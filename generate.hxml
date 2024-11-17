@@ -1,0 +1,11 @@
+#-lib vision
+#-lib format
+#-lib peote-view
+#-D pixelimageDoc
+-D doc-gen
+--macro include('justGraphix')
+-cp src
+-main justGraphix.JustGraphixDoc
+--no-output
+-xml output.xml
+-js foo

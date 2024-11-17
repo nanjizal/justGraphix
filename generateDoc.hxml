@@ -1,0 +1,4 @@
+#-cmd haxe generate.hxml
+-cmd haxelib run dox -i output.xml --title "justGraphix API documentation" -D themeColor 0xFF9966 -D source-path https://github.com/nanjizal/justGraphix/tree/master/src/ --toplevel-package justGraphix
+-cmd cd pages
+-cmd open index.html
