@@ -1,0 +1,12 @@
+{
+    "name"         : "justGraphix",
+    "url"          : "https://github.com/nanjizal/justGraphix#justGraphix",
+    "license"      : "MIT",
+    "tags"         : ["cross", "image", "2d"],
+    "description"  : "justGraphix, for drawing shapes with triangle or pixels",
+    "version"      : "0.0.1-alpha",
+    "releasenote"  : "See https://github.com/nanjizal/pi_xy/blob/master/CHANGELOG.md",
+    "contributors" : ["Nanjizal"],
+    "classPath"    : "src/",
+    "dependencies" : {}
+}
