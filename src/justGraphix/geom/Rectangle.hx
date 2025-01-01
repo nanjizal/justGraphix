@@ -1,6 +1,6 @@
 package justGraphix.geom;
 import justGraphix.geom.structs.RectangleStruct;
-import justGraphix.geom.structs.XY;
+import justGraphix.geom.structs.Mat1x2.XY;
 @:forward
 @:transitive
 @:access( justGraphix.geom.structs.RectangleStruct )

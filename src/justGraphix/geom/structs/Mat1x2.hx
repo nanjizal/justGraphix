@@ -8,7 +8,7 @@ typedef Tpoint = {
     public var x: Float;
     public var y: Float;
 }
-
+typedef XY = Mat1x2;
 /** 
    { x, y }
 **/

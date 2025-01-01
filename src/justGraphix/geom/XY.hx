@@ -1,4 +1,4 @@
-package justGraphix.geom.structs;
+package justGraphix.geom;
 
 /** 
    { x, y }

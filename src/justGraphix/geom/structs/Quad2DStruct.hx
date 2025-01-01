@@ -1,6 +1,6 @@
 package justGraphix.geom.structs;
 
-import justGraphix.geom.structs.XY;
+import justGraphix.geom.structs.Mat1x2.XY;
 @:structInit
 class Quad2DStruct {
     public var a: XY;

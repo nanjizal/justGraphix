@@ -462,6 +462,29 @@ function toEmacsIndex( rgb: Int ): Int {
         }
     }
 }
+// String CYMK typically created by ilustrator export from flash
+inline
+function aiCYMKA( arr: Array<String>, alpha: Float = 1.0 ): Int {
+    return from_cymka( Std.parseFloat( arr[0] )
+                     , Std.parseFloat( arr[1] )
+                     , Std.parseFloat( arr[2] )
+                     , Std.parseFloat( arr[3] ), alpha );
+}
+// String CYMK typically created by ilustrator or eps export from flash
+inline
+function aiARGB( arr: Array<String>, alpha: Float = 1.0 ): Int {
+    return from_argb( alpha
+                    , Std.parseFloat( arr[0] )
+                    , Std.parseFloat( arr[1] )
+                    , Std.parseFloat( arr[2] ) );
+}
+// String CYMK typically created by ilustrator or eps export from flash
+// TODO: Check!
+inline
+function aiGreyA( s: String, alpha: Float = 1.0 ): Int {
+    var v = Std.parseFloat( s );
+    return from_argb( alpha, v, v, v );
+}
 class ColorSpaceHelper {
     public var htmlRGBA_: ( r_: Float, g_: Float, b_: Float, a_: Float ) -> String = htmlRGBA;
     public var htmlHex_: ( r: Float, g: Float, b: Float ) -> String = htmlHex;
@@ -521,4 +544,7 @@ class ColorSpaceHelper {
     public var getIfGreyEmacsRGBi32_:( rgb: Int ) -> Int = getIfGreyEmacsRGBi32;
     public var eliminate16s_:( rgb: Int ) -> Int = eliminate16s;
     public var toEmacsIndex_:( rgb: Int ) -> Int = toEmacsIndex;
+    public var aiCYMKA_:( arr: Array<String>, alpha: Float ) -> Int = aiCYMKA;
+    public var aiARGB_:( arr: Array<String>, alpha: Float ) -> Int =  aiARGB;
+    public var aiGreyA_:( s: String, alpha: Float ) -> Int = aiGreyA;
 }
