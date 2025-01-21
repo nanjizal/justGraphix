@@ -620,15 +620,15 @@ abstract Pixelimage(ImageStruct) from ImageStruct to ImageStruct {
     }
     #end
     #if peote_view
-    public var peoteTexture( get, never ): pi_xy.imageAbstracts.PeoteTexture;
-    inline function get_peoteTexture():pi_xy.imageAbstracts.PeoteTexture {
-        return ( abstract: pi_xy.imageAbstracts.PeoteTexture );
+    public var peoteTexture( get, never ): justGraphix.target.openflTarget_.PeoteTexture;
+    inline function get_peoteTexture():justGraphix.target.openflTarget_.PeoteTexture {
+        return ( abstract: justGraphix.target.openflTarget_.PeoteTexture );
     }
     #end
     #if lime
-    public var imageLime( get, never ): pi_xy.imageAbstracts.ImageLime;
-    inline function get_imageLime():pi_xy.imageAbstracts.ImageLime {
-        return ( abstract: pi_xy.imageAbstracts.ImageLime );
+    public var imageLime( get, never ): justGraphix.target.openflTarget_.ImageLime;
+    inline function get_imageLime():justGraphix.target.openflTarget_.ImageLime {
+        return ( abstract: justGraphix.target.openflTarget_.ImageLime );
     }
     #end
     #if kha

@@ -4,10 +4,10 @@ import lime.graphics.PixelFormat;
 import lime.graphics.ImageBuffer;
 import lime.graphics.Image;
 import lime.utils.UInt8Array;
-import .Pixelimage;
+import justGraphix.image.Pixelimage;
 import justGraphix.pixel.Pixel32;
 import haxe.io.UInt8Array;
-import iterMagix.Img;
+import justGraphix.image.Img;
 
 // module LimeImage
 class LimeImage {

@@ -3,8 +3,8 @@ package justGraphix.target.openflTarget_;
 import lime.graphics.Image;
 import lime.graphics.ImageBuffer;
 import justGraphix.image.Pixelimage;
-import justGraphix.target.openflTarget.LimeImage
-typedef LimeImage = justGraphix.target.openflTarget.LimeImage;
+import justGraphix.target.openflTarget_.LimeImage;
+//typedef LimeImage = justGraphix.target.openflTarget_.LimeImage;
 @:forward
 @:transient
 abstract ImageLime( Pixelimage ) from Pixelimage to Pixelimage {

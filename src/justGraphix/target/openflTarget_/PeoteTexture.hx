@@ -7,7 +7,7 @@ import peote.view.TextureData;
 import justGraphix.image.Pixelimage;
 import justGraphix.pixel.Pixel32;
 import haxe.io.UInt8Array;
-import iterMagix.Img;
+import justGraphix.image.Img;
 
 typedef PeotePixels = haxe.io.Bytes; //RGBA
 //typedef RawPixels   = haxe.io.Bytes;  //ABGR
