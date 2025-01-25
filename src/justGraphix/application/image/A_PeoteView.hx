@@ -22,36 +22,42 @@ import haxe.CallStack;
 import lime.app.Application;
 import lime.ui.Window;
 import peote.view.*;
-class Elem implements Element {
-    @posX public var x:Int;
-    @posY public var y:Int;
-    @sizeX public var w:Int;
-    @sizeY public var h:Int;
-    public function new( x: Int = 0, y: Int = 0, w: Int = 100, h: Int = 100 ){
-        this.x = x;
-        this.y = y;
-        this.w = w;
-        this.h = h;
-    }
-}
+import peote.view.element.Elem;
+
 class A_PeoteView extends Application {
+    /**
+     * Lime GL setup for PeoteView
+     */
     override function onWindowCreate(): Void {
         switch( window.context.type ){
             case WEBGL, OPENGL, OPENGLES:
-                try startSample( window )
+                try startPeoteView( window )
                 catch (_) trace(CallStack.toString(CallStack.exceptionStack()), _);
             default: throw("Sorry, only works with OpenGL.");
         }
     }
-    public function startSample( window: lime.ui.Window ){
+    /**
+     * PeoteView initalization
+     * @param window 
+     */
+    public function startPeoteView( window: Window ){
         var peoteView = new PeoteView( window) ;
-        var display = new Display( 10, 10, window.width - 20, window.height - 20, Color.WHITE);
+        var display   = new Display( 10, 10, window.width - 20, window.height - 20, Color.WHITE );
+        var buffer    = new Buffer<Elem>( 10 );//var buffer = new Buffer<Elem>(4, 4, true);
+        var program   = new Program( buffer );
+
         peoteView.addDisplay( display );
-        var buffer  = new Buffer<Elem>( 10 );
-        var program = new Program( buffer );
-        var element = new Elem( 0, 0, 800, 600 );
+        var wid = 800;
+        var hi  = 600;
+        addElementToBuffer( buffer, wid, hi );
+        createPixelImage( program );
+        display.addProgram( program );
+    }
+	public function addElementToBuffer( buffer: Buffer<Elem>, wid: Int, hi: Int ){
+        var element = new Elem(0, 0, wid, hi, 0, 0, 0, 0, Color.WHITE );
         buffer.addElement( element );
-        
+    }
+    public function createPixelImage( program: Program ){
         var pixelImage = new Pixelimage( 800, 600 );
         pixelImage.transparent = true;
         pixelImage.simpleRect( 0, 0, pixelImage.width, pixelImage.height, 0xffc9c3c3 );
@@ -78,11 +84,15 @@ class A_PeoteView extends Application {
         pixelImage.putPixelImage( pixelTest, 45, 45 );
 
         var texture1 = pixelImage.peoteTexture.to();
-        program.setTexture( texture1, "custom" );
+        /**
+         * Currently unused for future testing perhaps.
+         */
+        /*
         var pixelImageTemp = justGraphix.image.imageAbstracts.PeoteTexture.createPixelImage( texture1 );
         pixelImageTemp.transform.flipY();
         var texture2 = pixelImageTemp.peoteTexture.to();
-        display.addProgram(program);
+        */
+        program.setTexture( texture1, "justGraphix_image" );
     }
     override function onPreloadComplete():Void {}
     override function update(deltaTime:Int):Void {}

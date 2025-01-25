@@ -867,7 +867,7 @@ ApplicationMain.main = function() {
 };
 ApplicationMain.create = function(config) {
 	var app = new justGraphix_application_image_A_$PeoteView();
-	app.meta.h["build"] = "5";
+	app.meta.h["build"] = "6";
 	app.meta.h["company"] = "Justinfront";
 	app.meta.h["file"] = "Application";
 	app.meta.h["name"] = "A_PeoteView";
@@ -1988,33 +1988,6 @@ js_Boot.__isNativeObj = function(o) {
 js_Boot.__resolveNativeClass = function(name) {
 	return $global[name];
 };
-var justGraphix_application_image_Elem = function(x,y,w,h) {
-	if(h == null) {
-		h = 100;
-	}
-	if(w == null) {
-		w = 100;
-	}
-	if(y == null) {
-		y = 0;
-	}
-	if(x == null) {
-		x = 0;
-	}
-	this.bytePos = -1;
-	this.h = 100;
-	this.w = 100;
-	this.y = 0;
-	this.x = 0;
-	this.x = x;
-	this.y = y;
-	this.w = w;
-	this.h = h;
-};
-justGraphix_application_image_Elem.__name__ = "justGraphix.application.image.Elem";
-justGraphix_application_image_Elem.prototype = {
-	__class__: justGraphix_application_image_Elem
-};
 var justGraphix_application_image_A_$PeoteView = function() {
 	lime_app_Application.call(this);
 };
@@ -2025,24 +1998,33 @@ justGraphix_application_image_A_$PeoteView.prototype = $extend(lime_app_Applicat
 		switch(this.__window.context.type) {
 		case "opengl":case "opengles":case "webgl":
 			try {
-				this.startSample(this.__window);
+				this.startPeoteView(this.__window);
 			} catch( _g ) {
 				var _ = haxe_Exception.caught(_g);
-				haxe_Log.trace(haxe_CallStack.toString(haxe_CallStack.exceptionStack()),{ fileName : "src/justGraphix/application/image/A_PeoteView.hx", lineNumber : 42, className : "justGraphix.application.image.A_PeoteView", methodName : "onWindowCreate", customParams : [_]});
+				haxe_Log.trace(haxe_CallStack.toString(haxe_CallStack.exceptionStack()),{ fileName : "src/justGraphix/application/image/A_PeoteView.hx", lineNumber : 49, className : "justGraphix.application.image.A_PeoteView", methodName : "onWindowCreate", customParams : [_]});
 			}
 			break;
 		default:
 			throw haxe_Exception.thrown("Sorry, only works with OpenGL.");
 		}
 	}
-	,startSample: function($window) {
+	,startPeoteView: function($window) {
 		var peoteView = new peote_view_PeoteView($window);
 		var display = new peote_view_Display(10,10,$window.__width - 20,$window.__height - 20,-1);
-		peoteView.addDisplay(display);
 		var buffer = new peote_view_Buffer_$Elem(10);
 		var program = new peote_view_Program(buffer);
-		var element = new justGraphix_application_image_Elem(0,0,800,600);
+		peoteView.addDisplay(display);
+		var wid = 800;
+		var hi = 600;
+		this.addElementToBuffer(buffer,wid,hi);
+		this.createPixelImage(program);
+		display.addProgram(program);
+	}
+	,addElementToBuffer: function(buffer,wid,hi) {
+		var element = new peote_view_element_Elem(0,0,wid,hi,0,0,0,0,-1);
 		buffer.addElement(element);
+	}
+	,createPixelImage: function(program) {
 		var pixelImage = justGraphix_image_Pixelimage._new(800,600);
 		pixelImage.transparent = true;
 		var r_x = 0;
@@ -2668,603 +2650,7 @@ justGraphix_application_image_A_$PeoteView.prototype = $extend(lime_app_Applicat
 			}
 		}
 		var texture1 = justGraphix_target_openflTarget_$_PeoteV.toPeoteTexture_(pixelImage);
-		program.setTexture(texture1,"custom");
-		var lh = texture1.height;
-		var lw = texture1.width;
-		var pixelImage = justGraphix_image_Pixelimage._new(lw,lh);
-		pixelImage.transparent = true;
-		var data = texture1.readPixelsUInt8(0,0,lw,lh);
-		var p = 0;
-		var _g = 0;
-		var _g1 = lh;
-		while(_g < _g1) {
-			var y = _g++;
-			var _g2 = 0;
-			var _g3 = lw;
-			while(_g2 < _g3) {
-				var x = _g2++;
-				var r = data[p++];
-				var g = data[p++];
-				var b = data[p++];
-				var a = data[p++];
-				var location = pixelImage.useVirtualPos ? (y - pixelImage.virtualY) * pixelImage.width + x - pixelImage.virtualX | 0 : y * pixelImage.width + x | 0;
-				if(pixelImage.transparent && a < 254) {
-					var this1 = pixelImage.image.get(location);
-					var old = justGraphix_image_Endian_isLittleEndian ? (this1 >> 24 & 255) << 24 | (this1 & 255) << 16 | (this1 >> 8 & 255) << 8 | this1 >> 16 & 255 : this1;
-					var rhs = a << 24 | r << 16 | g << 8 | b;
-					var this2 = old >> 24 & 255;
-					var a1 = this2 == 0 ? 0. : this2 / 255;
-					var this3 = old >> 16 & 255;
-					var r1 = this3 == 0 ? 0. : this3 / 255;
-					var this4 = old >> 8 & 255;
-					var g1 = this4 == 0 ? 0. : this4 / 255;
-					var this5 = old & 255;
-					var b1 = this5 == 0 ? 0. : this5 / 255;
-					var this6 = rhs >> 24 & 255;
-					var a2 = this6 == 0 ? 0. : this6 / 255;
-					var this7 = rhs >> 16 & 255;
-					var r2 = this7 == 0 ? 0. : this7 / 255;
-					var this8 = rhs >> 8 & 255;
-					var g2 = this8 == 0 ? 0. : this8 / 255;
-					var this9 = rhs & 255;
-					var b2 = this9 == 0 ? 0. : this9 / 255;
-					var a3 = a1 * (1 - a2);
-					var r3 = 255 * (r1 * a3 + r2 * a2) | 0;
-					var g3 = 255 * (g1 * a3 + g2 * a2) | 0;
-					var b3 = 255 * (b1 * a3 + b2 * a2) | 0;
-					var a4 = 255 * (a3 + a2) | 0;
-					var blended = a4 << 24 | r3 << 16 | g3 << 8 | b3;
-					pixelImage.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
-				} else {
-					pixelImage.image.set(location,pixelImage.isLittle ? a << 24 | b << 16 | g << 8 | r : a << 24 | r << 16 | g << 8 | b);
-				}
-			}
-		}
-		var pixelImageTemp = pixelImage;
-		var this1 = pixelImageTemp;
-		var w = this1.width;
-		var h = this1.height;
-		var transparent = this1.transparent;
-		var inPlace = true;
-		var includeMask = false;
-		if(includeMask == null) {
-			includeMask = false;
-		}
-		if(inPlace == null) {
-			inPlace = false;
-		}
-		if(transparent == null) {
-			transparent = false;
-		}
-		var transparent1 = transparent;
-		var inPlace1 = inPlace;
-		var includeMask1 = includeMask;
-		if(includeMask1 == null) {
-			includeMask1 = false;
-		}
-		if(inPlace1 == null) {
-			inPlace1 = false;
-		}
-		if(transparent1 == null) {
-			transparent1 = false;
-		}
-		var r = { x : 0, y : 0, w : w, h : h};
-		var xmax = r.x + r.w + 1 | 0;
-		var ymax = r.y + r.h + 1 | 0;
-		var ii_min = r.x | 0;
-		var ii_max = xmax;
-		var xRange__start = ii_min;
-		var xRange__max = ii_max;
-		var ii_min = r.y | 0;
-		var ii_max = ymax;
-		var yRange__start = ii_min;
-		var yRange__max = ii_max;
-		var range_x = xRange__start;
-		var range_y = yRange__start - 1;
-		var range_xReset = range_x;
-		var range_yReset = range_y;
-		var range_xMax = xRange__max - 2;
-		var range_yMax = yRange__max - 2;
-		var _this_min = 0;
-		var _this_max = (xRange__max - xRange__start) * (yRange__max - yRange__start) | 0;
-		var nextImage = justGraphix_image_Pixelimage._new(w | 0,h | 0);
-		nextImage.transparent = transparent1;
-		while(_this_min < _this_max) {
-			var i = _this_min++;
-			if(range_y > range_yMax) {
-				range_y = range_yReset;
-				++range_x;
-			}
-			++range_y;
-			var i1 = i;
-			var x = range_x;
-			var y = range_y;
-			var x1 = range_x;
-			var y1 = range_yMax - range_y;
-			var c = this1.image.get(this1.useVirtualPos ? (y1 - this1.virtualY) * this1.width + x1 - this1.virtualX | 0 : y1 * this1.width + x1 | 0);
-			var color = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
-			var c1 = color;
-			if((c1 >> 24 & 255) < 254 && nextImage.transparent) {
-				var location = nextImage.useVirtualPos ? (y - nextImage.virtualY) * nextImage.width + x - nextImage.virtualX | 0 : y * nextImage.width + x | 0;
-				var this2 = nextImage.image.get(location);
-				var this3 = justGraphix_image_Endian_isLittleEndian ? (this2 >> 24 & 255) << 24 | (this2 & 255) << 16 | (this2 >> 8 & 255) << 8 | this2 >> 16 & 255 : this2;
-				var this4 = this3 >> 24 & 255;
-				var a1 = this4 == 0 ? 0. : this4 / 255;
-				var this5 = this3 >> 16 & 255;
-				var r1 = this5 == 0 ? 0. : this5 / 255;
-				var this6 = this3 >> 8 & 255;
-				var g1 = this6 == 0 ? 0. : this6 / 255;
-				var this7 = this3 & 255;
-				var b1 = this7 == 0 ? 0. : this7 / 255;
-				var this8 = color >> 24 & 255;
-				var a2 = this8 == 0 ? 0. : this8 / 255;
-				var this9 = color >> 16 & 255;
-				var r2 = this9 == 0 ? 0. : this9 / 255;
-				var this10 = color >> 8 & 255;
-				var g2 = this10 == 0 ? 0. : this10 / 255;
-				var this11 = color & 255;
-				var b2 = this11 == 0 ? 0. : this11 / 255;
-				var a3 = a1 * (1 - a2);
-				var r = 255 * (r1 * a3 + r2 * a2) | 0;
-				var g = 255 * (g1 * a3 + g2 * a2) | 0;
-				var b = 255 * (b1 * a3 + b2 * a2) | 0;
-				var a = 255 * (a3 + a2) | 0;
-				var blended = a << 24 | r << 16 | g << 8 | b;
-				nextImage.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
-			} else {
-				nextImage.image.set(nextImage.useVirtualPos ? (y - nextImage.virtualY) * nextImage.width + x - nextImage.virtualX | 0 : y * nextImage.width + x | 0,justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1);
-			}
-		}
-		if(inPlace1) {
-			var x = 0;
-			var y = 0;
-			var _g = 0;
-			var _g1 = nextImage.height;
-			while(_g < _g1) {
-				var dy = _g++;
-				var _g2 = 0;
-				var _g3 = nextImage.width;
-				while(_g2 < _g3) {
-					var dx = _g2++;
-					var c = nextImage.image.get(nextImage.useVirtualPos ? (dy - nextImage.virtualY) * nextImage.width + dx - nextImage.virtualX | 0 : dy * nextImage.width + dx | 0);
-					var col = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
-					if(nextImage.useMask && nextImage.mask != null) {
-						var this2 = nextImage.mask;
-						var c1 = this2.image.get(this2.useVirtualPos ? (dy - this2.virtualY) * this2.width + dx - this2.virtualX | 0 : dy * this2.width + dx | 0);
-						var maskPixel = justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1;
-						var this3 = col;
-						if(maskPixel == 0) {
-							col = this3;
-						} else {
-							var this4 = maskPixel >> 24 & 255;
-							var m0 = this4 == 0 ? 0. : this4 / 255;
-							var this5 = maskPixel >> 16 & 255;
-							var m1 = this5 == 0 ? 0. : this5 / 255;
-							var this6 = maskPixel >> 8 & 255;
-							var m2 = this6 == 0 ? 0. : this6 / 255;
-							var this7 = maskPixel & 255;
-							var m3 = this7 == 0 ? 0. : this7 / 255;
-							var ch0 = (1. - m0) * (this3 >> 24 & 255) | 0;
-							var ch1 = (1. - m1) * (this3 >> 16 & 255) | 0;
-							var ch2 = (1. - m2) * (this3 >> 8 & 255) | 0;
-							var ch3 = (1. - m3) * (this3 & 255) | 0;
-							col = Math.round(ch0 * 255) << 24 | Math.round(ch1 * 255) << 16 | Math.round(ch2 * 255) << 8 | Math.round(ch3 * 255);
-						}
-					}
-					if(col != 0) {
-						var x1 = x + dx;
-						var y1 = y + dy;
-						var c2 = col;
-						if((c2 >> 24 & 255) < 254 && this1.transparent) {
-							var location = this1.useVirtualPos ? (y1 - this1.virtualY) * this1.width + x1 - this1.virtualX | 0 : y1 * this1.width + x1 | 0;
-							var this8 = this1.image.get(location);
-							var this9 = justGraphix_image_Endian_isLittleEndian ? (this8 >> 24 & 255) << 24 | (this8 & 255) << 16 | (this8 >> 8 & 255) << 8 | this8 >> 16 & 255 : this8;
-							var this10 = this9 >> 24 & 255;
-							var a1 = this10 == 0 ? 0. : this10 / 255;
-							var this11 = this9 >> 16 & 255;
-							var r1 = this11 == 0 ? 0. : this11 / 255;
-							var this12 = this9 >> 8 & 255;
-							var g1 = this12 == 0 ? 0. : this12 / 255;
-							var this13 = this9 & 255;
-							var b1 = this13 == 0 ? 0. : this13 / 255;
-							var this14 = col >> 24 & 255;
-							var a2 = this14 == 0 ? 0. : this14 / 255;
-							var this15 = col >> 16 & 255;
-							var r2 = this15 == 0 ? 0. : this15 / 255;
-							var this16 = col >> 8 & 255;
-							var g2 = this16 == 0 ? 0. : this16 / 255;
-							var this17 = col & 255;
-							var b2 = this17 == 0 ? 0. : this17 / 255;
-							var a3 = a1 * (1 - a2);
-							var r = 255 * (r1 * a3 + r2 * a2) | 0;
-							var g = 255 * (g1 * a3 + g2 * a2) | 0;
-							var b = 255 * (b1 * a3 + b2 * a2) | 0;
-							var a = 255 * (a3 + a2) | 0;
-							var blended = a << 24 | r << 16 | g << 8 | b;
-							this1.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
-						} else {
-							this1.image.set(this1.useVirtualPos ? (y1 - this1.virtualY) * this1.width + x1 - this1.virtualX | 0 : y1 * this1.width + x1 | 0,justGraphix_image_Endian_isLittleEndian ? (c2 >> 24 & 255) << 24 | (c2 & 255) << 16 | (c2 >> 8 & 255) << 8 | c2 >> 16 & 255 : c2);
-						}
-					}
-				}
-			}
-			if(this1.mask != null && includeMask1) {
-				var this2 = this1.mask;
-				var w = this1.width;
-				var h = this1.height;
-				var transparent = this1.mask.transparent;
-				var inPlace = inPlace1;
-				var includeMask = includeMask1;
-				if(includeMask == null) {
-					includeMask = false;
-				}
-				if(inPlace == null) {
-					inPlace = false;
-				}
-				if(transparent == null) {
-					transparent = false;
-				}
-				var transparent1 = transparent;
-				var inPlace2 = inPlace;
-				var includeMask2 = includeMask;
-				if(includeMask2 == null) {
-					includeMask2 = false;
-				}
-				if(inPlace2 == null) {
-					inPlace2 = false;
-				}
-				if(transparent1 == null) {
-					transparent1 = false;
-				}
-				var r = { x : 0, y : 0, w : w, h : h};
-				var xmax = r.x + r.w + 1 | 0;
-				var ymax = r.y + r.h + 1 | 0;
-				var ii_min = r.x | 0;
-				var ii_max = xmax;
-				var xRange__start = ii_min;
-				var xRange__max = ii_max;
-				var ii_min = r.y | 0;
-				var ii_max = ymax;
-				var yRange__start = ii_min;
-				var yRange__max = ii_max;
-				var range_x = xRange__start;
-				var range_y = yRange__start - 1;
-				var range_xReset = range_x;
-				var range_yReset = range_y;
-				var range_xMax = xRange__max - 2;
-				var range_yMax = yRange__max - 2;
-				var _this_min = 0;
-				var _this_max = (xRange__max - xRange__start) * (yRange__max - yRange__start) | 0;
-				var nextImage1 = justGraphix_image_Pixelimage._new(w | 0,h | 0);
-				nextImage1.transparent = transparent1;
-				while(_this_min < _this_max) {
-					var i = _this_min++;
-					if(range_y > range_yMax) {
-						range_y = range_yReset;
-						++range_x;
-					}
-					++range_y;
-					var i1 = i;
-					var x = range_x;
-					var y = range_y;
-					var x1 = range_x;
-					var y1 = range_yMax - range_y;
-					var c = this2.image.get(this2.useVirtualPos ? (y1 - this2.virtualY) * this2.width + x1 - this2.virtualX | 0 : y1 * this2.width + x1 | 0);
-					var color = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
-					var c1 = color;
-					if((c1 >> 24 & 255) < 254 && nextImage1.transparent) {
-						var location = nextImage1.useVirtualPos ? (y - nextImage1.virtualY) * nextImage1.width + x - nextImage1.virtualX | 0 : y * nextImage1.width + x | 0;
-						var this3 = nextImage1.image.get(location);
-						var this4 = justGraphix_image_Endian_isLittleEndian ? (this3 >> 24 & 255) << 24 | (this3 & 255) << 16 | (this3 >> 8 & 255) << 8 | this3 >> 16 & 255 : this3;
-						var this5 = this4 >> 24 & 255;
-						var a1 = this5 == 0 ? 0. : this5 / 255;
-						var this6 = this4 >> 16 & 255;
-						var r1 = this6 == 0 ? 0. : this6 / 255;
-						var this7 = this4 >> 8 & 255;
-						var g1 = this7 == 0 ? 0. : this7 / 255;
-						var this8 = this4 & 255;
-						var b1 = this8 == 0 ? 0. : this8 / 255;
-						var this9 = color >> 24 & 255;
-						var a2 = this9 == 0 ? 0. : this9 / 255;
-						var this10 = color >> 16 & 255;
-						var r2 = this10 == 0 ? 0. : this10 / 255;
-						var this11 = color >> 8 & 255;
-						var g2 = this11 == 0 ? 0. : this11 / 255;
-						var this12 = color & 255;
-						var b2 = this12 == 0 ? 0. : this12 / 255;
-						var a3 = a1 * (1 - a2);
-						var r = 255 * (r1 * a3 + r2 * a2) | 0;
-						var g = 255 * (g1 * a3 + g2 * a2) | 0;
-						var b = 255 * (b1 * a3 + b2 * a2) | 0;
-						var a = 255 * (a3 + a2) | 0;
-						var blended = a << 24 | r << 16 | g << 8 | b;
-						nextImage1.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
-					} else {
-						nextImage1.image.set(nextImage1.useVirtualPos ? (y - nextImage1.virtualY) * nextImage1.width + x - nextImage1.virtualX | 0 : y * nextImage1.width + x | 0,justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1);
-					}
-				}
-				var v;
-				if(inPlace2) {
-					var x = 0;
-					var y = 0;
-					var _g = 0;
-					var _g1 = nextImage1.height;
-					while(_g < _g1) {
-						var dy = _g++;
-						var _g2 = 0;
-						var _g3 = nextImage1.width;
-						while(_g2 < _g3) {
-							var dx = _g2++;
-							var c = nextImage1.image.get(nextImage1.useVirtualPos ? (dy - nextImage1.virtualY) * nextImage1.width + dx - nextImage1.virtualX | 0 : dy * nextImage1.width + dx | 0);
-							var col = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
-							if(nextImage1.useMask && nextImage1.mask != null) {
-								var this3 = nextImage1.mask;
-								var c1 = this3.image.get(this3.useVirtualPos ? (dy - this3.virtualY) * this3.width + dx - this3.virtualX | 0 : dy * this3.width + dx | 0);
-								var maskPixel = justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1;
-								var this4 = col;
-								if(maskPixel == 0) {
-									col = this4;
-								} else {
-									var this5 = maskPixel >> 24 & 255;
-									var m0 = this5 == 0 ? 0. : this5 / 255;
-									var this6 = maskPixel >> 16 & 255;
-									var m1 = this6 == 0 ? 0. : this6 / 255;
-									var this7 = maskPixel >> 8 & 255;
-									var m2 = this7 == 0 ? 0. : this7 / 255;
-									var this8 = maskPixel & 255;
-									var m3 = this8 == 0 ? 0. : this8 / 255;
-									var ch0 = (1. - m0) * (this4 >> 24 & 255) | 0;
-									var ch1 = (1. - m1) * (this4 >> 16 & 255) | 0;
-									var ch2 = (1. - m2) * (this4 >> 8 & 255) | 0;
-									var ch3 = (1. - m3) * (this4 & 255) | 0;
-									col = Math.round(ch0 * 255) << 24 | Math.round(ch1 * 255) << 16 | Math.round(ch2 * 255) << 8 | Math.round(ch3 * 255);
-								}
-							}
-							if(col != 0) {
-								var x1 = x + dx;
-								var y1 = y + dy;
-								var c2 = col;
-								if((c2 >> 24 & 255) < 254 && this2.transparent) {
-									var location = this2.useVirtualPos ? (y1 - this2.virtualY) * this2.width + x1 - this2.virtualX | 0 : y1 * this2.width + x1 | 0;
-									var this9 = this2.image.get(location);
-									var this10 = justGraphix_image_Endian_isLittleEndian ? (this9 >> 24 & 255) << 24 | (this9 & 255) << 16 | (this9 >> 8 & 255) << 8 | this9 >> 16 & 255 : this9;
-									var this11 = this10 >> 24 & 255;
-									var a1 = this11 == 0 ? 0. : this11 / 255;
-									var this12 = this10 >> 16 & 255;
-									var r1 = this12 == 0 ? 0. : this12 / 255;
-									var this13 = this10 >> 8 & 255;
-									var g1 = this13 == 0 ? 0. : this13 / 255;
-									var this14 = this10 & 255;
-									var b1 = this14 == 0 ? 0. : this14 / 255;
-									var this15 = col >> 24 & 255;
-									var a2 = this15 == 0 ? 0. : this15 / 255;
-									var this16 = col >> 16 & 255;
-									var r2 = this16 == 0 ? 0. : this16 / 255;
-									var this17 = col >> 8 & 255;
-									var g2 = this17 == 0 ? 0. : this17 / 255;
-									var this18 = col & 255;
-									var b2 = this18 == 0 ? 0. : this18 / 255;
-									var a3 = a1 * (1 - a2);
-									var r = 255 * (r1 * a3 + r2 * a2) | 0;
-									var g = 255 * (g1 * a3 + g2 * a2) | 0;
-									var b = 255 * (b1 * a3 + b2 * a2) | 0;
-									var a = 255 * (a3 + a2) | 0;
-									var blended = a << 24 | r << 16 | g << 8 | b;
-									this2.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
-								} else {
-									this2.image.set(this2.useVirtualPos ? (y1 - this2.virtualY) * this2.width + x1 - this2.virtualX | 0 : y1 * this2.width + x1 | 0,justGraphix_image_Endian_isLittleEndian ? (c2 >> 24 & 255) << 24 | (c2 & 255) << 16 | (c2 >> 8 & 255) << 8 | c2 >> 16 & 255 : c2);
-								}
-							}
-						}
-					}
-					if(this2.mask != null && includeMask2) {
-						var v1 = justGraphix_image_imageAbstracts_TransformImage.flippedY(this2.mask,0,0,this2.width,this2.height,this2.mask.transparent,inPlace2,includeMask2);
-						this2.useMask = true;
-						this2.mask = v1;
-					}
-					nextImage1 = null;
-					v = this2;
-				} else {
-					if(this2.mask != null && includeMask2) {
-						var v1 = justGraphix_image_imageAbstracts_TransformImage.flippedY(this2.mask,0,0,this2.width,this2.height,this2.mask.transparent,inPlace2,includeMask2);
-						nextImage1.useMask = true;
-						nextImage1.mask = v1;
-					}
-					v = nextImage1;
-				}
-				this1.useMask = true;
-				this1.mask = v;
-			}
-			nextImage = null;
-		} else if(this1.mask != null && includeMask1) {
-			var this2 = this1.mask;
-			var w = this1.width;
-			var h = this1.height;
-			var transparent = this1.mask.transparent;
-			var inPlace = inPlace1;
-			var includeMask = includeMask1;
-			if(includeMask == null) {
-				includeMask = false;
-			}
-			if(inPlace == null) {
-				inPlace = false;
-			}
-			if(transparent == null) {
-				transparent = false;
-			}
-			var transparent1 = transparent;
-			var inPlace1 = inPlace;
-			var includeMask1 = includeMask;
-			if(includeMask1 == null) {
-				includeMask1 = false;
-			}
-			if(inPlace1 == null) {
-				inPlace1 = false;
-			}
-			if(transparent1 == null) {
-				transparent1 = false;
-			}
-			var r = { x : 0, y : 0, w : w, h : h};
-			var xmax = r.x + r.w + 1 | 0;
-			var ymax = r.y + r.h + 1 | 0;
-			var ii_min = r.x | 0;
-			var ii_max = xmax;
-			var xRange__start = ii_min;
-			var xRange__max = ii_max;
-			var ii_min = r.y | 0;
-			var ii_max = ymax;
-			var yRange__start = ii_min;
-			var yRange__max = ii_max;
-			var range_x = xRange__start;
-			var range_y = yRange__start - 1;
-			var range_xReset = range_x;
-			var range_yReset = range_y;
-			var range_xMax = xRange__max - 2;
-			var range_yMax = yRange__max - 2;
-			var _this_min = 0;
-			var _this_max = (xRange__max - xRange__start) * (yRange__max - yRange__start) | 0;
-			var nextImage1 = justGraphix_image_Pixelimage._new(w | 0,h | 0);
-			nextImage1.transparent = transparent1;
-			while(_this_min < _this_max) {
-				var i = _this_min++;
-				if(range_y > range_yMax) {
-					range_y = range_yReset;
-					++range_x;
-				}
-				++range_y;
-				var i1 = i;
-				var x = range_x;
-				var y = range_y;
-				var x1 = range_x;
-				var y1 = range_yMax - range_y;
-				var c = this2.image.get(this2.useVirtualPos ? (y1 - this2.virtualY) * this2.width + x1 - this2.virtualX | 0 : y1 * this2.width + x1 | 0);
-				var color = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
-				var c1 = color;
-				if((c1 >> 24 & 255) < 254 && nextImage1.transparent) {
-					var location = nextImage1.useVirtualPos ? (y - nextImage1.virtualY) * nextImage1.width + x - nextImage1.virtualX | 0 : y * nextImage1.width + x | 0;
-					var this1 = nextImage1.image.get(location);
-					var this3 = justGraphix_image_Endian_isLittleEndian ? (this1 >> 24 & 255) << 24 | (this1 & 255) << 16 | (this1 >> 8 & 255) << 8 | this1 >> 16 & 255 : this1;
-					var this4 = this3 >> 24 & 255;
-					var a1 = this4 == 0 ? 0. : this4 / 255;
-					var this5 = this3 >> 16 & 255;
-					var r1 = this5 == 0 ? 0. : this5 / 255;
-					var this6 = this3 >> 8 & 255;
-					var g1 = this6 == 0 ? 0. : this6 / 255;
-					var this7 = this3 & 255;
-					var b1 = this7 == 0 ? 0. : this7 / 255;
-					var this8 = color >> 24 & 255;
-					var a2 = this8 == 0 ? 0. : this8 / 255;
-					var this9 = color >> 16 & 255;
-					var r2 = this9 == 0 ? 0. : this9 / 255;
-					var this10 = color >> 8 & 255;
-					var g2 = this10 == 0 ? 0. : this10 / 255;
-					var this11 = color & 255;
-					var b2 = this11 == 0 ? 0. : this11 / 255;
-					var a3 = a1 * (1 - a2);
-					var r = 255 * (r1 * a3 + r2 * a2) | 0;
-					var g = 255 * (g1 * a3 + g2 * a2) | 0;
-					var b = 255 * (b1 * a3 + b2 * a2) | 0;
-					var a = 255 * (a3 + a2) | 0;
-					var blended = a << 24 | r << 16 | g << 8 | b;
-					nextImage1.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
-				} else {
-					nextImage1.image.set(nextImage1.useVirtualPos ? (y - nextImage1.virtualY) * nextImage1.width + x - nextImage1.virtualX | 0 : y * nextImage1.width + x | 0,justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1);
-				}
-			}
-			var v;
-			if(inPlace1) {
-				var x = 0;
-				var y = 0;
-				var _g = 0;
-				var _g1 = nextImage1.height;
-				while(_g < _g1) {
-					var dy = _g++;
-					var _g2 = 0;
-					var _g3 = nextImage1.width;
-					while(_g2 < _g3) {
-						var dx = _g2++;
-						var c = nextImage1.image.get(nextImage1.useVirtualPos ? (dy - nextImage1.virtualY) * nextImage1.width + dx - nextImage1.virtualX | 0 : dy * nextImage1.width + dx | 0);
-						var col = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
-						if(nextImage1.useMask && nextImage1.mask != null) {
-							var this1 = nextImage1.mask;
-							var c1 = this1.image.get(this1.useVirtualPos ? (dy - this1.virtualY) * this1.width + dx - this1.virtualX | 0 : dy * this1.width + dx | 0);
-							var maskPixel = justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1;
-							var this3 = col;
-							if(maskPixel == 0) {
-								col = this3;
-							} else {
-								var this4 = maskPixel >> 24 & 255;
-								var m0 = this4 == 0 ? 0. : this4 / 255;
-								var this5 = maskPixel >> 16 & 255;
-								var m1 = this5 == 0 ? 0. : this5 / 255;
-								var this6 = maskPixel >> 8 & 255;
-								var m2 = this6 == 0 ? 0. : this6 / 255;
-								var this7 = maskPixel & 255;
-								var m3 = this7 == 0 ? 0. : this7 / 255;
-								var ch0 = (1. - m0) * (this3 >> 24 & 255) | 0;
-								var ch1 = (1. - m1) * (this3 >> 16 & 255) | 0;
-								var ch2 = (1. - m2) * (this3 >> 8 & 255) | 0;
-								var ch3 = (1. - m3) * (this3 & 255) | 0;
-								col = Math.round(ch0 * 255) << 24 | Math.round(ch1 * 255) << 16 | Math.round(ch2 * 255) << 8 | Math.round(ch3 * 255);
-							}
-						}
-						if(col != 0) {
-							var x1 = x + dx;
-							var y1 = y + dy;
-							var c2 = col;
-							if((c2 >> 24 & 255) < 254 && this2.transparent) {
-								var location = this2.useVirtualPos ? (y1 - this2.virtualY) * this2.width + x1 - this2.virtualX | 0 : y1 * this2.width + x1 | 0;
-								var this8 = this2.image.get(location);
-								var this9 = justGraphix_image_Endian_isLittleEndian ? (this8 >> 24 & 255) << 24 | (this8 & 255) << 16 | (this8 >> 8 & 255) << 8 | this8 >> 16 & 255 : this8;
-								var this10 = this9 >> 24 & 255;
-								var a1 = this10 == 0 ? 0. : this10 / 255;
-								var this11 = this9 >> 16 & 255;
-								var r1 = this11 == 0 ? 0. : this11 / 255;
-								var this12 = this9 >> 8 & 255;
-								var g1 = this12 == 0 ? 0. : this12 / 255;
-								var this13 = this9 & 255;
-								var b1 = this13 == 0 ? 0. : this13 / 255;
-								var this14 = col >> 24 & 255;
-								var a2 = this14 == 0 ? 0. : this14 / 255;
-								var this15 = col >> 16 & 255;
-								var r2 = this15 == 0 ? 0. : this15 / 255;
-								var this16 = col >> 8 & 255;
-								var g2 = this16 == 0 ? 0. : this16 / 255;
-								var this17 = col & 255;
-								var b2 = this17 == 0 ? 0. : this17 / 255;
-								var a3 = a1 * (1 - a2);
-								var r = 255 * (r1 * a3 + r2 * a2) | 0;
-								var g = 255 * (g1 * a3 + g2 * a2) | 0;
-								var b = 255 * (b1 * a3 + b2 * a2) | 0;
-								var a = 255 * (a3 + a2) | 0;
-								var blended = a << 24 | r << 16 | g << 8 | b;
-								this2.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
-							} else {
-								this2.image.set(this2.useVirtualPos ? (y1 - this2.virtualY) * this2.width + x1 - this2.virtualX | 0 : y1 * this2.width + x1 | 0,justGraphix_image_Endian_isLittleEndian ? (c2 >> 24 & 255) << 24 | (c2 & 255) << 16 | (c2 >> 8 & 255) << 8 | c2 >> 16 & 255 : c2);
-							}
-						}
-					}
-				}
-				if(this2.mask != null && includeMask1) {
-					var v1 = justGraphix_image_imageAbstracts_TransformImage.flippedY(this2.mask,0,0,this2.width,this2.height,this2.mask.transparent,inPlace1,includeMask1);
-					this2.useMask = true;
-					this2.mask = v1;
-				}
-				nextImage1 = null;
-				v = this2;
-			} else {
-				if(this2.mask != null && includeMask1) {
-					var v1 = justGraphix_image_imageAbstracts_TransformImage.flippedY(this2.mask,0,0,this2.width,this2.height,this2.mask.transparent,inPlace1,includeMask1);
-					nextImage1.useMask = true;
-					nextImage1.mask = v1;
-				}
-				v = nextImage1;
-			}
-			nextImage.useMask = true;
-			nextImage.mask = v;
-		}
-		var texture2 = justGraphix_target_openflTarget_$_PeoteV.toPeoteTexture_(pixelImageTemp);
-		display.addProgram(program);
+		program.setTexture(texture1,"justGraphix_image");
 	}
 	,onPreloadComplete: function() {
 	}
@@ -4954,188 +4340,6 @@ justGraphix_image_imageAbstracts_LineShape.thinLine = function(this1,ax,ay,bx,by
 		}
 	}
 	return new justGraphix_hit_HitThinLine(ax,ay,bx,by);
-};
-var justGraphix_image_imageAbstracts_TransformImage = {};
-justGraphix_image_imageAbstracts_TransformImage.flippedY = function(this1,x,y,w,h,transparent,inPlace,includeMask) {
-	if(includeMask == null) {
-		includeMask = false;
-	}
-	if(inPlace == null) {
-		inPlace = false;
-	}
-	if(transparent == null) {
-		transparent = false;
-	}
-	var transparent1 = transparent;
-	var inPlace1 = inPlace;
-	var includeMask1 = includeMask;
-	if(includeMask1 == null) {
-		includeMask1 = false;
-	}
-	if(inPlace1 == null) {
-		inPlace1 = false;
-	}
-	if(transparent1 == null) {
-		transparent1 = false;
-	}
-	var r_x = x;
-	var r_y = y;
-	var r_w = w;
-	var r_h = h;
-	var xmax = r_x + r_w + 1 | 0;
-	var ymax = r_y + r_h + 1 | 0;
-	var ii_min = r_x | 0;
-	var ii_max = xmax;
-	var xRange__start = ii_min;
-	var xRange__max = ii_max;
-	var ii_min = r_y | 0;
-	var ii_max = ymax;
-	var yRange__start = ii_min;
-	var yRange__max = ii_max;
-	var range_x = xRange__start;
-	var range_y = yRange__start - 1;
-	var range_xReset = range_x;
-	var range_yReset = range_y;
-	var range_xMax = xRange__max - 2;
-	var range_yMax = yRange__max - 2;
-	var _this_min = 0;
-	var _this_max = (xRange__max - xRange__start) * (yRange__max - yRange__start) | 0;
-	var nextImage = justGraphix_image_Pixelimage._new(w | 0,h | 0);
-	nextImage.transparent = transparent1;
-	while(_this_min < _this_max) {
-		var i = _this_min++;
-		if(range_y > range_yMax) {
-			range_y = range_yReset;
-			++range_x;
-		}
-		++range_y;
-		var i1 = i;
-		var x1 = range_x;
-		var y1 = range_y;
-		var x2 = range_x;
-		var y2 = range_yMax - range_y;
-		var c = this1.image.get(this1.useVirtualPos ? (y2 - this1.virtualY) * this1.width + x2 - this1.virtualX | 0 : y2 * this1.width + x2 | 0);
-		var color = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
-		var c1 = color;
-		if((c1 >> 24 & 255) < 254 && nextImage.transparent) {
-			var location = nextImage.useVirtualPos ? (y1 - nextImage.virtualY) * nextImage.width + x1 - nextImage.virtualX | 0 : y1 * nextImage.width + x1 | 0;
-			var this2 = nextImage.image.get(location);
-			var this3 = justGraphix_image_Endian_isLittleEndian ? (this2 >> 24 & 255) << 24 | (this2 & 255) << 16 | (this2 >> 8 & 255) << 8 | this2 >> 16 & 255 : this2;
-			var this4 = this3 >> 24 & 255;
-			var a1 = this4 == 0 ? 0. : this4 / 255;
-			var this5 = this3 >> 16 & 255;
-			var r1 = this5 == 0 ? 0. : this5 / 255;
-			var this6 = this3 >> 8 & 255;
-			var g1 = this6 == 0 ? 0. : this6 / 255;
-			var this7 = this3 & 255;
-			var b1 = this7 == 0 ? 0. : this7 / 255;
-			var this8 = color >> 24 & 255;
-			var a2 = this8 == 0 ? 0. : this8 / 255;
-			var this9 = color >> 16 & 255;
-			var r2 = this9 == 0 ? 0. : this9 / 255;
-			var this10 = color >> 8 & 255;
-			var g2 = this10 == 0 ? 0. : this10 / 255;
-			var this11 = color & 255;
-			var b2 = this11 == 0 ? 0. : this11 / 255;
-			var a3 = a1 * (1 - a2);
-			var r = 255 * (r1 * a3 + r2 * a2) | 0;
-			var g = 255 * (g1 * a3 + g2 * a2) | 0;
-			var b = 255 * (b1 * a3 + b2 * a2) | 0;
-			var a = 255 * (a3 + a2) | 0;
-			var blended = a << 24 | r << 16 | g << 8 | b;
-			nextImage.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
-		} else {
-			nextImage.image.set(nextImage.useVirtualPos ? (y1 - nextImage.virtualY) * nextImage.width + x1 - nextImage.virtualX | 0 : y1 * nextImage.width + x1 | 0,justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1);
-		}
-	}
-	if(inPlace1) {
-		var x1 = x | 0;
-		var y1 = y | 0;
-		var _g = 0;
-		var _g1 = nextImage.height;
-		while(_g < _g1) {
-			var dy = _g++;
-			var _g2 = 0;
-			var _g3 = nextImage.width;
-			while(_g2 < _g3) {
-				var dx = _g2++;
-				var c = nextImage.image.get(nextImage.useVirtualPos ? (dy - nextImage.virtualY) * nextImage.width + dx - nextImage.virtualX | 0 : dy * nextImage.width + dx | 0);
-				var col = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
-				if(nextImage.useMask && nextImage.mask != null) {
-					var this2 = nextImage.mask;
-					var c1 = this2.image.get(this2.useVirtualPos ? (dy - this2.virtualY) * this2.width + dx - this2.virtualX | 0 : dy * this2.width + dx | 0);
-					var maskPixel = justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1;
-					var this3 = col;
-					if(maskPixel == 0) {
-						col = this3;
-					} else {
-						var this4 = maskPixel >> 24 & 255;
-						var m0 = this4 == 0 ? 0. : this4 / 255;
-						var this5 = maskPixel >> 16 & 255;
-						var m1 = this5 == 0 ? 0. : this5 / 255;
-						var this6 = maskPixel >> 8 & 255;
-						var m2 = this6 == 0 ? 0. : this6 / 255;
-						var this7 = maskPixel & 255;
-						var m3 = this7 == 0 ? 0. : this7 / 255;
-						var ch0 = (1. - m0) * (this3 >> 24 & 255) | 0;
-						var ch1 = (1. - m1) * (this3 >> 16 & 255) | 0;
-						var ch2 = (1. - m2) * (this3 >> 8 & 255) | 0;
-						var ch3 = (1. - m3) * (this3 & 255) | 0;
-						col = Math.round(ch0 * 255) << 24 | Math.round(ch1 * 255) << 16 | Math.round(ch2 * 255) << 8 | Math.round(ch3 * 255);
-					}
-				}
-				if(col != 0) {
-					var x2 = x1 + dx;
-					var y2 = y1 + dy;
-					var c2 = col;
-					if((c2 >> 24 & 255) < 254 && this1.transparent) {
-						var location = this1.useVirtualPos ? (y2 - this1.virtualY) * this1.width + x2 - this1.virtualX | 0 : y2 * this1.width + x2 | 0;
-						var this8 = this1.image.get(location);
-						var this9 = justGraphix_image_Endian_isLittleEndian ? (this8 >> 24 & 255) << 24 | (this8 & 255) << 16 | (this8 >> 8 & 255) << 8 | this8 >> 16 & 255 : this8;
-						var this10 = this9 >> 24 & 255;
-						var a1 = this10 == 0 ? 0. : this10 / 255;
-						var this11 = this9 >> 16 & 255;
-						var r1 = this11 == 0 ? 0. : this11 / 255;
-						var this12 = this9 >> 8 & 255;
-						var g1 = this12 == 0 ? 0. : this12 / 255;
-						var this13 = this9 & 255;
-						var b1 = this13 == 0 ? 0. : this13 / 255;
-						var this14 = col >> 24 & 255;
-						var a2 = this14 == 0 ? 0. : this14 / 255;
-						var this15 = col >> 16 & 255;
-						var r2 = this15 == 0 ? 0. : this15 / 255;
-						var this16 = col >> 8 & 255;
-						var g2 = this16 == 0 ? 0. : this16 / 255;
-						var this17 = col & 255;
-						var b2 = this17 == 0 ? 0. : this17 / 255;
-						var a3 = a1 * (1 - a2);
-						var r = 255 * (r1 * a3 + r2 * a2) | 0;
-						var g = 255 * (g1 * a3 + g2 * a2) | 0;
-						var b = 255 * (b1 * a3 + b2 * a2) | 0;
-						var a = 255 * (a3 + a2) | 0;
-						var blended = a << 24 | r << 16 | g << 8 | b;
-						this1.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
-					} else {
-						this1.image.set(this1.useVirtualPos ? (y2 - this1.virtualY) * this1.width + x2 - this1.virtualX | 0 : y2 * this1.width + x2 | 0,justGraphix_image_Endian_isLittleEndian ? (c2 >> 24 & 255) << 24 | (c2 & 255) << 16 | (c2 >> 8 & 255) << 8 | c2 >> 16 & 255 : c2);
-					}
-				}
-			}
-		}
-		if(this1.mask != null && includeMask1) {
-			var v = justGraphix_image_imageAbstracts_TransformImage.flippedY(this1.mask,x,y,this1.width,this1.height,this1.mask.transparent,inPlace1,includeMask1);
-			this1.useMask = true;
-			this1.mask = v;
-		}
-		nextImage = null;
-		return this1;
-	} else {
-		if(this1.mask != null && includeMask1) {
-			var v = justGraphix_image_imageAbstracts_TransformImage.flippedY(this1.mask,x,y,this1.width,this1.height,this1.mask.transparent,inPlace1,includeMask1);
-			nextImage.useMask = true;
-			nextImage.mask = v;
-		}
-		return nextImage;
-	}
 };
 var justGraphix_iterMagix_IntIterStart = function(min_,max_) {
 	this.start = min_;
@@ -21142,24 +20346,24 @@ var peote_view_Buffer_$Elem = function(minSize,growSize,autoShrink) {
 	}
 	this._elements = new Array(this._minSize);
 	if(peote_view_Version.isINSTANCED) {
-		if(justGraphix_application_image_Elem.instanceBytes == null) {
-			justGraphix_application_image_Elem.instanceBytes = new peote_view_intern_BufferBytes(new ArrayBuffer(12));
-			justGraphix_application_image_Elem.instanceBytes.b[0] = 1;
-			justGraphix_application_image_Elem.instanceBytes.b[1] = 1;
-			justGraphix_application_image_Elem.instanceBytes.b[2] = 1;
-			justGraphix_application_image_Elem.instanceBytes.b[3] = 1;
-			justGraphix_application_image_Elem.instanceBytes.b[4] = 0;
-			justGraphix_application_image_Elem.instanceBytes.b[5] = 1;
-			justGraphix_application_image_Elem.instanceBytes.b[6] = 1;
-			justGraphix_application_image_Elem.instanceBytes.b[7] = 0;
-			justGraphix_application_image_Elem.instanceBytes.b[8] = 0;
-			justGraphix_application_image_Elem.instanceBytes.b[9] = 0;
-			justGraphix_application_image_Elem.instanceBytes.b[10] = 0;
-			justGraphix_application_image_Elem.instanceBytes.b[11] = 0;
+		if(peote_view_element_Elem.instanceBytes == null) {
+			peote_view_element_Elem.instanceBytes = new peote_view_intern_BufferBytes(new ArrayBuffer(12));
+			peote_view_element_Elem.instanceBytes.b[0] = 1;
+			peote_view_element_Elem.instanceBytes.b[1] = 1;
+			peote_view_element_Elem.instanceBytes.b[2] = 1;
+			peote_view_element_Elem.instanceBytes.b[3] = 1;
+			peote_view_element_Elem.instanceBytes.b[4] = 0;
+			peote_view_element_Elem.instanceBytes.b[5] = 1;
+			peote_view_element_Elem.instanceBytes.b[6] = 1;
+			peote_view_element_Elem.instanceBytes.b[7] = 0;
+			peote_view_element_Elem.instanceBytes.b[8] = 0;
+			peote_view_element_Elem.instanceBytes.b[9] = 0;
+			peote_view_element_Elem.instanceBytes.b[10] = 0;
+			peote_view_element_Elem.instanceBytes.b[11] = 0;
 		}
-		this._elemBuffSize = 8;
+		this._elemBuffSize = 24;
 	} else {
-		this._elemBuffSize = 72;
+		this._elemBuffSize = 168;
 	}
 	this._bytes = new peote_view_intern_BufferBytes(new ArrayBuffer(this._elemBuffSize * this._minSize));
 	this._bytes.fill(0,this._elemBuffSize * this._minSize,0);
@@ -21189,8 +20393,8 @@ peote_view_Buffer_$Elem.prototype = {
 				this._glInstanceBuffer = this._gl.createBuffer();
 				var gl = this._gl;
 				gl.bindBuffer(gl.ARRAY_BUFFER,this._glInstanceBuffer);
-				var size = justGraphix_application_image_Elem.instanceBytes.length;
-				var bytes = justGraphix_application_image_Elem.instanceBytes;
+				var size = peote_view_element_Elem.instanceBytes.length;
+				var bytes = peote_view_element_Elem.instanceBytes;
 				gl.bufferData(gl.ARRAY_BUFFER,new Uint8Array(bytes.b.bufferValue,0),gl.STATIC_DRAW);
 				gl.bindBuffer(gl.ARRAY_BUFFER,null);
 			}
@@ -21204,21 +20408,36 @@ peote_view_Buffer_$Elem.prototype = {
 					gl.enableVertexAttribArray(0);
 					gl.vertexAttribPointer(0,2,gl.UNSIGNED_BYTE,false,2,0);
 					gl.bindBuffer(gl.ARRAY_BUFFER,glBuffer);
+					gl.enableVertexAttribArray(5);
+					gl.vertexAttribPointer(5,4,gl.UNSIGNED_BYTE,true,24,0);
+					gl.vertexAttribDivisor(5,1);
+					gl.enableVertexAttribArray(4);
+					gl.vertexAttribPointer(4,2,gl.FLOAT,false,24,4);
+					gl.vertexAttribDivisor(4,1);
 					gl.enableVertexAttribArray(1);
-					gl.vertexAttribPointer(1,2,gl.SHORT,false,8,0);
+					gl.vertexAttribPointer(1,2,gl.SHORT,false,24,12);
 					gl.vertexAttribDivisor(1,1);
 					gl.enableVertexAttribArray(2);
-					gl.vertexAttribPointer(2,2,gl.SHORT,false,8,4);
+					gl.vertexAttribPointer(2,2,gl.SHORT,false,24,16);
 					gl.vertexAttribDivisor(2,1);
+					gl.enableVertexAttribArray(3);
+					gl.vertexAttribPointer(3,2,gl.SHORT,false,24,20);
+					gl.vertexAttribDivisor(3,1);
 				} else {
 					var gl = this._gl;
 					gl.bindBuffer(gl.ARRAY_BUFFER,this._glBuffer);
+					gl.enableVertexAttribArray(5);
+					gl.vertexAttribPointer(5,4,gl.UNSIGNED_BYTE,true,28,0);
+					gl.enableVertexAttribArray(4);
+					gl.vertexAttribPointer(4,2,gl.FLOAT,false,28,4);
 					gl.enableVertexAttribArray(1);
-					gl.vertexAttribPointer(1,2,gl.SHORT,false,12,0);
+					gl.vertexAttribPointer(1,2,gl.SHORT,false,28,12);
 					gl.enableVertexAttribArray(2);
-					gl.vertexAttribPointer(2,2,gl.SHORT,false,12,4);
+					gl.vertexAttribPointer(2,2,gl.SHORT,false,28,16);
+					gl.enableVertexAttribArray(3);
+					gl.vertexAttribPointer(3,2,gl.SHORT,false,28,20);
 					gl.enableVertexAttribArray(0);
-					gl.vertexAttribPointer(0,2,gl.UNSIGNED_BYTE,false,12,8);
+					gl.vertexAttribPointer(0,2,gl.UNSIGNED_BYTE,false,28,24);
 				}
 				this._gl.bindVertexArray(null);
 			}
@@ -21227,48 +20446,83 @@ peote_view_Buffer_$Elem.prototype = {
 	,updateElement: function(element) {
 		if(peote_view_Version.isINSTANCED) {
 			var bytes = this._bytes;
-			bytes.b_Uint16[element.bytePos >> 1] = element.x & 65535;
-			bytes.b_Uint16[element.bytePos + 2 >> 1] = element.y & 65535;
-			bytes.b_Uint16[element.bytePos + 4 >> 1] = element.w & 65535;
-			bytes.b_Uint16[element.bytePos + 6 >> 1] = element.h & 65535;
-		} else {
-			var bytes = this._bytes;
-			bytes.b_Uint16[element.bytePos >> 1] = element.x & 65535;
-			bytes.b_Uint16[element.bytePos + 2 >> 1] = element.y & 65535;
-			bytes.b_Uint16[element.bytePos + 4 >> 1] = element.w & 65535;
-			bytes.b_Uint16[element.bytePos + 6 >> 1] = element.h & 65535;
-			bytes.b[element.bytePos + 8] = 1;
-			bytes.b[element.bytePos + 9] = 1;
+			bytes.b_Int32[element.bytePos >> 2] = element.c;
+			bytes.b_UFloat32[element.bytePos + 4 >> 2] = element.r / 180 * Math.PI;
+			bytes.b_UFloat32[element.bytePos + 8 >> 2] = Math.min(1.0,Math.max(-1.0,element.z / 2097151));
 			bytes.b_Uint16[element.bytePos + 12 >> 1] = element.x & 65535;
 			bytes.b_Uint16[element.bytePos + 14 >> 1] = element.y & 65535;
 			bytes.b_Uint16[element.bytePos + 16 >> 1] = element.w & 65535;
 			bytes.b_Uint16[element.bytePos + 18 >> 1] = element.h & 65535;
-			bytes.b[element.bytePos + 20] = 1;
-			bytes.b[element.bytePos + 21] = 1;
-			bytes.b_Uint16[element.bytePos + 24 >> 1] = element.x & 65535;
-			bytes.b_Uint16[element.bytePos + 26 >> 1] = element.y & 65535;
-			bytes.b_Uint16[element.bytePos + 28 >> 1] = element.w & 65535;
-			bytes.b_Uint16[element.bytePos + 30 >> 1] = element.h & 65535;
-			bytes.b[element.bytePos + 32] = 0;
-			bytes.b[element.bytePos + 33] = 1;
-			bytes.b_Uint16[element.bytePos + 36 >> 1] = element.x & 65535;
-			bytes.b_Uint16[element.bytePos + 38 >> 1] = element.y & 65535;
-			bytes.b_Uint16[element.bytePos + 40 >> 1] = element.w & 65535;
-			bytes.b_Uint16[element.bytePos + 42 >> 1] = element.h & 65535;
-			bytes.b[element.bytePos + 44] = 1;
-			bytes.b[element.bytePos + 45] = 0;
-			bytes.b_Uint16[element.bytePos + 48 >> 1] = element.x & 65535;
-			bytes.b_Uint16[element.bytePos + 50 >> 1] = element.y & 65535;
-			bytes.b_Uint16[element.bytePos + 52 >> 1] = element.w & 65535;
-			bytes.b_Uint16[element.bytePos + 54 >> 1] = element.h & 65535;
-			bytes.b[element.bytePos + 56] = 0;
-			bytes.b[element.bytePos + 57] = 0;
-			bytes.b_Uint16[element.bytePos + 60 >> 1] = element.x & 65535;
-			bytes.b_Uint16[element.bytePos + 62 >> 1] = element.y & 65535;
-			bytes.b_Uint16[element.bytePos + 64 >> 1] = element.w & 65535;
-			bytes.b_Uint16[element.bytePos + 66 >> 1] = element.h & 65535;
-			bytes.b[element.bytePos + 68] = 0;
-			bytes.b[element.bytePos + 69] = 0;
+			bytes.b_Uint16[element.bytePos + 20 >> 1] = element.px & 65535;
+			bytes.b_Uint16[element.bytePos + 22 >> 1] = element.py & 65535;
+		} else {
+			var bytes = this._bytes;
+			bytes.b_Int32[element.bytePos >> 2] = element.c;
+			bytes.b_UFloat32[element.bytePos + 4 >> 2] = element.r / 180 * Math.PI;
+			bytes.b_UFloat32[element.bytePos + 8 >> 2] = Math.min(1.0,Math.max(-1.0,element.z / 2097151));
+			bytes.b_Uint16[element.bytePos + 12 >> 1] = element.x & 65535;
+			bytes.b_Uint16[element.bytePos + 14 >> 1] = element.y & 65535;
+			bytes.b_Uint16[element.bytePos + 16 >> 1] = element.w & 65535;
+			bytes.b_Uint16[element.bytePos + 18 >> 1] = element.h & 65535;
+			bytes.b_Uint16[element.bytePos + 20 >> 1] = element.px & 65535;
+			bytes.b_Uint16[element.bytePos + 22 >> 1] = element.py & 65535;
+			bytes.b[element.bytePos + 24] = 1;
+			bytes.b[element.bytePos + 25] = 1;
+			bytes.b_Int32[element.bytePos + 28 >> 2] = element.c;
+			bytes.b_UFloat32[element.bytePos + 32 >> 2] = element.r / 180 * Math.PI;
+			bytes.b_UFloat32[element.bytePos + 36 >> 2] = Math.min(1.0,Math.max(-1.0,element.z / 2097151));
+			bytes.b_Uint16[element.bytePos + 40 >> 1] = element.x & 65535;
+			bytes.b_Uint16[element.bytePos + 42 >> 1] = element.y & 65535;
+			bytes.b_Uint16[element.bytePos + 44 >> 1] = element.w & 65535;
+			bytes.b_Uint16[element.bytePos + 46 >> 1] = element.h & 65535;
+			bytes.b_Uint16[element.bytePos + 48 >> 1] = element.px & 65535;
+			bytes.b_Uint16[element.bytePos + 50 >> 1] = element.py & 65535;
+			bytes.b[element.bytePos + 52] = 1;
+			bytes.b[element.bytePos + 53] = 1;
+			bytes.b_Int32[element.bytePos + 56 >> 2] = element.c;
+			bytes.b_UFloat32[element.bytePos + 60 >> 2] = element.r / 180 * Math.PI;
+			bytes.b_UFloat32[element.bytePos + 64 >> 2] = Math.min(1.0,Math.max(-1.0,element.z / 2097151));
+			bytes.b_Uint16[element.bytePos + 68 >> 1] = element.x & 65535;
+			bytes.b_Uint16[element.bytePos + 70 >> 1] = element.y & 65535;
+			bytes.b_Uint16[element.bytePos + 72 >> 1] = element.w & 65535;
+			bytes.b_Uint16[element.bytePos + 74 >> 1] = element.h & 65535;
+			bytes.b_Uint16[element.bytePos + 76 >> 1] = element.px & 65535;
+			bytes.b_Uint16[element.bytePos + 78 >> 1] = element.py & 65535;
+			bytes.b[element.bytePos + 80] = 0;
+			bytes.b[element.bytePos + 81] = 1;
+			bytes.b_Int32[element.bytePos + 84 >> 2] = element.c;
+			bytes.b_UFloat32[element.bytePos + 88 >> 2] = element.r / 180 * Math.PI;
+			bytes.b_UFloat32[element.bytePos + 92 >> 2] = Math.min(1.0,Math.max(-1.0,element.z / 2097151));
+			bytes.b_Uint16[element.bytePos + 96 >> 1] = element.x & 65535;
+			bytes.b_Uint16[element.bytePos + 98 >> 1] = element.y & 65535;
+			bytes.b_Uint16[element.bytePos + 100 >> 1] = element.w & 65535;
+			bytes.b_Uint16[element.bytePos + 102 >> 1] = element.h & 65535;
+			bytes.b_Uint16[element.bytePos + 104 >> 1] = element.px & 65535;
+			bytes.b_Uint16[element.bytePos + 106 >> 1] = element.py & 65535;
+			bytes.b[element.bytePos + 108] = 1;
+			bytes.b[element.bytePos + 109] = 0;
+			bytes.b_Int32[element.bytePos + 112 >> 2] = element.c;
+			bytes.b_UFloat32[element.bytePos + 116 >> 2] = element.r / 180 * Math.PI;
+			bytes.b_UFloat32[element.bytePos + 120 >> 2] = Math.min(1.0,Math.max(-1.0,element.z / 2097151));
+			bytes.b_Uint16[element.bytePos + 124 >> 1] = element.x & 65535;
+			bytes.b_Uint16[element.bytePos + 126 >> 1] = element.y & 65535;
+			bytes.b_Uint16[element.bytePos + 128 >> 1] = element.w & 65535;
+			bytes.b_Uint16[element.bytePos + 130 >> 1] = element.h & 65535;
+			bytes.b_Uint16[element.bytePos + 132 >> 1] = element.px & 65535;
+			bytes.b_Uint16[element.bytePos + 134 >> 1] = element.py & 65535;
+			bytes.b[element.bytePos + 136] = 0;
+			bytes.b[element.bytePos + 137] = 0;
+			bytes.b_Int32[element.bytePos + 140 >> 2] = element.c;
+			bytes.b_UFloat32[element.bytePos + 144 >> 2] = element.r / 180 * Math.PI;
+			bytes.b_UFloat32[element.bytePos + 148 >> 2] = Math.min(1.0,Math.max(-1.0,element.z / 2097151));
+			bytes.b_Uint16[element.bytePos + 152 >> 1] = element.x & 65535;
+			bytes.b_Uint16[element.bytePos + 154 >> 1] = element.y & 65535;
+			bytes.b_Uint16[element.bytePos + 156 >> 1] = element.w & 65535;
+			bytes.b_Uint16[element.bytePos + 158 >> 1] = element.h & 65535;
+			bytes.b_Uint16[element.bytePos + 160 >> 1] = element.px & 65535;
+			bytes.b_Uint16[element.bytePos + 162 >> 1] = element.py & 65535;
+			bytes.b[element.bytePos + 164] = 0;
+			bytes.b[element.bytePos + 165] = 0;
 		}
 		if(element.bytePos == -1) {
 			throw haxe_Exception.thrown("Error, Element is not added to Buffer");
@@ -21333,21 +20587,36 @@ peote_view_Buffer_$Elem.prototype = {
 							gl.enableVertexAttribArray(0);
 							gl.vertexAttribPointer(0,2,gl.UNSIGNED_BYTE,false,2,0);
 							gl.bindBuffer(gl.ARRAY_BUFFER,glBuffer);
+							gl.enableVertexAttribArray(5);
+							gl.vertexAttribPointer(5,4,gl.UNSIGNED_BYTE,true,24,0);
+							gl.vertexAttribDivisor(5,1);
+							gl.enableVertexAttribArray(4);
+							gl.vertexAttribPointer(4,2,gl.FLOAT,false,24,4);
+							gl.vertexAttribDivisor(4,1);
 							gl.enableVertexAttribArray(1);
-							gl.vertexAttribPointer(1,2,gl.SHORT,false,8,0);
+							gl.vertexAttribPointer(1,2,gl.SHORT,false,24,12);
 							gl.vertexAttribDivisor(1,1);
 							gl.enableVertexAttribArray(2);
-							gl.vertexAttribPointer(2,2,gl.SHORT,false,8,4);
+							gl.vertexAttribPointer(2,2,gl.SHORT,false,24,16);
 							gl.vertexAttribDivisor(2,1);
+							gl.enableVertexAttribArray(3);
+							gl.vertexAttribPointer(3,2,gl.SHORT,false,24,20);
+							gl.vertexAttribDivisor(3,1);
 						} else {
 							var gl = this._gl;
 							gl.bindBuffer(gl.ARRAY_BUFFER,this._glBuffer);
+							gl.enableVertexAttribArray(5);
+							gl.vertexAttribPointer(5,4,gl.UNSIGNED_BYTE,true,28,0);
+							gl.enableVertexAttribArray(4);
+							gl.vertexAttribPointer(4,2,gl.FLOAT,false,28,4);
 							gl.enableVertexAttribArray(1);
-							gl.vertexAttribPointer(1,2,gl.SHORT,false,12,0);
+							gl.vertexAttribPointer(1,2,gl.SHORT,false,28,12);
 							gl.enableVertexAttribArray(2);
-							gl.vertexAttribPointer(2,2,gl.SHORT,false,12,4);
+							gl.vertexAttribPointer(2,2,gl.SHORT,false,28,16);
+							gl.enableVertexAttribArray(3);
+							gl.vertexAttribPointer(3,2,gl.SHORT,false,28,20);
 							gl.enableVertexAttribArray(0);
-							gl.vertexAttribPointer(0,2,gl.UNSIGNED_BYTE,false,12,8);
+							gl.vertexAttribPointer(0,2,gl.UNSIGNED_BYTE,false,28,24);
 						}
 						this._gl.bindVertexArray(null);
 					}
@@ -21377,16 +20646,16 @@ peote_view_Buffer_$Elem.prototype = {
 		}
 	}
 	,getVertexShader: function() {
-		return "\n\t::if isES3::#version 300 es::end::\n\t::if VERTEX_INT_PRECISION::precision ::VERTEX_INT_PRECISION:: int; ::end::\n\t::if VERTEX_FLOAT_PRECISION::precision ::VERTEX_FLOAT_PRECISION:: float; ::end::\n\t::if VERTEX_SAMPLER_PRECISION::precision ::VERTEX_SAMPLER_PRECISION:: sampler2D; ::end::\n\t\n\t// Uniforms -------------------------\n\t::if (!isPICKING && isUBO)::\n\t//layout(std140) uniform uboView\n\tuniform uboView\n\t{\n\t\tvec2 uResolution;\n\t\tvec2 uViewOffset;\n\t\tvec2 uViewZoom;\n\t};\n\t//layout(std140) uniform uboDisplay\n\tuniform uboDisplay\n\t{\n\t\tvec2 uOffset;\n\t\tvec2 uZoom;\n\t};\n\t::else::\n\tuniform vec2 uResolution;\n\tuniform vec2 uOffset;\n\tuniform vec2 uZoom;\n\t::end::\n\t\n\t\n\t\n\t// Attributes -------------------------\n\t::IN:: vec2 aPosition;\n\t\n\t::if isPICKING::\n\t\t::if !isINSTANCED::\n\t\t\t::IN:: vec4 aElement;\n\t\t::end::\n\t::end::\n\t\n\t::IN:: vec2 aPos;\n\t::IN:: vec2 aSize;\n\t\n\t\n\t\n\t\n\t\n\t\n\t\n\t\n\t// Varyings ---------------------------\n\t::if isPICKING::\n\t\t::if isINSTANCED::\n\t\t\tflat ::VAROUT:: int vElement;\n\t\t::else::\n\t\t\t::VAROUT:: vec4 vElement;\n\t\t::end::\n\t::end::\n\t\n\t\n\t\n\t\n\t::if (hasTEXTURES || hasFRAGMENT_INJECTION)::\n\t\t::VAROUT:: vec2 vTexCoord;\n\t\t\n\t::end::\t\n\n\t// custom functions -------------------\n\t::VERTEX_INJECTION::\n\n\t// --------- vertex main --------------\n\tvoid main(void)\n\t{\n\t\t\n\t\tvec2 size = ::if SIZE_FORMULA::::SIZE_FORMULA::::else::aSize::end::;\n\t\t\t\t\n\t\t\n\t\tvec2 pos = ::if POS_FORMULA::::POS_FORMULA::::else::aPos::end::;\npos = pos + aPosition * size;\n\t\t\n\n\t\t\n\n\t\t::if (hasTEXTURES || hasFRAGMENT_INJECTION)::\n\t\t\tvTexCoord = aPosition;\t\t\t\n\t\t\t\n\t\t::end::\n\t\t\n\t\t::if isPICKING::\n\t\t\t::if isINSTANCED::\n\t\t\t\tvElement = gl_InstanceID + 1;\n\t\t\t::else::\n\t\t\t\tvElement = aElement;\n\t\t\t::end::\n\t\t::end::\n\t\t\n\t\tfloat width = uResolution.x;\n\t\tfloat height = uResolution.y;\n\t\t::if (!isPICKING && isUBO)::\n\t\tfloat deltaX = (uOffset.x  + uViewOffset.x) / uZoom.x;\n\t\tfloat deltaY = (uOffset.y  + uViewOffset.y) / uZoom.y;\n\t\tvec2 zoom = uZoom * uViewZoom;\n\t\t::else::\n\t\tfloat deltaX = uOffset.x;\n\t\tfloat deltaY = uOffset.y;\n\t\tvec2 zoom = uZoom;\n\t\t::end::\n\t\t\n\t\t::if isPIXELSNAPPING::\n\t\tpos = floor( pos * ::PIXELDIVISOR:: * zoom ) / ::PIXELDIVISOR:: / zoom;\n\t\t::end::\n\t\t\n\t\tgl_Position = vec4 (\n\t\t\t 2.0 * zoom.x/width  * (pos.x + deltaX) - 1.0,\n\t\t\t-2.0 * zoom.y/height * (pos.y + deltaY) + 1.0,\n\t\t\t- 0.0,\n\t\t\t1.0\n\t\t);\t\t\n\t\t\n\t}\n\t";
+		return "\n\t::if isES3::#version 300 es::end::\n\t::if VERTEX_INT_PRECISION::precision ::VERTEX_INT_PRECISION:: int; ::end::\n\t::if VERTEX_FLOAT_PRECISION::precision ::VERTEX_FLOAT_PRECISION:: float; ::end::\n\t::if VERTEX_SAMPLER_PRECISION::precision ::VERTEX_SAMPLER_PRECISION:: sampler2D; ::end::\n\t\n\t// Uniforms -------------------------\n\t::if (!isPICKING && isUBO)::\n\t//layout(std140) uniform uboView\n\tuniform uboView\n\t{\n\t\tvec2 uResolution;\n\t\tvec2 uViewOffset;\n\t\tvec2 uViewZoom;\n\t};\n\t//layout(std140) uniform uboDisplay\n\tuniform uboDisplay\n\t{\n\t\tvec2 uOffset;\n\t\tvec2 uZoom;\n\t};\n\t::else::\n\tuniform vec2 uResolution;\n\tuniform vec2 uOffset;\n\tuniform vec2 uZoom;\n\t::end::\n\t\n\t\n\t\n\t// Attributes -------------------------\n\t::IN:: vec2 aPosition;\n\t\n\t::if isPICKING::\n\t\t::if !isINSTANCED::\n\t\t\t::IN:: vec4 aElement;\n\t\t::end::\n\t::end::\n\t\n\t::IN:: vec2 aPos;\n\t::IN:: vec2 aSize;\n\t\n\t::IN:: vec2 aRotZ;\n\t::IN:: vec2 aPivot;\n\t\n\t::IN:: vec4 aColorStart0;\n\t\n\t\n\t\n\t// Varyings ---------------------------\n\t::if isPICKING::\n\t\t::if isINSTANCED::\n\t\t\tflat ::VAROUT:: int vElement;\n\t\t::else::\n\t\t\t::VAROUT:: vec4 vElement;\n\t\t::end::\n\t::end::\n\t\n\t::if isES3::flat ::end::::VAROUT:: vec4 vColor0;\n\t\n\t\n\t::if (hasTEXTURES || hasFRAGMENT_INJECTION)::\n\t\t::VAROUT:: vec2 vTexCoord;\n\t\t\n\t::end::\t\n\n\t// custom functions -------------------\n\t::VERTEX_INJECTION::\n\n\t// --------- vertex main --------------\n\tvoid main(void)\n\t{\n\t\t\n\t\tvec2 size = ::if SIZE_FORMULA::::SIZE_FORMULA::::else::aSize::end::;\n\t\tvec2 pivot = ::if PIVOT_FORMULA::::PIVOT_FORMULA::::else::aPivot::end::;\t\t\n\t\tvec2 rotZ = ::if ROTZ_FORMULA::::ROTZ_FORMULA::::else::aRotZ::end::;\n\t\tvec2 pos = ::if POS_FORMULA::::POS_FORMULA::::else::aPos::end::;\npos = pos + (aPosition * size - pivot) * mat2( vec2(cos(rotZ.x), -sin(rotZ.x)), vec2(sin(rotZ.x), cos(rotZ.x)) );\n\t\tvColor0 = aColorStart0.wzyx; \n\n\t\t\n\n\t\t::if (hasTEXTURES || hasFRAGMENT_INJECTION)::\n\t\t\tvTexCoord = aPosition;\t\t\t\n\t\t\t\n\t\t::end::\n\t\t\n\t\t::if isPICKING::\n\t\t\t::if isINSTANCED::\n\t\t\t\tvElement = gl_InstanceID + 1;\n\t\t\t::else::\n\t\t\t\tvElement = aElement;\n\t\t\t::end::\n\t\t::end::\n\t\t\n\t\tfloat width = uResolution.x;\n\t\tfloat height = uResolution.y;\n\t\t::if (!isPICKING && isUBO)::\n\t\tfloat deltaX = (uOffset.x  + uViewOffset.x) / uZoom.x;\n\t\tfloat deltaY = (uOffset.y  + uViewOffset.y) / uZoom.y;\n\t\tvec2 zoom = uZoom * uViewZoom;\n\t\t::else::\n\t\tfloat deltaX = uOffset.x;\n\t\tfloat deltaY = uOffset.y;\n\t\tvec2 zoom = uZoom;\n\t\t::end::\n\t\t\n\t\t::if isPIXELSNAPPING::\n\t\tpos = floor( pos * ::PIXELDIVISOR:: * zoom ) / ::PIXELDIVISOR:: / zoom;\n\t\t::end::\n\t\t\n\t\tgl_Position = vec4 (\n\t\t\t 2.0 * zoom.x/width  * (pos.x + deltaX) - 1.0,\n\t\t\t-2.0 * zoom.y/height * (pos.y + deltaY) + 1.0,\n\t\t\t- rotZ.y,\n\t\t\t1.0\n\t\t);\t\t\n\t\t\n\t}\n\t";
 	}
 	,getFragmentShader: function() {
-		return "\n\t::if isES3::#version 300 es::end::\n\t::foreach FRAGMENT_EXTENSIONS::#extension ::EXTENSION:: : enable\n\t::end::\n\t\n\t::if FRAGMENT_INT_PRECISION::precision ::FRAGMENT_INT_PRECISION:: int; ::end::\n\t::if FRAGMENT_FLOAT_PRECISION::precision ::FRAGMENT_FLOAT_PRECISION:: float; ::end::\n\t::if FRAGMENT_SAMPLER_PRECISION::precision ::FRAGMENT_SAMPLER_PRECISION:: sampler2D; ::end::\n\t\n\t// Uniforms -------------------------\t\n\t::FRAGMENT_PROGRAM_UNIFORMS::\n\t\n\t// Varyings ---------------------------\n\t::if isPICKING::\n\t\t::if isINSTANCED::\n\t\t\tflat ::VARIN:: int vElement;\n\t\t::else::\n\t\t\t::VARIN:: vec4 vElement;\n\t\t::end::\n\t::end::\n\n\t\n\t\n\t\t\t\n\t::if (hasTEXTURES || hasFRAGMENT_INJECTION)::\n\t\t::VARIN:: vec2 vTexCoord;\n\t\t\n\t::end::\t\n\t\n\t\n\t::if isES3::\n\t\t::if (isPICKING && isINSTANCED)::\n\t\t\tout int Color;\n\t\t::else::\n\t\t\tout vec4 Color;\n\t\t::end::\n\t::end::\n\n\t::if hasTEXTURE_FUNCTIONS::\n\t\t// function to get texture color\n\t\tvec4 getTextureColor(int TXTNUM, vec2 vTexCoord) {\n\t\t::foreach TEXTURES::\n\t\t\t\n\t\t\t::if (LAYER >= 0)::\n\t\t\t::if USED_ID::\n\t\t\t\tif (TXTNUM == ::LAYER::) {\n\t\t\t\t\t::foreach UNITS::\n\t\t\t\t\t::if !FIRST ::else ::end::::if !LAST ::if (0.0 < ::UNIT_VALUE::)::end::\n\t\t\t\t\t\treturn(texture::if !isES3::2D::end::(::TEXTURE::, vec2(vTexCoord.x * ::SLOTS_WIDTH::, vTexCoord.y * ::SLOTS_HEIGHT::)));\n\t\t\t\t\t::end::\n\t\t\t\t}\n\t\t\t::end::\n\t\t\t::end::\n\t\t\t\n\t\t::end::\n\t\t// default values:\n\t\t::foreach TEXTURE_DEFAULTS::\n\t\t\tif (TXTNUM == ::LAYER::) {return(::DEFAULT_VALUE::);}\t\t\n\t\t::end::\n\t\t}\n\t::else:: \n\t\t::if hasFRAGMENT_INJECTION::#define getTextureColor(a,b) vec4(0.0,0.0,0.0,0.0)::end::\n\t::end::\n\n\t::if hasTEXTURE_FUNCTIONS::\n\t\t// function to get full texture size\n\t\tvec2 getTextureResolution(int TXTNUM) {\n\t\t::foreach TEXTURES::\n\t\t\t\n\t\t\t::if (LAYER >= 0)::\n\t\t\t::if USED_ID::\n\t\t\t\tif (TXTNUM == ::LAYER::) {\n\t\t\t\t\t::foreach UNITS::\n\t\t\t\t\t::if !FIRST ::else ::end::::if !LAST ::if (0.0 < ::UNIT_VALUE::)::end::\n\t\t\t\t\t\treturn( vec2(::TEXTURE_WIDTH::, ::TEXTURE_HEIGHT::) );\n\t\t\t\t\t::end::\n\t\t\t\t}\n\t\t\t::end::\n\t\t\t::end::\n\t\t\t\n\t\t::end::\n\t\t// default values:\n\t\t::foreach TEXTURE_DEFAULTS::\n\t\t\tif (TXTNUM == ::LAYER::) {return(vec2(0.0,0.0));}\t\t\n\t\t::end::\n\t\t}\n\t::else:: \n\t\t::if hasFRAGMENT_INJECTION::#define getTextureResolution(a) vec2(0.0,0.0)::end::\n\t::end::\n\n\t// custom functions -------------------\n\t::FRAGMENT_INJECTION::\n\t\n\t// --------- fragment main ------------\n\tvoid main(void)\n\t{\t\n\t\t\n\t\t\n\t\t::if hasTEXTURES::\n\t\t\t::foreach TEXTURES::\n\t\t\t\t// ------------- LAYER ::LAYER:: --------------\n\t\t\t\t\n\t\t\t\t::if (LAYER >= 0)::\n\t\t\t\t::if USED::\n\t\t\t\t\tvec4 t::LAYER::;\n\t\t\t\t\t::foreach UNITS::\n\t\t\t\t\t::if !FIRST ::else ::end::::if !LAST ::if (0.0 < ::UNIT_VALUE::)::end::\n\t\t\t\t\t\tt::LAYER:: = texture::if !isES3::2D::end::(::TEXTURE::, vec2(vTexCoord.x * ::SLOTS_WIDTH::, vTexCoord.y * ::SLOTS_HEIGHT::));\n\t\t\t\t\t::end::\n\t\t\t\t::end::\n\t\t\t\t::end::\n\t\t\t\t\n\t\t\t::end::\n\t\t::end::\n\t\t\n\t\t// calc final color from all layers\n\t\tvec4 col = ::FRAGMENT_CALC_LAYER::;\n\t\t\n\t\t::if isDISCARD:: \n\t\t\tif (col.a <= ::DISCARD::) discard;\n\t\t::end::\n\t\t\n\t\t::if isPICKING::\n\t\t\t::if !isES3::gl_Frag::end::Color = vElement;\n\t\t::else::\n\t\t\t::if !isES3::gl_Frag::end::Color = col;\n\t\t\t// this fixing problem on old FF if alpha goes zero\n\t\t\t// ::if !isES3::gl_Frag::end::Color.w = clamp(::if !isES3::gl_Frag::end::Color.w, 0.003, 1.0);\n\t\t::end::\n\t}\n\t";
+		return "\n\t::if isES3::#version 300 es::end::\n\t::foreach FRAGMENT_EXTENSIONS::#extension ::EXTENSION:: : enable\n\t::end::\n\t\n\t::if FRAGMENT_INT_PRECISION::precision ::FRAGMENT_INT_PRECISION:: int; ::end::\n\t::if FRAGMENT_FLOAT_PRECISION::precision ::FRAGMENT_FLOAT_PRECISION:: float; ::end::\n\t::if FRAGMENT_SAMPLER_PRECISION::precision ::FRAGMENT_SAMPLER_PRECISION:: sampler2D; ::end::\n\t\n\t// Uniforms -------------------------\t\n\t::FRAGMENT_PROGRAM_UNIFORMS::\n\t\n\t// Varyings ---------------------------\n\t::if isPICKING::\n\t\t::if isINSTANCED::\n\t\t\tflat ::VARIN:: int vElement;\n\t\t::else::\n\t\t\t::VARIN:: vec4 vElement;\n\t\t::end::\n\t::end::\n\n\t::if isES3::flat ::end::::VARIN:: vec4 vColor0; \n\t\n\t\t\t\n\t::if (hasTEXTURES || hasFRAGMENT_INJECTION)::\n\t\t::VARIN:: vec2 vTexCoord;\n\t\t\n\t::end::\t\n\t\n\t\n\t::if isES3::\n\t\t::if (isPICKING && isINSTANCED)::\n\t\t\tout int Color;\n\t\t::else::\n\t\t\tout vec4 Color;\n\t\t::end::\n\t::end::\n\n\t::if hasTEXTURE_FUNCTIONS::\n\t\t// function to get texture color\n\t\tvec4 getTextureColor(int TXTNUM, vec2 vTexCoord) {\n\t\t::foreach TEXTURES::\n\t\t\t\n\t\t\t::if (LAYER >= 0)::\n\t\t\t::if USED_ID::\n\t\t\t\tif (TXTNUM == ::LAYER::) {\n\t\t\t\t\t::foreach UNITS::\n\t\t\t\t\t::if !FIRST ::else ::end::::if !LAST ::if (0.0 < ::UNIT_VALUE::)::end::\n\t\t\t\t\t\treturn(texture::if !isES3::2D::end::(::TEXTURE::, vec2(vTexCoord.x * ::SLOTS_WIDTH::, vTexCoord.y * ::SLOTS_HEIGHT::)));\n\t\t\t\t\t::end::\n\t\t\t\t}\n\t\t\t::end::\n\t\t\t::end::\n\t\t\t\n\t\t::end::\n\t\t// default values:\n\t\t::foreach TEXTURE_DEFAULTS::\n\t\t\tif (TXTNUM == ::LAYER::) {return(::DEFAULT_VALUE::);}\t\t\n\t\t::end::\n\t\t}\n\t::else:: \n\t\t::if hasFRAGMENT_INJECTION::#define getTextureColor(a,b) vec4(0.0,0.0,0.0,0.0)::end::\n\t::end::\n\n\t::if hasTEXTURE_FUNCTIONS::\n\t\t// function to get full texture size\n\t\tvec2 getTextureResolution(int TXTNUM) {\n\t\t::foreach TEXTURES::\n\t\t\t\n\t\t\t::if (LAYER >= 0)::\n\t\t\t::if USED_ID::\n\t\t\t\tif (TXTNUM == ::LAYER::) {\n\t\t\t\t\t::foreach UNITS::\n\t\t\t\t\t::if !FIRST ::else ::end::::if !LAST ::if (0.0 < ::UNIT_VALUE::)::end::\n\t\t\t\t\t\treturn( vec2(::TEXTURE_WIDTH::, ::TEXTURE_HEIGHT::) );\n\t\t\t\t\t::end::\n\t\t\t\t}\n\t\t\t::end::\n\t\t\t::end::\n\t\t\t\n\t\t::end::\n\t\t// default values:\n\t\t::foreach TEXTURE_DEFAULTS::\n\t\t\tif (TXTNUM == ::LAYER::) {return(vec2(0.0,0.0));}\t\t\n\t\t::end::\n\t\t}\n\t::else:: \n\t\t::if hasFRAGMENT_INJECTION::#define getTextureResolution(a) vec2(0.0,0.0)::end::\n\t::end::\n\n\t// custom functions -------------------\n\t::FRAGMENT_INJECTION::\n\t\n\t// --------- fragment main ------------\n\tvoid main(void)\n\t{\t\n\t\tvec4 c0 = vColor0; \n\t\t\n\t\t::if hasTEXTURES::\n\t\t\t::foreach TEXTURES::\n\t\t\t\t// ------------- LAYER ::LAYER:: --------------\n\t\t\t\t\n\t\t\t\t::if (LAYER >= 0)::\n\t\t\t\t::if USED::\n\t\t\t\t\tvec4 t::LAYER::;\n\t\t\t\t\t::foreach UNITS::\n\t\t\t\t\t::if !FIRST ::else ::end::::if !LAST ::if (0.0 < ::UNIT_VALUE::)::end::\n\t\t\t\t\t\tt::LAYER:: = texture::if !isES3::2D::end::(::TEXTURE::, vec2(vTexCoord.x * ::SLOTS_WIDTH::, vTexCoord.y * ::SLOTS_HEIGHT::));\n\t\t\t\t\t::end::\n\t\t\t\t::end::\n\t\t\t\t::end::\n\t\t\t\t\n\t\t\t::end::\n\t\t::end::\n\t\t\n\t\t// calc final color from all layers\n\t\tvec4 col = ::FRAGMENT_CALC_LAYER::;\n\t\t\n\t\t::if isDISCARD:: \n\t\t\tif (col.a <= ::DISCARD::) discard;\n\t\t::end::\n\t\t\n\t\t::if isPICKING::\n\t\t\t::if !isES3::gl_Frag::end::Color = vElement;\n\t\t::else::\n\t\t\t::if !isES3::gl_Frag::end::Color = col;\n\t\t\t// this fixing problem on old FF if alpha goes zero\n\t\t\t// ::if !isES3::gl_Frag::end::Color.w = clamp(::if !isES3::gl_Frag::end::Color.w, 0.003, 1.0);\n\t\t::end::\n\t}\n\t";
 	}
 	,getTextureIdentifiers: function() {
 		return [];
 	}
 	,getColorIdentifiers: function() {
-		return [];
+		return "c".split(",");
 	}
 	,getCustomIdentifiers: function() {
 		return [];
@@ -21398,29 +20667,29 @@ peote_view_Buffer_$Elem.prototype = {
 		return "";
 	}
 	,getDefaultFormulaVars: function() {
-		return justGraphix_application_image_Elem.DEFAULT_FORMULA_VARS;
+		return peote_view_element_Elem.DEFAULT_FORMULA_VARS;
 	}
 	,getFormulas: function() {
-		return justGraphix_application_image_Elem.FORMULAS;
+		return peote_view_element_Elem.FORMULAS;
 	}
 	,getAttributes: function() {
-		return justGraphix_application_image_Elem.ATTRIBUTES;
+		return peote_view_element_Elem.ATTRIBUTES;
 	}
 	,getFormulaNames: function() {
-		return justGraphix_application_image_Elem.FORMULA_NAMES;
+		return peote_view_element_Elem.FORMULA_NAMES;
 	}
 	,getFormulaVaryings: function() {
-		if(justGraphix_application_image_Elem.FORMULA_VARYINGS == "") {
+		if(peote_view_element_Elem.FORMULA_VARYINGS == "") {
 			return [];
 		} else {
-			return justGraphix_application_image_Elem.FORMULA_VARYINGS.split(",");
+			return peote_view_element_Elem.FORMULA_VARYINGS.split(",");
 		}
 	}
 	,getFormulaConstants: function() {
-		if(justGraphix_application_image_Elem.FORMULA_CONSTANTS == "") {
+		if(peote_view_element_Elem.FORMULA_CONSTANTS == "") {
 			return [];
 		} else {
-			return justGraphix_application_image_Elem.FORMULA_CONSTANTS.split(",");
+			return peote_view_element_Elem.FORMULA_CONSTANTS.split(",");
 		}
 	}
 	,getMaxZindex: function() {
@@ -21430,7 +20699,7 @@ peote_view_Buffer_$Elem.prototype = {
 		return false;
 	}
 	,hasZindex: function() {
-		return false;
+		return true;
 	}
 	,hasPicking: function() {
 		return false;
@@ -21440,12 +20709,18 @@ peote_view_Buffer_$Elem.prototype = {
 	}
 	,bindAttribLocations: function(gl,glProgram) {
 		if(peote_view_Version.isINSTANCED) {
+			gl.bindAttribLocation(glProgram,5,"aColorStart0");
+			gl.bindAttribLocation(glProgram,4,"aRotZ");
 			gl.bindAttribLocation(glProgram,1,"aPos");
 			gl.bindAttribLocation(glProgram,2,"aSize");
+			gl.bindAttribLocation(glProgram,3,"aPivot");
 			gl.bindAttribLocation(glProgram,0,"aPosition");
 		} else {
+			gl.bindAttribLocation(glProgram,5,"aColorStart0");
+			gl.bindAttribLocation(glProgram,4,"aRotZ");
 			gl.bindAttribLocation(glProgram,1,"aPos");
 			gl.bindAttribLocation(glProgram,2,"aSize");
+			gl.bindAttribLocation(glProgram,3,"aPivot");
 			gl.bindAttribLocation(glProgram,0,"aPosition");
 		}
 	}
@@ -21461,12 +20736,21 @@ peote_view_Buffer_$Elem.prototype = {
 				gl.enableVertexAttribArray(0);
 				gl.vertexAttribPointer(0,2,gl.UNSIGNED_BYTE,false,2,0);
 				gl.bindBuffer(gl.ARRAY_BUFFER,glBuffer);
+				gl.enableVertexAttribArray(5);
+				gl.vertexAttribPointer(5,4,gl.UNSIGNED_BYTE,true,24,0);
+				gl.vertexAttribDivisor(5,1);
+				gl.enableVertexAttribArray(4);
+				gl.vertexAttribPointer(4,2,gl.FLOAT,false,24,4);
+				gl.vertexAttribDivisor(4,1);
 				gl.enableVertexAttribArray(1);
-				gl.vertexAttribPointer(1,2,gl.SHORT,false,8,0);
+				gl.vertexAttribPointer(1,2,gl.SHORT,false,24,12);
 				gl.vertexAttribDivisor(1,1);
 				gl.enableVertexAttribArray(2);
-				gl.vertexAttribPointer(2,2,gl.SHORT,false,8,4);
+				gl.vertexAttribPointer(2,2,gl.SHORT,false,24,16);
 				gl.vertexAttribDivisor(2,1);
+				gl.enableVertexAttribArray(3);
+				gl.vertexAttribPointer(3,2,gl.SHORT,false,24,20);
+				gl.vertexAttribDivisor(3,1);
 			}
 			this._gl.drawArraysInstanced(this._gl.TRIANGLE_STRIP,0,6,toElement);
 			if(peote_view_Version.isVAO) {
@@ -21474,8 +20758,11 @@ peote_view_Buffer_$Elem.prototype = {
 			} else {
 				var gl = this._gl;
 				gl.disableVertexAttribArray(0);
+				gl.disableVertexAttribArray(5);
+				gl.disableVertexAttribArray(4);
 				gl.disableVertexAttribArray(1);
 				gl.disableVertexAttribArray(2);
+				gl.disableVertexAttribArray(3);
 			}
 			this._gl.bindBuffer(this._gl.ARRAY_BUFFER,null);
 		} else {
@@ -21484,12 +20771,18 @@ peote_view_Buffer_$Elem.prototype = {
 			} else {
 				var gl = this._gl;
 				gl.bindBuffer(gl.ARRAY_BUFFER,this._glBuffer);
+				gl.enableVertexAttribArray(5);
+				gl.vertexAttribPointer(5,4,gl.UNSIGNED_BYTE,true,28,0);
+				gl.enableVertexAttribArray(4);
+				gl.vertexAttribPointer(4,2,gl.FLOAT,false,28,4);
 				gl.enableVertexAttribArray(1);
-				gl.vertexAttribPointer(1,2,gl.SHORT,false,12,0);
+				gl.vertexAttribPointer(1,2,gl.SHORT,false,28,12);
 				gl.enableVertexAttribArray(2);
-				gl.vertexAttribPointer(2,2,gl.SHORT,false,12,4);
+				gl.vertexAttribPointer(2,2,gl.SHORT,false,28,16);
+				gl.enableVertexAttribArray(3);
+				gl.vertexAttribPointer(3,2,gl.SHORT,false,28,20);
 				gl.enableVertexAttribArray(0);
-				gl.vertexAttribPointer(0,2,gl.UNSIGNED_BYTE,false,12,8);
+				gl.vertexAttribPointer(0,2,gl.UNSIGNED_BYTE,false,28,24);
 			}
 			this._gl.drawArrays(this._gl.TRIANGLE_STRIP,0,toElement * 6);
 			if(peote_view_Version.isVAO) {
@@ -21497,8 +20790,11 @@ peote_view_Buffer_$Elem.prototype = {
 			} else {
 				var gl = this._gl;
 				gl.disableVertexAttribArray(0);
+				gl.disableVertexAttribArray(5);
+				gl.disableVertexAttribArray(4);
 				gl.disableVertexAttribArray(1);
 				gl.disableVertexAttribArray(2);
+				gl.disableVertexAttribArray(3);
 			}
 			this._gl.bindBuffer(this._gl.ARRAY_BUFFER,null);
 		}
@@ -23573,6 +22869,31 @@ peote_view_UniformFloat.__name__ = "peote.view.UniformFloat";
 peote_view_UniformFloat.prototype = {
 	__class__: peote_view_UniformFloat
 };
+var peote_view_element_Elem = function(positionX,positionY,width,height,rotation,pivotX,pivotY,zIndex,color) {
+	this.bytePos = -1;
+	this.z = 0;
+	this.c = -16776961;
+	this.py = 0;
+	this.px = 0;
+	this.r = 0.;
+	this.h = 100;
+	this.w = 100;
+	this.y = 0;
+	this.x = 0;
+	this.x = positionX;
+	this.y = positionY;
+	this.w = width;
+	this.h = height;
+	this.r = rotation;
+	this.px = pivotX;
+	this.py = pivotY;
+	this.z = zIndex;
+	this.c = color;
+};
+peote_view_element_Elem.__name__ = "peote.view.element.Elem";
+peote_view_element_Elem.prototype = {
+	__class__: peote_view_element_Elem
+};
 var peote_view_intern_Background = function(gl) {
 	this.gl = gl;
 	this.createBuffer();
@@ -24716,39 +24037,6 @@ if(console.log == null) {
 	console.log = function() {
 	};
 }
-justGraphix_application_image_Elem.__meta__ = { fields : { x : { posX : null}, y : { posY : null}, w : { sizeX : null}, h : { sizeY : null}}};
-justGraphix_application_image_Elem.FORMULAS = new haxe_ds_StringMap();
-justGraphix_application_image_Elem.ATTRIBUTES = (function($this) {
-	var $r;
-	var _g = new haxe_ds_StringMap();
-	_g.h["yStart"] = "aPos.y";
-	_g.h["yEnd"] = "aPos.y";
-	_g.h["y"] = "aPos.y";
-	_g.h["xStart"] = "aPos.x";
-	_g.h["xEnd"] = "aPos.x";
-	_g.h["x"] = "aPos.x";
-	_g.h["wStart"] = "aSize.x";
-	_g.h["wEnd"] = "aSize.x";
-	_g.h["w"] = "aSize.x";
-	_g.h["hStart"] = "aSize.y";
-	_g.h["hEnd"] = "aSize.y";
-	_g.h["h"] = "aSize.y";
-	$r = _g;
-	return $r;
-}(this));
-justGraphix_application_image_Elem.FORMULA_NAMES = (function($this) {
-	var $r;
-	var _g = new haxe_ds_StringMap();
-	_g.h["sizeX"] = "w";
-	_g.h["sizeY"] = "h";
-	_g.h["posX"] = "x";
-	_g.h["posY"] = "y";
-	$r = _g;
-	return $r;
-}(this));
-justGraphix_application_image_Elem.FORMULA_VARYINGS = "";
-justGraphix_application_image_Elem.FORMULA_CONSTANTS = "";
-justGraphix_application_image_Elem.DEFAULT_FORMULA_VARS = new haxe_ds_StringMap();
 var justGraphix_application_image_A_$PeoteView_kiwi_d = "M210.333,65.331C104.367,66.105-12.349,150.637,1.056,276.449c4.303,40.393,18.533,63.704,52.171,79.03c36.307,16.544,57.022,54.556,50.406,112.954c-9.935,4.88-17.405,11.031-19.132,20.015c7.531-0.17,14.943-0.312,22.59,4.341c20.333,12.375,31.296,27.363,42.979,51.72c1.714,3.572,8.192,2.849,8.312-3.078c0.17-8.467-1.856-17.454-5.226-26.933c-2.955-8.313,3.059-7.985,6.917-6.106c6.399,3.115,16.334,9.43,30.39,13.098c5.392,1.407,5.995-3.877,5.224-6.991c-1.864-7.522-11.009-10.862-24.519-19.229c-4.82-2.984-0.927-9.736,5.168-8.351l20.234,2.415c3.359,0.763,4.555-6.114,0.882-7.875c-14.198-6.804-28.897-10.098-53.864-7.799c-11.617-29.265-29.811-61.617-15.674-81.681c12.639-17.938,31.216-20.74,39.147,43.489c-5.002,3.107-11.215,5.031-11.332,13.024c7.201-2.845,11.207-1.399,14.791,0c17.912,6.998,35.462,21.826,52.982,37.309c3.739,3.303,8.413-1.718,6.991-6.034c-2.138-6.494-8.053-10.659-14.791-20.016c-3.239-4.495,5.03-7.045,10.886-6.876c13.849,0.396,22.886,8.268,35.177,11.218c4.483,1.076,9.741-1.964,6.917-6.917c-3.472-6.085-13.015-9.124-19.18-13.413c-4.357-3.029-3.025-7.132,2.697-6.602c3.905,0.361,8.478,2.271,13.908,1.767c9.946-0.925,7.717-7.169-0.883-9.566c-19.036-5.304-39.891-6.311-61.665-5.225c-43.837-8.358-31.554-84.887,0-90.363c29.571-5.132,62.966-13.339,99.928-32.156c32.668-5.429,64.835-12.446,92.939-33.85c48.106-14.469,111.903,16.113,204.241,149.695c3.926,5.681,15.819,9.94,9.524-6.351c-15.893-41.125-68.176-93.328-92.13-132.085c-24.581-39.774-14.34-61.243-39.957-91.247c-21.326-24.978-47.502-25.803-77.339-17.365c-23.461,6.634-39.234-7.117-52.98-31.273C318.42,87.525,265.838,64.927,210.333,65.331zM445.731,203.01c6.12,0,11.112,4.919,11.112,11.038c0,6.119-4.994,11.111-11.112,11.111s-11.038-4.994-11.038-11.111C434.693,207.929,439.613,203.01,445.731,203.01z";
 var justGraphix_curve_CurveMath_quadStep = 0.03;
 var justGraphix_image_Endian_isLittleEndian = (function($this) {
@@ -24791,6 +24079,55 @@ peote_view_Precision.VertexSampler = { high : 0, medium : 0, low : 0};
 peote_view_Precision.FragmentFloat = { high : 0, medium : 0, low : 0};
 peote_view_Precision.FragmentInt = { high : 0, medium : 0, low : 0};
 peote_view_Precision.FragmentSampler = { high : 0, medium : 0, low : 0};
+peote_view_element_Elem.__meta__ = { fields : { x : { posX : null}, y : { posY : null}, w : { sizeX : null}, h : { sizeY : null}, r : { rotation : null}, px : { pivotX : null}, py : { pivotY : null}, c : { color : null}, z : { zIndex : null}}};
+peote_view_element_Elem.FORMULAS = new haxe_ds_StringMap();
+peote_view_element_Elem.ATTRIBUTES = (function($this) {
+	var $r;
+	var _g = new haxe_ds_StringMap();
+	_g.h["zStart"] = "aRotZ.y";
+	_g.h["zEnd"] = "aRotZ.y";
+	_g.h["z"] = "aRotZ.y";
+	_g.h["yStart"] = "aPos.y";
+	_g.h["yEnd"] = "aPos.y";
+	_g.h["y"] = "aPos.y";
+	_g.h["xStart"] = "aPos.x";
+	_g.h["xEnd"] = "aPos.x";
+	_g.h["x"] = "aPos.x";
+	_g.h["wStart"] = "aSize.x";
+	_g.h["wEnd"] = "aSize.x";
+	_g.h["w"] = "aSize.x";
+	_g.h["rStart"] = "aRotZ.x";
+	_g.h["rEnd"] = "aRotZ.x";
+	_g.h["r"] = "aRotZ.x";
+	_g.h["pyStart"] = "aPivot.y";
+	_g.h["pyEnd"] = "aPivot.y";
+	_g.h["py"] = "aPivot.y";
+	_g.h["pxStart"] = "aPivot.x";
+	_g.h["pxEnd"] = "aPivot.x";
+	_g.h["px"] = "aPivot.x";
+	_g.h["hStart"] = "aSize.y";
+	_g.h["hEnd"] = "aSize.y";
+	_g.h["h"] = "aSize.y";
+	$r = _g;
+	return $r;
+}(this));
+peote_view_element_Elem.FORMULA_NAMES = (function($this) {
+	var $r;
+	var _g = new haxe_ds_StringMap();
+	_g.h["sizeX"] = "w";
+	_g.h["sizeY"] = "h";
+	_g.h["posX"] = "x";
+	_g.h["posY"] = "y";
+	_g.h["rotation"] = "r";
+	_g.h["zIndex"] = "z";
+	_g.h["pivotX"] = "px";
+	_g.h["pivotY"] = "py";
+	$r = _g;
+	return $r;
+}(this));
+peote_view_element_Elem.FORMULA_VARYINGS = "";
+peote_view_element_Elem.FORMULA_CONSTANTS = "";
+peote_view_element_Elem.DEFAULT_FORMULA_VARS = new haxe_ds_StringMap();
 peote_view_intern_GLTool.rEmptylines = new EReg("([ \t]*\r?\n)+","g");
 peote_view_intern_GLTool.rStartspaces = new EReg("^([ \t]*\r?\n)+","g");
 utils_MultipassTemplate.splitter = new EReg("(::[A-Za-z0-9_ ()&|!+=/><*.\"-]+::|\\$\\$([A-Za-z0-9_-]+)\\()","");
