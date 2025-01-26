@@ -867,7 +867,7 @@ ApplicationMain.main = function() {
 };
 ApplicationMain.create = function(config) {
 	var app = new justGraphix_application_image_A_$PeoteView();
-	app.meta.h["build"] = "6";
+	app.meta.h["build"] = "7";
 	app.meta.h["company"] = "Justinfront";
 	app.meta.h["file"] = "Application";
 	app.meta.h["name"] = "A_PeoteView";
@@ -2001,7 +2001,7 @@ justGraphix_application_image_A_$PeoteView.prototype = $extend(lime_app_Applicat
 				this.startPeoteView(this.__window);
 			} catch( _g ) {
 				var _ = haxe_Exception.caught(_g);
-				haxe_Log.trace(haxe_CallStack.toString(haxe_CallStack.exceptionStack()),{ fileName : "src/justGraphix/application/image/A_PeoteView.hx", lineNumber : 49, className : "justGraphix.application.image.A_PeoteView", methodName : "onWindowCreate", customParams : [_]});
+				haxe_Log.trace(haxe_CallStack.toString(haxe_CallStack.exceptionStack()),{ fileName : "src/justGraphix/application/image/A_PeoteView.hx", lineNumber : 35, className : "justGraphix.application.image.A_PeoteView", methodName : "onWindowCreate", customParams : [_]});
 			}
 			break;
 		default:
@@ -2011,20 +2011,2754 @@ justGraphix_application_image_A_$PeoteView.prototype = $extend(lime_app_Applicat
 	,startPeoteView: function($window) {
 		var peoteView = new peote_view_PeoteView($window);
 		var display = new peote_view_Display(10,10,$window.__width - 20,$window.__height - 20,-1);
-		var buffer = new peote_view_Buffer_$Elem(10);
+		var buffer = new peote_view_Buffer_$PeoteBasicElement(10);
 		var program = new peote_view_Program(buffer);
 		peoteView.addDisplay(display);
-		var wid = 800;
-		var hi = 600;
-		this.addElementToBuffer(buffer,wid,hi);
-		this.createPixelImage(program);
+		var pixelImage = this.createPixelImage();
+		var texture = new peote_view_Texture(pixelImage.width,pixelImage.height,2);
+		texture.setData(justGraphix_target_openflTarget_$_PeoteV.toPeoteTextureData_(pixelImage),0);
+		var this1 = pixelImage;
+		var w = this1.width;
+		var h = this1.height;
+		var transparent = this1.transparent;
+		var inPlace = true;
+		var includeMask = false;
+		if(includeMask == null) {
+			includeMask = false;
+		}
+		if(inPlace == null) {
+			inPlace = false;
+		}
+		if(transparent == null) {
+			transparent = false;
+		}
+		var transparent1 = transparent;
+		var inPlace1 = inPlace;
+		var includeMask1 = includeMask;
+		if(includeMask1 == null) {
+			includeMask1 = false;
+		}
+		if(inPlace1 == null) {
+			inPlace1 = false;
+		}
+		if(transparent1 == null) {
+			transparent1 = false;
+		}
+		var r = { x : 0, y : 0, w : w, h : h};
+		var xmax = r.x + r.w + 1 | 0;
+		var ymax = r.y + r.h + 1 | 0;
+		var ii_min = r.x | 0;
+		var ii_max = xmax;
+		var xRange__start = ii_min;
+		var xRange__max = ii_max;
+		var ii_min = r.y | 0;
+		var ii_max = ymax;
+		var yRange__start = ii_min;
+		var yRange__max = ii_max;
+		var range_x = xRange__start;
+		var range_y = yRange__start - 1;
+		var range_xReset = range_x;
+		var range_yReset = range_y;
+		var range_xMax = xRange__max - 2;
+		var range_yMax = yRange__max - 2;
+		var _this_min = 0;
+		var _this_max = (xRange__max - xRange__start) * (yRange__max - yRange__start) | 0;
+		var nextImage = justGraphix_image_Pixelimage._new(w | 0,h | 0);
+		nextImage.transparent = transparent1;
+		while(_this_min < _this_max) {
+			var i = _this_min++;
+			if(range_y > range_yMax) {
+				range_y = range_yReset;
+				++range_x;
+			}
+			++range_y;
+			var i1 = i;
+			var x = range_x;
+			var y = range_y;
+			var x1 = range_x;
+			var y1 = range_yMax - range_y;
+			var c = this1.image.get(this1.useVirtualPos ? (y1 - this1.virtualY) * this1.width + x1 - this1.virtualX | 0 : y1 * this1.width + x1 | 0);
+			var color = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+			var c1 = color;
+			if((c1 >> 24 & 255) < 254 && nextImage.transparent) {
+				var location = nextImage.useVirtualPos ? (y - nextImage.virtualY) * nextImage.width + x - nextImage.virtualX | 0 : y * nextImage.width + x | 0;
+				var this2 = nextImage.image.get(location);
+				var this3 = justGraphix_image_Endian_isLittleEndian ? (this2 >> 24 & 255) << 24 | (this2 & 255) << 16 | (this2 >> 8 & 255) << 8 | this2 >> 16 & 255 : this2;
+				var this4 = this3 >> 24 & 255;
+				var a1 = this4 == 0 ? 0. : this4 / 255;
+				var this5 = this3 >> 16 & 255;
+				var r1 = this5 == 0 ? 0. : this5 / 255;
+				var this6 = this3 >> 8 & 255;
+				var g1 = this6 == 0 ? 0. : this6 / 255;
+				var this7 = this3 & 255;
+				var b1 = this7 == 0 ? 0. : this7 / 255;
+				var this8 = color >> 24 & 255;
+				var a2 = this8 == 0 ? 0. : this8 / 255;
+				var this9 = color >> 16 & 255;
+				var r2 = this9 == 0 ? 0. : this9 / 255;
+				var this10 = color >> 8 & 255;
+				var g2 = this10 == 0 ? 0. : this10 / 255;
+				var this11 = color & 255;
+				var b2 = this11 == 0 ? 0. : this11 / 255;
+				var a3 = a1 * (1 - a2);
+				var r = 255 * (r1 * a3 + r2 * a2) | 0;
+				var g = 255 * (g1 * a3 + g2 * a2) | 0;
+				var b = 255 * (b1 * a3 + b2 * a2) | 0;
+				var a = 255 * (a3 + a2) | 0;
+				var blended = a << 24 | r << 16 | g << 8 | b;
+				nextImage.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+			} else {
+				nextImage.image.set(nextImage.useVirtualPos ? (y - nextImage.virtualY) * nextImage.width + x - nextImage.virtualX | 0 : y * nextImage.width + x | 0,justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1);
+			}
+		}
+		var this2;
+		if(inPlace1) {
+			var x = 0;
+			var y = 0;
+			var _g = 0;
+			var _g1 = nextImage.height;
+			while(_g < _g1) {
+				var dy = _g++;
+				var _g2 = 0;
+				var _g3 = nextImage.width;
+				while(_g2 < _g3) {
+					var dx = _g2++;
+					var c = nextImage.image.get(nextImage.useVirtualPos ? (dy - nextImage.virtualY) * nextImage.width + dx - nextImage.virtualX | 0 : dy * nextImage.width + dx | 0);
+					var col = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+					if(nextImage.useMask && nextImage.mask != null) {
+						var this3 = nextImage.mask;
+						var c1 = this3.image.get(this3.useVirtualPos ? (dy - this3.virtualY) * this3.width + dx - this3.virtualX | 0 : dy * this3.width + dx | 0);
+						var maskPixel = justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1;
+						var this4 = col;
+						if(maskPixel == 0) {
+							col = this4;
+						} else {
+							var this5 = maskPixel >> 24 & 255;
+							var m0 = this5 == 0 ? 0. : this5 / 255;
+							var this6 = maskPixel >> 16 & 255;
+							var m1 = this6 == 0 ? 0. : this6 / 255;
+							var this7 = maskPixel >> 8 & 255;
+							var m2 = this7 == 0 ? 0. : this7 / 255;
+							var this8 = maskPixel & 255;
+							var m3 = this8 == 0 ? 0. : this8 / 255;
+							var ch0 = (1. - m0) * (this4 >> 24 & 255) | 0;
+							var ch1 = (1. - m1) * (this4 >> 16 & 255) | 0;
+							var ch2 = (1. - m2) * (this4 >> 8 & 255) | 0;
+							var ch3 = (1. - m3) * (this4 & 255) | 0;
+							col = Math.round(ch0 * 255) << 24 | Math.round(ch1 * 255) << 16 | Math.round(ch2 * 255) << 8 | Math.round(ch3 * 255);
+						}
+					}
+					if(col != 0) {
+						var x1 = x + dx;
+						var y1 = y + dy;
+						var c2 = col;
+						if((c2 >> 24 & 255) < 254 && this1.transparent) {
+							var location = this1.useVirtualPos ? (y1 - this1.virtualY) * this1.width + x1 - this1.virtualX | 0 : y1 * this1.width + x1 | 0;
+							var this9 = this1.image.get(location);
+							var this10 = justGraphix_image_Endian_isLittleEndian ? (this9 >> 24 & 255) << 24 | (this9 & 255) << 16 | (this9 >> 8 & 255) << 8 | this9 >> 16 & 255 : this9;
+							var this11 = this10 >> 24 & 255;
+							var a1 = this11 == 0 ? 0. : this11 / 255;
+							var this12 = this10 >> 16 & 255;
+							var r1 = this12 == 0 ? 0. : this12 / 255;
+							var this13 = this10 >> 8 & 255;
+							var g1 = this13 == 0 ? 0. : this13 / 255;
+							var this14 = this10 & 255;
+							var b1 = this14 == 0 ? 0. : this14 / 255;
+							var this15 = col >> 24 & 255;
+							var a2 = this15 == 0 ? 0. : this15 / 255;
+							var this16 = col >> 16 & 255;
+							var r2 = this16 == 0 ? 0. : this16 / 255;
+							var this17 = col >> 8 & 255;
+							var g2 = this17 == 0 ? 0. : this17 / 255;
+							var this18 = col & 255;
+							var b2 = this18 == 0 ? 0. : this18 / 255;
+							var a3 = a1 * (1 - a2);
+							var r = 255 * (r1 * a3 + r2 * a2) | 0;
+							var g = 255 * (g1 * a3 + g2 * a2) | 0;
+							var b = 255 * (b1 * a3 + b2 * a2) | 0;
+							var a = 255 * (a3 + a2) | 0;
+							var blended = a << 24 | r << 16 | g << 8 | b;
+							this1.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+						} else {
+							this1.image.set(this1.useVirtualPos ? (y1 - this1.virtualY) * this1.width + x1 - this1.virtualX | 0 : y1 * this1.width + x1 | 0,justGraphix_image_Endian_isLittleEndian ? (c2 >> 24 & 255) << 24 | (c2 & 255) << 16 | (c2 >> 8 & 255) << 8 | c2 >> 16 & 255 : c2);
+						}
+					}
+				}
+			}
+			if(this1.mask != null && includeMask1) {
+				var this3 = this1.mask;
+				var w = this1.width;
+				var h = this1.height;
+				var transparent = this1.mask.transparent;
+				var inPlace = inPlace1;
+				var includeMask = includeMask1;
+				if(includeMask == null) {
+					includeMask = false;
+				}
+				if(inPlace == null) {
+					inPlace = false;
+				}
+				if(transparent == null) {
+					transparent = false;
+				}
+				var transparent1 = transparent;
+				var inPlace2 = inPlace;
+				var includeMask2 = includeMask;
+				if(includeMask2 == null) {
+					includeMask2 = false;
+				}
+				if(inPlace2 == null) {
+					inPlace2 = false;
+				}
+				if(transparent1 == null) {
+					transparent1 = false;
+				}
+				var r = { x : 0, y : 0, w : w, h : h};
+				var xmax = r.x + r.w + 1 | 0;
+				var ymax = r.y + r.h + 1 | 0;
+				var ii_min = r.x | 0;
+				var ii_max = xmax;
+				var xRange__start = ii_min;
+				var xRange__max = ii_max;
+				var ii_min = r.y | 0;
+				var ii_max = ymax;
+				var yRange__start = ii_min;
+				var yRange__max = ii_max;
+				var range_x = xRange__start;
+				var range_y = yRange__start - 1;
+				var range_xReset = range_x;
+				var range_yReset = range_y;
+				var range_xMax = xRange__max - 2;
+				var range_yMax = yRange__max - 2;
+				var _this_min = 0;
+				var _this_max = (xRange__max - xRange__start) * (yRange__max - yRange__start) | 0;
+				var nextImage1 = justGraphix_image_Pixelimage._new(w | 0,h | 0);
+				nextImage1.transparent = transparent1;
+				while(_this_min < _this_max) {
+					var i = _this_min++;
+					if(range_y > range_yMax) {
+						range_y = range_yReset;
+						++range_x;
+					}
+					++range_y;
+					var i1 = i;
+					var x = range_x;
+					var y = range_y;
+					var x1 = range_x;
+					var y1 = range_yMax - range_y;
+					var c = this3.image.get(this3.useVirtualPos ? (y1 - this3.virtualY) * this3.width + x1 - this3.virtualX | 0 : y1 * this3.width + x1 | 0);
+					var color = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+					var c1 = color;
+					if((c1 >> 24 & 255) < 254 && nextImage1.transparent) {
+						var location = nextImage1.useVirtualPos ? (y - nextImage1.virtualY) * nextImage1.width + x - nextImage1.virtualX | 0 : y * nextImage1.width + x | 0;
+						var this4 = nextImage1.image.get(location);
+						var this5 = justGraphix_image_Endian_isLittleEndian ? (this4 >> 24 & 255) << 24 | (this4 & 255) << 16 | (this4 >> 8 & 255) << 8 | this4 >> 16 & 255 : this4;
+						var this6 = this5 >> 24 & 255;
+						var a1 = this6 == 0 ? 0. : this6 / 255;
+						var this7 = this5 >> 16 & 255;
+						var r1 = this7 == 0 ? 0. : this7 / 255;
+						var this8 = this5 >> 8 & 255;
+						var g1 = this8 == 0 ? 0. : this8 / 255;
+						var this9 = this5 & 255;
+						var b1 = this9 == 0 ? 0. : this9 / 255;
+						var this10 = color >> 24 & 255;
+						var a2 = this10 == 0 ? 0. : this10 / 255;
+						var this11 = color >> 16 & 255;
+						var r2 = this11 == 0 ? 0. : this11 / 255;
+						var this12 = color >> 8 & 255;
+						var g2 = this12 == 0 ? 0. : this12 / 255;
+						var this13 = color & 255;
+						var b2 = this13 == 0 ? 0. : this13 / 255;
+						var a3 = a1 * (1 - a2);
+						var r = 255 * (r1 * a3 + r2 * a2) | 0;
+						var g = 255 * (g1 * a3 + g2 * a2) | 0;
+						var b = 255 * (b1 * a3 + b2 * a2) | 0;
+						var a = 255 * (a3 + a2) | 0;
+						var blended = a << 24 | r << 16 | g << 8 | b;
+						nextImage1.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+					} else {
+						nextImage1.image.set(nextImage1.useVirtualPos ? (y - nextImage1.virtualY) * nextImage1.width + x - nextImage1.virtualX | 0 : y * nextImage1.width + x | 0,justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1);
+					}
+				}
+				var v;
+				if(inPlace2) {
+					var x = 0;
+					var y = 0;
+					var _g = 0;
+					var _g1 = nextImage1.height;
+					while(_g < _g1) {
+						var dy = _g++;
+						var _g2 = 0;
+						var _g3 = nextImage1.width;
+						while(_g2 < _g3) {
+							var dx = _g2++;
+							var c = nextImage1.image.get(nextImage1.useVirtualPos ? (dy - nextImage1.virtualY) * nextImage1.width + dx - nextImage1.virtualX | 0 : dy * nextImage1.width + dx | 0);
+							var col = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+							if(nextImage1.useMask && nextImage1.mask != null) {
+								var this4 = nextImage1.mask;
+								var c1 = this4.image.get(this4.useVirtualPos ? (dy - this4.virtualY) * this4.width + dx - this4.virtualX | 0 : dy * this4.width + dx | 0);
+								var maskPixel = justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1;
+								var this5 = col;
+								if(maskPixel == 0) {
+									col = this5;
+								} else {
+									var this6 = maskPixel >> 24 & 255;
+									var m0 = this6 == 0 ? 0. : this6 / 255;
+									var this7 = maskPixel >> 16 & 255;
+									var m1 = this7 == 0 ? 0. : this7 / 255;
+									var this8 = maskPixel >> 8 & 255;
+									var m2 = this8 == 0 ? 0. : this8 / 255;
+									var this9 = maskPixel & 255;
+									var m3 = this9 == 0 ? 0. : this9 / 255;
+									var ch0 = (1. - m0) * (this5 >> 24 & 255) | 0;
+									var ch1 = (1. - m1) * (this5 >> 16 & 255) | 0;
+									var ch2 = (1. - m2) * (this5 >> 8 & 255) | 0;
+									var ch3 = (1. - m3) * (this5 & 255) | 0;
+									col = Math.round(ch0 * 255) << 24 | Math.round(ch1 * 255) << 16 | Math.round(ch2 * 255) << 8 | Math.round(ch3 * 255);
+								}
+							}
+							if(col != 0) {
+								var x1 = x + dx;
+								var y1 = y + dy;
+								var c2 = col;
+								if((c2 >> 24 & 255) < 254 && this3.transparent) {
+									var location = this3.useVirtualPos ? (y1 - this3.virtualY) * this3.width + x1 - this3.virtualX | 0 : y1 * this3.width + x1 | 0;
+									var this10 = this3.image.get(location);
+									var this11 = justGraphix_image_Endian_isLittleEndian ? (this10 >> 24 & 255) << 24 | (this10 & 255) << 16 | (this10 >> 8 & 255) << 8 | this10 >> 16 & 255 : this10;
+									var this12 = this11 >> 24 & 255;
+									var a1 = this12 == 0 ? 0. : this12 / 255;
+									var this13 = this11 >> 16 & 255;
+									var r1 = this13 == 0 ? 0. : this13 / 255;
+									var this14 = this11 >> 8 & 255;
+									var g1 = this14 == 0 ? 0. : this14 / 255;
+									var this15 = this11 & 255;
+									var b1 = this15 == 0 ? 0. : this15 / 255;
+									var this16 = col >> 24 & 255;
+									var a2 = this16 == 0 ? 0. : this16 / 255;
+									var this17 = col >> 16 & 255;
+									var r2 = this17 == 0 ? 0. : this17 / 255;
+									var this18 = col >> 8 & 255;
+									var g2 = this18 == 0 ? 0. : this18 / 255;
+									var this19 = col & 255;
+									var b2 = this19 == 0 ? 0. : this19 / 255;
+									var a3 = a1 * (1 - a2);
+									var r = 255 * (r1 * a3 + r2 * a2) | 0;
+									var g = 255 * (g1 * a3 + g2 * a2) | 0;
+									var b = 255 * (b1 * a3 + b2 * a2) | 0;
+									var a = 255 * (a3 + a2) | 0;
+									var blended = a << 24 | r << 16 | g << 8 | b;
+									this3.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+								} else {
+									this3.image.set(this3.useVirtualPos ? (y1 - this3.virtualY) * this3.width + x1 - this3.virtualX | 0 : y1 * this3.width + x1 | 0,justGraphix_image_Endian_isLittleEndian ? (c2 >> 24 & 255) << 24 | (c2 & 255) << 16 | (c2 >> 8 & 255) << 8 | c2 >> 16 & 255 : c2);
+								}
+							}
+						}
+					}
+					if(this3.mask != null && includeMask2) {
+						var this4 = this3.mask;
+						var w = this3.width;
+						var h = this3.height;
+						var transparent = this3.mask.transparent;
+						var inPlace = inPlace2;
+						var includeMask = includeMask2;
+						if(includeMask == null) {
+							includeMask = false;
+						}
+						if(inPlace == null) {
+							inPlace = false;
+						}
+						if(transparent == null) {
+							transparent = false;
+						}
+						var transparent1 = transparent;
+						var inPlace3 = inPlace;
+						var includeMask3 = includeMask;
+						if(includeMask3 == null) {
+							includeMask3 = false;
+						}
+						if(inPlace3 == null) {
+							inPlace3 = false;
+						}
+						if(transparent1 == null) {
+							transparent1 = false;
+						}
+						var r = { x : 0, y : 0, w : w, h : h};
+						var xmax = r.x + r.w + 1 | 0;
+						var ymax = r.y + r.h + 1 | 0;
+						var ii_min = r.x | 0;
+						var ii_max = xmax;
+						var xRange__start = ii_min;
+						var xRange__max = ii_max;
+						var ii_min = r.y | 0;
+						var ii_max = ymax;
+						var yRange__start = ii_min;
+						var yRange__max = ii_max;
+						var range_x = xRange__start;
+						var range_y = yRange__start - 1;
+						var range_xReset = range_x;
+						var range_yReset = range_y;
+						var range_xMax = xRange__max - 2;
+						var range_yMax = yRange__max - 2;
+						var _this_min = 0;
+						var _this_max = (xRange__max - xRange__start) * (yRange__max - yRange__start) | 0;
+						var nextImage2 = justGraphix_image_Pixelimage._new(w | 0,h | 0);
+						nextImage2.transparent = transparent1;
+						while(_this_min < _this_max) {
+							var i = _this_min++;
+							if(range_y > range_yMax) {
+								range_y = range_yReset;
+								++range_x;
+							}
+							++range_y;
+							var i1 = i;
+							var x = range_x;
+							var y = range_y;
+							var x1 = range_x;
+							var y1 = range_yMax - range_y;
+							var c = this4.image.get(this4.useVirtualPos ? (y1 - this4.virtualY) * this4.width + x1 - this4.virtualX | 0 : y1 * this4.width + x1 | 0);
+							var color = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+							var c1 = color;
+							if((c1 >> 24 & 255) < 254 && nextImage2.transparent) {
+								var location = nextImage2.useVirtualPos ? (y - nextImage2.virtualY) * nextImage2.width + x - nextImage2.virtualX | 0 : y * nextImage2.width + x | 0;
+								var this5 = nextImage2.image.get(location);
+								var this6 = justGraphix_image_Endian_isLittleEndian ? (this5 >> 24 & 255) << 24 | (this5 & 255) << 16 | (this5 >> 8 & 255) << 8 | this5 >> 16 & 255 : this5;
+								var this7 = this6 >> 24 & 255;
+								var a1 = this7 == 0 ? 0. : this7 / 255;
+								var this8 = this6 >> 16 & 255;
+								var r1 = this8 == 0 ? 0. : this8 / 255;
+								var this9 = this6 >> 8 & 255;
+								var g1 = this9 == 0 ? 0. : this9 / 255;
+								var this10 = this6 & 255;
+								var b1 = this10 == 0 ? 0. : this10 / 255;
+								var this11 = color >> 24 & 255;
+								var a2 = this11 == 0 ? 0. : this11 / 255;
+								var this12 = color >> 16 & 255;
+								var r2 = this12 == 0 ? 0. : this12 / 255;
+								var this13 = color >> 8 & 255;
+								var g2 = this13 == 0 ? 0. : this13 / 255;
+								var this14 = color & 255;
+								var b2 = this14 == 0 ? 0. : this14 / 255;
+								var a3 = a1 * (1 - a2);
+								var r = 255 * (r1 * a3 + r2 * a2) | 0;
+								var g = 255 * (g1 * a3 + g2 * a2) | 0;
+								var b = 255 * (b1 * a3 + b2 * a2) | 0;
+								var a = 255 * (a3 + a2) | 0;
+								var blended = a << 24 | r << 16 | g << 8 | b;
+								nextImage2.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+							} else {
+								nextImage2.image.set(nextImage2.useVirtualPos ? (y - nextImage2.virtualY) * nextImage2.width + x - nextImage2.virtualX | 0 : y * nextImage2.width + x | 0,justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1);
+							}
+						}
+						var v1;
+						if(inPlace3) {
+							var x = 0;
+							var y = 0;
+							var _g = 0;
+							var _g1 = nextImage2.height;
+							while(_g < _g1) {
+								var dy = _g++;
+								var _g2 = 0;
+								var _g3 = nextImage2.width;
+								while(_g2 < _g3) {
+									var dx = _g2++;
+									var c = nextImage2.image.get(nextImage2.useVirtualPos ? (dy - nextImage2.virtualY) * nextImage2.width + dx - nextImage2.virtualX | 0 : dy * nextImage2.width + dx | 0);
+									var col = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+									if(nextImage2.useMask && nextImage2.mask != null) {
+										var this5 = nextImage2.mask;
+										var c1 = this5.image.get(this5.useVirtualPos ? (dy - this5.virtualY) * this5.width + dx - this5.virtualX | 0 : dy * this5.width + dx | 0);
+										var maskPixel = justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1;
+										var this6 = col;
+										if(maskPixel == 0) {
+											col = this6;
+										} else {
+											var this7 = maskPixel >> 24 & 255;
+											var m0 = this7 == 0 ? 0. : this7 / 255;
+											var this8 = maskPixel >> 16 & 255;
+											var m1 = this8 == 0 ? 0. : this8 / 255;
+											var this9 = maskPixel >> 8 & 255;
+											var m2 = this9 == 0 ? 0. : this9 / 255;
+											var this10 = maskPixel & 255;
+											var m3 = this10 == 0 ? 0. : this10 / 255;
+											var ch0 = (1. - m0) * (this6 >> 24 & 255) | 0;
+											var ch1 = (1. - m1) * (this6 >> 16 & 255) | 0;
+											var ch2 = (1. - m2) * (this6 >> 8 & 255) | 0;
+											var ch3 = (1. - m3) * (this6 & 255) | 0;
+											col = Math.round(ch0 * 255) << 24 | Math.round(ch1 * 255) << 16 | Math.round(ch2 * 255) << 8 | Math.round(ch3 * 255);
+										}
+									}
+									if(col != 0) {
+										var x1 = x + dx;
+										var y1 = y + dy;
+										var c2 = col;
+										if((c2 >> 24 & 255) < 254 && this4.transparent) {
+											var location = this4.useVirtualPos ? (y1 - this4.virtualY) * this4.width + x1 - this4.virtualX | 0 : y1 * this4.width + x1 | 0;
+											var this11 = this4.image.get(location);
+											var this12 = justGraphix_image_Endian_isLittleEndian ? (this11 >> 24 & 255) << 24 | (this11 & 255) << 16 | (this11 >> 8 & 255) << 8 | this11 >> 16 & 255 : this11;
+											var this13 = this12 >> 24 & 255;
+											var a1 = this13 == 0 ? 0. : this13 / 255;
+											var this14 = this12 >> 16 & 255;
+											var r1 = this14 == 0 ? 0. : this14 / 255;
+											var this15 = this12 >> 8 & 255;
+											var g1 = this15 == 0 ? 0. : this15 / 255;
+											var this16 = this12 & 255;
+											var b1 = this16 == 0 ? 0. : this16 / 255;
+											var this17 = col >> 24 & 255;
+											var a2 = this17 == 0 ? 0. : this17 / 255;
+											var this18 = col >> 16 & 255;
+											var r2 = this18 == 0 ? 0. : this18 / 255;
+											var this19 = col >> 8 & 255;
+											var g2 = this19 == 0 ? 0. : this19 / 255;
+											var this20 = col & 255;
+											var b2 = this20 == 0 ? 0. : this20 / 255;
+											var a3 = a1 * (1 - a2);
+											var r = 255 * (r1 * a3 + r2 * a2) | 0;
+											var g = 255 * (g1 * a3 + g2 * a2) | 0;
+											var b = 255 * (b1 * a3 + b2 * a2) | 0;
+											var a = 255 * (a3 + a2) | 0;
+											var blended = a << 24 | r << 16 | g << 8 | b;
+											this4.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+										} else {
+											this4.image.set(this4.useVirtualPos ? (y1 - this4.virtualY) * this4.width + x1 - this4.virtualX | 0 : y1 * this4.width + x1 | 0,justGraphix_image_Endian_isLittleEndian ? (c2 >> 24 & 255) << 24 | (c2 & 255) << 16 | (c2 >> 8 & 255) << 8 | c2 >> 16 & 255 : c2);
+										}
+									}
+								}
+							}
+							if(this4.mask != null && includeMask3) {
+								var this5 = this4.mask;
+								var w = this4.width;
+								var h = this4.height;
+								var transparent = this4.mask.transparent;
+								var inPlace = inPlace3;
+								var includeMask = includeMask3;
+								if(includeMask == null) {
+									includeMask = false;
+								}
+								if(inPlace == null) {
+									inPlace = false;
+								}
+								if(transparent == null) {
+									transparent = false;
+								}
+								var transparent1 = transparent;
+								var inPlace4 = inPlace;
+								var includeMask4 = includeMask;
+								if(includeMask4 == null) {
+									includeMask4 = false;
+								}
+								if(inPlace4 == null) {
+									inPlace4 = false;
+								}
+								if(transparent1 == null) {
+									transparent1 = false;
+								}
+								var r = { x : 0, y : 0, w : w, h : h};
+								var xmax = r.x + r.w + 1 | 0;
+								var ymax = r.y + r.h + 1 | 0;
+								var ii_min = r.x | 0;
+								var ii_max = xmax;
+								var xRange__start = ii_min;
+								var xRange__max = ii_max;
+								var ii_min = r.y | 0;
+								var ii_max = ymax;
+								var yRange__start = ii_min;
+								var yRange__max = ii_max;
+								var range_x = xRange__start;
+								var range_y = yRange__start - 1;
+								var range_xReset = range_x;
+								var range_yReset = range_y;
+								var range_xMax = xRange__max - 2;
+								var range_yMax = yRange__max - 2;
+								var _this_min = 0;
+								var _this_max = (xRange__max - xRange__start) * (yRange__max - yRange__start) | 0;
+								var nextImage3 = justGraphix_image_Pixelimage._new(w | 0,h | 0);
+								nextImage3.transparent = transparent1;
+								while(_this_min < _this_max) {
+									var i = _this_min++;
+									if(range_y > range_yMax) {
+										range_y = range_yReset;
+										++range_x;
+									}
+									++range_y;
+									var i1 = i;
+									var x = range_x;
+									var y = range_y;
+									var x1 = range_x;
+									var y1 = range_yMax - range_y;
+									var c = this5.image.get(this5.useVirtualPos ? (y1 - this5.virtualY) * this5.width + x1 - this5.virtualX | 0 : y1 * this5.width + x1 | 0);
+									var color = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+									var c1 = color;
+									if((c1 >> 24 & 255) < 254 && nextImage3.transparent) {
+										var location = nextImage3.useVirtualPos ? (y - nextImage3.virtualY) * nextImage3.width + x - nextImage3.virtualX | 0 : y * nextImage3.width + x | 0;
+										var this6 = nextImage3.image.get(location);
+										var this7 = justGraphix_image_Endian_isLittleEndian ? (this6 >> 24 & 255) << 24 | (this6 & 255) << 16 | (this6 >> 8 & 255) << 8 | this6 >> 16 & 255 : this6;
+										var this8 = this7 >> 24 & 255;
+										var a1 = this8 == 0 ? 0. : this8 / 255;
+										var this9 = this7 >> 16 & 255;
+										var r1 = this9 == 0 ? 0. : this9 / 255;
+										var this10 = this7 >> 8 & 255;
+										var g1 = this10 == 0 ? 0. : this10 / 255;
+										var this11 = this7 & 255;
+										var b1 = this11 == 0 ? 0. : this11 / 255;
+										var this12 = color >> 24 & 255;
+										var a2 = this12 == 0 ? 0. : this12 / 255;
+										var this13 = color >> 16 & 255;
+										var r2 = this13 == 0 ? 0. : this13 / 255;
+										var this14 = color >> 8 & 255;
+										var g2 = this14 == 0 ? 0. : this14 / 255;
+										var this15 = color & 255;
+										var b2 = this15 == 0 ? 0. : this15 / 255;
+										var a3 = a1 * (1 - a2);
+										var r = 255 * (r1 * a3 + r2 * a2) | 0;
+										var g = 255 * (g1 * a3 + g2 * a2) | 0;
+										var b = 255 * (b1 * a3 + b2 * a2) | 0;
+										var a = 255 * (a3 + a2) | 0;
+										var blended = a << 24 | r << 16 | g << 8 | b;
+										nextImage3.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+									} else {
+										nextImage3.image.set(nextImage3.useVirtualPos ? (y - nextImage3.virtualY) * nextImage3.width + x - nextImage3.virtualX | 0 : y * nextImage3.width + x | 0,justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1);
+									}
+								}
+								var v2;
+								if(inPlace4) {
+									var x = 0;
+									var y = 0;
+									var _g = 0;
+									var _g1 = nextImage3.height;
+									while(_g < _g1) {
+										var dy = _g++;
+										var _g2 = 0;
+										var _g3 = nextImage3.width;
+										while(_g2 < _g3) {
+											var dx = _g2++;
+											var c = nextImage3.image.get(nextImage3.useVirtualPos ? (dy - nextImage3.virtualY) * nextImage3.width + dx - nextImage3.virtualX | 0 : dy * nextImage3.width + dx | 0);
+											var col = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+											if(nextImage3.useMask && nextImage3.mask != null) {
+												var this6 = nextImage3.mask;
+												var c1 = this6.image.get(this6.useVirtualPos ? (dy - this6.virtualY) * this6.width + dx - this6.virtualX | 0 : dy * this6.width + dx | 0);
+												var maskPixel = justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1;
+												var this7 = col;
+												if(maskPixel == 0) {
+													col = this7;
+												} else {
+													var this8 = maskPixel >> 24 & 255;
+													var m0 = this8 == 0 ? 0. : this8 / 255;
+													var this9 = maskPixel >> 16 & 255;
+													var m1 = this9 == 0 ? 0. : this9 / 255;
+													var this10 = maskPixel >> 8 & 255;
+													var m2 = this10 == 0 ? 0. : this10 / 255;
+													var this11 = maskPixel & 255;
+													var m3 = this11 == 0 ? 0. : this11 / 255;
+													var ch0 = (1. - m0) * (this7 >> 24 & 255) | 0;
+													var ch1 = (1. - m1) * (this7 >> 16 & 255) | 0;
+													var ch2 = (1. - m2) * (this7 >> 8 & 255) | 0;
+													var ch3 = (1. - m3) * (this7 & 255) | 0;
+													col = Math.round(ch0 * 255) << 24 | Math.round(ch1 * 255) << 16 | Math.round(ch2 * 255) << 8 | Math.round(ch3 * 255);
+												}
+											}
+											if(col != 0) {
+												var x1 = x + dx;
+												var y1 = y + dy;
+												var c2 = col;
+												if((c2 >> 24 & 255) < 254 && this5.transparent) {
+													var location = this5.useVirtualPos ? (y1 - this5.virtualY) * this5.width + x1 - this5.virtualX | 0 : y1 * this5.width + x1 | 0;
+													var this12 = this5.image.get(location);
+													var this13 = justGraphix_image_Endian_isLittleEndian ? (this12 >> 24 & 255) << 24 | (this12 & 255) << 16 | (this12 >> 8 & 255) << 8 | this12 >> 16 & 255 : this12;
+													var this14 = this13 >> 24 & 255;
+													var a1 = this14 == 0 ? 0. : this14 / 255;
+													var this15 = this13 >> 16 & 255;
+													var r1 = this15 == 0 ? 0. : this15 / 255;
+													var this16 = this13 >> 8 & 255;
+													var g1 = this16 == 0 ? 0. : this16 / 255;
+													var this17 = this13 & 255;
+													var b1 = this17 == 0 ? 0. : this17 / 255;
+													var this18 = col >> 24 & 255;
+													var a2 = this18 == 0 ? 0. : this18 / 255;
+													var this19 = col >> 16 & 255;
+													var r2 = this19 == 0 ? 0. : this19 / 255;
+													var this20 = col >> 8 & 255;
+													var g2 = this20 == 0 ? 0. : this20 / 255;
+													var this21 = col & 255;
+													var b2 = this21 == 0 ? 0. : this21 / 255;
+													var a3 = a1 * (1 - a2);
+													var r = 255 * (r1 * a3 + r2 * a2) | 0;
+													var g = 255 * (g1 * a3 + g2 * a2) | 0;
+													var b = 255 * (b1 * a3 + b2 * a2) | 0;
+													var a = 255 * (a3 + a2) | 0;
+													var blended = a << 24 | r << 16 | g << 8 | b;
+													this5.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+												} else {
+													this5.image.set(this5.useVirtualPos ? (y1 - this5.virtualY) * this5.width + x1 - this5.virtualX | 0 : y1 * this5.width + x1 | 0,justGraphix_image_Endian_isLittleEndian ? (c2 >> 24 & 255) << 24 | (c2 & 255) << 16 | (c2 >> 8 & 255) << 8 | c2 >> 16 & 255 : c2);
+												}
+											}
+										}
+									}
+									if(this5.mask != null && includeMask4) {
+										var v3 = justGraphix_image_imageAbstracts_TransformImage.flippedY(this5.mask,0,0,this5.width,this5.height,this5.mask.transparent,inPlace4,includeMask4);
+										this5.useMask = true;
+										this5.mask = v3;
+									}
+									nextImage3 = null;
+									v2 = this5;
+								} else {
+									if(this5.mask != null && includeMask4) {
+										var v3 = justGraphix_image_imageAbstracts_TransformImage.flippedY(this5.mask,0,0,this5.width,this5.height,this5.mask.transparent,inPlace4,includeMask4);
+										nextImage3.useMask = true;
+										nextImage3.mask = v3;
+									}
+									v2 = nextImage3;
+								}
+								this4.useMask = true;
+								this4.mask = v2;
+							}
+							nextImage2 = null;
+							v1 = this4;
+						} else {
+							if(this4.mask != null && includeMask3) {
+								var this5 = this4.mask;
+								var w = this4.width;
+								var h = this4.height;
+								var transparent = this4.mask.transparent;
+								var inPlace = inPlace3;
+								var includeMask = includeMask3;
+								if(includeMask == null) {
+									includeMask = false;
+								}
+								if(inPlace == null) {
+									inPlace = false;
+								}
+								if(transparent == null) {
+									transparent = false;
+								}
+								var transparent1 = transparent;
+								var inPlace3 = inPlace;
+								var includeMask3 = includeMask;
+								if(includeMask3 == null) {
+									includeMask3 = false;
+								}
+								if(inPlace3 == null) {
+									inPlace3 = false;
+								}
+								if(transparent1 == null) {
+									transparent1 = false;
+								}
+								var r = { x : 0, y : 0, w : w, h : h};
+								var xmax = r.x + r.w + 1 | 0;
+								var ymax = r.y + r.h + 1 | 0;
+								var ii_min = r.x | 0;
+								var ii_max = xmax;
+								var xRange__start = ii_min;
+								var xRange__max = ii_max;
+								var ii_min = r.y | 0;
+								var ii_max = ymax;
+								var yRange__start = ii_min;
+								var yRange__max = ii_max;
+								var range_x = xRange__start;
+								var range_y = yRange__start - 1;
+								var range_xReset = range_x;
+								var range_yReset = range_y;
+								var range_xMax = xRange__max - 2;
+								var range_yMax = yRange__max - 2;
+								var _this_min = 0;
+								var _this_max = (xRange__max - xRange__start) * (yRange__max - yRange__start) | 0;
+								var nextImage3 = justGraphix_image_Pixelimage._new(w | 0,h | 0);
+								nextImage3.transparent = transparent1;
+								while(_this_min < _this_max) {
+									var i = _this_min++;
+									if(range_y > range_yMax) {
+										range_y = range_yReset;
+										++range_x;
+									}
+									++range_y;
+									var i1 = i;
+									var x = range_x;
+									var y = range_y;
+									var x1 = range_x;
+									var y1 = range_yMax - range_y;
+									var c = this5.image.get(this5.useVirtualPos ? (y1 - this5.virtualY) * this5.width + x1 - this5.virtualX | 0 : y1 * this5.width + x1 | 0);
+									var color = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+									var c1 = color;
+									if((c1 >> 24 & 255) < 254 && nextImage3.transparent) {
+										var location = nextImage3.useVirtualPos ? (y - nextImage3.virtualY) * nextImage3.width + x - nextImage3.virtualX | 0 : y * nextImage3.width + x | 0;
+										var this4 = nextImage3.image.get(location);
+										var this6 = justGraphix_image_Endian_isLittleEndian ? (this4 >> 24 & 255) << 24 | (this4 & 255) << 16 | (this4 >> 8 & 255) << 8 | this4 >> 16 & 255 : this4;
+										var this7 = this6 >> 24 & 255;
+										var a1 = this7 == 0 ? 0. : this7 / 255;
+										var this8 = this6 >> 16 & 255;
+										var r1 = this8 == 0 ? 0. : this8 / 255;
+										var this9 = this6 >> 8 & 255;
+										var g1 = this9 == 0 ? 0. : this9 / 255;
+										var this10 = this6 & 255;
+										var b1 = this10 == 0 ? 0. : this10 / 255;
+										var this11 = color >> 24 & 255;
+										var a2 = this11 == 0 ? 0. : this11 / 255;
+										var this12 = color >> 16 & 255;
+										var r2 = this12 == 0 ? 0. : this12 / 255;
+										var this13 = color >> 8 & 255;
+										var g2 = this13 == 0 ? 0. : this13 / 255;
+										var this14 = color & 255;
+										var b2 = this14 == 0 ? 0. : this14 / 255;
+										var a3 = a1 * (1 - a2);
+										var r = 255 * (r1 * a3 + r2 * a2) | 0;
+										var g = 255 * (g1 * a3 + g2 * a2) | 0;
+										var b = 255 * (b1 * a3 + b2 * a2) | 0;
+										var a = 255 * (a3 + a2) | 0;
+										var blended = a << 24 | r << 16 | g << 8 | b;
+										nextImage3.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+									} else {
+										nextImage3.image.set(nextImage3.useVirtualPos ? (y - nextImage3.virtualY) * nextImage3.width + x - nextImage3.virtualX | 0 : y * nextImage3.width + x | 0,justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1);
+									}
+								}
+								var v2;
+								if(inPlace3) {
+									var x = 0;
+									var y = 0;
+									var _g = 0;
+									var _g1 = nextImage3.height;
+									while(_g < _g1) {
+										var dy = _g++;
+										var _g2 = 0;
+										var _g3 = nextImage3.width;
+										while(_g2 < _g3) {
+											var dx = _g2++;
+											var c = nextImage3.image.get(nextImage3.useVirtualPos ? (dy - nextImage3.virtualY) * nextImage3.width + dx - nextImage3.virtualX | 0 : dy * nextImage3.width + dx | 0);
+											var col = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+											if(nextImage3.useMask && nextImage3.mask != null) {
+												var this4 = nextImage3.mask;
+												var c1 = this4.image.get(this4.useVirtualPos ? (dy - this4.virtualY) * this4.width + dx - this4.virtualX | 0 : dy * this4.width + dx | 0);
+												var maskPixel = justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1;
+												var this6 = col;
+												if(maskPixel == 0) {
+													col = this6;
+												} else {
+													var this7 = maskPixel >> 24 & 255;
+													var m0 = this7 == 0 ? 0. : this7 / 255;
+													var this8 = maskPixel >> 16 & 255;
+													var m1 = this8 == 0 ? 0. : this8 / 255;
+													var this9 = maskPixel >> 8 & 255;
+													var m2 = this9 == 0 ? 0. : this9 / 255;
+													var this10 = maskPixel & 255;
+													var m3 = this10 == 0 ? 0. : this10 / 255;
+													var ch0 = (1. - m0) * (this6 >> 24 & 255) | 0;
+													var ch1 = (1. - m1) * (this6 >> 16 & 255) | 0;
+													var ch2 = (1. - m2) * (this6 >> 8 & 255) | 0;
+													var ch3 = (1. - m3) * (this6 & 255) | 0;
+													col = Math.round(ch0 * 255) << 24 | Math.round(ch1 * 255) << 16 | Math.round(ch2 * 255) << 8 | Math.round(ch3 * 255);
+												}
+											}
+											if(col != 0) {
+												var x1 = x + dx;
+												var y1 = y + dy;
+												var c2 = col;
+												if((c2 >> 24 & 255) < 254 && this5.transparent) {
+													var location = this5.useVirtualPos ? (y1 - this5.virtualY) * this5.width + x1 - this5.virtualX | 0 : y1 * this5.width + x1 | 0;
+													var this11 = this5.image.get(location);
+													var this12 = justGraphix_image_Endian_isLittleEndian ? (this11 >> 24 & 255) << 24 | (this11 & 255) << 16 | (this11 >> 8 & 255) << 8 | this11 >> 16 & 255 : this11;
+													var this13 = this12 >> 24 & 255;
+													var a1 = this13 == 0 ? 0. : this13 / 255;
+													var this14 = this12 >> 16 & 255;
+													var r1 = this14 == 0 ? 0. : this14 / 255;
+													var this15 = this12 >> 8 & 255;
+													var g1 = this15 == 0 ? 0. : this15 / 255;
+													var this16 = this12 & 255;
+													var b1 = this16 == 0 ? 0. : this16 / 255;
+													var this17 = col >> 24 & 255;
+													var a2 = this17 == 0 ? 0. : this17 / 255;
+													var this18 = col >> 16 & 255;
+													var r2 = this18 == 0 ? 0. : this18 / 255;
+													var this19 = col >> 8 & 255;
+													var g2 = this19 == 0 ? 0. : this19 / 255;
+													var this20 = col & 255;
+													var b2 = this20 == 0 ? 0. : this20 / 255;
+													var a3 = a1 * (1 - a2);
+													var r = 255 * (r1 * a3 + r2 * a2) | 0;
+													var g = 255 * (g1 * a3 + g2 * a2) | 0;
+													var b = 255 * (b1 * a3 + b2 * a2) | 0;
+													var a = 255 * (a3 + a2) | 0;
+													var blended = a << 24 | r << 16 | g << 8 | b;
+													this5.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+												} else {
+													this5.image.set(this5.useVirtualPos ? (y1 - this5.virtualY) * this5.width + x1 - this5.virtualX | 0 : y1 * this5.width + x1 | 0,justGraphix_image_Endian_isLittleEndian ? (c2 >> 24 & 255) << 24 | (c2 & 255) << 16 | (c2 >> 8 & 255) << 8 | c2 >> 16 & 255 : c2);
+												}
+											}
+										}
+									}
+									if(this5.mask != null && includeMask3) {
+										var v3 = justGraphix_image_imageAbstracts_TransformImage.flippedY(this5.mask,0,0,this5.width,this5.height,this5.mask.transparent,inPlace3,includeMask3);
+										this5.useMask = true;
+										this5.mask = v3;
+									}
+									nextImage3 = null;
+									v2 = this5;
+								} else {
+									if(this5.mask != null && includeMask3) {
+										var v3 = justGraphix_image_imageAbstracts_TransformImage.flippedY(this5.mask,0,0,this5.width,this5.height,this5.mask.transparent,inPlace3,includeMask3);
+										nextImage3.useMask = true;
+										nextImage3.mask = v3;
+									}
+									v2 = nextImage3;
+								}
+								nextImage2.useMask = true;
+								nextImage2.mask = v2;
+							}
+							v1 = nextImage2;
+						}
+						this3.useMask = true;
+						this3.mask = v1;
+					}
+					nextImage1 = null;
+					v = this3;
+				} else {
+					if(this3.mask != null && includeMask2) {
+						var this4 = this3.mask;
+						var w = this3.width;
+						var h = this3.height;
+						var transparent = this3.mask.transparent;
+						var inPlace = inPlace2;
+						var includeMask = includeMask2;
+						if(includeMask == null) {
+							includeMask = false;
+						}
+						if(inPlace == null) {
+							inPlace = false;
+						}
+						if(transparent == null) {
+							transparent = false;
+						}
+						var transparent1 = transparent;
+						var inPlace2 = inPlace;
+						var includeMask2 = includeMask;
+						if(includeMask2 == null) {
+							includeMask2 = false;
+						}
+						if(inPlace2 == null) {
+							inPlace2 = false;
+						}
+						if(transparent1 == null) {
+							transparent1 = false;
+						}
+						var r = { x : 0, y : 0, w : w, h : h};
+						var xmax = r.x + r.w + 1 | 0;
+						var ymax = r.y + r.h + 1 | 0;
+						var ii_min = r.x | 0;
+						var ii_max = xmax;
+						var xRange__start = ii_min;
+						var xRange__max = ii_max;
+						var ii_min = r.y | 0;
+						var ii_max = ymax;
+						var yRange__start = ii_min;
+						var yRange__max = ii_max;
+						var range_x = xRange__start;
+						var range_y = yRange__start - 1;
+						var range_xReset = range_x;
+						var range_yReset = range_y;
+						var range_xMax = xRange__max - 2;
+						var range_yMax = yRange__max - 2;
+						var _this_min = 0;
+						var _this_max = (xRange__max - xRange__start) * (yRange__max - yRange__start) | 0;
+						var nextImage2 = justGraphix_image_Pixelimage._new(w | 0,h | 0);
+						nextImage2.transparent = transparent1;
+						while(_this_min < _this_max) {
+							var i = _this_min++;
+							if(range_y > range_yMax) {
+								range_y = range_yReset;
+								++range_x;
+							}
+							++range_y;
+							var i1 = i;
+							var x = range_x;
+							var y = range_y;
+							var x1 = range_x;
+							var y1 = range_yMax - range_y;
+							var c = this4.image.get(this4.useVirtualPos ? (y1 - this4.virtualY) * this4.width + x1 - this4.virtualX | 0 : y1 * this4.width + x1 | 0);
+							var color = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+							var c1 = color;
+							if((c1 >> 24 & 255) < 254 && nextImage2.transparent) {
+								var location = nextImage2.useVirtualPos ? (y - nextImage2.virtualY) * nextImage2.width + x - nextImage2.virtualX | 0 : y * nextImage2.width + x | 0;
+								var this3 = nextImage2.image.get(location);
+								var this5 = justGraphix_image_Endian_isLittleEndian ? (this3 >> 24 & 255) << 24 | (this3 & 255) << 16 | (this3 >> 8 & 255) << 8 | this3 >> 16 & 255 : this3;
+								var this6 = this5 >> 24 & 255;
+								var a1 = this6 == 0 ? 0. : this6 / 255;
+								var this7 = this5 >> 16 & 255;
+								var r1 = this7 == 0 ? 0. : this7 / 255;
+								var this8 = this5 >> 8 & 255;
+								var g1 = this8 == 0 ? 0. : this8 / 255;
+								var this9 = this5 & 255;
+								var b1 = this9 == 0 ? 0. : this9 / 255;
+								var this10 = color >> 24 & 255;
+								var a2 = this10 == 0 ? 0. : this10 / 255;
+								var this11 = color >> 16 & 255;
+								var r2 = this11 == 0 ? 0. : this11 / 255;
+								var this12 = color >> 8 & 255;
+								var g2 = this12 == 0 ? 0. : this12 / 255;
+								var this13 = color & 255;
+								var b2 = this13 == 0 ? 0. : this13 / 255;
+								var a3 = a1 * (1 - a2);
+								var r = 255 * (r1 * a3 + r2 * a2) | 0;
+								var g = 255 * (g1 * a3 + g2 * a2) | 0;
+								var b = 255 * (b1 * a3 + b2 * a2) | 0;
+								var a = 255 * (a3 + a2) | 0;
+								var blended = a << 24 | r << 16 | g << 8 | b;
+								nextImage2.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+							} else {
+								nextImage2.image.set(nextImage2.useVirtualPos ? (y - nextImage2.virtualY) * nextImage2.width + x - nextImage2.virtualX | 0 : y * nextImage2.width + x | 0,justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1);
+							}
+						}
+						var v1;
+						if(inPlace2) {
+							var x = 0;
+							var y = 0;
+							var _g = 0;
+							var _g1 = nextImage2.height;
+							while(_g < _g1) {
+								var dy = _g++;
+								var _g2 = 0;
+								var _g3 = nextImage2.width;
+								while(_g2 < _g3) {
+									var dx = _g2++;
+									var c = nextImage2.image.get(nextImage2.useVirtualPos ? (dy - nextImage2.virtualY) * nextImage2.width + dx - nextImage2.virtualX | 0 : dy * nextImage2.width + dx | 0);
+									var col = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+									if(nextImage2.useMask && nextImage2.mask != null) {
+										var this3 = nextImage2.mask;
+										var c1 = this3.image.get(this3.useVirtualPos ? (dy - this3.virtualY) * this3.width + dx - this3.virtualX | 0 : dy * this3.width + dx | 0);
+										var maskPixel = justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1;
+										var this5 = col;
+										if(maskPixel == 0) {
+											col = this5;
+										} else {
+											var this6 = maskPixel >> 24 & 255;
+											var m0 = this6 == 0 ? 0. : this6 / 255;
+											var this7 = maskPixel >> 16 & 255;
+											var m1 = this7 == 0 ? 0. : this7 / 255;
+											var this8 = maskPixel >> 8 & 255;
+											var m2 = this8 == 0 ? 0. : this8 / 255;
+											var this9 = maskPixel & 255;
+											var m3 = this9 == 0 ? 0. : this9 / 255;
+											var ch0 = (1. - m0) * (this5 >> 24 & 255) | 0;
+											var ch1 = (1. - m1) * (this5 >> 16 & 255) | 0;
+											var ch2 = (1. - m2) * (this5 >> 8 & 255) | 0;
+											var ch3 = (1. - m3) * (this5 & 255) | 0;
+											col = Math.round(ch0 * 255) << 24 | Math.round(ch1 * 255) << 16 | Math.round(ch2 * 255) << 8 | Math.round(ch3 * 255);
+										}
+									}
+									if(col != 0) {
+										var x1 = x + dx;
+										var y1 = y + dy;
+										var c2 = col;
+										if((c2 >> 24 & 255) < 254 && this4.transparent) {
+											var location = this4.useVirtualPos ? (y1 - this4.virtualY) * this4.width + x1 - this4.virtualX | 0 : y1 * this4.width + x1 | 0;
+											var this10 = this4.image.get(location);
+											var this11 = justGraphix_image_Endian_isLittleEndian ? (this10 >> 24 & 255) << 24 | (this10 & 255) << 16 | (this10 >> 8 & 255) << 8 | this10 >> 16 & 255 : this10;
+											var this12 = this11 >> 24 & 255;
+											var a1 = this12 == 0 ? 0. : this12 / 255;
+											var this13 = this11 >> 16 & 255;
+											var r1 = this13 == 0 ? 0. : this13 / 255;
+											var this14 = this11 >> 8 & 255;
+											var g1 = this14 == 0 ? 0. : this14 / 255;
+											var this15 = this11 & 255;
+											var b1 = this15 == 0 ? 0. : this15 / 255;
+											var this16 = col >> 24 & 255;
+											var a2 = this16 == 0 ? 0. : this16 / 255;
+											var this17 = col >> 16 & 255;
+											var r2 = this17 == 0 ? 0. : this17 / 255;
+											var this18 = col >> 8 & 255;
+											var g2 = this18 == 0 ? 0. : this18 / 255;
+											var this19 = col & 255;
+											var b2 = this19 == 0 ? 0. : this19 / 255;
+											var a3 = a1 * (1 - a2);
+											var r = 255 * (r1 * a3 + r2 * a2) | 0;
+											var g = 255 * (g1 * a3 + g2 * a2) | 0;
+											var b = 255 * (b1 * a3 + b2 * a2) | 0;
+											var a = 255 * (a3 + a2) | 0;
+											var blended = a << 24 | r << 16 | g << 8 | b;
+											this4.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+										} else {
+											this4.image.set(this4.useVirtualPos ? (y1 - this4.virtualY) * this4.width + x1 - this4.virtualX | 0 : y1 * this4.width + x1 | 0,justGraphix_image_Endian_isLittleEndian ? (c2 >> 24 & 255) << 24 | (c2 & 255) << 16 | (c2 >> 8 & 255) << 8 | c2 >> 16 & 255 : c2);
+										}
+									}
+								}
+							}
+							if(this4.mask != null && includeMask2) {
+								var this3 = this4.mask;
+								var w = this4.width;
+								var h = this4.height;
+								var transparent = this4.mask.transparent;
+								var inPlace = inPlace2;
+								var includeMask = includeMask2;
+								if(includeMask == null) {
+									includeMask = false;
+								}
+								if(inPlace == null) {
+									inPlace = false;
+								}
+								if(transparent == null) {
+									transparent = false;
+								}
+								var transparent1 = transparent;
+								var inPlace3 = inPlace;
+								var includeMask3 = includeMask;
+								if(includeMask3 == null) {
+									includeMask3 = false;
+								}
+								if(inPlace3 == null) {
+									inPlace3 = false;
+								}
+								if(transparent1 == null) {
+									transparent1 = false;
+								}
+								var r = { x : 0, y : 0, w : w, h : h};
+								var xmax = r.x + r.w + 1 | 0;
+								var ymax = r.y + r.h + 1 | 0;
+								var ii_min = r.x | 0;
+								var ii_max = xmax;
+								var xRange__start = ii_min;
+								var xRange__max = ii_max;
+								var ii_min = r.y | 0;
+								var ii_max = ymax;
+								var yRange__start = ii_min;
+								var yRange__max = ii_max;
+								var range_x = xRange__start;
+								var range_y = yRange__start - 1;
+								var range_xReset = range_x;
+								var range_yReset = range_y;
+								var range_xMax = xRange__max - 2;
+								var range_yMax = yRange__max - 2;
+								var _this_min = 0;
+								var _this_max = (xRange__max - xRange__start) * (yRange__max - yRange__start) | 0;
+								var nextImage3 = justGraphix_image_Pixelimage._new(w | 0,h | 0);
+								nextImage3.transparent = transparent1;
+								while(_this_min < _this_max) {
+									var i = _this_min++;
+									if(range_y > range_yMax) {
+										range_y = range_yReset;
+										++range_x;
+									}
+									++range_y;
+									var i1 = i;
+									var x = range_x;
+									var y = range_y;
+									var x1 = range_x;
+									var y1 = range_yMax - range_y;
+									var c = this3.image.get(this3.useVirtualPos ? (y1 - this3.virtualY) * this3.width + x1 - this3.virtualX | 0 : y1 * this3.width + x1 | 0);
+									var color = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+									var c1 = color;
+									if((c1 >> 24 & 255) < 254 && nextImage3.transparent) {
+										var location = nextImage3.useVirtualPos ? (y - nextImage3.virtualY) * nextImage3.width + x - nextImage3.virtualX | 0 : y * nextImage3.width + x | 0;
+										var this5 = nextImage3.image.get(location);
+										var this6 = justGraphix_image_Endian_isLittleEndian ? (this5 >> 24 & 255) << 24 | (this5 & 255) << 16 | (this5 >> 8 & 255) << 8 | this5 >> 16 & 255 : this5;
+										var this7 = this6 >> 24 & 255;
+										var a1 = this7 == 0 ? 0. : this7 / 255;
+										var this8 = this6 >> 16 & 255;
+										var r1 = this8 == 0 ? 0. : this8 / 255;
+										var this9 = this6 >> 8 & 255;
+										var g1 = this9 == 0 ? 0. : this9 / 255;
+										var this10 = this6 & 255;
+										var b1 = this10 == 0 ? 0. : this10 / 255;
+										var this11 = color >> 24 & 255;
+										var a2 = this11 == 0 ? 0. : this11 / 255;
+										var this12 = color >> 16 & 255;
+										var r2 = this12 == 0 ? 0. : this12 / 255;
+										var this13 = color >> 8 & 255;
+										var g2 = this13 == 0 ? 0. : this13 / 255;
+										var this14 = color & 255;
+										var b2 = this14 == 0 ? 0. : this14 / 255;
+										var a3 = a1 * (1 - a2);
+										var r = 255 * (r1 * a3 + r2 * a2) | 0;
+										var g = 255 * (g1 * a3 + g2 * a2) | 0;
+										var b = 255 * (b1 * a3 + b2 * a2) | 0;
+										var a = 255 * (a3 + a2) | 0;
+										var blended = a << 24 | r << 16 | g << 8 | b;
+										nextImage3.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+									} else {
+										nextImage3.image.set(nextImage3.useVirtualPos ? (y - nextImage3.virtualY) * nextImage3.width + x - nextImage3.virtualX | 0 : y * nextImage3.width + x | 0,justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1);
+									}
+								}
+								var v2;
+								if(inPlace3) {
+									var x = 0;
+									var y = 0;
+									var _g = 0;
+									var _g1 = nextImage3.height;
+									while(_g < _g1) {
+										var dy = _g++;
+										var _g2 = 0;
+										var _g3 = nextImage3.width;
+										while(_g2 < _g3) {
+											var dx = _g2++;
+											var c = nextImage3.image.get(nextImage3.useVirtualPos ? (dy - nextImage3.virtualY) * nextImage3.width + dx - nextImage3.virtualX | 0 : dy * nextImage3.width + dx | 0);
+											var col = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+											if(nextImage3.useMask && nextImage3.mask != null) {
+												var this5 = nextImage3.mask;
+												var c1 = this5.image.get(this5.useVirtualPos ? (dy - this5.virtualY) * this5.width + dx - this5.virtualX | 0 : dy * this5.width + dx | 0);
+												var maskPixel = justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1;
+												var this6 = col;
+												if(maskPixel == 0) {
+													col = this6;
+												} else {
+													var this7 = maskPixel >> 24 & 255;
+													var m0 = this7 == 0 ? 0. : this7 / 255;
+													var this8 = maskPixel >> 16 & 255;
+													var m1 = this8 == 0 ? 0. : this8 / 255;
+													var this9 = maskPixel >> 8 & 255;
+													var m2 = this9 == 0 ? 0. : this9 / 255;
+													var this10 = maskPixel & 255;
+													var m3 = this10 == 0 ? 0. : this10 / 255;
+													var ch0 = (1. - m0) * (this6 >> 24 & 255) | 0;
+													var ch1 = (1. - m1) * (this6 >> 16 & 255) | 0;
+													var ch2 = (1. - m2) * (this6 >> 8 & 255) | 0;
+													var ch3 = (1. - m3) * (this6 & 255) | 0;
+													col = Math.round(ch0 * 255) << 24 | Math.round(ch1 * 255) << 16 | Math.round(ch2 * 255) << 8 | Math.round(ch3 * 255);
+												}
+											}
+											if(col != 0) {
+												var x1 = x + dx;
+												var y1 = y + dy;
+												var c2 = col;
+												if((c2 >> 24 & 255) < 254 && this3.transparent) {
+													var location = this3.useVirtualPos ? (y1 - this3.virtualY) * this3.width + x1 - this3.virtualX | 0 : y1 * this3.width + x1 | 0;
+													var this11 = this3.image.get(location);
+													var this12 = justGraphix_image_Endian_isLittleEndian ? (this11 >> 24 & 255) << 24 | (this11 & 255) << 16 | (this11 >> 8 & 255) << 8 | this11 >> 16 & 255 : this11;
+													var this13 = this12 >> 24 & 255;
+													var a1 = this13 == 0 ? 0. : this13 / 255;
+													var this14 = this12 >> 16 & 255;
+													var r1 = this14 == 0 ? 0. : this14 / 255;
+													var this15 = this12 >> 8 & 255;
+													var g1 = this15 == 0 ? 0. : this15 / 255;
+													var this16 = this12 & 255;
+													var b1 = this16 == 0 ? 0. : this16 / 255;
+													var this17 = col >> 24 & 255;
+													var a2 = this17 == 0 ? 0. : this17 / 255;
+													var this18 = col >> 16 & 255;
+													var r2 = this18 == 0 ? 0. : this18 / 255;
+													var this19 = col >> 8 & 255;
+													var g2 = this19 == 0 ? 0. : this19 / 255;
+													var this20 = col & 255;
+													var b2 = this20 == 0 ? 0. : this20 / 255;
+													var a3 = a1 * (1 - a2);
+													var r = 255 * (r1 * a3 + r2 * a2) | 0;
+													var g = 255 * (g1 * a3 + g2 * a2) | 0;
+													var b = 255 * (b1 * a3 + b2 * a2) | 0;
+													var a = 255 * (a3 + a2) | 0;
+													var blended = a << 24 | r << 16 | g << 8 | b;
+													this3.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+												} else {
+													this3.image.set(this3.useVirtualPos ? (y1 - this3.virtualY) * this3.width + x1 - this3.virtualX | 0 : y1 * this3.width + x1 | 0,justGraphix_image_Endian_isLittleEndian ? (c2 >> 24 & 255) << 24 | (c2 & 255) << 16 | (c2 >> 8 & 255) << 8 | c2 >> 16 & 255 : c2);
+												}
+											}
+										}
+									}
+									if(this3.mask != null && includeMask3) {
+										var v3 = justGraphix_image_imageAbstracts_TransformImage.flippedY(this3.mask,0,0,this3.width,this3.height,this3.mask.transparent,inPlace3,includeMask3);
+										this3.useMask = true;
+										this3.mask = v3;
+									}
+									nextImage3 = null;
+									v2 = this3;
+								} else {
+									if(this3.mask != null && includeMask3) {
+										var v3 = justGraphix_image_imageAbstracts_TransformImage.flippedY(this3.mask,0,0,this3.width,this3.height,this3.mask.transparent,inPlace3,includeMask3);
+										nextImage3.useMask = true;
+										nextImage3.mask = v3;
+									}
+									v2 = nextImage3;
+								}
+								this4.useMask = true;
+								this4.mask = v2;
+							}
+							nextImage2 = null;
+							v1 = this4;
+						} else {
+							if(this4.mask != null && includeMask2) {
+								var this3 = this4.mask;
+								var w = this4.width;
+								var h = this4.height;
+								var transparent = this4.mask.transparent;
+								var inPlace = inPlace2;
+								var includeMask = includeMask2;
+								if(includeMask == null) {
+									includeMask = false;
+								}
+								if(inPlace == null) {
+									inPlace = false;
+								}
+								if(transparent == null) {
+									transparent = false;
+								}
+								var transparent1 = transparent;
+								var inPlace2 = inPlace;
+								var includeMask2 = includeMask;
+								if(includeMask2 == null) {
+									includeMask2 = false;
+								}
+								if(inPlace2 == null) {
+									inPlace2 = false;
+								}
+								if(transparent1 == null) {
+									transparent1 = false;
+								}
+								var r = { x : 0, y : 0, w : w, h : h};
+								var xmax = r.x + r.w + 1 | 0;
+								var ymax = r.y + r.h + 1 | 0;
+								var ii_min = r.x | 0;
+								var ii_max = xmax;
+								var xRange__start = ii_min;
+								var xRange__max = ii_max;
+								var ii_min = r.y | 0;
+								var ii_max = ymax;
+								var yRange__start = ii_min;
+								var yRange__max = ii_max;
+								var range_x = xRange__start;
+								var range_y = yRange__start - 1;
+								var range_xReset = range_x;
+								var range_yReset = range_y;
+								var range_xMax = xRange__max - 2;
+								var range_yMax = yRange__max - 2;
+								var _this_min = 0;
+								var _this_max = (xRange__max - xRange__start) * (yRange__max - yRange__start) | 0;
+								var nextImage3 = justGraphix_image_Pixelimage._new(w | 0,h | 0);
+								nextImage3.transparent = transparent1;
+								while(_this_min < _this_max) {
+									var i = _this_min++;
+									if(range_y > range_yMax) {
+										range_y = range_yReset;
+										++range_x;
+									}
+									++range_y;
+									var i1 = i;
+									var x = range_x;
+									var y = range_y;
+									var x1 = range_x;
+									var y1 = range_yMax - range_y;
+									var c = this3.image.get(this3.useVirtualPos ? (y1 - this3.virtualY) * this3.width + x1 - this3.virtualX | 0 : y1 * this3.width + x1 | 0);
+									var color = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+									var c1 = color;
+									if((c1 >> 24 & 255) < 254 && nextImage3.transparent) {
+										var location = nextImage3.useVirtualPos ? (y - nextImage3.virtualY) * nextImage3.width + x - nextImage3.virtualX | 0 : y * nextImage3.width + x | 0;
+										var this4 = nextImage3.image.get(location);
+										var this5 = justGraphix_image_Endian_isLittleEndian ? (this4 >> 24 & 255) << 24 | (this4 & 255) << 16 | (this4 >> 8 & 255) << 8 | this4 >> 16 & 255 : this4;
+										var this6 = this5 >> 24 & 255;
+										var a1 = this6 == 0 ? 0. : this6 / 255;
+										var this7 = this5 >> 16 & 255;
+										var r1 = this7 == 0 ? 0. : this7 / 255;
+										var this8 = this5 >> 8 & 255;
+										var g1 = this8 == 0 ? 0. : this8 / 255;
+										var this9 = this5 & 255;
+										var b1 = this9 == 0 ? 0. : this9 / 255;
+										var this10 = color >> 24 & 255;
+										var a2 = this10 == 0 ? 0. : this10 / 255;
+										var this11 = color >> 16 & 255;
+										var r2 = this11 == 0 ? 0. : this11 / 255;
+										var this12 = color >> 8 & 255;
+										var g2 = this12 == 0 ? 0. : this12 / 255;
+										var this13 = color & 255;
+										var b2 = this13 == 0 ? 0. : this13 / 255;
+										var a3 = a1 * (1 - a2);
+										var r = 255 * (r1 * a3 + r2 * a2) | 0;
+										var g = 255 * (g1 * a3 + g2 * a2) | 0;
+										var b = 255 * (b1 * a3 + b2 * a2) | 0;
+										var a = 255 * (a3 + a2) | 0;
+										var blended = a << 24 | r << 16 | g << 8 | b;
+										nextImage3.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+									} else {
+										nextImage3.image.set(nextImage3.useVirtualPos ? (y - nextImage3.virtualY) * nextImage3.width + x - nextImage3.virtualX | 0 : y * nextImage3.width + x | 0,justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1);
+									}
+								}
+								var v2;
+								if(inPlace2) {
+									var x = 0;
+									var y = 0;
+									var _g = 0;
+									var _g1 = nextImage3.height;
+									while(_g < _g1) {
+										var dy = _g++;
+										var _g2 = 0;
+										var _g3 = nextImage3.width;
+										while(_g2 < _g3) {
+											var dx = _g2++;
+											var c = nextImage3.image.get(nextImage3.useVirtualPos ? (dy - nextImage3.virtualY) * nextImage3.width + dx - nextImage3.virtualX | 0 : dy * nextImage3.width + dx | 0);
+											var col = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+											if(nextImage3.useMask && nextImage3.mask != null) {
+												var this4 = nextImage3.mask;
+												var c1 = this4.image.get(this4.useVirtualPos ? (dy - this4.virtualY) * this4.width + dx - this4.virtualX | 0 : dy * this4.width + dx | 0);
+												var maskPixel = justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1;
+												var this5 = col;
+												if(maskPixel == 0) {
+													col = this5;
+												} else {
+													var this6 = maskPixel >> 24 & 255;
+													var m0 = this6 == 0 ? 0. : this6 / 255;
+													var this7 = maskPixel >> 16 & 255;
+													var m1 = this7 == 0 ? 0. : this7 / 255;
+													var this8 = maskPixel >> 8 & 255;
+													var m2 = this8 == 0 ? 0. : this8 / 255;
+													var this9 = maskPixel & 255;
+													var m3 = this9 == 0 ? 0. : this9 / 255;
+													var ch0 = (1. - m0) * (this5 >> 24 & 255) | 0;
+													var ch1 = (1. - m1) * (this5 >> 16 & 255) | 0;
+													var ch2 = (1. - m2) * (this5 >> 8 & 255) | 0;
+													var ch3 = (1. - m3) * (this5 & 255) | 0;
+													col = Math.round(ch0 * 255) << 24 | Math.round(ch1 * 255) << 16 | Math.round(ch2 * 255) << 8 | Math.round(ch3 * 255);
+												}
+											}
+											if(col != 0) {
+												var x1 = x + dx;
+												var y1 = y + dy;
+												var c2 = col;
+												if((c2 >> 24 & 255) < 254 && this3.transparent) {
+													var location = this3.useVirtualPos ? (y1 - this3.virtualY) * this3.width + x1 - this3.virtualX | 0 : y1 * this3.width + x1 | 0;
+													var this10 = this3.image.get(location);
+													var this11 = justGraphix_image_Endian_isLittleEndian ? (this10 >> 24 & 255) << 24 | (this10 & 255) << 16 | (this10 >> 8 & 255) << 8 | this10 >> 16 & 255 : this10;
+													var this12 = this11 >> 24 & 255;
+													var a1 = this12 == 0 ? 0. : this12 / 255;
+													var this13 = this11 >> 16 & 255;
+													var r1 = this13 == 0 ? 0. : this13 / 255;
+													var this14 = this11 >> 8 & 255;
+													var g1 = this14 == 0 ? 0. : this14 / 255;
+													var this15 = this11 & 255;
+													var b1 = this15 == 0 ? 0. : this15 / 255;
+													var this16 = col >> 24 & 255;
+													var a2 = this16 == 0 ? 0. : this16 / 255;
+													var this17 = col >> 16 & 255;
+													var r2 = this17 == 0 ? 0. : this17 / 255;
+													var this18 = col >> 8 & 255;
+													var g2 = this18 == 0 ? 0. : this18 / 255;
+													var this19 = col & 255;
+													var b2 = this19 == 0 ? 0. : this19 / 255;
+													var a3 = a1 * (1 - a2);
+													var r = 255 * (r1 * a3 + r2 * a2) | 0;
+													var g = 255 * (g1 * a3 + g2 * a2) | 0;
+													var b = 255 * (b1 * a3 + b2 * a2) | 0;
+													var a = 255 * (a3 + a2) | 0;
+													var blended = a << 24 | r << 16 | g << 8 | b;
+													this3.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+												} else {
+													this3.image.set(this3.useVirtualPos ? (y1 - this3.virtualY) * this3.width + x1 - this3.virtualX | 0 : y1 * this3.width + x1 | 0,justGraphix_image_Endian_isLittleEndian ? (c2 >> 24 & 255) << 24 | (c2 & 255) << 16 | (c2 >> 8 & 255) << 8 | c2 >> 16 & 255 : c2);
+												}
+											}
+										}
+									}
+									if(this3.mask != null && includeMask2) {
+										var v3 = justGraphix_image_imageAbstracts_TransformImage.flippedY(this3.mask,0,0,this3.width,this3.height,this3.mask.transparent,inPlace2,includeMask2);
+										this3.useMask = true;
+										this3.mask = v3;
+									}
+									nextImage3 = null;
+									v2 = this3;
+								} else {
+									if(this3.mask != null && includeMask2) {
+										var v3 = justGraphix_image_imageAbstracts_TransformImage.flippedY(this3.mask,0,0,this3.width,this3.height,this3.mask.transparent,inPlace2,includeMask2);
+										nextImage3.useMask = true;
+										nextImage3.mask = v3;
+									}
+									v2 = nextImage3;
+								}
+								nextImage2.useMask = true;
+								nextImage2.mask = v2;
+							}
+							v1 = nextImage2;
+						}
+						nextImage1.useMask = true;
+						nextImage1.mask = v1;
+					}
+					v = nextImage1;
+				}
+				this1.useMask = true;
+				this1.mask = v;
+			}
+			nextImage = null;
+			this2 = this1;
+		} else {
+			if(this1.mask != null && includeMask1) {
+				var this3 = this1.mask;
+				var w = this1.width;
+				var h = this1.height;
+				var transparent = this1.mask.transparent;
+				var inPlace = inPlace1;
+				var includeMask = includeMask1;
+				if(includeMask == null) {
+					includeMask = false;
+				}
+				if(inPlace == null) {
+					inPlace = false;
+				}
+				if(transparent == null) {
+					transparent = false;
+				}
+				var transparent1 = transparent;
+				var inPlace1 = inPlace;
+				var includeMask1 = includeMask;
+				if(includeMask1 == null) {
+					includeMask1 = false;
+				}
+				if(inPlace1 == null) {
+					inPlace1 = false;
+				}
+				if(transparent1 == null) {
+					transparent1 = false;
+				}
+				var r = { x : 0, y : 0, w : w, h : h};
+				var xmax = r.x + r.w + 1 | 0;
+				var ymax = r.y + r.h + 1 | 0;
+				var ii_min = r.x | 0;
+				var ii_max = xmax;
+				var xRange__start = ii_min;
+				var xRange__max = ii_max;
+				var ii_min = r.y | 0;
+				var ii_max = ymax;
+				var yRange__start = ii_min;
+				var yRange__max = ii_max;
+				var range_x = xRange__start;
+				var range_y = yRange__start - 1;
+				var range_xReset = range_x;
+				var range_yReset = range_y;
+				var range_xMax = xRange__max - 2;
+				var range_yMax = yRange__max - 2;
+				var _this_min = 0;
+				var _this_max = (xRange__max - xRange__start) * (yRange__max - yRange__start) | 0;
+				var nextImage1 = justGraphix_image_Pixelimage._new(w | 0,h | 0);
+				nextImage1.transparent = transparent1;
+				while(_this_min < _this_max) {
+					var i = _this_min++;
+					if(range_y > range_yMax) {
+						range_y = range_yReset;
+						++range_x;
+					}
+					++range_y;
+					var i1 = i;
+					var x = range_x;
+					var y = range_y;
+					var x1 = range_x;
+					var y1 = range_yMax - range_y;
+					var c = this3.image.get(this3.useVirtualPos ? (y1 - this3.virtualY) * this3.width + x1 - this3.virtualX | 0 : y1 * this3.width + x1 | 0);
+					var color = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+					var c1 = color;
+					if((c1 >> 24 & 255) < 254 && nextImage1.transparent) {
+						var location = nextImage1.useVirtualPos ? (y - nextImage1.virtualY) * nextImage1.width + x - nextImage1.virtualX | 0 : y * nextImage1.width + x | 0;
+						var this1 = nextImage1.image.get(location);
+						var this4 = justGraphix_image_Endian_isLittleEndian ? (this1 >> 24 & 255) << 24 | (this1 & 255) << 16 | (this1 >> 8 & 255) << 8 | this1 >> 16 & 255 : this1;
+						var this5 = this4 >> 24 & 255;
+						var a1 = this5 == 0 ? 0. : this5 / 255;
+						var this6 = this4 >> 16 & 255;
+						var r1 = this6 == 0 ? 0. : this6 / 255;
+						var this7 = this4 >> 8 & 255;
+						var g1 = this7 == 0 ? 0. : this7 / 255;
+						var this8 = this4 & 255;
+						var b1 = this8 == 0 ? 0. : this8 / 255;
+						var this9 = color >> 24 & 255;
+						var a2 = this9 == 0 ? 0. : this9 / 255;
+						var this10 = color >> 16 & 255;
+						var r2 = this10 == 0 ? 0. : this10 / 255;
+						var this11 = color >> 8 & 255;
+						var g2 = this11 == 0 ? 0. : this11 / 255;
+						var this12 = color & 255;
+						var b2 = this12 == 0 ? 0. : this12 / 255;
+						var a3 = a1 * (1 - a2);
+						var r = 255 * (r1 * a3 + r2 * a2) | 0;
+						var g = 255 * (g1 * a3 + g2 * a2) | 0;
+						var b = 255 * (b1 * a3 + b2 * a2) | 0;
+						var a = 255 * (a3 + a2) | 0;
+						var blended = a << 24 | r << 16 | g << 8 | b;
+						nextImage1.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+					} else {
+						nextImage1.image.set(nextImage1.useVirtualPos ? (y - nextImage1.virtualY) * nextImage1.width + x - nextImage1.virtualX | 0 : y * nextImage1.width + x | 0,justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1);
+					}
+				}
+				var v;
+				if(inPlace1) {
+					var x = 0;
+					var y = 0;
+					var _g = 0;
+					var _g1 = nextImage1.height;
+					while(_g < _g1) {
+						var dy = _g++;
+						var _g2 = 0;
+						var _g3 = nextImage1.width;
+						while(_g2 < _g3) {
+							var dx = _g2++;
+							var c = nextImage1.image.get(nextImage1.useVirtualPos ? (dy - nextImage1.virtualY) * nextImage1.width + dx - nextImage1.virtualX | 0 : dy * nextImage1.width + dx | 0);
+							var col = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+							if(nextImage1.useMask && nextImage1.mask != null) {
+								var this1 = nextImage1.mask;
+								var c1 = this1.image.get(this1.useVirtualPos ? (dy - this1.virtualY) * this1.width + dx - this1.virtualX | 0 : dy * this1.width + dx | 0);
+								var maskPixel = justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1;
+								var this4 = col;
+								if(maskPixel == 0) {
+									col = this4;
+								} else {
+									var this5 = maskPixel >> 24 & 255;
+									var m0 = this5 == 0 ? 0. : this5 / 255;
+									var this6 = maskPixel >> 16 & 255;
+									var m1 = this6 == 0 ? 0. : this6 / 255;
+									var this7 = maskPixel >> 8 & 255;
+									var m2 = this7 == 0 ? 0. : this7 / 255;
+									var this8 = maskPixel & 255;
+									var m3 = this8 == 0 ? 0. : this8 / 255;
+									var ch0 = (1. - m0) * (this4 >> 24 & 255) | 0;
+									var ch1 = (1. - m1) * (this4 >> 16 & 255) | 0;
+									var ch2 = (1. - m2) * (this4 >> 8 & 255) | 0;
+									var ch3 = (1. - m3) * (this4 & 255) | 0;
+									col = Math.round(ch0 * 255) << 24 | Math.round(ch1 * 255) << 16 | Math.round(ch2 * 255) << 8 | Math.round(ch3 * 255);
+								}
+							}
+							if(col != 0) {
+								var x1 = x + dx;
+								var y1 = y + dy;
+								var c2 = col;
+								if((c2 >> 24 & 255) < 254 && this3.transparent) {
+									var location = this3.useVirtualPos ? (y1 - this3.virtualY) * this3.width + x1 - this3.virtualX | 0 : y1 * this3.width + x1 | 0;
+									var this9 = this3.image.get(location);
+									var this10 = justGraphix_image_Endian_isLittleEndian ? (this9 >> 24 & 255) << 24 | (this9 & 255) << 16 | (this9 >> 8 & 255) << 8 | this9 >> 16 & 255 : this9;
+									var this11 = this10 >> 24 & 255;
+									var a1 = this11 == 0 ? 0. : this11 / 255;
+									var this12 = this10 >> 16 & 255;
+									var r1 = this12 == 0 ? 0. : this12 / 255;
+									var this13 = this10 >> 8 & 255;
+									var g1 = this13 == 0 ? 0. : this13 / 255;
+									var this14 = this10 & 255;
+									var b1 = this14 == 0 ? 0. : this14 / 255;
+									var this15 = col >> 24 & 255;
+									var a2 = this15 == 0 ? 0. : this15 / 255;
+									var this16 = col >> 16 & 255;
+									var r2 = this16 == 0 ? 0. : this16 / 255;
+									var this17 = col >> 8 & 255;
+									var g2 = this17 == 0 ? 0. : this17 / 255;
+									var this18 = col & 255;
+									var b2 = this18 == 0 ? 0. : this18 / 255;
+									var a3 = a1 * (1 - a2);
+									var r = 255 * (r1 * a3 + r2 * a2) | 0;
+									var g = 255 * (g1 * a3 + g2 * a2) | 0;
+									var b = 255 * (b1 * a3 + b2 * a2) | 0;
+									var a = 255 * (a3 + a2) | 0;
+									var blended = a << 24 | r << 16 | g << 8 | b;
+									this3.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+								} else {
+									this3.image.set(this3.useVirtualPos ? (y1 - this3.virtualY) * this3.width + x1 - this3.virtualX | 0 : y1 * this3.width + x1 | 0,justGraphix_image_Endian_isLittleEndian ? (c2 >> 24 & 255) << 24 | (c2 & 255) << 16 | (c2 >> 8 & 255) << 8 | c2 >> 16 & 255 : c2);
+								}
+							}
+						}
+					}
+					if(this3.mask != null && includeMask1) {
+						var this1 = this3.mask;
+						var w = this3.width;
+						var h = this3.height;
+						var transparent = this3.mask.transparent;
+						var inPlace = inPlace1;
+						var includeMask = includeMask1;
+						if(includeMask == null) {
+							includeMask = false;
+						}
+						if(inPlace == null) {
+							inPlace = false;
+						}
+						if(transparent == null) {
+							transparent = false;
+						}
+						var transparent1 = transparent;
+						var inPlace2 = inPlace;
+						var includeMask2 = includeMask;
+						if(includeMask2 == null) {
+							includeMask2 = false;
+						}
+						if(inPlace2 == null) {
+							inPlace2 = false;
+						}
+						if(transparent1 == null) {
+							transparent1 = false;
+						}
+						var r = { x : 0, y : 0, w : w, h : h};
+						var xmax = r.x + r.w + 1 | 0;
+						var ymax = r.y + r.h + 1 | 0;
+						var ii_min = r.x | 0;
+						var ii_max = xmax;
+						var xRange__start = ii_min;
+						var xRange__max = ii_max;
+						var ii_min = r.y | 0;
+						var ii_max = ymax;
+						var yRange__start = ii_min;
+						var yRange__max = ii_max;
+						var range_x = xRange__start;
+						var range_y = yRange__start - 1;
+						var range_xReset = range_x;
+						var range_yReset = range_y;
+						var range_xMax = xRange__max - 2;
+						var range_yMax = yRange__max - 2;
+						var _this_min = 0;
+						var _this_max = (xRange__max - xRange__start) * (yRange__max - yRange__start) | 0;
+						var nextImage2 = justGraphix_image_Pixelimage._new(w | 0,h | 0);
+						nextImage2.transparent = transparent1;
+						while(_this_min < _this_max) {
+							var i = _this_min++;
+							if(range_y > range_yMax) {
+								range_y = range_yReset;
+								++range_x;
+							}
+							++range_y;
+							var i1 = i;
+							var x = range_x;
+							var y = range_y;
+							var x1 = range_x;
+							var y1 = range_yMax - range_y;
+							var c = this1.image.get(this1.useVirtualPos ? (y1 - this1.virtualY) * this1.width + x1 - this1.virtualX | 0 : y1 * this1.width + x1 | 0);
+							var color = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+							var c1 = color;
+							if((c1 >> 24 & 255) < 254 && nextImage2.transparent) {
+								var location = nextImage2.useVirtualPos ? (y - nextImage2.virtualY) * nextImage2.width + x - nextImage2.virtualX | 0 : y * nextImage2.width + x | 0;
+								var this4 = nextImage2.image.get(location);
+								var this5 = justGraphix_image_Endian_isLittleEndian ? (this4 >> 24 & 255) << 24 | (this4 & 255) << 16 | (this4 >> 8 & 255) << 8 | this4 >> 16 & 255 : this4;
+								var this6 = this5 >> 24 & 255;
+								var a1 = this6 == 0 ? 0. : this6 / 255;
+								var this7 = this5 >> 16 & 255;
+								var r1 = this7 == 0 ? 0. : this7 / 255;
+								var this8 = this5 >> 8 & 255;
+								var g1 = this8 == 0 ? 0. : this8 / 255;
+								var this9 = this5 & 255;
+								var b1 = this9 == 0 ? 0. : this9 / 255;
+								var this10 = color >> 24 & 255;
+								var a2 = this10 == 0 ? 0. : this10 / 255;
+								var this11 = color >> 16 & 255;
+								var r2 = this11 == 0 ? 0. : this11 / 255;
+								var this12 = color >> 8 & 255;
+								var g2 = this12 == 0 ? 0. : this12 / 255;
+								var this13 = color & 255;
+								var b2 = this13 == 0 ? 0. : this13 / 255;
+								var a3 = a1 * (1 - a2);
+								var r = 255 * (r1 * a3 + r2 * a2) | 0;
+								var g = 255 * (g1 * a3 + g2 * a2) | 0;
+								var b = 255 * (b1 * a3 + b2 * a2) | 0;
+								var a = 255 * (a3 + a2) | 0;
+								var blended = a << 24 | r << 16 | g << 8 | b;
+								nextImage2.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+							} else {
+								nextImage2.image.set(nextImage2.useVirtualPos ? (y - nextImage2.virtualY) * nextImage2.width + x - nextImage2.virtualX | 0 : y * nextImage2.width + x | 0,justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1);
+							}
+						}
+						var v1;
+						if(inPlace2) {
+							var x = 0;
+							var y = 0;
+							var _g = 0;
+							var _g1 = nextImage2.height;
+							while(_g < _g1) {
+								var dy = _g++;
+								var _g2 = 0;
+								var _g3 = nextImage2.width;
+								while(_g2 < _g3) {
+									var dx = _g2++;
+									var c = nextImage2.image.get(nextImage2.useVirtualPos ? (dy - nextImage2.virtualY) * nextImage2.width + dx - nextImage2.virtualX | 0 : dy * nextImage2.width + dx | 0);
+									var col = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+									if(nextImage2.useMask && nextImage2.mask != null) {
+										var this4 = nextImage2.mask;
+										var c1 = this4.image.get(this4.useVirtualPos ? (dy - this4.virtualY) * this4.width + dx - this4.virtualX | 0 : dy * this4.width + dx | 0);
+										var maskPixel = justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1;
+										var this5 = col;
+										if(maskPixel == 0) {
+											col = this5;
+										} else {
+											var this6 = maskPixel >> 24 & 255;
+											var m0 = this6 == 0 ? 0. : this6 / 255;
+											var this7 = maskPixel >> 16 & 255;
+											var m1 = this7 == 0 ? 0. : this7 / 255;
+											var this8 = maskPixel >> 8 & 255;
+											var m2 = this8 == 0 ? 0. : this8 / 255;
+											var this9 = maskPixel & 255;
+											var m3 = this9 == 0 ? 0. : this9 / 255;
+											var ch0 = (1. - m0) * (this5 >> 24 & 255) | 0;
+											var ch1 = (1. - m1) * (this5 >> 16 & 255) | 0;
+											var ch2 = (1. - m2) * (this5 >> 8 & 255) | 0;
+											var ch3 = (1. - m3) * (this5 & 255) | 0;
+											col = Math.round(ch0 * 255) << 24 | Math.round(ch1 * 255) << 16 | Math.round(ch2 * 255) << 8 | Math.round(ch3 * 255);
+										}
+									}
+									if(col != 0) {
+										var x1 = x + dx;
+										var y1 = y + dy;
+										var c2 = col;
+										if((c2 >> 24 & 255) < 254 && this1.transparent) {
+											var location = this1.useVirtualPos ? (y1 - this1.virtualY) * this1.width + x1 - this1.virtualX | 0 : y1 * this1.width + x1 | 0;
+											var this10 = this1.image.get(location);
+											var this11 = justGraphix_image_Endian_isLittleEndian ? (this10 >> 24 & 255) << 24 | (this10 & 255) << 16 | (this10 >> 8 & 255) << 8 | this10 >> 16 & 255 : this10;
+											var this12 = this11 >> 24 & 255;
+											var a1 = this12 == 0 ? 0. : this12 / 255;
+											var this13 = this11 >> 16 & 255;
+											var r1 = this13 == 0 ? 0. : this13 / 255;
+											var this14 = this11 >> 8 & 255;
+											var g1 = this14 == 0 ? 0. : this14 / 255;
+											var this15 = this11 & 255;
+											var b1 = this15 == 0 ? 0. : this15 / 255;
+											var this16 = col >> 24 & 255;
+											var a2 = this16 == 0 ? 0. : this16 / 255;
+											var this17 = col >> 16 & 255;
+											var r2 = this17 == 0 ? 0. : this17 / 255;
+											var this18 = col >> 8 & 255;
+											var g2 = this18 == 0 ? 0. : this18 / 255;
+											var this19 = col & 255;
+											var b2 = this19 == 0 ? 0. : this19 / 255;
+											var a3 = a1 * (1 - a2);
+											var r = 255 * (r1 * a3 + r2 * a2) | 0;
+											var g = 255 * (g1 * a3 + g2 * a2) | 0;
+											var b = 255 * (b1 * a3 + b2 * a2) | 0;
+											var a = 255 * (a3 + a2) | 0;
+											var blended = a << 24 | r << 16 | g << 8 | b;
+											this1.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+										} else {
+											this1.image.set(this1.useVirtualPos ? (y1 - this1.virtualY) * this1.width + x1 - this1.virtualX | 0 : y1 * this1.width + x1 | 0,justGraphix_image_Endian_isLittleEndian ? (c2 >> 24 & 255) << 24 | (c2 & 255) << 16 | (c2 >> 8 & 255) << 8 | c2 >> 16 & 255 : c2);
+										}
+									}
+								}
+							}
+							if(this1.mask != null && includeMask2) {
+								var this4 = this1.mask;
+								var w = this1.width;
+								var h = this1.height;
+								var transparent = this1.mask.transparent;
+								var inPlace = inPlace2;
+								var includeMask = includeMask2;
+								if(includeMask == null) {
+									includeMask = false;
+								}
+								if(inPlace == null) {
+									inPlace = false;
+								}
+								if(transparent == null) {
+									transparent = false;
+								}
+								var transparent1 = transparent;
+								var inPlace3 = inPlace;
+								var includeMask3 = includeMask;
+								if(includeMask3 == null) {
+									includeMask3 = false;
+								}
+								if(inPlace3 == null) {
+									inPlace3 = false;
+								}
+								if(transparent1 == null) {
+									transparent1 = false;
+								}
+								var r = { x : 0, y : 0, w : w, h : h};
+								var xmax = r.x + r.w + 1 | 0;
+								var ymax = r.y + r.h + 1 | 0;
+								var ii_min = r.x | 0;
+								var ii_max = xmax;
+								var xRange__start = ii_min;
+								var xRange__max = ii_max;
+								var ii_min = r.y | 0;
+								var ii_max = ymax;
+								var yRange__start = ii_min;
+								var yRange__max = ii_max;
+								var range_x = xRange__start;
+								var range_y = yRange__start - 1;
+								var range_xReset = range_x;
+								var range_yReset = range_y;
+								var range_xMax = xRange__max - 2;
+								var range_yMax = yRange__max - 2;
+								var _this_min = 0;
+								var _this_max = (xRange__max - xRange__start) * (yRange__max - yRange__start) | 0;
+								var nextImage3 = justGraphix_image_Pixelimage._new(w | 0,h | 0);
+								nextImage3.transparent = transparent1;
+								while(_this_min < _this_max) {
+									var i = _this_min++;
+									if(range_y > range_yMax) {
+										range_y = range_yReset;
+										++range_x;
+									}
+									++range_y;
+									var i1 = i;
+									var x = range_x;
+									var y = range_y;
+									var x1 = range_x;
+									var y1 = range_yMax - range_y;
+									var c = this4.image.get(this4.useVirtualPos ? (y1 - this4.virtualY) * this4.width + x1 - this4.virtualX | 0 : y1 * this4.width + x1 | 0);
+									var color = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+									var c1 = color;
+									if((c1 >> 24 & 255) < 254 && nextImage3.transparent) {
+										var location = nextImage3.useVirtualPos ? (y - nextImage3.virtualY) * nextImage3.width + x - nextImage3.virtualX | 0 : y * nextImage3.width + x | 0;
+										var this5 = nextImage3.image.get(location);
+										var this6 = justGraphix_image_Endian_isLittleEndian ? (this5 >> 24 & 255) << 24 | (this5 & 255) << 16 | (this5 >> 8 & 255) << 8 | this5 >> 16 & 255 : this5;
+										var this7 = this6 >> 24 & 255;
+										var a1 = this7 == 0 ? 0. : this7 / 255;
+										var this8 = this6 >> 16 & 255;
+										var r1 = this8 == 0 ? 0. : this8 / 255;
+										var this9 = this6 >> 8 & 255;
+										var g1 = this9 == 0 ? 0. : this9 / 255;
+										var this10 = this6 & 255;
+										var b1 = this10 == 0 ? 0. : this10 / 255;
+										var this11 = color >> 24 & 255;
+										var a2 = this11 == 0 ? 0. : this11 / 255;
+										var this12 = color >> 16 & 255;
+										var r2 = this12 == 0 ? 0. : this12 / 255;
+										var this13 = color >> 8 & 255;
+										var g2 = this13 == 0 ? 0. : this13 / 255;
+										var this14 = color & 255;
+										var b2 = this14 == 0 ? 0. : this14 / 255;
+										var a3 = a1 * (1 - a2);
+										var r = 255 * (r1 * a3 + r2 * a2) | 0;
+										var g = 255 * (g1 * a3 + g2 * a2) | 0;
+										var b = 255 * (b1 * a3 + b2 * a2) | 0;
+										var a = 255 * (a3 + a2) | 0;
+										var blended = a << 24 | r << 16 | g << 8 | b;
+										nextImage3.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+									} else {
+										nextImage3.image.set(nextImage3.useVirtualPos ? (y - nextImage3.virtualY) * nextImage3.width + x - nextImage3.virtualX | 0 : y * nextImage3.width + x | 0,justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1);
+									}
+								}
+								var v2;
+								if(inPlace3) {
+									var x = 0;
+									var y = 0;
+									var _g = 0;
+									var _g1 = nextImage3.height;
+									while(_g < _g1) {
+										var dy = _g++;
+										var _g2 = 0;
+										var _g3 = nextImage3.width;
+										while(_g2 < _g3) {
+											var dx = _g2++;
+											var c = nextImage3.image.get(nextImage3.useVirtualPos ? (dy - nextImage3.virtualY) * nextImage3.width + dx - nextImage3.virtualX | 0 : dy * nextImage3.width + dx | 0);
+											var col = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+											if(nextImage3.useMask && nextImage3.mask != null) {
+												var this5 = nextImage3.mask;
+												var c1 = this5.image.get(this5.useVirtualPos ? (dy - this5.virtualY) * this5.width + dx - this5.virtualX | 0 : dy * this5.width + dx | 0);
+												var maskPixel = justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1;
+												var this6 = col;
+												if(maskPixel == 0) {
+													col = this6;
+												} else {
+													var this7 = maskPixel >> 24 & 255;
+													var m0 = this7 == 0 ? 0. : this7 / 255;
+													var this8 = maskPixel >> 16 & 255;
+													var m1 = this8 == 0 ? 0. : this8 / 255;
+													var this9 = maskPixel >> 8 & 255;
+													var m2 = this9 == 0 ? 0. : this9 / 255;
+													var this10 = maskPixel & 255;
+													var m3 = this10 == 0 ? 0. : this10 / 255;
+													var ch0 = (1. - m0) * (this6 >> 24 & 255) | 0;
+													var ch1 = (1. - m1) * (this6 >> 16 & 255) | 0;
+													var ch2 = (1. - m2) * (this6 >> 8 & 255) | 0;
+													var ch3 = (1. - m3) * (this6 & 255) | 0;
+													col = Math.round(ch0 * 255) << 24 | Math.round(ch1 * 255) << 16 | Math.round(ch2 * 255) << 8 | Math.round(ch3 * 255);
+												}
+											}
+											if(col != 0) {
+												var x1 = x + dx;
+												var y1 = y + dy;
+												var c2 = col;
+												if((c2 >> 24 & 255) < 254 && this4.transparent) {
+													var location = this4.useVirtualPos ? (y1 - this4.virtualY) * this4.width + x1 - this4.virtualX | 0 : y1 * this4.width + x1 | 0;
+													var this11 = this4.image.get(location);
+													var this12 = justGraphix_image_Endian_isLittleEndian ? (this11 >> 24 & 255) << 24 | (this11 & 255) << 16 | (this11 >> 8 & 255) << 8 | this11 >> 16 & 255 : this11;
+													var this13 = this12 >> 24 & 255;
+													var a1 = this13 == 0 ? 0. : this13 / 255;
+													var this14 = this12 >> 16 & 255;
+													var r1 = this14 == 0 ? 0. : this14 / 255;
+													var this15 = this12 >> 8 & 255;
+													var g1 = this15 == 0 ? 0. : this15 / 255;
+													var this16 = this12 & 255;
+													var b1 = this16 == 0 ? 0. : this16 / 255;
+													var this17 = col >> 24 & 255;
+													var a2 = this17 == 0 ? 0. : this17 / 255;
+													var this18 = col >> 16 & 255;
+													var r2 = this18 == 0 ? 0. : this18 / 255;
+													var this19 = col >> 8 & 255;
+													var g2 = this19 == 0 ? 0. : this19 / 255;
+													var this20 = col & 255;
+													var b2 = this20 == 0 ? 0. : this20 / 255;
+													var a3 = a1 * (1 - a2);
+													var r = 255 * (r1 * a3 + r2 * a2) | 0;
+													var g = 255 * (g1 * a3 + g2 * a2) | 0;
+													var b = 255 * (b1 * a3 + b2 * a2) | 0;
+													var a = 255 * (a3 + a2) | 0;
+													var blended = a << 24 | r << 16 | g << 8 | b;
+													this4.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+												} else {
+													this4.image.set(this4.useVirtualPos ? (y1 - this4.virtualY) * this4.width + x1 - this4.virtualX | 0 : y1 * this4.width + x1 | 0,justGraphix_image_Endian_isLittleEndian ? (c2 >> 24 & 255) << 24 | (c2 & 255) << 16 | (c2 >> 8 & 255) << 8 | c2 >> 16 & 255 : c2);
+												}
+											}
+										}
+									}
+									if(this4.mask != null && includeMask3) {
+										var v3 = justGraphix_image_imageAbstracts_TransformImage.flippedY(this4.mask,0,0,this4.width,this4.height,this4.mask.transparent,inPlace3,includeMask3);
+										this4.useMask = true;
+										this4.mask = v3;
+									}
+									nextImage3 = null;
+									v2 = this4;
+								} else {
+									if(this4.mask != null && includeMask3) {
+										var v3 = justGraphix_image_imageAbstracts_TransformImage.flippedY(this4.mask,0,0,this4.width,this4.height,this4.mask.transparent,inPlace3,includeMask3);
+										nextImage3.useMask = true;
+										nextImage3.mask = v3;
+									}
+									v2 = nextImage3;
+								}
+								this1.useMask = true;
+								this1.mask = v2;
+							}
+							nextImage2 = null;
+							v1 = this1;
+						} else {
+							if(this1.mask != null && includeMask2) {
+								var this4 = this1.mask;
+								var w = this1.width;
+								var h = this1.height;
+								var transparent = this1.mask.transparent;
+								var inPlace = inPlace2;
+								var includeMask = includeMask2;
+								if(includeMask == null) {
+									includeMask = false;
+								}
+								if(inPlace == null) {
+									inPlace = false;
+								}
+								if(transparent == null) {
+									transparent = false;
+								}
+								var transparent1 = transparent;
+								var inPlace2 = inPlace;
+								var includeMask2 = includeMask;
+								if(includeMask2 == null) {
+									includeMask2 = false;
+								}
+								if(inPlace2 == null) {
+									inPlace2 = false;
+								}
+								if(transparent1 == null) {
+									transparent1 = false;
+								}
+								var r = { x : 0, y : 0, w : w, h : h};
+								var xmax = r.x + r.w + 1 | 0;
+								var ymax = r.y + r.h + 1 | 0;
+								var ii_min = r.x | 0;
+								var ii_max = xmax;
+								var xRange__start = ii_min;
+								var xRange__max = ii_max;
+								var ii_min = r.y | 0;
+								var ii_max = ymax;
+								var yRange__start = ii_min;
+								var yRange__max = ii_max;
+								var range_x = xRange__start;
+								var range_y = yRange__start - 1;
+								var range_xReset = range_x;
+								var range_yReset = range_y;
+								var range_xMax = xRange__max - 2;
+								var range_yMax = yRange__max - 2;
+								var _this_min = 0;
+								var _this_max = (xRange__max - xRange__start) * (yRange__max - yRange__start) | 0;
+								var nextImage3 = justGraphix_image_Pixelimage._new(w | 0,h | 0);
+								nextImage3.transparent = transparent1;
+								while(_this_min < _this_max) {
+									var i = _this_min++;
+									if(range_y > range_yMax) {
+										range_y = range_yReset;
+										++range_x;
+									}
+									++range_y;
+									var i1 = i;
+									var x = range_x;
+									var y = range_y;
+									var x1 = range_x;
+									var y1 = range_yMax - range_y;
+									var c = this4.image.get(this4.useVirtualPos ? (y1 - this4.virtualY) * this4.width + x1 - this4.virtualX | 0 : y1 * this4.width + x1 | 0);
+									var color = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+									var c1 = color;
+									if((c1 >> 24 & 255) < 254 && nextImage3.transparent) {
+										var location = nextImage3.useVirtualPos ? (y - nextImage3.virtualY) * nextImage3.width + x - nextImage3.virtualX | 0 : y * nextImage3.width + x | 0;
+										var this1 = nextImage3.image.get(location);
+										var this5 = justGraphix_image_Endian_isLittleEndian ? (this1 >> 24 & 255) << 24 | (this1 & 255) << 16 | (this1 >> 8 & 255) << 8 | this1 >> 16 & 255 : this1;
+										var this6 = this5 >> 24 & 255;
+										var a1 = this6 == 0 ? 0. : this6 / 255;
+										var this7 = this5 >> 16 & 255;
+										var r1 = this7 == 0 ? 0. : this7 / 255;
+										var this8 = this5 >> 8 & 255;
+										var g1 = this8 == 0 ? 0. : this8 / 255;
+										var this9 = this5 & 255;
+										var b1 = this9 == 0 ? 0. : this9 / 255;
+										var this10 = color >> 24 & 255;
+										var a2 = this10 == 0 ? 0. : this10 / 255;
+										var this11 = color >> 16 & 255;
+										var r2 = this11 == 0 ? 0. : this11 / 255;
+										var this12 = color >> 8 & 255;
+										var g2 = this12 == 0 ? 0. : this12 / 255;
+										var this13 = color & 255;
+										var b2 = this13 == 0 ? 0. : this13 / 255;
+										var a3 = a1 * (1 - a2);
+										var r = 255 * (r1 * a3 + r2 * a2) | 0;
+										var g = 255 * (g1 * a3 + g2 * a2) | 0;
+										var b = 255 * (b1 * a3 + b2 * a2) | 0;
+										var a = 255 * (a3 + a2) | 0;
+										var blended = a << 24 | r << 16 | g << 8 | b;
+										nextImage3.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+									} else {
+										nextImage3.image.set(nextImage3.useVirtualPos ? (y - nextImage3.virtualY) * nextImage3.width + x - nextImage3.virtualX | 0 : y * nextImage3.width + x | 0,justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1);
+									}
+								}
+								var v2;
+								if(inPlace2) {
+									var x = 0;
+									var y = 0;
+									var _g = 0;
+									var _g1 = nextImage3.height;
+									while(_g < _g1) {
+										var dy = _g++;
+										var _g2 = 0;
+										var _g3 = nextImage3.width;
+										while(_g2 < _g3) {
+											var dx = _g2++;
+											var c = nextImage3.image.get(nextImage3.useVirtualPos ? (dy - nextImage3.virtualY) * nextImage3.width + dx - nextImage3.virtualX | 0 : dy * nextImage3.width + dx | 0);
+											var col = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+											if(nextImage3.useMask && nextImage3.mask != null) {
+												var this1 = nextImage3.mask;
+												var c1 = this1.image.get(this1.useVirtualPos ? (dy - this1.virtualY) * this1.width + dx - this1.virtualX | 0 : dy * this1.width + dx | 0);
+												var maskPixel = justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1;
+												var this5 = col;
+												if(maskPixel == 0) {
+													col = this5;
+												} else {
+													var this6 = maskPixel >> 24 & 255;
+													var m0 = this6 == 0 ? 0. : this6 / 255;
+													var this7 = maskPixel >> 16 & 255;
+													var m1 = this7 == 0 ? 0. : this7 / 255;
+													var this8 = maskPixel >> 8 & 255;
+													var m2 = this8 == 0 ? 0. : this8 / 255;
+													var this9 = maskPixel & 255;
+													var m3 = this9 == 0 ? 0. : this9 / 255;
+													var ch0 = (1. - m0) * (this5 >> 24 & 255) | 0;
+													var ch1 = (1. - m1) * (this5 >> 16 & 255) | 0;
+													var ch2 = (1. - m2) * (this5 >> 8 & 255) | 0;
+													var ch3 = (1. - m3) * (this5 & 255) | 0;
+													col = Math.round(ch0 * 255) << 24 | Math.round(ch1 * 255) << 16 | Math.round(ch2 * 255) << 8 | Math.round(ch3 * 255);
+												}
+											}
+											if(col != 0) {
+												var x1 = x + dx;
+												var y1 = y + dy;
+												var c2 = col;
+												if((c2 >> 24 & 255) < 254 && this4.transparent) {
+													var location = this4.useVirtualPos ? (y1 - this4.virtualY) * this4.width + x1 - this4.virtualX | 0 : y1 * this4.width + x1 | 0;
+													var this10 = this4.image.get(location);
+													var this11 = justGraphix_image_Endian_isLittleEndian ? (this10 >> 24 & 255) << 24 | (this10 & 255) << 16 | (this10 >> 8 & 255) << 8 | this10 >> 16 & 255 : this10;
+													var this12 = this11 >> 24 & 255;
+													var a1 = this12 == 0 ? 0. : this12 / 255;
+													var this13 = this11 >> 16 & 255;
+													var r1 = this13 == 0 ? 0. : this13 / 255;
+													var this14 = this11 >> 8 & 255;
+													var g1 = this14 == 0 ? 0. : this14 / 255;
+													var this15 = this11 & 255;
+													var b1 = this15 == 0 ? 0. : this15 / 255;
+													var this16 = col >> 24 & 255;
+													var a2 = this16 == 0 ? 0. : this16 / 255;
+													var this17 = col >> 16 & 255;
+													var r2 = this17 == 0 ? 0. : this17 / 255;
+													var this18 = col >> 8 & 255;
+													var g2 = this18 == 0 ? 0. : this18 / 255;
+													var this19 = col & 255;
+													var b2 = this19 == 0 ? 0. : this19 / 255;
+													var a3 = a1 * (1 - a2);
+													var r = 255 * (r1 * a3 + r2 * a2) | 0;
+													var g = 255 * (g1 * a3 + g2 * a2) | 0;
+													var b = 255 * (b1 * a3 + b2 * a2) | 0;
+													var a = 255 * (a3 + a2) | 0;
+													var blended = a << 24 | r << 16 | g << 8 | b;
+													this4.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+												} else {
+													this4.image.set(this4.useVirtualPos ? (y1 - this4.virtualY) * this4.width + x1 - this4.virtualX | 0 : y1 * this4.width + x1 | 0,justGraphix_image_Endian_isLittleEndian ? (c2 >> 24 & 255) << 24 | (c2 & 255) << 16 | (c2 >> 8 & 255) << 8 | c2 >> 16 & 255 : c2);
+												}
+											}
+										}
+									}
+									if(this4.mask != null && includeMask2) {
+										var v3 = justGraphix_image_imageAbstracts_TransformImage.flippedY(this4.mask,0,0,this4.width,this4.height,this4.mask.transparent,inPlace2,includeMask2);
+										this4.useMask = true;
+										this4.mask = v3;
+									}
+									nextImage3 = null;
+									v2 = this4;
+								} else {
+									if(this4.mask != null && includeMask2) {
+										var v3 = justGraphix_image_imageAbstracts_TransformImage.flippedY(this4.mask,0,0,this4.width,this4.height,this4.mask.transparent,inPlace2,includeMask2);
+										nextImage3.useMask = true;
+										nextImage3.mask = v3;
+									}
+									v2 = nextImage3;
+								}
+								nextImage2.useMask = true;
+								nextImage2.mask = v2;
+							}
+							v1 = nextImage2;
+						}
+						this3.useMask = true;
+						this3.mask = v1;
+					}
+					nextImage1 = null;
+					v = this3;
+				} else {
+					if(this3.mask != null && includeMask1) {
+						var this1 = this3.mask;
+						var w = this3.width;
+						var h = this3.height;
+						var transparent = this3.mask.transparent;
+						var inPlace = inPlace1;
+						var includeMask = includeMask1;
+						if(includeMask == null) {
+							includeMask = false;
+						}
+						if(inPlace == null) {
+							inPlace = false;
+						}
+						if(transparent == null) {
+							transparent = false;
+						}
+						var transparent1 = transparent;
+						var inPlace1 = inPlace;
+						var includeMask1 = includeMask;
+						if(includeMask1 == null) {
+							includeMask1 = false;
+						}
+						if(inPlace1 == null) {
+							inPlace1 = false;
+						}
+						if(transparent1 == null) {
+							transparent1 = false;
+						}
+						var r = { x : 0, y : 0, w : w, h : h};
+						var xmax = r.x + r.w + 1 | 0;
+						var ymax = r.y + r.h + 1 | 0;
+						var ii_min = r.x | 0;
+						var ii_max = xmax;
+						var xRange__start = ii_min;
+						var xRange__max = ii_max;
+						var ii_min = r.y | 0;
+						var ii_max = ymax;
+						var yRange__start = ii_min;
+						var yRange__max = ii_max;
+						var range_x = xRange__start;
+						var range_y = yRange__start - 1;
+						var range_xReset = range_x;
+						var range_yReset = range_y;
+						var range_xMax = xRange__max - 2;
+						var range_yMax = yRange__max - 2;
+						var _this_min = 0;
+						var _this_max = (xRange__max - xRange__start) * (yRange__max - yRange__start) | 0;
+						var nextImage2 = justGraphix_image_Pixelimage._new(w | 0,h | 0);
+						nextImage2.transparent = transparent1;
+						while(_this_min < _this_max) {
+							var i = _this_min++;
+							if(range_y > range_yMax) {
+								range_y = range_yReset;
+								++range_x;
+							}
+							++range_y;
+							var i1 = i;
+							var x = range_x;
+							var y = range_y;
+							var x1 = range_x;
+							var y1 = range_yMax - range_y;
+							var c = this1.image.get(this1.useVirtualPos ? (y1 - this1.virtualY) * this1.width + x1 - this1.virtualX | 0 : y1 * this1.width + x1 | 0);
+							var color = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+							var c1 = color;
+							if((c1 >> 24 & 255) < 254 && nextImage2.transparent) {
+								var location = nextImage2.useVirtualPos ? (y - nextImage2.virtualY) * nextImage2.width + x - nextImage2.virtualX | 0 : y * nextImage2.width + x | 0;
+								var this3 = nextImage2.image.get(location);
+								var this4 = justGraphix_image_Endian_isLittleEndian ? (this3 >> 24 & 255) << 24 | (this3 & 255) << 16 | (this3 >> 8 & 255) << 8 | this3 >> 16 & 255 : this3;
+								var this5 = this4 >> 24 & 255;
+								var a1 = this5 == 0 ? 0. : this5 / 255;
+								var this6 = this4 >> 16 & 255;
+								var r1 = this6 == 0 ? 0. : this6 / 255;
+								var this7 = this4 >> 8 & 255;
+								var g1 = this7 == 0 ? 0. : this7 / 255;
+								var this8 = this4 & 255;
+								var b1 = this8 == 0 ? 0. : this8 / 255;
+								var this9 = color >> 24 & 255;
+								var a2 = this9 == 0 ? 0. : this9 / 255;
+								var this10 = color >> 16 & 255;
+								var r2 = this10 == 0 ? 0. : this10 / 255;
+								var this11 = color >> 8 & 255;
+								var g2 = this11 == 0 ? 0. : this11 / 255;
+								var this12 = color & 255;
+								var b2 = this12 == 0 ? 0. : this12 / 255;
+								var a3 = a1 * (1 - a2);
+								var r = 255 * (r1 * a3 + r2 * a2) | 0;
+								var g = 255 * (g1 * a3 + g2 * a2) | 0;
+								var b = 255 * (b1 * a3 + b2 * a2) | 0;
+								var a = 255 * (a3 + a2) | 0;
+								var blended = a << 24 | r << 16 | g << 8 | b;
+								nextImage2.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+							} else {
+								nextImage2.image.set(nextImage2.useVirtualPos ? (y - nextImage2.virtualY) * nextImage2.width + x - nextImage2.virtualX | 0 : y * nextImage2.width + x | 0,justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1);
+							}
+						}
+						var v1;
+						if(inPlace1) {
+							var x = 0;
+							var y = 0;
+							var _g = 0;
+							var _g1 = nextImage2.height;
+							while(_g < _g1) {
+								var dy = _g++;
+								var _g2 = 0;
+								var _g3 = nextImage2.width;
+								while(_g2 < _g3) {
+									var dx = _g2++;
+									var c = nextImage2.image.get(nextImage2.useVirtualPos ? (dy - nextImage2.virtualY) * nextImage2.width + dx - nextImage2.virtualX | 0 : dy * nextImage2.width + dx | 0);
+									var col = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+									if(nextImage2.useMask && nextImage2.mask != null) {
+										var this3 = nextImage2.mask;
+										var c1 = this3.image.get(this3.useVirtualPos ? (dy - this3.virtualY) * this3.width + dx - this3.virtualX | 0 : dy * this3.width + dx | 0);
+										var maskPixel = justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1;
+										var this4 = col;
+										if(maskPixel == 0) {
+											col = this4;
+										} else {
+											var this5 = maskPixel >> 24 & 255;
+											var m0 = this5 == 0 ? 0. : this5 / 255;
+											var this6 = maskPixel >> 16 & 255;
+											var m1 = this6 == 0 ? 0. : this6 / 255;
+											var this7 = maskPixel >> 8 & 255;
+											var m2 = this7 == 0 ? 0. : this7 / 255;
+											var this8 = maskPixel & 255;
+											var m3 = this8 == 0 ? 0. : this8 / 255;
+											var ch0 = (1. - m0) * (this4 >> 24 & 255) | 0;
+											var ch1 = (1. - m1) * (this4 >> 16 & 255) | 0;
+											var ch2 = (1. - m2) * (this4 >> 8 & 255) | 0;
+											var ch3 = (1. - m3) * (this4 & 255) | 0;
+											col = Math.round(ch0 * 255) << 24 | Math.round(ch1 * 255) << 16 | Math.round(ch2 * 255) << 8 | Math.round(ch3 * 255);
+										}
+									}
+									if(col != 0) {
+										var x1 = x + dx;
+										var y1 = y + dy;
+										var c2 = col;
+										if((c2 >> 24 & 255) < 254 && this1.transparent) {
+											var location = this1.useVirtualPos ? (y1 - this1.virtualY) * this1.width + x1 - this1.virtualX | 0 : y1 * this1.width + x1 | 0;
+											var this9 = this1.image.get(location);
+											var this10 = justGraphix_image_Endian_isLittleEndian ? (this9 >> 24 & 255) << 24 | (this9 & 255) << 16 | (this9 >> 8 & 255) << 8 | this9 >> 16 & 255 : this9;
+											var this11 = this10 >> 24 & 255;
+											var a1 = this11 == 0 ? 0. : this11 / 255;
+											var this12 = this10 >> 16 & 255;
+											var r1 = this12 == 0 ? 0. : this12 / 255;
+											var this13 = this10 >> 8 & 255;
+											var g1 = this13 == 0 ? 0. : this13 / 255;
+											var this14 = this10 & 255;
+											var b1 = this14 == 0 ? 0. : this14 / 255;
+											var this15 = col >> 24 & 255;
+											var a2 = this15 == 0 ? 0. : this15 / 255;
+											var this16 = col >> 16 & 255;
+											var r2 = this16 == 0 ? 0. : this16 / 255;
+											var this17 = col >> 8 & 255;
+											var g2 = this17 == 0 ? 0. : this17 / 255;
+											var this18 = col & 255;
+											var b2 = this18 == 0 ? 0. : this18 / 255;
+											var a3 = a1 * (1 - a2);
+											var r = 255 * (r1 * a3 + r2 * a2) | 0;
+											var g = 255 * (g1 * a3 + g2 * a2) | 0;
+											var b = 255 * (b1 * a3 + b2 * a2) | 0;
+											var a = 255 * (a3 + a2) | 0;
+											var blended = a << 24 | r << 16 | g << 8 | b;
+											this1.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+										} else {
+											this1.image.set(this1.useVirtualPos ? (y1 - this1.virtualY) * this1.width + x1 - this1.virtualX | 0 : y1 * this1.width + x1 | 0,justGraphix_image_Endian_isLittleEndian ? (c2 >> 24 & 255) << 24 | (c2 & 255) << 16 | (c2 >> 8 & 255) << 8 | c2 >> 16 & 255 : c2);
+										}
+									}
+								}
+							}
+							if(this1.mask != null && includeMask1) {
+								var this3 = this1.mask;
+								var w = this1.width;
+								var h = this1.height;
+								var transparent = this1.mask.transparent;
+								var inPlace = inPlace1;
+								var includeMask = includeMask1;
+								if(includeMask == null) {
+									includeMask = false;
+								}
+								if(inPlace == null) {
+									inPlace = false;
+								}
+								if(transparent == null) {
+									transparent = false;
+								}
+								var transparent1 = transparent;
+								var inPlace2 = inPlace;
+								var includeMask2 = includeMask;
+								if(includeMask2 == null) {
+									includeMask2 = false;
+								}
+								if(inPlace2 == null) {
+									inPlace2 = false;
+								}
+								if(transparent1 == null) {
+									transparent1 = false;
+								}
+								var r = { x : 0, y : 0, w : w, h : h};
+								var xmax = r.x + r.w + 1 | 0;
+								var ymax = r.y + r.h + 1 | 0;
+								var ii_min = r.x | 0;
+								var ii_max = xmax;
+								var xRange__start = ii_min;
+								var xRange__max = ii_max;
+								var ii_min = r.y | 0;
+								var ii_max = ymax;
+								var yRange__start = ii_min;
+								var yRange__max = ii_max;
+								var range_x = xRange__start;
+								var range_y = yRange__start - 1;
+								var range_xReset = range_x;
+								var range_yReset = range_y;
+								var range_xMax = xRange__max - 2;
+								var range_yMax = yRange__max - 2;
+								var _this_min = 0;
+								var _this_max = (xRange__max - xRange__start) * (yRange__max - yRange__start) | 0;
+								var nextImage3 = justGraphix_image_Pixelimage._new(w | 0,h | 0);
+								nextImage3.transparent = transparent1;
+								while(_this_min < _this_max) {
+									var i = _this_min++;
+									if(range_y > range_yMax) {
+										range_y = range_yReset;
+										++range_x;
+									}
+									++range_y;
+									var i1 = i;
+									var x = range_x;
+									var y = range_y;
+									var x1 = range_x;
+									var y1 = range_yMax - range_y;
+									var c = this3.image.get(this3.useVirtualPos ? (y1 - this3.virtualY) * this3.width + x1 - this3.virtualX | 0 : y1 * this3.width + x1 | 0);
+									var color = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+									var c1 = color;
+									if((c1 >> 24 & 255) < 254 && nextImage3.transparent) {
+										var location = nextImage3.useVirtualPos ? (y - nextImage3.virtualY) * nextImage3.width + x - nextImage3.virtualX | 0 : y * nextImage3.width + x | 0;
+										var this4 = nextImage3.image.get(location);
+										var this5 = justGraphix_image_Endian_isLittleEndian ? (this4 >> 24 & 255) << 24 | (this4 & 255) << 16 | (this4 >> 8 & 255) << 8 | this4 >> 16 & 255 : this4;
+										var this6 = this5 >> 24 & 255;
+										var a1 = this6 == 0 ? 0. : this6 / 255;
+										var this7 = this5 >> 16 & 255;
+										var r1 = this7 == 0 ? 0. : this7 / 255;
+										var this8 = this5 >> 8 & 255;
+										var g1 = this8 == 0 ? 0. : this8 / 255;
+										var this9 = this5 & 255;
+										var b1 = this9 == 0 ? 0. : this9 / 255;
+										var this10 = color >> 24 & 255;
+										var a2 = this10 == 0 ? 0. : this10 / 255;
+										var this11 = color >> 16 & 255;
+										var r2 = this11 == 0 ? 0. : this11 / 255;
+										var this12 = color >> 8 & 255;
+										var g2 = this12 == 0 ? 0. : this12 / 255;
+										var this13 = color & 255;
+										var b2 = this13 == 0 ? 0. : this13 / 255;
+										var a3 = a1 * (1 - a2);
+										var r = 255 * (r1 * a3 + r2 * a2) | 0;
+										var g = 255 * (g1 * a3 + g2 * a2) | 0;
+										var b = 255 * (b1 * a3 + b2 * a2) | 0;
+										var a = 255 * (a3 + a2) | 0;
+										var blended = a << 24 | r << 16 | g << 8 | b;
+										nextImage3.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+									} else {
+										nextImage3.image.set(nextImage3.useVirtualPos ? (y - nextImage3.virtualY) * nextImage3.width + x - nextImage3.virtualX | 0 : y * nextImage3.width + x | 0,justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1);
+									}
+								}
+								var v2;
+								if(inPlace2) {
+									var x = 0;
+									var y = 0;
+									var _g = 0;
+									var _g1 = nextImage3.height;
+									while(_g < _g1) {
+										var dy = _g++;
+										var _g2 = 0;
+										var _g3 = nextImage3.width;
+										while(_g2 < _g3) {
+											var dx = _g2++;
+											var c = nextImage3.image.get(nextImage3.useVirtualPos ? (dy - nextImage3.virtualY) * nextImage3.width + dx - nextImage3.virtualX | 0 : dy * nextImage3.width + dx | 0);
+											var col = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+											if(nextImage3.useMask && nextImage3.mask != null) {
+												var this4 = nextImage3.mask;
+												var c1 = this4.image.get(this4.useVirtualPos ? (dy - this4.virtualY) * this4.width + dx - this4.virtualX | 0 : dy * this4.width + dx | 0);
+												var maskPixel = justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1;
+												var this5 = col;
+												if(maskPixel == 0) {
+													col = this5;
+												} else {
+													var this6 = maskPixel >> 24 & 255;
+													var m0 = this6 == 0 ? 0. : this6 / 255;
+													var this7 = maskPixel >> 16 & 255;
+													var m1 = this7 == 0 ? 0. : this7 / 255;
+													var this8 = maskPixel >> 8 & 255;
+													var m2 = this8 == 0 ? 0. : this8 / 255;
+													var this9 = maskPixel & 255;
+													var m3 = this9 == 0 ? 0. : this9 / 255;
+													var ch0 = (1. - m0) * (this5 >> 24 & 255) | 0;
+													var ch1 = (1. - m1) * (this5 >> 16 & 255) | 0;
+													var ch2 = (1. - m2) * (this5 >> 8 & 255) | 0;
+													var ch3 = (1. - m3) * (this5 & 255) | 0;
+													col = Math.round(ch0 * 255) << 24 | Math.round(ch1 * 255) << 16 | Math.round(ch2 * 255) << 8 | Math.round(ch3 * 255);
+												}
+											}
+											if(col != 0) {
+												var x1 = x + dx;
+												var y1 = y + dy;
+												var c2 = col;
+												if((c2 >> 24 & 255) < 254 && this3.transparent) {
+													var location = this3.useVirtualPos ? (y1 - this3.virtualY) * this3.width + x1 - this3.virtualX | 0 : y1 * this3.width + x1 | 0;
+													var this10 = this3.image.get(location);
+													var this11 = justGraphix_image_Endian_isLittleEndian ? (this10 >> 24 & 255) << 24 | (this10 & 255) << 16 | (this10 >> 8 & 255) << 8 | this10 >> 16 & 255 : this10;
+													var this12 = this11 >> 24 & 255;
+													var a1 = this12 == 0 ? 0. : this12 / 255;
+													var this13 = this11 >> 16 & 255;
+													var r1 = this13 == 0 ? 0. : this13 / 255;
+													var this14 = this11 >> 8 & 255;
+													var g1 = this14 == 0 ? 0. : this14 / 255;
+													var this15 = this11 & 255;
+													var b1 = this15 == 0 ? 0. : this15 / 255;
+													var this16 = col >> 24 & 255;
+													var a2 = this16 == 0 ? 0. : this16 / 255;
+													var this17 = col >> 16 & 255;
+													var r2 = this17 == 0 ? 0. : this17 / 255;
+													var this18 = col >> 8 & 255;
+													var g2 = this18 == 0 ? 0. : this18 / 255;
+													var this19 = col & 255;
+													var b2 = this19 == 0 ? 0. : this19 / 255;
+													var a3 = a1 * (1 - a2);
+													var r = 255 * (r1 * a3 + r2 * a2) | 0;
+													var g = 255 * (g1 * a3 + g2 * a2) | 0;
+													var b = 255 * (b1 * a3 + b2 * a2) | 0;
+													var a = 255 * (a3 + a2) | 0;
+													var blended = a << 24 | r << 16 | g << 8 | b;
+													this3.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+												} else {
+													this3.image.set(this3.useVirtualPos ? (y1 - this3.virtualY) * this3.width + x1 - this3.virtualX | 0 : y1 * this3.width + x1 | 0,justGraphix_image_Endian_isLittleEndian ? (c2 >> 24 & 255) << 24 | (c2 & 255) << 16 | (c2 >> 8 & 255) << 8 | c2 >> 16 & 255 : c2);
+												}
+											}
+										}
+									}
+									if(this3.mask != null && includeMask2) {
+										var v3 = justGraphix_image_imageAbstracts_TransformImage.flippedY(this3.mask,0,0,this3.width,this3.height,this3.mask.transparent,inPlace2,includeMask2);
+										this3.useMask = true;
+										this3.mask = v3;
+									}
+									nextImage3 = null;
+									v2 = this3;
+								} else {
+									if(this3.mask != null && includeMask2) {
+										var v3 = justGraphix_image_imageAbstracts_TransformImage.flippedY(this3.mask,0,0,this3.width,this3.height,this3.mask.transparent,inPlace2,includeMask2);
+										nextImage3.useMask = true;
+										nextImage3.mask = v3;
+									}
+									v2 = nextImage3;
+								}
+								this1.useMask = true;
+								this1.mask = v2;
+							}
+							nextImage2 = null;
+							v1 = this1;
+						} else {
+							if(this1.mask != null && includeMask1) {
+								var this3 = this1.mask;
+								var w = this1.width;
+								var h = this1.height;
+								var transparent = this1.mask.transparent;
+								var inPlace = inPlace1;
+								var includeMask = includeMask1;
+								if(includeMask == null) {
+									includeMask = false;
+								}
+								if(inPlace == null) {
+									inPlace = false;
+								}
+								if(transparent == null) {
+									transparent = false;
+								}
+								var transparent1 = transparent;
+								var inPlace1 = inPlace;
+								var includeMask1 = includeMask;
+								if(includeMask1 == null) {
+									includeMask1 = false;
+								}
+								if(inPlace1 == null) {
+									inPlace1 = false;
+								}
+								if(transparent1 == null) {
+									transparent1 = false;
+								}
+								var r = { x : 0, y : 0, w : w, h : h};
+								var xmax = r.x + r.w + 1 | 0;
+								var ymax = r.y + r.h + 1 | 0;
+								var ii_min = r.x | 0;
+								var ii_max = xmax;
+								var xRange__start = ii_min;
+								var xRange__max = ii_max;
+								var ii_min = r.y | 0;
+								var ii_max = ymax;
+								var yRange__start = ii_min;
+								var yRange__max = ii_max;
+								var range_x = xRange__start;
+								var range_y = yRange__start - 1;
+								var range_xReset = range_x;
+								var range_yReset = range_y;
+								var range_xMax = xRange__max - 2;
+								var range_yMax = yRange__max - 2;
+								var _this_min = 0;
+								var _this_max = (xRange__max - xRange__start) * (yRange__max - yRange__start) | 0;
+								var nextImage3 = justGraphix_image_Pixelimage._new(w | 0,h | 0);
+								nextImage3.transparent = transparent1;
+								while(_this_min < _this_max) {
+									var i = _this_min++;
+									if(range_y > range_yMax) {
+										range_y = range_yReset;
+										++range_x;
+									}
+									++range_y;
+									var i1 = i;
+									var x = range_x;
+									var y = range_y;
+									var x1 = range_x;
+									var y1 = range_yMax - range_y;
+									var c = this3.image.get(this3.useVirtualPos ? (y1 - this3.virtualY) * this3.width + x1 - this3.virtualX | 0 : y1 * this3.width + x1 | 0);
+									var color = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+									var c1 = color;
+									if((c1 >> 24 & 255) < 254 && nextImage3.transparent) {
+										var location = nextImage3.useVirtualPos ? (y - nextImage3.virtualY) * nextImage3.width + x - nextImage3.virtualX | 0 : y * nextImage3.width + x | 0;
+										var this1 = nextImage3.image.get(location);
+										var this4 = justGraphix_image_Endian_isLittleEndian ? (this1 >> 24 & 255) << 24 | (this1 & 255) << 16 | (this1 >> 8 & 255) << 8 | this1 >> 16 & 255 : this1;
+										var this5 = this4 >> 24 & 255;
+										var a1 = this5 == 0 ? 0. : this5 / 255;
+										var this6 = this4 >> 16 & 255;
+										var r1 = this6 == 0 ? 0. : this6 / 255;
+										var this7 = this4 >> 8 & 255;
+										var g1 = this7 == 0 ? 0. : this7 / 255;
+										var this8 = this4 & 255;
+										var b1 = this8 == 0 ? 0. : this8 / 255;
+										var this9 = color >> 24 & 255;
+										var a2 = this9 == 0 ? 0. : this9 / 255;
+										var this10 = color >> 16 & 255;
+										var r2 = this10 == 0 ? 0. : this10 / 255;
+										var this11 = color >> 8 & 255;
+										var g2 = this11 == 0 ? 0. : this11 / 255;
+										var this12 = color & 255;
+										var b2 = this12 == 0 ? 0. : this12 / 255;
+										var a3 = a1 * (1 - a2);
+										var r = 255 * (r1 * a3 + r2 * a2) | 0;
+										var g = 255 * (g1 * a3 + g2 * a2) | 0;
+										var b = 255 * (b1 * a3 + b2 * a2) | 0;
+										var a = 255 * (a3 + a2) | 0;
+										var blended = a << 24 | r << 16 | g << 8 | b;
+										nextImage3.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+									} else {
+										nextImage3.image.set(nextImage3.useVirtualPos ? (y - nextImage3.virtualY) * nextImage3.width + x - nextImage3.virtualX | 0 : y * nextImage3.width + x | 0,justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1);
+									}
+								}
+								var v2;
+								if(inPlace1) {
+									var x = 0;
+									var y = 0;
+									var _g = 0;
+									var _g1 = nextImage3.height;
+									while(_g < _g1) {
+										var dy = _g++;
+										var _g2 = 0;
+										var _g3 = nextImage3.width;
+										while(_g2 < _g3) {
+											var dx = _g2++;
+											var c = nextImage3.image.get(nextImage3.useVirtualPos ? (dy - nextImage3.virtualY) * nextImage3.width + dx - nextImage3.virtualX | 0 : dy * nextImage3.width + dx | 0);
+											var col = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+											if(nextImage3.useMask && nextImage3.mask != null) {
+												var this1 = nextImage3.mask;
+												var c1 = this1.image.get(this1.useVirtualPos ? (dy - this1.virtualY) * this1.width + dx - this1.virtualX | 0 : dy * this1.width + dx | 0);
+												var maskPixel = justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1;
+												var this4 = col;
+												if(maskPixel == 0) {
+													col = this4;
+												} else {
+													var this5 = maskPixel >> 24 & 255;
+													var m0 = this5 == 0 ? 0. : this5 / 255;
+													var this6 = maskPixel >> 16 & 255;
+													var m1 = this6 == 0 ? 0. : this6 / 255;
+													var this7 = maskPixel >> 8 & 255;
+													var m2 = this7 == 0 ? 0. : this7 / 255;
+													var this8 = maskPixel & 255;
+													var m3 = this8 == 0 ? 0. : this8 / 255;
+													var ch0 = (1. - m0) * (this4 >> 24 & 255) | 0;
+													var ch1 = (1. - m1) * (this4 >> 16 & 255) | 0;
+													var ch2 = (1. - m2) * (this4 >> 8 & 255) | 0;
+													var ch3 = (1. - m3) * (this4 & 255) | 0;
+													col = Math.round(ch0 * 255) << 24 | Math.round(ch1 * 255) << 16 | Math.round(ch2 * 255) << 8 | Math.round(ch3 * 255);
+												}
+											}
+											if(col != 0) {
+												var x1 = x + dx;
+												var y1 = y + dy;
+												var c2 = col;
+												if((c2 >> 24 & 255) < 254 && this3.transparent) {
+													var location = this3.useVirtualPos ? (y1 - this3.virtualY) * this3.width + x1 - this3.virtualX | 0 : y1 * this3.width + x1 | 0;
+													var this9 = this3.image.get(location);
+													var this10 = justGraphix_image_Endian_isLittleEndian ? (this9 >> 24 & 255) << 24 | (this9 & 255) << 16 | (this9 >> 8 & 255) << 8 | this9 >> 16 & 255 : this9;
+													var this11 = this10 >> 24 & 255;
+													var a1 = this11 == 0 ? 0. : this11 / 255;
+													var this12 = this10 >> 16 & 255;
+													var r1 = this12 == 0 ? 0. : this12 / 255;
+													var this13 = this10 >> 8 & 255;
+													var g1 = this13 == 0 ? 0. : this13 / 255;
+													var this14 = this10 & 255;
+													var b1 = this14 == 0 ? 0. : this14 / 255;
+													var this15 = col >> 24 & 255;
+													var a2 = this15 == 0 ? 0. : this15 / 255;
+													var this16 = col >> 16 & 255;
+													var r2 = this16 == 0 ? 0. : this16 / 255;
+													var this17 = col >> 8 & 255;
+													var g2 = this17 == 0 ? 0. : this17 / 255;
+													var this18 = col & 255;
+													var b2 = this18 == 0 ? 0. : this18 / 255;
+													var a3 = a1 * (1 - a2);
+													var r = 255 * (r1 * a3 + r2 * a2) | 0;
+													var g = 255 * (g1 * a3 + g2 * a2) | 0;
+													var b = 255 * (b1 * a3 + b2 * a2) | 0;
+													var a = 255 * (a3 + a2) | 0;
+													var blended = a << 24 | r << 16 | g << 8 | b;
+													this3.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+												} else {
+													this3.image.set(this3.useVirtualPos ? (y1 - this3.virtualY) * this3.width + x1 - this3.virtualX | 0 : y1 * this3.width + x1 | 0,justGraphix_image_Endian_isLittleEndian ? (c2 >> 24 & 255) << 24 | (c2 & 255) << 16 | (c2 >> 8 & 255) << 8 | c2 >> 16 & 255 : c2);
+												}
+											}
+										}
+									}
+									if(this3.mask != null && includeMask1) {
+										var v3 = justGraphix_image_imageAbstracts_TransformImage.flippedY(this3.mask,0,0,this3.width,this3.height,this3.mask.transparent,inPlace1,includeMask1);
+										this3.useMask = true;
+										this3.mask = v3;
+									}
+									nextImage3 = null;
+									v2 = this3;
+								} else {
+									if(this3.mask != null && includeMask1) {
+										var v3 = justGraphix_image_imageAbstracts_TransformImage.flippedY(this3.mask,0,0,this3.width,this3.height,this3.mask.transparent,inPlace1,includeMask1);
+										nextImage3.useMask = true;
+										nextImage3.mask = v3;
+									}
+									v2 = nextImage3;
+								}
+								nextImage2.useMask = true;
+								nextImage2.mask = v2;
+							}
+							v1 = nextImage2;
+						}
+						nextImage1.useMask = true;
+						nextImage1.mask = v1;
+					}
+					v = nextImage1;
+				}
+				nextImage.useMask = true;
+				nextImage.mask = v;
+			}
+			this2 = nextImage;
+		}
+		texture.setData(justGraphix_target_openflTarget_$_PeoteV.toPeoteTextureData_(this2),1);
+		var wid = pixelImage.width;
+		var hi = pixelImage.height;
+		var element1 = new justGraphix_target_openflTarget_$_PeoteBasicElement(0,0,wid,hi,0);
+		buffer.addElement(element1);
+		var element2 = new justGraphix_target_openflTarget_$_PeoteBasicElement(800,0,wid,hi,1);
+		buffer.addElement(element2);
+		program.setTexture(texture,"justGraphix_image");
 		display.addProgram(program);
 	}
-	,addElementToBuffer: function(buffer,wid,hi) {
-		var element = new peote_view_element_Elem(0,0,wid,hi,0,0,0,0,-1);
-		buffer.addElement(element);
-	}
-	,createPixelImage: function(program) {
+	,createPixelImage: function() {
 		var pixelImage = justGraphix_image_Pixelimage._new(800,600);
 		pixelImage.transparent = true;
 		var r_x = 0;
@@ -2649,8 +5383,7 @@ justGraphix_application_image_A_$PeoteView.prototype = $extend(lime_app_Applicat
 				}
 			}
 		}
-		var texture1 = justGraphix_target_openflTarget_$_PeoteV.toPeoteTexture_(pixelImage);
-		program.setTexture(texture1,"justGraphix_image");
+		return pixelImage;
 	}
 	,onPreloadComplete: function() {
 	}
@@ -4340,6 +7073,188 @@ justGraphix_image_imageAbstracts_LineShape.thinLine = function(this1,ax,ay,bx,by
 		}
 	}
 	return new justGraphix_hit_HitThinLine(ax,ay,bx,by);
+};
+var justGraphix_image_imageAbstracts_TransformImage = {};
+justGraphix_image_imageAbstracts_TransformImage.flippedY = function(this1,x,y,w,h,transparent,inPlace,includeMask) {
+	if(includeMask == null) {
+		includeMask = false;
+	}
+	if(inPlace == null) {
+		inPlace = false;
+	}
+	if(transparent == null) {
+		transparent = false;
+	}
+	var transparent1 = transparent;
+	var inPlace1 = inPlace;
+	var includeMask1 = includeMask;
+	if(includeMask1 == null) {
+		includeMask1 = false;
+	}
+	if(inPlace1 == null) {
+		inPlace1 = false;
+	}
+	if(transparent1 == null) {
+		transparent1 = false;
+	}
+	var r_x = x;
+	var r_y = y;
+	var r_w = w;
+	var r_h = h;
+	var xmax = r_x + r_w + 1 | 0;
+	var ymax = r_y + r_h + 1 | 0;
+	var ii_min = r_x | 0;
+	var ii_max = xmax;
+	var xRange__start = ii_min;
+	var xRange__max = ii_max;
+	var ii_min = r_y | 0;
+	var ii_max = ymax;
+	var yRange__start = ii_min;
+	var yRange__max = ii_max;
+	var range_x = xRange__start;
+	var range_y = yRange__start - 1;
+	var range_xReset = range_x;
+	var range_yReset = range_y;
+	var range_xMax = xRange__max - 2;
+	var range_yMax = yRange__max - 2;
+	var _this_min = 0;
+	var _this_max = (xRange__max - xRange__start) * (yRange__max - yRange__start) | 0;
+	var nextImage = justGraphix_image_Pixelimage._new(w | 0,h | 0);
+	nextImage.transparent = transparent1;
+	while(_this_min < _this_max) {
+		var i = _this_min++;
+		if(range_y > range_yMax) {
+			range_y = range_yReset;
+			++range_x;
+		}
+		++range_y;
+		var i1 = i;
+		var x1 = range_x;
+		var y1 = range_y;
+		var x2 = range_x;
+		var y2 = range_yMax - range_y;
+		var c = this1.image.get(this1.useVirtualPos ? (y2 - this1.virtualY) * this1.width + x2 - this1.virtualX | 0 : y2 * this1.width + x2 | 0);
+		var color = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+		var c1 = color;
+		if((c1 >> 24 & 255) < 254 && nextImage.transparent) {
+			var location = nextImage.useVirtualPos ? (y1 - nextImage.virtualY) * nextImage.width + x1 - nextImage.virtualX | 0 : y1 * nextImage.width + x1 | 0;
+			var this2 = nextImage.image.get(location);
+			var this3 = justGraphix_image_Endian_isLittleEndian ? (this2 >> 24 & 255) << 24 | (this2 & 255) << 16 | (this2 >> 8 & 255) << 8 | this2 >> 16 & 255 : this2;
+			var this4 = this3 >> 24 & 255;
+			var a1 = this4 == 0 ? 0. : this4 / 255;
+			var this5 = this3 >> 16 & 255;
+			var r1 = this5 == 0 ? 0. : this5 / 255;
+			var this6 = this3 >> 8 & 255;
+			var g1 = this6 == 0 ? 0. : this6 / 255;
+			var this7 = this3 & 255;
+			var b1 = this7 == 0 ? 0. : this7 / 255;
+			var this8 = color >> 24 & 255;
+			var a2 = this8 == 0 ? 0. : this8 / 255;
+			var this9 = color >> 16 & 255;
+			var r2 = this9 == 0 ? 0. : this9 / 255;
+			var this10 = color >> 8 & 255;
+			var g2 = this10 == 0 ? 0. : this10 / 255;
+			var this11 = color & 255;
+			var b2 = this11 == 0 ? 0. : this11 / 255;
+			var a3 = a1 * (1 - a2);
+			var r = 255 * (r1 * a3 + r2 * a2) | 0;
+			var g = 255 * (g1 * a3 + g2 * a2) | 0;
+			var b = 255 * (b1 * a3 + b2 * a2) | 0;
+			var a = 255 * (a3 + a2) | 0;
+			var blended = a << 24 | r << 16 | g << 8 | b;
+			nextImage.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+		} else {
+			nextImage.image.set(nextImage.useVirtualPos ? (y1 - nextImage.virtualY) * nextImage.width + x1 - nextImage.virtualX | 0 : y1 * nextImage.width + x1 | 0,justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1);
+		}
+	}
+	if(inPlace1) {
+		var x1 = x | 0;
+		var y1 = y | 0;
+		var _g = 0;
+		var _g1 = nextImage.height;
+		while(_g < _g1) {
+			var dy = _g++;
+			var _g2 = 0;
+			var _g3 = nextImage.width;
+			while(_g2 < _g3) {
+				var dx = _g2++;
+				var c = nextImage.image.get(nextImage.useVirtualPos ? (dy - nextImage.virtualY) * nextImage.width + dx - nextImage.virtualX | 0 : dy * nextImage.width + dx | 0);
+				var col = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+				if(nextImage.useMask && nextImage.mask != null) {
+					var this2 = nextImage.mask;
+					var c1 = this2.image.get(this2.useVirtualPos ? (dy - this2.virtualY) * this2.width + dx - this2.virtualX | 0 : dy * this2.width + dx | 0);
+					var maskPixel = justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1;
+					var this3 = col;
+					if(maskPixel == 0) {
+						col = this3;
+					} else {
+						var this4 = maskPixel >> 24 & 255;
+						var m0 = this4 == 0 ? 0. : this4 / 255;
+						var this5 = maskPixel >> 16 & 255;
+						var m1 = this5 == 0 ? 0. : this5 / 255;
+						var this6 = maskPixel >> 8 & 255;
+						var m2 = this6 == 0 ? 0. : this6 / 255;
+						var this7 = maskPixel & 255;
+						var m3 = this7 == 0 ? 0. : this7 / 255;
+						var ch0 = (1. - m0) * (this3 >> 24 & 255) | 0;
+						var ch1 = (1. - m1) * (this3 >> 16 & 255) | 0;
+						var ch2 = (1. - m2) * (this3 >> 8 & 255) | 0;
+						var ch3 = (1. - m3) * (this3 & 255) | 0;
+						col = Math.round(ch0 * 255) << 24 | Math.round(ch1 * 255) << 16 | Math.round(ch2 * 255) << 8 | Math.round(ch3 * 255);
+					}
+				}
+				if(col != 0) {
+					var x2 = x1 + dx;
+					var y2 = y1 + dy;
+					var c2 = col;
+					if((c2 >> 24 & 255) < 254 && this1.transparent) {
+						var location = this1.useVirtualPos ? (y2 - this1.virtualY) * this1.width + x2 - this1.virtualX | 0 : y2 * this1.width + x2 | 0;
+						var this8 = this1.image.get(location);
+						var this9 = justGraphix_image_Endian_isLittleEndian ? (this8 >> 24 & 255) << 24 | (this8 & 255) << 16 | (this8 >> 8 & 255) << 8 | this8 >> 16 & 255 : this8;
+						var this10 = this9 >> 24 & 255;
+						var a1 = this10 == 0 ? 0. : this10 / 255;
+						var this11 = this9 >> 16 & 255;
+						var r1 = this11 == 0 ? 0. : this11 / 255;
+						var this12 = this9 >> 8 & 255;
+						var g1 = this12 == 0 ? 0. : this12 / 255;
+						var this13 = this9 & 255;
+						var b1 = this13 == 0 ? 0. : this13 / 255;
+						var this14 = col >> 24 & 255;
+						var a2 = this14 == 0 ? 0. : this14 / 255;
+						var this15 = col >> 16 & 255;
+						var r2 = this15 == 0 ? 0. : this15 / 255;
+						var this16 = col >> 8 & 255;
+						var g2 = this16 == 0 ? 0. : this16 / 255;
+						var this17 = col & 255;
+						var b2 = this17 == 0 ? 0. : this17 / 255;
+						var a3 = a1 * (1 - a2);
+						var r = 255 * (r1 * a3 + r2 * a2) | 0;
+						var g = 255 * (g1 * a3 + g2 * a2) | 0;
+						var b = 255 * (b1 * a3 + b2 * a2) | 0;
+						var a = 255 * (a3 + a2) | 0;
+						var blended = a << 24 | r << 16 | g << 8 | b;
+						this1.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+					} else {
+						this1.image.set(this1.useVirtualPos ? (y2 - this1.virtualY) * this1.width + x2 - this1.virtualX | 0 : y2 * this1.width + x2 | 0,justGraphix_image_Endian_isLittleEndian ? (c2 >> 24 & 255) << 24 | (c2 & 255) << 16 | (c2 >> 8 & 255) << 8 | c2 >> 16 & 255 : c2);
+					}
+				}
+			}
+		}
+		if(this1.mask != null && includeMask1) {
+			var v = justGraphix_image_imageAbstracts_TransformImage.flippedY(this1.mask,x,y,this1.width,this1.height,this1.mask.transparent,inPlace1,includeMask1);
+			this1.useMask = true;
+			this1.mask = v;
+		}
+		nextImage = null;
+		return this1;
+	} else {
+		if(this1.mask != null && includeMask1) {
+			var v = justGraphix_image_imageAbstracts_TransformImage.flippedY(this1.mask,x,y,this1.width,this1.height,this1.mask.transparent,inPlace1,includeMask1);
+			nextImage.useMask = true;
+			nextImage.mask = v;
+		}
+		return nextImage;
+	}
 };
 var justGraphix_iterMagix_IntIterStart = function(min_,max_) {
 	this.start = min_;
@@ -16641,7 +19556,33 @@ lime_math_Rectangle.prototype = {
 };
 var justGraphix_target_openflTarget_$_LimeImage = function() { };
 justGraphix_target_openflTarget_$_LimeImage.__name__ = "justGraphix.target.openflTarget_.LimeImage";
-function justGraphix_target_openflTarget_$_PeoteTexture_toPeotePixels(pixelImage,peotePixels) {
+var justGraphix_target_openflTarget_$_PeoteBasicElement = function(x,y,wide,hi,slot) {
+	if(slot == null) {
+		slot = 0;
+	}
+	if(hi == null) {
+		hi = 128;
+	}
+	if(wide == null) {
+		wide = 128;
+	}
+	this.bytePos = -1;
+	this.slot = 0;
+	this.hi = 128;
+	this.wide = 128;
+	this.y = 0;
+	this.x = 0;
+	this.x = x;
+	this.y = y;
+	this.wide = wide;
+	this.hi = hi;
+	this.slot = slot;
+};
+justGraphix_target_openflTarget_$_PeoteBasicElement.__name__ = "justGraphix.target.openflTarget_.PeoteBasicElement";
+justGraphix_target_openflTarget_$_PeoteBasicElement.prototype = {
+	__class__: justGraphix_target_openflTarget_$_PeoteBasicElement
+};
+function justGraphix_target_openflTarget_$_PeoteTextureData_toPeotePixels(pixelImage,peotePixels) {
 	var lh = pixelImage.height;
 	var lw = pixelImage.width;
 	if(peotePixels == null) {
@@ -16675,7 +19616,7 @@ function justGraphix_target_openflTarget_$_PeoteTexture_toPeotePixels(pixelImage
 	}
 	return peotePixels;
 }
-function justGraphix_target_openflTarget_$_PeoteTexture_fromPeotePixels(peotePixels,width,height) {
+function justGraphix_target_openflTarget_$_PeoteTextureData_fromPeotePixels(peotePixels,width,height) {
 	var lh = height;
 	var lw = width;
 	var pixelImage = justGraphix_image_Pixelimage._new(lw,lh);
@@ -16734,7 +19675,7 @@ function justGraphix_target_openflTarget_$_PeoteTexture_fromPeotePixels(peotePix
 	}
 	return pixelImage;
 }
-function justGraphix_target_openflTarget_$_PeoteTexture_toPeoteTextureData(pixelImage) {
+function justGraphix_target_openflTarget_$_PeoteTextureData_toPeoteTextureData(pixelImage) {
 	var peotePixels = null;
 	var lh = pixelImage.height;
 	var lw = pixelImage.width;
@@ -16774,9 +19715,9 @@ function justGraphix_target_openflTarget_$_PeoteTexture_toPeoteTextureData(pixel
 	}
 	return new peote_view__$TextureData_TextureDataImpl(pixelImage.width,pixelImage.height,format,0,peotePixels1);
 }
-function justGraphix_target_openflTarget_$_PeoteTexture_fromPeoteTextureData(textureData) {
+function justGraphix_target_openflTarget_$_PeoteTextureData_fromPeoteTextureData(textureData) {
 	if(textureData.format != 4) {
-		haxe_Log.trace("requires TextureData in RGBA format!!",{ fileName : "src/justGraphix/target/openflTarget_/PeoteTexture.hx", lineNumber : 116, className : "justGraphix.target.openflTarget_._PeoteTexture.PeoteTexture_Fields_", methodName : "fromPeoteTextureData"});
+		haxe_Log.trace("requires TextureData in RGBA format!!",{ fileName : "src/justGraphix/target/openflTarget_/PeoteTextureData.hx", lineNumber : 102, className : "justGraphix.target.openflTarget_._PeoteTextureData.PeoteTextureData_Fields_", methodName : "fromPeoteTextureData"});
 		return null;
 	} else {
 		var peotePixels = textureData.bytes;
@@ -16838,108 +19779,6 @@ function justGraphix_target_openflTarget_$_PeoteTexture_fromPeoteTextureData(tex
 		}
 		return pixelImage;
 	}
-}
-function justGraphix_target_openflTarget_$_PeoteTexture_toPeoteTexture(pixelImage,slot) {
-	if(slot == null) {
-		slot = 0;
-	}
-	var texture = new peote_view_Texture(pixelImage.width,pixelImage.height);
-	var peotePixels = null;
-	var lh = pixelImage.height;
-	var lw = pixelImage.width;
-	if(peotePixels == null) {
-		peotePixels = new haxe_io_Bytes(new ArrayBuffer(lw * lh * 4));
-	}
-	var a;
-	var r;
-	var g;
-	var b;
-	var col;
-	var w = 0;
-	var _g = 0;
-	var _g1 = lh;
-	while(_g < _g1) {
-		var y = _g++;
-		var _g2 = 0;
-		var _g3 = lw;
-		while(_g2 < _g3) {
-			var x = _g2++;
-			var c = pixelImage.image.get(pixelImage.useVirtualPos ? (y - pixelImage.virtualY) * pixelImage.width + x - pixelImage.virtualX | 0 : y * pixelImage.width + x | 0);
-			col = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
-			a = col >> 24 & 255;
-			r = col >> 16 & 255;
-			g = col >> 8 & 255;
-			b = col & 255;
-			peotePixels.b[w++] = r;
-			peotePixels.b[w++] = g;
-			peotePixels.b[w++] = b;
-			peotePixels.b[w++] = a;
-		}
-	}
-	var peotePixels1 = peotePixels;
-	var format = 4;
-	if(format == null) {
-		format = 4;
-	}
-	texture.setData(new peote_view__$TextureData_TextureDataImpl(pixelImage.width,pixelImage.height,format,0,peotePixels1),slot);
-	return texture;
-}
-function justGraphix_target_openflTarget_$_PeoteTexture_fromPeoteTexture(texture,transparent) {
-	if(transparent == null) {
-		transparent = true;
-	}
-	var lh = texture.height;
-	var lw = texture.width;
-	var pixelImage = justGraphix_image_Pixelimage._new(lw,lh);
-	pixelImage.transparent = transparent;
-	var data = texture.readPixelsUInt8(0,0,lw,lh);
-	var p = 0;
-	var _g = 0;
-	var _g1 = lh;
-	while(_g < _g1) {
-		var y = _g++;
-		var _g2 = 0;
-		var _g3 = lw;
-		while(_g2 < _g3) {
-			var x = _g2++;
-			var r = data[p++];
-			var g = data[p++];
-			var b = data[p++];
-			var a = data[p++];
-			var location = pixelImage.useVirtualPos ? (y - pixelImage.virtualY) * pixelImage.width + x - pixelImage.virtualX | 0 : y * pixelImage.width + x | 0;
-			if(pixelImage.transparent && a < 254) {
-				var this1 = pixelImage.image.get(location);
-				var old = justGraphix_image_Endian_isLittleEndian ? (this1 >> 24 & 255) << 24 | (this1 & 255) << 16 | (this1 >> 8 & 255) << 8 | this1 >> 16 & 255 : this1;
-				var rhs = a << 24 | r << 16 | g << 8 | b;
-				var this2 = old >> 24 & 255;
-				var a1 = this2 == 0 ? 0. : this2 / 255;
-				var this3 = old >> 16 & 255;
-				var r1 = this3 == 0 ? 0. : this3 / 255;
-				var this4 = old >> 8 & 255;
-				var g1 = this4 == 0 ? 0. : this4 / 255;
-				var this5 = old & 255;
-				var b1 = this5 == 0 ? 0. : this5 / 255;
-				var this6 = rhs >> 24 & 255;
-				var a2 = this6 == 0 ? 0. : this6 / 255;
-				var this7 = rhs >> 16 & 255;
-				var r2 = this7 == 0 ? 0. : this7 / 255;
-				var this8 = rhs >> 8 & 255;
-				var g2 = this8 == 0 ? 0. : this8 / 255;
-				var this9 = rhs & 255;
-				var b2 = this9 == 0 ? 0. : this9 / 255;
-				var a3 = a1 * (1 - a2);
-				var r3 = 255 * (r1 * a3 + r2 * a2) | 0;
-				var g3 = 255 * (g1 * a3 + g2 * a2) | 0;
-				var b3 = 255 * (b1 * a3 + b2 * a2) | 0;
-				var a4 = 255 * (a3 + a2) | 0;
-				var blended = a4 << 24 | r3 << 16 | g3 << 8 | b3;
-				pixelImage.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
-			} else {
-				pixelImage.image.set(location,pixelImage.isLittle ? a << 24 | b << 16 | g << 8 | r : a << 24 | r << 16 | g << 8 | b);
-			}
-		}
-	}
-	return pixelImage;
 }
 var peote_view__$TextureData_TextureDataImpl = function(width,height,format,color,bytes) {
 	if(color == null) {
@@ -17107,963 +19946,6 @@ peote_view__$TextureData_TextureDataImpl.prototype = {
 		}
 	}
 	,__class__: peote_view__$TextureData_TextureDataImpl
-};
-var peote_view_Texture = function(slotWidth,slotHeight,slots,textureConfig) {
-	this.displays = [];
-	this.programs = [];
-	this.updated = false;
-	this.usedSlots = new haxe_ds_IntMap();
-	this.tilesY = 1;
-	this.tilesX = 1;
-	this.slotsY = 1;
-	this.slotsX = 1;
-	this.maxSlots = 1;
-	this.height = 0;
-	this.width = 0;
-	this.smoothMipmap = false;
-	this.mipmap = false;
-	this.mipmapIsCreated = false;
-	this.smoothShrink = false;
-	this.smoothExpand = false;
-	this.clearOnRenderInto = true;
-	this.glDepthBuffer = null;
-	this.framebuffer = null;
-	this.glTexture = null;
-	this.gl = null;
-	if(textureConfig == null) {
-		textureConfig = new peote_view_TextureConfig(null,null,null,null,null,null,null,null,null,null,null);
-	}
-	this.slotWidth = slotWidth;
-	this.slotHeight = slotHeight;
-	this.tilesX = textureConfig.tilesX;
-	this.tilesY = textureConfig.tilesY;
-	this.format = textureConfig.format;
-	var b = textureConfig.smoothExpand;
-	if(this.gl != null) {
-		var gl = this.gl;
-		var smoothExpand = this.smoothExpand;
-		var smoothShrink = null;
-		var smoothMipmap = null;
-		var glTexture = this.glTexture;
-		if(glTexture != null) {
-			gl.bindTexture(gl.TEXTURE_2D,glTexture);
-		}
-		if(smoothExpand != null) {
-			gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,smoothExpand ? gl.LINEAR : gl.NEAREST);
-		}
-		if(smoothShrink != null) {
-			if(smoothMipmap != null) {
-				if(smoothMipmap) {
-					gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,smoothShrink ? gl.LINEAR_MIPMAP_LINEAR : gl.NEAREST_MIPMAP_LINEAR);
-				} else {
-					gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,smoothShrink ? gl.LINEAR_MIPMAP_NEAREST : gl.NEAREST_MIPMAP_NEAREST);
-				}
-			} else {
-				gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,smoothShrink ? gl.LINEAR : gl.NEAREST);
-			}
-		}
-		if(glTexture != null) {
-			gl.bindTexture(gl.TEXTURE_2D,null);
-		}
-	}
-	this.smoothExpand = b;
-	var b = textureConfig.smoothShrink;
-	if(this.gl != null) {
-		var gl = this.gl;
-		var smoothExpand = null;
-		var smoothShrink = this.smoothShrink;
-		var smoothMipmap = this.mipmap ? this.smoothMipmap : null;
-		var glTexture = this.glTexture;
-		if(glTexture != null) {
-			gl.bindTexture(gl.TEXTURE_2D,glTexture);
-		}
-		if(smoothExpand != null) {
-			gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,smoothExpand ? gl.LINEAR : gl.NEAREST);
-		}
-		if(smoothShrink != null) {
-			if(smoothMipmap != null) {
-				if(smoothMipmap) {
-					gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,smoothShrink ? gl.LINEAR_MIPMAP_LINEAR : gl.NEAREST_MIPMAP_LINEAR);
-				} else {
-					gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,smoothShrink ? gl.LINEAR_MIPMAP_NEAREST : gl.NEAREST_MIPMAP_NEAREST);
-				}
-			} else {
-				gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,smoothShrink ? gl.LINEAR : gl.NEAREST);
-			}
-		}
-		if(glTexture != null) {
-			gl.bindTexture(gl.TEXTURE_2D,null);
-		}
-	}
-	this.smoothShrink = b;
-	this.mipmap = textureConfig.mipmap;
-	var b = textureConfig.smoothMipmap;
-	if(this.gl != null) {
-		var gl = this.gl;
-		var smoothExpand = null;
-		var smoothShrink = this.smoothShrink;
-		var smoothMipmap = this.mipmap ? this.smoothMipmap : null;
-		var glTexture = this.glTexture;
-		if(glTexture != null) {
-			gl.bindTexture(gl.TEXTURE_2D,glTexture);
-		}
-		if(smoothExpand != null) {
-			gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,smoothExpand ? gl.LINEAR : gl.NEAREST);
-		}
-		if(smoothShrink != null) {
-			if(smoothMipmap != null) {
-				if(smoothMipmap) {
-					gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,smoothShrink ? gl.LINEAR_MIPMAP_LINEAR : gl.NEAREST_MIPMAP_LINEAR);
-				} else {
-					gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,smoothShrink ? gl.LINEAR_MIPMAP_NEAREST : gl.NEAREST_MIPMAP_NEAREST);
-				}
-			} else {
-				gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,smoothShrink ? gl.LINEAR : gl.NEAREST);
-			}
-		}
-		if(glTexture != null) {
-			gl.bindTexture(gl.TEXTURE_2D,null);
-		}
-	}
-	this.smoothMipmap = b;
-	if(slots == null) {
-		this.slotsX = textureConfig.slotsX;
-		this.slotsY = textureConfig.slotsY;
-		this.width = this.slotsX * slotWidth;
-		this.height = this.slotsY * slotHeight;
-		if(textureConfig.powerOfTwo) {
-			var tmp;
-			if(UInt.gt(3,this.width)) {
-				tmp = this.width;
-			} else {
-				var bitsize;
-				if(this.width - 1 >>> 8 == 1) {
-					bitsize = 9;
-				} else if(UInt.gt(1,this.width - 1 >>> 8)) {
-					if(this.width - 1 >>> 4 == 1) {
-						bitsize = 5;
-					} else if(UInt.gt(1,this.width - 1 >>> 4)) {
-						if(this.width - 1 >>> 2 == 1) {
-							bitsize = 3;
-						} else if(UInt.gt(1,this.width - 1 >>> 2)) {
-							if(this.width - 1 >>> 1 == 1) {
-								bitsize = 2;
-							} else if(UInt.gt(1,this.width - 1 >>> 1)) {
-								var tmp1 = this.width - 1;
-								throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
-							} else {
-								var tmp1 = this.width - 1;
-								throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
-							}
-						} else if(this.width - 1 >>> 3 == 1) {
-							bitsize = 4;
-						} else if(UInt.gt(1,this.width - 1 >>> 3)) {
-							var tmp1 = this.width - 1;
-							throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
-						} else {
-							var tmp1 = this.width - 1;
-							throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
-						}
-					} else if(this.width - 1 >>> 6 == 1) {
-						bitsize = 7;
-					} else if(UInt.gt(1,this.width - 1 >>> 6)) {
-						if(this.width - 1 >>> 5 == 1) {
-							bitsize = 6;
-						} else if(UInt.gt(1,this.width - 1 >>> 5)) {
-							var tmp1 = this.width - 1;
-							throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
-						} else {
-							var tmp1 = this.width - 1;
-							throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
-						}
-					} else if(this.width - 1 >>> 7 == 1) {
-						bitsize = 8;
-					} else if(UInt.gt(1,this.width - 1 >>> 7)) {
-						var tmp1 = this.width - 1;
-						throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
-					} else {
-						var tmp1 = this.width - 1;
-						throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
-					}
-				} else if(this.width - 1 >>> 12 == 1) {
-					bitsize = 13;
-				} else if(UInt.gt(1,this.width - 1 >>> 12)) {
-					if(this.width - 1 >>> 10 == 1) {
-						bitsize = 11;
-					} else if(UInt.gt(1,this.width - 1 >>> 10)) {
-						if(this.width - 1 >>> 9 == 1) {
-							bitsize = 10;
-						} else if(UInt.gt(1,this.width - 1 >>> 9)) {
-							var tmp1 = this.width - 1;
-							throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
-						} else {
-							var tmp1 = this.width - 1;
-							throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
-						}
-					} else if(this.width - 1 >>> 11 == 1) {
-						bitsize = 12;
-					} else if(UInt.gt(1,this.width - 1 >>> 11)) {
-						var tmp1 = this.width - 1;
-						throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
-					} else {
-						var tmp1 = this.width - 1;
-						throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
-					}
-				} else if(this.width - 1 >>> 14 == 1) {
-					bitsize = 15;
-				} else if(UInt.gt(1,this.width - 1 >>> 14)) {
-					if(this.width - 1 >>> 13 == 1) {
-						bitsize = 14;
-					} else if(UInt.gt(1,this.width - 1 >>> 13)) {
-						var tmp1 = this.width - 1;
-						throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
-					} else {
-						var tmp1 = this.width - 1;
-						throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
-					}
-				} else if(this.width - 1 >>> 15 == 1) {
-					bitsize = 16;
-				} else if(UInt.gt(1,this.width - 1 >>> 15)) {
-					var tmp1 = this.width - 1;
-					throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
-				} else {
-					var tmp1 = this.width - 1;
-					throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
-				}
-				if(bitsize >= 16) {
-					throw haxe_Exception.thrown("Error calculating nextPowerOfTwo: reaching maxBitSize of " + 16);
-				}
-				tmp = 1 << bitsize;
-			}
-			this.width = tmp;
-			var tmp;
-			if(UInt.gt(3,this.height)) {
-				tmp = this.height;
-			} else {
-				var bitsize;
-				if(this.height - 1 >>> 8 == 1) {
-					bitsize = 9;
-				} else if(UInt.gt(1,this.height - 1 >>> 8)) {
-					if(this.height - 1 >>> 4 == 1) {
-						bitsize = 5;
-					} else if(UInt.gt(1,this.height - 1 >>> 4)) {
-						if(this.height - 1 >>> 2 == 1) {
-							bitsize = 3;
-						} else if(UInt.gt(1,this.height - 1 >>> 2)) {
-							if(this.height - 1 >>> 1 == 1) {
-								bitsize = 2;
-							} else if(UInt.gt(1,this.height - 1 >>> 1)) {
-								var tmp1 = this.height - 1;
-								throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
-							} else {
-								var tmp1 = this.height - 1;
-								throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
-							}
-						} else if(this.height - 1 >>> 3 == 1) {
-							bitsize = 4;
-						} else if(UInt.gt(1,this.height - 1 >>> 3)) {
-							var tmp1 = this.height - 1;
-							throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
-						} else {
-							var tmp1 = this.height - 1;
-							throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
-						}
-					} else if(this.height - 1 >>> 6 == 1) {
-						bitsize = 7;
-					} else if(UInt.gt(1,this.height - 1 >>> 6)) {
-						if(this.height - 1 >>> 5 == 1) {
-							bitsize = 6;
-						} else if(UInt.gt(1,this.height - 1 >>> 5)) {
-							var tmp1 = this.height - 1;
-							throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
-						} else {
-							var tmp1 = this.height - 1;
-							throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
-						}
-					} else if(this.height - 1 >>> 7 == 1) {
-						bitsize = 8;
-					} else if(UInt.gt(1,this.height - 1 >>> 7)) {
-						var tmp1 = this.height - 1;
-						throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
-					} else {
-						var tmp1 = this.height - 1;
-						throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
-					}
-				} else if(this.height - 1 >>> 12 == 1) {
-					bitsize = 13;
-				} else if(UInt.gt(1,this.height - 1 >>> 12)) {
-					if(this.height - 1 >>> 10 == 1) {
-						bitsize = 11;
-					} else if(UInt.gt(1,this.height - 1 >>> 10)) {
-						if(this.height - 1 >>> 9 == 1) {
-							bitsize = 10;
-						} else if(UInt.gt(1,this.height - 1 >>> 9)) {
-							var tmp1 = this.height - 1;
-							throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
-						} else {
-							var tmp1 = this.height - 1;
-							throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
-						}
-					} else if(this.height - 1 >>> 11 == 1) {
-						bitsize = 12;
-					} else if(UInt.gt(1,this.height - 1 >>> 11)) {
-						var tmp1 = this.height - 1;
-						throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
-					} else {
-						var tmp1 = this.height - 1;
-						throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
-					}
-				} else if(this.height - 1 >>> 14 == 1) {
-					bitsize = 15;
-				} else if(UInt.gt(1,this.height - 1 >>> 14)) {
-					if(this.height - 1 >>> 13 == 1) {
-						bitsize = 14;
-					} else if(UInt.gt(1,this.height - 1 >>> 13)) {
-						var tmp1 = this.height - 1;
-						throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
-					} else {
-						var tmp1 = this.height - 1;
-						throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
-					}
-				} else if(this.height - 1 >>> 15 == 1) {
-					bitsize = 16;
-				} else if(UInt.gt(1,this.height - 1 >>> 15)) {
-					var tmp1 = this.height - 1;
-					throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
-				} else {
-					var tmp1 = this.height - 1;
-					throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
-				}
-				if(bitsize >= 16) {
-					throw haxe_Exception.thrown("Error calculating nextPowerOfTwo: reaching maxBitSize of " + 16);
-				}
-				tmp = 1 << bitsize;
-			}
-			this.height = tmp;
-		}
-		if(this.width > textureConfig.maxTextureSize || this.height > textureConfig.maxTextureSize) {
-			throw haxe_Exception.thrown("Error: max texture-size (" + textureConfig.maxTextureSize + ") is to small for " + slots + " images (" + slotWidth + " x " + slotHeight + ")");
-		}
-	} else {
-		var p = peote_view_intern_TexUtils.optimalTextureSize(slots,slotWidth,slotHeight,textureConfig.maxTextureSize,textureConfig.powerOfTwo);
-		this.width = p.width;
-		this.height = p.height;
-		this.slotsX = p.slotsX;
-		this.slotsY = p.slotsY;
-	}
-	this.maxSlots = this.slotsX * this.slotsY;
-};
-peote_view_Texture.__name__ = "peote.view.Texture";
-peote_view_Texture.prototype = {
-	readPixelsUInt8: function(x,y,w,h,data) {
-		if(data == null) {
-			data = new Uint8Array(w * h * 4);
-		}
-		this.gl.bindFramebuffer(this.gl.FRAMEBUFFER,this.framebuffer);
-		if(this.gl.checkFramebufferStatus(this.gl.FRAMEBUFFER) == this.gl.FRAMEBUFFER_COMPLETE) {
-			var this1 = this.gl;
-			var gl = this.gl;
-			var format;
-			switch(this.format) {
-			case 1:
-				format = gl.RED;
-				break;
-			case 2:
-				format = gl.RG;
-				break;
-			case 3:
-				format = gl.RGB;
-				break;
-			case 4:
-				format = gl.RGBA;
-				break;
-			case 5:
-				format = gl.LUMINANCE;
-				break;
-			case 6:
-				format = gl.ALPHA;
-				break;
-			case 7:
-				format = gl.LUMINANCE_ALPHA;
-				break;
-			default:
-				format = gl.RGBA;
-			}
-			this1.readPixels(x,y,w,h,format,this.gl.UNSIGNED_BYTE,data);
-		} else {
-			throw haxe_Exception.thrown("Error: opengl-Picking - Framebuffer not complete!");
-		}
-		this.gl.bindFramebuffer(this.gl.FRAMEBUFFER,null);
-		return data;
-	}
-	,setData: function(textureData,slot) {
-		if(slot == null) {
-			slot = 0;
-		}
-		if(this.format > 7 != textureData.format > 7) {
-			throw haxe_Exception.thrown("Error: Can not use " + (textureData.format > 7 ? "float" : "integer") + " TextureData for " + (this.format > 7 ? "float" : "integer") + " Texture");
-		} else {
-			var this1 = this.format;
-			var this2 = textureData.format;
-			if((this1 > 7 ? this1 - 7 : this1 < 5 ? this1 : this1 < 7 ? 1 : 2) != (this2 > 7 ? this2 - 7 : this2 < 5 ? this2 : this2 < 7 ? 1 : 2)) {
-				throw haxe_Exception.thrown("Error: Number of colorchannels of TextureData and Texture don't match");
-			}
-		}
-		this.usedSlots.h[slot] = textureData;
-		if(this.gl != null) {
-			if(this.glTexture == null) {
-				if(this.width > this.gl.getParameter(this.gl.MAX_TEXTURE_SIZE) || this.height > this.gl.getParameter(this.gl.MAX_TEXTURE_SIZE)) {
-					throw haxe_Exception.thrown("Error, texture size is greater then gl.MAX_TEXTURE_SIZE");
-				}
-				this.glTexture = peote_view_intern_TexUtils.createEmptyTexture(this.gl,this.width,this.height,this.format,this.smoothExpand,this.smoothShrink,this.mipmap,this.smoothMipmap);
-			}
-			peote_view_intern_TexUtils.dataToTexture(this.gl,this.slotWidth * (slot % this.slotsX),this.slotHeight * (slot / this.slotsX | 0),this.format,textureData,this.mipmap,this.glTexture);
-			if(this.mipmap) {
-				this.mipmapIsCreated = true;
-			}
-			this.updated = true;
-		}
-	}
-	,__class__: peote_view_Texture
-};
-var peote_view_TextureConfig = function(maxTextureSize,slotsX,slotsY,powerOfTwo,tilesX,tilesY,format,smoothExpand,smoothShrink,mipmap,smoothMipmap) {
-	this.smoothMipmap = false;
-	this.mipmap = false;
-	this.smoothShrink = false;
-	this.smoothExpand = false;
-	this.format = 4;
-	this.tilesY = 1;
-	this.tilesX = 1;
-	this.powerOfTwo = true;
-	this.slotsY = 1;
-	this.slotsX = 1;
-	this.maxTextureSize = 16384;
-	if(maxTextureSize != null) {
-		this.maxTextureSize = maxTextureSize;
-	}
-	if(slotsX != null) {
-		this.slotsX = slotsX;
-	}
-	if(slotsY != null) {
-		this.slotsY = slotsY;
-	}
-	if(powerOfTwo != null) {
-		this.powerOfTwo = powerOfTwo;
-	}
-	if(tilesX != null) {
-		this.tilesX = tilesX;
-	}
-	if(tilesY != null) {
-		this.tilesY = tilesY;
-	}
-	if(format != null) {
-		this.format = format;
-	}
-	if(smoothExpand != null) {
-		this.smoothExpand = smoothExpand;
-	}
-	if(smoothShrink != null) {
-		this.smoothShrink = smoothShrink;
-	}
-	if(mipmap != null) {
-		this.mipmap = mipmap;
-	}
-	if(smoothMipmap != null) {
-		this.smoothMipmap = smoothMipmap;
-	}
-};
-peote_view_TextureConfig.__name__ = "peote.view.TextureConfig";
-peote_view_TextureConfig.prototype = {
-	__class__: peote_view_TextureConfig
-};
-var peote_view_intern_TexUtils = function() { };
-peote_view_intern_TexUtils.__name__ = "peote.view.intern.TexUtils";
-peote_view_intern_TexUtils.createEmptyTexture = function(gl,width,height,format,smoothExpand,smoothShrink,mipmap,smoothMipmap) {
-	if(smoothMipmap == null) {
-		smoothMipmap = false;
-	}
-	if(mipmap == null) {
-		mipmap = false;
-	}
-	if(smoothShrink == null) {
-		smoothShrink = false;
-	}
-	if(smoothExpand == null) {
-		smoothExpand = false;
-	}
-	var glTexture = gl.createTexture();
-	gl.bindTexture(gl.TEXTURE_2D,glTexture);
-	peote_view_intern_GLTool.clearGlErrorQueue(gl);
-	if(format > 7) {
-		var target = gl.TEXTURE_2D;
-		var internalformat;
-		switch(format) {
-		case 8:
-			internalformat = gl.R32F;
-			break;
-		case 9:
-			internalformat = gl.RG32F;
-			break;
-		case 10:
-			internalformat = gl.RGB32F;
-			break;
-		case 11:
-			internalformat = gl.RGBA32F;
-			break;
-		default:
-			internalformat = gl.RGBA32F;
-		}
-		var format1;
-		switch(format) {
-		case 8:
-			format1 = gl.RED;
-			break;
-		case 9:
-			format1 = gl.RG;
-			break;
-		case 10:
-			format1 = gl.RGB;
-			break;
-		case 11:
-			format1 = gl.RGBA;
-			break;
-		default:
-			format1 = gl.RGBA;
-		}
-		var type = gl.FLOAT;
-		var data = 0;
-		if(data == 0) {
-			gl.texImage2D(target,0,internalformat,width,height,0,format1,type,null);
-		} else {
-			gl.texImage2D(target,0,internalformat,width,height,0,format1,type,data);
-		}
-		if(peote_view_intern_GLTool.getLastGlError(gl) == gl.INVALID_VALUE) {
-			var target = gl.TEXTURE_2D;
-			var internalformat;
-			switch(format) {
-			case 8:
-				internalformat = gl.R16F;
-				break;
-			case 9:
-				internalformat = gl.RG16F;
-				break;
-			case 10:
-				internalformat = gl.RGB16F;
-				break;
-			case 11:
-				internalformat = gl.RGBA16F;
-				break;
-			default:
-				internalformat = gl.RGBA16F;
-			}
-			var format1;
-			switch(format) {
-			case 8:
-				format1 = gl.RED;
-				break;
-			case 9:
-				format1 = gl.RG;
-				break;
-			case 10:
-				format1 = gl.RGB;
-				break;
-			case 11:
-				format1 = gl.RGBA;
-				break;
-			default:
-				format1 = gl.RGBA;
-			}
-			var type = gl.FLOAT;
-			var data = 0;
-			if(data == 0) {
-				gl.texImage2D(target,0,internalformat,width,height,0,format1,type,null);
-			} else {
-				gl.texImage2D(target,0,internalformat,width,height,0,format1,type,data);
-			}
-			if(peote_view_intern_GLTool.getLastGlError(gl) == gl.INVALID_VALUE) {
-				var target = gl.TEXTURE_2D;
-				var internalformat;
-				switch(format) {
-				case 8:
-					internalformat = gl.RED;
-					break;
-				case 9:
-					internalformat = gl.RG;
-					break;
-				case 10:
-					internalformat = gl.RGB;
-					break;
-				case 11:
-					internalformat = gl.RGBA;
-					break;
-				default:
-					internalformat = gl.RGBA;
-				}
-				var format1;
-				switch(format) {
-				case 8:
-					format1 = gl.RED;
-					break;
-				case 9:
-					format1 = gl.RG;
-					break;
-				case 10:
-					format1 = gl.RGB;
-					break;
-				case 11:
-					format1 = gl.RGBA;
-					break;
-				default:
-					format1 = gl.RGBA;
-				}
-				var type = gl.FLOAT;
-				var data = 0;
-				if(data == 0) {
-					gl.texImage2D(target,0,internalformat,width,height,0,format1,type,null);
-				} else {
-					gl.texImage2D(target,0,internalformat,width,height,0,format1,type,data);
-				}
-			}
-		}
-	} else {
-		var target = gl.TEXTURE_2D;
-		var internalformat;
-		switch(format) {
-		case 1:
-			internalformat = gl.R8;
-			break;
-		case 2:
-			internalformat = gl.RG8;
-			break;
-		case 3:
-			internalformat = gl.RGB;
-			break;
-		case 4:
-			internalformat = gl.RGBA;
-			break;
-		case 5:
-			internalformat = gl.LUMINANCE;
-			break;
-		case 6:
-			internalformat = gl.ALPHA;
-			break;
-		case 7:
-			internalformat = gl.LUMINANCE_ALPHA;
-			break;
-		default:
-			internalformat = gl.RGBA;
-		}
-		var format1;
-		switch(format) {
-		case 1:
-			format1 = gl.RED;
-			break;
-		case 2:
-			format1 = gl.RG;
-			break;
-		case 3:
-			format1 = gl.RGB;
-			break;
-		case 4:
-			format1 = gl.RGBA;
-			break;
-		case 5:
-			format1 = gl.LUMINANCE;
-			break;
-		case 6:
-			format1 = gl.ALPHA;
-			break;
-		case 7:
-			format1 = gl.LUMINANCE_ALPHA;
-			break;
-		default:
-			format1 = gl.RGBA;
-		}
-		var type = gl.UNSIGNED_BYTE;
-		var data = 0;
-		if(data == 0) {
-			gl.texImage2D(target,0,internalformat,width,height,0,format1,type,null);
-		} else {
-			gl.texImage2D(target,0,internalformat,width,height,0,format1,type,data);
-		}
-	}
-	if(peote_view_intern_GLTool.getLastGlError(gl) == gl.OUT_OF_MEMORY) {
-		throw haxe_Exception.thrown("OUT OF GPU MEMORY while texture creation");
-	}
-	var smoothMipmap1 = mipmap ? smoothMipmap : null;
-	var glTexture1 = null;
-	if(glTexture1 != null) {
-		gl.bindTexture(gl.TEXTURE_2D,glTexture1);
-	}
-	if(smoothExpand != null) {
-		gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,smoothExpand ? gl.LINEAR : gl.NEAREST);
-	}
-	if(smoothShrink != null) {
-		if(smoothMipmap1 != null) {
-			if(smoothMipmap1) {
-				gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,smoothShrink ? gl.LINEAR_MIPMAP_LINEAR : gl.NEAREST_MIPMAP_LINEAR);
-			} else {
-				gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,smoothShrink ? gl.LINEAR_MIPMAP_NEAREST : gl.NEAREST_MIPMAP_NEAREST);
-			}
-		} else {
-			gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,smoothShrink ? gl.LINEAR : gl.NEAREST);
-		}
-	}
-	if(glTexture1 != null) {
-		gl.bindTexture(gl.TEXTURE_2D,null);
-	}
-	gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);
-	gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
-	gl.bindTexture(gl.TEXTURE_2D,null);
-	return glTexture;
-};
-peote_view_intern_TexUtils.dataToTexture = function(gl,x,y,format,textureData,genMipmap,glTexture) {
-	if(glTexture != null) {
-		gl.bindTexture(gl.TEXTURE_2D,glTexture);
-	}
-	peote_view_intern_GLTool.clearGlErrorQueue(gl);
-	if(format > 7) {
-		var target = gl.TEXTURE_2D;
-		var width = textureData.width;
-		var height = textureData.height;
-		var format1;
-		switch(format) {
-		case 8:
-			format1 = gl.RED;
-			break;
-		case 9:
-			format1 = gl.RG;
-			break;
-		case 10:
-			format1 = gl.RGB;
-			break;
-		case 11:
-			format1 = gl.RGBA;
-			break;
-		default:
-			format1 = gl.RGBA;
-		}
-		var type = gl.FLOAT;
-		var data = haxe_io_Float32Array.fromBytes(textureData.bytes);
-		gl.texSubImage2D(target,0,x,y,width,height,format1,type,data);
-		var tmp = peote_view_intern_GLTool.getLastGlError(gl) == gl.INVALID_VALUE;
-	} else {
-		var target = gl.TEXTURE_2D;
-		var width = textureData.width;
-		var height = textureData.height;
-		var format1;
-		switch(format) {
-		case 1:
-			format1 = gl.RED;
-			break;
-		case 2:
-			format1 = gl.RG;
-			break;
-		case 3:
-			format1 = gl.RGB;
-			break;
-		case 4:
-			format1 = gl.RGBA;
-			break;
-		case 5:
-			format1 = gl.LUMINANCE;
-			break;
-		case 6:
-			format1 = gl.ALPHA;
-			break;
-		case 7:
-			format1 = gl.LUMINANCE_ALPHA;
-			break;
-		default:
-			format1 = gl.RGBA;
-		}
-		var type = gl.UNSIGNED_BYTE;
-		var data = haxe_io_UInt8Array.fromBytes(textureData.bytes);
-		gl.texSubImage2D(target,0,x,y,width,height,format1,type,data);
-	}
-	if(peote_view_intern_GLTool.getLastGlError(gl) == gl.OUT_OF_MEMORY) {
-		throw haxe_Exception.thrown("OUT OF GPU MEMORY while texture creation");
-	}
-	if(genMipmap) {
-		var glTexture1 = null;
-		if(glTexture1 != null) {
-			gl.bindTexture(gl.TEXTURE_2D,glTexture1);
-		}
-		gl.generateMipmap(gl.TEXTURE_2D);
-		if(glTexture1 != null) {
-			gl.bindTexture(gl.TEXTURE_2D,null);
-		}
-	}
-	if(glTexture != null) {
-		gl.bindTexture(gl.TEXTURE_2D,null);
-	}
-};
-peote_view_intern_TexUtils.createPickingTexture = function(gl,isRGBA32I) {
-	if(isRGBA32I == null) {
-		isRGBA32I = false;
-	}
-	var glTexture = gl.createTexture();
-	gl.bindTexture(gl.TEXTURE_2D,glTexture);
-	if(isRGBA32I) {
-		var target = gl.TEXTURE_2D;
-		var internalformat = gl.RGBA32I;
-		var format = gl.RGBA_INTEGER;
-		var type = gl.INT;
-		var data = 0;
-		if(data == 0) {
-			gl.texImage2D(target,0,internalformat,1,1,0,format,type,null);
-		} else {
-			gl.texImage2D(target,0,internalformat,1,1,0,format,type,data);
-		}
-	} else {
-		var target = gl.TEXTURE_2D;
-		var internalformat = gl.RGBA;
-		var format = gl.RGBA;
-		var type = gl.UNSIGNED_BYTE;
-		var data = 0;
-		if(data == 0) {
-			gl.texImage2D(target,0,internalformat,1,1,0,format,type,null);
-		} else {
-			gl.texImage2D(target,0,internalformat,1,1,0,format,type,data);
-		}
-	}
-	gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.NEAREST);
-	gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.NEAREST);
-	gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);
-	gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
-	gl.bindTexture(gl.TEXTURE_2D,null);
-	return glTexture;
-};
-peote_view_intern_TexUtils.optimalTextureSize = function(slots,slotWidth,slotHeight,maxTextureSize,powerOfTwo,errorIfNotFit,debug) {
-	if(debug == null) {
-		debug = true;
-	}
-	if(errorIfNotFit == null) {
-		errorIfNotFit = true;
-	}
-	if(powerOfTwo == null) {
-		powerOfTwo = true;
-	}
-	if(powerOfTwo) {
-		var errorIfNotFit1 = errorIfNotFit;
-		var debug1 = debug;
-		if(errorIfNotFit1 == null) {
-			errorIfNotFit1 = true;
-		}
-		var mts = Math.ceil(Math.log(maxTextureSize) / Math.log(2));
-		var a = Math.ceil(Math.log(slots * slotWidth * slotHeight) / Math.log(2));
-		var r;
-		var w = 1;
-		var h = a - 1;
-		var delta = Math.floor(Math.abs(w - h));
-		var rmin = (1 << mts) * (1 << mts);
-		var found = false;
-		var n = Math.floor(Math.min(mts,a));
-		var m;
-		while(1 << n >= slotWidth) {
-			m = Math.floor(Math.min(mts,a - n + 1));
-			while(1 << m >= slotHeight) {
-				if(Math.floor((1 << n) / slotWidth) * Math.floor((1 << m) / slotHeight) < slots) {
-					break;
-				}
-				r = (1 << n) * (1 << m) - slots * slotWidth * slotHeight;
-				if(r < 0) {
-					break;
-				}
-				if(r <= rmin) {
-					if(r == rmin) {
-						if(Math.abs(n - m) < delta) {
-							delta = Math.floor(Math.abs(n - m));
-							w = n;
-							h = m;
-							found = true;
-						}
-					} else {
-						w = n;
-						h = m;
-						rmin = r;
-						found = true;
-					}
-				}
-				--m;
-			}
-			--n;
-		}
-		if(found) {
-			w = 1 << w;
-			h = 1 << h;
-		} else {
-			if(errorIfNotFit1) {
-				throw haxe_Exception.thrown("Error: max texture-size (" + maxTextureSize + ") is to small for " + slots + " images (" + slotWidth + " x " + slotHeight + ")");
-			}
-			if(slotWidth > maxTextureSize || slotHeight > maxTextureSize) {
-				throw haxe_Exception.thrown("Error: max texture-size (" + maxTextureSize + ") is to small for image (" + slotWidth + " x " + slotHeight + ")");
-			}
-			h = maxTextureSize;
-			w = h;
-		}
-		return { width : w, height : h, slotsX : w / slotWidth | 0, slotsY : h / slotHeight | 0};
-	}
-	if(slots < 1) {
-		throw haxe_Exception.thrown("Error: the slots have to be greater then 1");
-	} else if(slots == 1) {
-		if(slotWidth > maxTextureSize || slotHeight > maxTextureSize) {
-			throw haxe_Exception.thrown("Error: max texture-size (" + maxTextureSize + ") is to small for image (" + slotWidth + " x " + slotHeight + ")");
-		} else {
-			return { width : slotWidth, height : slotHeight, slotsX : 1, slotsY : 1};
-		}
-	}
-	var wMax = maxTextureSize / slotWidth | 0;
-	var hMax = maxTextureSize / slotHeight | 0;
-	var w = Math.sqrt(slots * slotHeight / slotWidth) | 0;
-	var best = w;
-	var h = Math.ceil(slots / w);
-	var r = w * h - slots;
-	var aspect = null;
-	if(h <= hMax && w <= wMax) {
-		while(r > 0 && w < slots && w < wMax) {
-			++w;
-			h = Math.ceil(slots / w);
-			if(w * h - slots < r) {
-				r = w * h - slots;
-				best = w;
-			}
-		}
-		w = best;
-		h = Math.ceil(slots / w);
-		aspect = w * slotWidth > h * slotHeight ? w * slotWidth / (h * slotHeight) : h * slotHeight / (w * slotWidth);
-	}
-	if(aspect == null || aspect != 1.0) {
-		var _h = Math.sqrt(slots * slotWidth / slotHeight) | 0;
-		best = _h;
-		var _w = Math.ceil(slots / _h);
-		var _r = _w * _h - slots;
-		var _aspect = null;
-		if(_w <= wMax && _h <= hMax) {
-			while(_r > 0 && _h < slots && _h < hMax) {
-				++_h;
-				_w = Math.ceil(slots / _h);
-				if(_w * _h - slots < _r) {
-					_r = _w * _h - slots;
-					best = _h;
-				}
-			}
-			_h = best;
-			_w = Math.ceil(slots / _h);
-			aspect = _w * slotWidth > _h * slotHeight ? _w * slotWidth / (_h * slotHeight) : _h * slotHeight / (_w * slotWidth);
-		}
-		if(aspect == null && _aspect == null) {
-			if(errorIfNotFit) {
-				throw haxe_Exception.thrown("Error: max texture-size (" + maxTextureSize + ") is to small for " + slots + " images (" + slotWidth + " x " + slotHeight + ")");
-			}
-			w = wMax;
-			h = hMax;
-		} else if(aspect == null || _aspect != null && (_r < r || _r == r && aspect > _aspect)) {
-			w = _w;
-			h = _h;
-		}
-	}
-	return { width : w * slotWidth, height : h * slotHeight, slotsX : w, slotsY : h};
 };
 var justGraphix_target_openflTarget_$_PeoteV = function() { };
 justGraphix_target_openflTarget_$_PeoteV.__name__ = "justGraphix.target.openflTarget_.PeoteV";
@@ -20323,7 +22205,7 @@ peote_view_intern_BufferInterface.__isInterface__ = true;
 peote_view_intern_BufferInterface.prototype = {
 	__class__: peote_view_intern_BufferInterface
 };
-var peote_view_Buffer_$Elem = function(minSize,growSize,autoShrink) {
+var peote_view_Buffer_$PeoteBasicElement = function(minSize,growSize,autoShrink) {
 	if(autoShrink == null) {
 		autoShrink = false;
 	}
@@ -20346,31 +22228,31 @@ var peote_view_Buffer_$Elem = function(minSize,growSize,autoShrink) {
 	}
 	this._elements = new Array(this._minSize);
 	if(peote_view_Version.isINSTANCED) {
-		if(peote_view_element_Elem.instanceBytes == null) {
-			peote_view_element_Elem.instanceBytes = new peote_view_intern_BufferBytes(new ArrayBuffer(12));
-			peote_view_element_Elem.instanceBytes.b[0] = 1;
-			peote_view_element_Elem.instanceBytes.b[1] = 1;
-			peote_view_element_Elem.instanceBytes.b[2] = 1;
-			peote_view_element_Elem.instanceBytes.b[3] = 1;
-			peote_view_element_Elem.instanceBytes.b[4] = 0;
-			peote_view_element_Elem.instanceBytes.b[5] = 1;
-			peote_view_element_Elem.instanceBytes.b[6] = 1;
-			peote_view_element_Elem.instanceBytes.b[7] = 0;
-			peote_view_element_Elem.instanceBytes.b[8] = 0;
-			peote_view_element_Elem.instanceBytes.b[9] = 0;
-			peote_view_element_Elem.instanceBytes.b[10] = 0;
-			peote_view_element_Elem.instanceBytes.b[11] = 0;
+		if(justGraphix_target_openflTarget_$_PeoteBasicElement.instanceBytes == null) {
+			justGraphix_target_openflTarget_$_PeoteBasicElement.instanceBytes = new peote_view_intern_BufferBytes(new ArrayBuffer(12));
+			justGraphix_target_openflTarget_$_PeoteBasicElement.instanceBytes.b[0] = 1;
+			justGraphix_target_openflTarget_$_PeoteBasicElement.instanceBytes.b[1] = 1;
+			justGraphix_target_openflTarget_$_PeoteBasicElement.instanceBytes.b[2] = 1;
+			justGraphix_target_openflTarget_$_PeoteBasicElement.instanceBytes.b[3] = 1;
+			justGraphix_target_openflTarget_$_PeoteBasicElement.instanceBytes.b[4] = 0;
+			justGraphix_target_openflTarget_$_PeoteBasicElement.instanceBytes.b[5] = 1;
+			justGraphix_target_openflTarget_$_PeoteBasicElement.instanceBytes.b[6] = 1;
+			justGraphix_target_openflTarget_$_PeoteBasicElement.instanceBytes.b[7] = 0;
+			justGraphix_target_openflTarget_$_PeoteBasicElement.instanceBytes.b[8] = 0;
+			justGraphix_target_openflTarget_$_PeoteBasicElement.instanceBytes.b[9] = 0;
+			justGraphix_target_openflTarget_$_PeoteBasicElement.instanceBytes.b[10] = 0;
+			justGraphix_target_openflTarget_$_PeoteBasicElement.instanceBytes.b[11] = 0;
 		}
-		this._elemBuffSize = 24;
+		this._elemBuffSize = 12;
 	} else {
-		this._elemBuffSize = 168;
+		this._elemBuffSize = 72;
 	}
 	this._bytes = new peote_view_intern_BufferBytes(new ArrayBuffer(this._elemBuffSize * this._minSize));
 	this._bytes.fill(0,this._elemBuffSize * this._minSize,0);
 };
-peote_view_Buffer_$Elem.__name__ = "peote.view.Buffer_Elem";
-peote_view_Buffer_$Elem.__interfaces__ = [peote_view_intern_BufferInterface];
-peote_view_Buffer_$Elem.prototype = {
+peote_view_Buffer_$PeoteBasicElement.__name__ = "peote.view.Buffer_PeoteBasicElement";
+peote_view_Buffer_$PeoteBasicElement.__interfaces__ = [peote_view_intern_BufferInterface];
+peote_view_Buffer_$PeoteBasicElement.prototype = {
 	setNewGLContext: function(newGl) {
 		if(newGl != null && newGl != this._gl) {
 			if(this._gl != null) {
@@ -20393,8 +22275,8 @@ peote_view_Buffer_$Elem.prototype = {
 				this._glInstanceBuffer = this._gl.createBuffer();
 				var gl = this._gl;
 				gl.bindBuffer(gl.ARRAY_BUFFER,this._glInstanceBuffer);
-				var size = peote_view_element_Elem.instanceBytes.length;
-				var bytes = peote_view_element_Elem.instanceBytes;
+				var size = justGraphix_target_openflTarget_$_PeoteBasicElement.instanceBytes.length;
+				var bytes = justGraphix_target_openflTarget_$_PeoteBasicElement.instanceBytes;
 				gl.bufferData(gl.ARRAY_BUFFER,new Uint8Array(bytes.b.bufferValue,0),gl.STATIC_DRAW);
 				gl.bindBuffer(gl.ARRAY_BUFFER,null);
 			}
@@ -20408,36 +22290,26 @@ peote_view_Buffer_$Elem.prototype = {
 					gl.enableVertexAttribArray(0);
 					gl.vertexAttribPointer(0,2,gl.UNSIGNED_BYTE,false,2,0);
 					gl.bindBuffer(gl.ARRAY_BUFFER,glBuffer);
-					gl.enableVertexAttribArray(5);
-					gl.vertexAttribPointer(5,4,gl.UNSIGNED_BYTE,true,24,0);
-					gl.vertexAttribDivisor(5,1);
-					gl.enableVertexAttribArray(4);
-					gl.vertexAttribPointer(4,2,gl.FLOAT,false,24,4);
-					gl.vertexAttribDivisor(4,1);
 					gl.enableVertexAttribArray(1);
-					gl.vertexAttribPointer(1,2,gl.SHORT,false,24,12);
+					gl.vertexAttribPointer(1,2,gl.SHORT,false,12,0);
 					gl.vertexAttribDivisor(1,1);
 					gl.enableVertexAttribArray(2);
-					gl.vertexAttribPointer(2,2,gl.SHORT,false,24,16);
+					gl.vertexAttribPointer(2,2,gl.SHORT,false,12,4);
 					gl.vertexAttribDivisor(2,1);
 					gl.enableVertexAttribArray(3);
-					gl.vertexAttribPointer(3,2,gl.SHORT,false,24,20);
+					gl.vertexAttribPointer(3,1,gl.SHORT,false,12,8);
 					gl.vertexAttribDivisor(3,1);
 				} else {
 					var gl = this._gl;
 					gl.bindBuffer(gl.ARRAY_BUFFER,this._glBuffer);
-					gl.enableVertexAttribArray(5);
-					gl.vertexAttribPointer(5,4,gl.UNSIGNED_BYTE,true,28,0);
-					gl.enableVertexAttribArray(4);
-					gl.vertexAttribPointer(4,2,gl.FLOAT,false,28,4);
 					gl.enableVertexAttribArray(1);
-					gl.vertexAttribPointer(1,2,gl.SHORT,false,28,12);
+					gl.vertexAttribPointer(1,2,gl.SHORT,false,12,0);
 					gl.enableVertexAttribArray(2);
-					gl.vertexAttribPointer(2,2,gl.SHORT,false,28,16);
+					gl.vertexAttribPointer(2,2,gl.SHORT,false,12,4);
 					gl.enableVertexAttribArray(3);
-					gl.vertexAttribPointer(3,2,gl.SHORT,false,28,20);
+					gl.vertexAttribPointer(3,1,gl.SHORT,false,12,8);
 					gl.enableVertexAttribArray(0);
-					gl.vertexAttribPointer(0,2,gl.UNSIGNED_BYTE,false,28,24);
+					gl.vertexAttribPointer(0,2,gl.UNSIGNED_BYTE,false,12,10);
 				}
 				this._gl.bindVertexArray(null);
 			}
@@ -20446,83 +22318,55 @@ peote_view_Buffer_$Elem.prototype = {
 	,updateElement: function(element) {
 		if(peote_view_Version.isINSTANCED) {
 			var bytes = this._bytes;
-			bytes.b_Int32[element.bytePos >> 2] = element.c;
-			bytes.b_UFloat32[element.bytePos + 4 >> 2] = element.r / 180 * Math.PI;
-			bytes.b_UFloat32[element.bytePos + 8 >> 2] = Math.min(1.0,Math.max(-1.0,element.z / 2097151));
-			bytes.b_Uint16[element.bytePos + 12 >> 1] = element.x & 65535;
-			bytes.b_Uint16[element.bytePos + 14 >> 1] = element.y & 65535;
-			bytes.b_Uint16[element.bytePos + 16 >> 1] = element.w & 65535;
-			bytes.b_Uint16[element.bytePos + 18 >> 1] = element.h & 65535;
-			bytes.b_Uint16[element.bytePos + 20 >> 1] = element.px & 65535;
-			bytes.b_Uint16[element.bytePos + 22 >> 1] = element.py & 65535;
+			bytes.b_Uint16[element.bytePos >> 1] = element.x & 65535;
+			bytes.b_Uint16[element.bytePos + 2 >> 1] = element.y & 65535;
+			bytes.b_Uint16[element.bytePos + 4 >> 1] = element.wide & 65535;
+			bytes.b_Uint16[element.bytePos + 6 >> 1] = element.hi & 65535;
+			bytes.b_Uint16[element.bytePos + 8 >> 1] = element.slot & 65535;
 		} else {
 			var bytes = this._bytes;
-			bytes.b_Int32[element.bytePos >> 2] = element.c;
-			bytes.b_UFloat32[element.bytePos + 4 >> 2] = element.r / 180 * Math.PI;
-			bytes.b_UFloat32[element.bytePos + 8 >> 2] = Math.min(1.0,Math.max(-1.0,element.z / 2097151));
+			bytes.b_Uint16[element.bytePos >> 1] = element.x & 65535;
+			bytes.b_Uint16[element.bytePos + 2 >> 1] = element.y & 65535;
+			bytes.b_Uint16[element.bytePos + 4 >> 1] = element.wide & 65535;
+			bytes.b_Uint16[element.bytePos + 6 >> 1] = element.hi & 65535;
+			bytes.b_Uint16[element.bytePos + 8 >> 1] = element.slot & 65535;
+			bytes.b[element.bytePos + 10] = 1;
+			bytes.b[element.bytePos + 11] = 1;
 			bytes.b_Uint16[element.bytePos + 12 >> 1] = element.x & 65535;
 			bytes.b_Uint16[element.bytePos + 14 >> 1] = element.y & 65535;
-			bytes.b_Uint16[element.bytePos + 16 >> 1] = element.w & 65535;
-			bytes.b_Uint16[element.bytePos + 18 >> 1] = element.h & 65535;
-			bytes.b_Uint16[element.bytePos + 20 >> 1] = element.px & 65535;
-			bytes.b_Uint16[element.bytePos + 22 >> 1] = element.py & 65535;
-			bytes.b[element.bytePos + 24] = 1;
-			bytes.b[element.bytePos + 25] = 1;
-			bytes.b_Int32[element.bytePos + 28 >> 2] = element.c;
-			bytes.b_UFloat32[element.bytePos + 32 >> 2] = element.r / 180 * Math.PI;
-			bytes.b_UFloat32[element.bytePos + 36 >> 2] = Math.min(1.0,Math.max(-1.0,element.z / 2097151));
-			bytes.b_Uint16[element.bytePos + 40 >> 1] = element.x & 65535;
-			bytes.b_Uint16[element.bytePos + 42 >> 1] = element.y & 65535;
-			bytes.b_Uint16[element.bytePos + 44 >> 1] = element.w & 65535;
-			bytes.b_Uint16[element.bytePos + 46 >> 1] = element.h & 65535;
-			bytes.b_Uint16[element.bytePos + 48 >> 1] = element.px & 65535;
-			bytes.b_Uint16[element.bytePos + 50 >> 1] = element.py & 65535;
-			bytes.b[element.bytePos + 52] = 1;
-			bytes.b[element.bytePos + 53] = 1;
-			bytes.b_Int32[element.bytePos + 56 >> 2] = element.c;
-			bytes.b_UFloat32[element.bytePos + 60 >> 2] = element.r / 180 * Math.PI;
-			bytes.b_UFloat32[element.bytePos + 64 >> 2] = Math.min(1.0,Math.max(-1.0,element.z / 2097151));
-			bytes.b_Uint16[element.bytePos + 68 >> 1] = element.x & 65535;
-			bytes.b_Uint16[element.bytePos + 70 >> 1] = element.y & 65535;
-			bytes.b_Uint16[element.bytePos + 72 >> 1] = element.w & 65535;
-			bytes.b_Uint16[element.bytePos + 74 >> 1] = element.h & 65535;
-			bytes.b_Uint16[element.bytePos + 76 >> 1] = element.px & 65535;
-			bytes.b_Uint16[element.bytePos + 78 >> 1] = element.py & 65535;
-			bytes.b[element.bytePos + 80] = 0;
-			bytes.b[element.bytePos + 81] = 1;
-			bytes.b_Int32[element.bytePos + 84 >> 2] = element.c;
-			bytes.b_UFloat32[element.bytePos + 88 >> 2] = element.r / 180 * Math.PI;
-			bytes.b_UFloat32[element.bytePos + 92 >> 2] = Math.min(1.0,Math.max(-1.0,element.z / 2097151));
-			bytes.b_Uint16[element.bytePos + 96 >> 1] = element.x & 65535;
-			bytes.b_Uint16[element.bytePos + 98 >> 1] = element.y & 65535;
-			bytes.b_Uint16[element.bytePos + 100 >> 1] = element.w & 65535;
-			bytes.b_Uint16[element.bytePos + 102 >> 1] = element.h & 65535;
-			bytes.b_Uint16[element.bytePos + 104 >> 1] = element.px & 65535;
-			bytes.b_Uint16[element.bytePos + 106 >> 1] = element.py & 65535;
-			bytes.b[element.bytePos + 108] = 1;
-			bytes.b[element.bytePos + 109] = 0;
-			bytes.b_Int32[element.bytePos + 112 >> 2] = element.c;
-			bytes.b_UFloat32[element.bytePos + 116 >> 2] = element.r / 180 * Math.PI;
-			bytes.b_UFloat32[element.bytePos + 120 >> 2] = Math.min(1.0,Math.max(-1.0,element.z / 2097151));
-			bytes.b_Uint16[element.bytePos + 124 >> 1] = element.x & 65535;
-			bytes.b_Uint16[element.bytePos + 126 >> 1] = element.y & 65535;
-			bytes.b_Uint16[element.bytePos + 128 >> 1] = element.w & 65535;
-			bytes.b_Uint16[element.bytePos + 130 >> 1] = element.h & 65535;
-			bytes.b_Uint16[element.bytePos + 132 >> 1] = element.px & 65535;
-			bytes.b_Uint16[element.bytePos + 134 >> 1] = element.py & 65535;
-			bytes.b[element.bytePos + 136] = 0;
-			bytes.b[element.bytePos + 137] = 0;
-			bytes.b_Int32[element.bytePos + 140 >> 2] = element.c;
-			bytes.b_UFloat32[element.bytePos + 144 >> 2] = element.r / 180 * Math.PI;
-			bytes.b_UFloat32[element.bytePos + 148 >> 2] = Math.min(1.0,Math.max(-1.0,element.z / 2097151));
-			bytes.b_Uint16[element.bytePos + 152 >> 1] = element.x & 65535;
-			bytes.b_Uint16[element.bytePos + 154 >> 1] = element.y & 65535;
-			bytes.b_Uint16[element.bytePos + 156 >> 1] = element.w & 65535;
-			bytes.b_Uint16[element.bytePos + 158 >> 1] = element.h & 65535;
-			bytes.b_Uint16[element.bytePos + 160 >> 1] = element.px & 65535;
-			bytes.b_Uint16[element.bytePos + 162 >> 1] = element.py & 65535;
-			bytes.b[element.bytePos + 164] = 0;
-			bytes.b[element.bytePos + 165] = 0;
+			bytes.b_Uint16[element.bytePos + 16 >> 1] = element.wide & 65535;
+			bytes.b_Uint16[element.bytePos + 18 >> 1] = element.hi & 65535;
+			bytes.b_Uint16[element.bytePos + 20 >> 1] = element.slot & 65535;
+			bytes.b[element.bytePos + 22] = 1;
+			bytes.b[element.bytePos + 23] = 1;
+			bytes.b_Uint16[element.bytePos + 24 >> 1] = element.x & 65535;
+			bytes.b_Uint16[element.bytePos + 26 >> 1] = element.y & 65535;
+			bytes.b_Uint16[element.bytePos + 28 >> 1] = element.wide & 65535;
+			bytes.b_Uint16[element.bytePos + 30 >> 1] = element.hi & 65535;
+			bytes.b_Uint16[element.bytePos + 32 >> 1] = element.slot & 65535;
+			bytes.b[element.bytePos + 34] = 0;
+			bytes.b[element.bytePos + 35] = 1;
+			bytes.b_Uint16[element.bytePos + 36 >> 1] = element.x & 65535;
+			bytes.b_Uint16[element.bytePos + 38 >> 1] = element.y & 65535;
+			bytes.b_Uint16[element.bytePos + 40 >> 1] = element.wide & 65535;
+			bytes.b_Uint16[element.bytePos + 42 >> 1] = element.hi & 65535;
+			bytes.b_Uint16[element.bytePos + 44 >> 1] = element.slot & 65535;
+			bytes.b[element.bytePos + 46] = 1;
+			bytes.b[element.bytePos + 47] = 0;
+			bytes.b_Uint16[element.bytePos + 48 >> 1] = element.x & 65535;
+			bytes.b_Uint16[element.bytePos + 50 >> 1] = element.y & 65535;
+			bytes.b_Uint16[element.bytePos + 52 >> 1] = element.wide & 65535;
+			bytes.b_Uint16[element.bytePos + 54 >> 1] = element.hi & 65535;
+			bytes.b_Uint16[element.bytePos + 56 >> 1] = element.slot & 65535;
+			bytes.b[element.bytePos + 58] = 0;
+			bytes.b[element.bytePos + 59] = 0;
+			bytes.b_Uint16[element.bytePos + 60 >> 1] = element.x & 65535;
+			bytes.b_Uint16[element.bytePos + 62 >> 1] = element.y & 65535;
+			bytes.b_Uint16[element.bytePos + 64 >> 1] = element.wide & 65535;
+			bytes.b_Uint16[element.bytePos + 66 >> 1] = element.hi & 65535;
+			bytes.b_Uint16[element.bytePos + 68 >> 1] = element.slot & 65535;
+			bytes.b[element.bytePos + 70] = 0;
+			bytes.b[element.bytePos + 71] = 0;
 		}
 		if(element.bytePos == -1) {
 			throw haxe_Exception.thrown("Error, Element is not added to Buffer");
@@ -20587,36 +22431,26 @@ peote_view_Buffer_$Elem.prototype = {
 							gl.enableVertexAttribArray(0);
 							gl.vertexAttribPointer(0,2,gl.UNSIGNED_BYTE,false,2,0);
 							gl.bindBuffer(gl.ARRAY_BUFFER,glBuffer);
-							gl.enableVertexAttribArray(5);
-							gl.vertexAttribPointer(5,4,gl.UNSIGNED_BYTE,true,24,0);
-							gl.vertexAttribDivisor(5,1);
-							gl.enableVertexAttribArray(4);
-							gl.vertexAttribPointer(4,2,gl.FLOAT,false,24,4);
-							gl.vertexAttribDivisor(4,1);
 							gl.enableVertexAttribArray(1);
-							gl.vertexAttribPointer(1,2,gl.SHORT,false,24,12);
+							gl.vertexAttribPointer(1,2,gl.SHORT,false,12,0);
 							gl.vertexAttribDivisor(1,1);
 							gl.enableVertexAttribArray(2);
-							gl.vertexAttribPointer(2,2,gl.SHORT,false,24,16);
+							gl.vertexAttribPointer(2,2,gl.SHORT,false,12,4);
 							gl.vertexAttribDivisor(2,1);
 							gl.enableVertexAttribArray(3);
-							gl.vertexAttribPointer(3,2,gl.SHORT,false,24,20);
+							gl.vertexAttribPointer(3,1,gl.SHORT,false,12,8);
 							gl.vertexAttribDivisor(3,1);
 						} else {
 							var gl = this._gl;
 							gl.bindBuffer(gl.ARRAY_BUFFER,this._glBuffer);
-							gl.enableVertexAttribArray(5);
-							gl.vertexAttribPointer(5,4,gl.UNSIGNED_BYTE,true,28,0);
-							gl.enableVertexAttribArray(4);
-							gl.vertexAttribPointer(4,2,gl.FLOAT,false,28,4);
 							gl.enableVertexAttribArray(1);
-							gl.vertexAttribPointer(1,2,gl.SHORT,false,28,12);
+							gl.vertexAttribPointer(1,2,gl.SHORT,false,12,0);
 							gl.enableVertexAttribArray(2);
-							gl.vertexAttribPointer(2,2,gl.SHORT,false,28,16);
+							gl.vertexAttribPointer(2,2,gl.SHORT,false,12,4);
 							gl.enableVertexAttribArray(3);
-							gl.vertexAttribPointer(3,2,gl.SHORT,false,28,20);
+							gl.vertexAttribPointer(3,1,gl.SHORT,false,12,8);
 							gl.enableVertexAttribArray(0);
-							gl.vertexAttribPointer(0,2,gl.UNSIGNED_BYTE,false,28,24);
+							gl.vertexAttribPointer(0,2,gl.UNSIGNED_BYTE,false,12,10);
 						}
 						this._gl.bindVertexArray(null);
 					}
@@ -20646,16 +22480,16 @@ peote_view_Buffer_$Elem.prototype = {
 		}
 	}
 	,getVertexShader: function() {
-		return "\n\t::if isES3::#version 300 es::end::\n\t::if VERTEX_INT_PRECISION::precision ::VERTEX_INT_PRECISION:: int; ::end::\n\t::if VERTEX_FLOAT_PRECISION::precision ::VERTEX_FLOAT_PRECISION:: float; ::end::\n\t::if VERTEX_SAMPLER_PRECISION::precision ::VERTEX_SAMPLER_PRECISION:: sampler2D; ::end::\n\t\n\t// Uniforms -------------------------\n\t::if (!isPICKING && isUBO)::\n\t//layout(std140) uniform uboView\n\tuniform uboView\n\t{\n\t\tvec2 uResolution;\n\t\tvec2 uViewOffset;\n\t\tvec2 uViewZoom;\n\t};\n\t//layout(std140) uniform uboDisplay\n\tuniform uboDisplay\n\t{\n\t\tvec2 uOffset;\n\t\tvec2 uZoom;\n\t};\n\t::else::\n\tuniform vec2 uResolution;\n\tuniform vec2 uOffset;\n\tuniform vec2 uZoom;\n\t::end::\n\t\n\t\n\t\n\t// Attributes -------------------------\n\t::IN:: vec2 aPosition;\n\t\n\t::if isPICKING::\n\t\t::if !isINSTANCED::\n\t\t\t::IN:: vec4 aElement;\n\t\t::end::\n\t::end::\n\t\n\t::IN:: vec2 aPos;\n\t::IN:: vec2 aSize;\n\t\n\t::IN:: vec2 aRotZ;\n\t::IN:: vec2 aPivot;\n\t\n\t::IN:: vec4 aColorStart0;\n\t\n\t\n\t\n\t// Varyings ---------------------------\n\t::if isPICKING::\n\t\t::if isINSTANCED::\n\t\t\tflat ::VAROUT:: int vElement;\n\t\t::else::\n\t\t\t::VAROUT:: vec4 vElement;\n\t\t::end::\n\t::end::\n\t\n\t::if isES3::flat ::end::::VAROUT:: vec4 vColor0;\n\t\n\t\n\t::if (hasTEXTURES || hasFRAGMENT_INJECTION)::\n\t\t::VAROUT:: vec2 vTexCoord;\n\t\t\n\t::end::\t\n\n\t// custom functions -------------------\n\t::VERTEX_INJECTION::\n\n\t// --------- vertex main --------------\n\tvoid main(void)\n\t{\n\t\t\n\t\tvec2 size = ::if SIZE_FORMULA::::SIZE_FORMULA::::else::aSize::end::;\n\t\tvec2 pivot = ::if PIVOT_FORMULA::::PIVOT_FORMULA::::else::aPivot::end::;\t\t\n\t\tvec2 rotZ = ::if ROTZ_FORMULA::::ROTZ_FORMULA::::else::aRotZ::end::;\n\t\tvec2 pos = ::if POS_FORMULA::::POS_FORMULA::::else::aPos::end::;\npos = pos + (aPosition * size - pivot) * mat2( vec2(cos(rotZ.x), -sin(rotZ.x)), vec2(sin(rotZ.x), cos(rotZ.x)) );\n\t\tvColor0 = aColorStart0.wzyx; \n\n\t\t\n\n\t\t::if (hasTEXTURES || hasFRAGMENT_INJECTION)::\n\t\t\tvTexCoord = aPosition;\t\t\t\n\t\t\t\n\t\t::end::\n\t\t\n\t\t::if isPICKING::\n\t\t\t::if isINSTANCED::\n\t\t\t\tvElement = gl_InstanceID + 1;\n\t\t\t::else::\n\t\t\t\tvElement = aElement;\n\t\t\t::end::\n\t\t::end::\n\t\t\n\t\tfloat width = uResolution.x;\n\t\tfloat height = uResolution.y;\n\t\t::if (!isPICKING && isUBO)::\n\t\tfloat deltaX = (uOffset.x  + uViewOffset.x) / uZoom.x;\n\t\tfloat deltaY = (uOffset.y  + uViewOffset.y) / uZoom.y;\n\t\tvec2 zoom = uZoom * uViewZoom;\n\t\t::else::\n\t\tfloat deltaX = uOffset.x;\n\t\tfloat deltaY = uOffset.y;\n\t\tvec2 zoom = uZoom;\n\t\t::end::\n\t\t\n\t\t::if isPIXELSNAPPING::\n\t\tpos = floor( pos * ::PIXELDIVISOR:: * zoom ) / ::PIXELDIVISOR:: / zoom;\n\t\t::end::\n\t\t\n\t\tgl_Position = vec4 (\n\t\t\t 2.0 * zoom.x/width  * (pos.x + deltaX) - 1.0,\n\t\t\t-2.0 * zoom.y/height * (pos.y + deltaY) + 1.0,\n\t\t\t- rotZ.y,\n\t\t\t1.0\n\t\t);\t\t\n\t\t\n\t}\n\t";
+		return "\n\t::if isES3::#version 300 es::end::\n\t::if VERTEX_INT_PRECISION::precision ::VERTEX_INT_PRECISION:: int; ::end::\n\t::if VERTEX_FLOAT_PRECISION::precision ::VERTEX_FLOAT_PRECISION:: float; ::end::\n\t::if VERTEX_SAMPLER_PRECISION::precision ::VERTEX_SAMPLER_PRECISION:: sampler2D; ::end::\n\t\n\t// Uniforms -------------------------\n\t::if (!isPICKING && isUBO)::\n\t//layout(std140) uniform uboView\n\tuniform uboView\n\t{\n\t\tvec2 uResolution;\n\t\tvec2 uViewOffset;\n\t\tvec2 uViewZoom;\n\t};\n\t//layout(std140) uniform uboDisplay\n\tuniform uboDisplay\n\t{\n\t\tvec2 uOffset;\n\t\tvec2 uZoom;\n\t};\n\t::else::\n\tuniform vec2 uResolution;\n\tuniform vec2 uOffset;\n\tuniform vec2 uZoom;\n\t::end::\n\t\n\t\n\t\n\t// Attributes -------------------------\n\t::IN:: vec2 aPosition;\n\t\n\t::if isPICKING::\n\t\t::if !isINSTANCED::\n\t\t\t::IN:: vec4 aElement;\n\t\t::end::\n\t::end::\n\t\n\t::IN:: vec2 aPos;\n\t::IN:: vec2 aSize;\n\t\n\t\n\t\n\t\n\t\n\t\n\t::IN:: float aShort0;\n\t\n\t// Varyings ---------------------------\n\t::if isPICKING::\n\t\t::if isINSTANCED::\n\t\t\tflat ::VAROUT:: int vElement;\n\t\t::else::\n\t\t\t::VAROUT:: vec4 vElement;\n\t\t::end::\n\t::end::\n\t\n\t\n\t\n\t\n\t::if (hasTEXTURES || hasFRAGMENT_INJECTION)::\n\t\t::VAROUT:: vec2 vTexCoord;\n\t\t::if isES3::flat ::end:: ::VAROUT:: float vTexPack0;\n\t::end::\t\n\n\t// custom functions -------------------\n\t::VERTEX_INJECTION::\n\n\t// --------- vertex main --------------\n\tvoid main(void)\n\t{\n\t\t\n\t\tvec2 size = ::if SIZE_FORMULA::::SIZE_FORMULA::::else::aSize::end::;\n\t\t\t\t\n\t\t\n\t\tvec2 pos = ::if POS_FORMULA::::POS_FORMULA::::else::aPos::end::;\npos = pos + aPosition * size;\n\t\t\n\n\t\t\n\n\t\t::if (hasTEXTURES || hasFRAGMENT_INJECTION)::\n\t\t\tvTexCoord = aPosition;\t\t\t\n\t\t\tvTexPack0 = ::if FORMULA_VARYINGS.slot::::FORMULA_VARYINGS.slot::::else::aShort0::end::;\n\t\t::end::\n\t\t\n\t\t::if isPICKING::\n\t\t\t::if isINSTANCED::\n\t\t\t\tvElement = gl_InstanceID + 1;\n\t\t\t::else::\n\t\t\t\tvElement = aElement;\n\t\t\t::end::\n\t\t::end::\n\t\t\n\t\tfloat width = uResolution.x;\n\t\tfloat height = uResolution.y;\n\t\t::if (!isPICKING && isUBO)::\n\t\tfloat deltaX = (uOffset.x  + uViewOffset.x) / uZoom.x;\n\t\tfloat deltaY = (uOffset.y  + uViewOffset.y) / uZoom.y;\n\t\tvec2 zoom = uZoom * uViewZoom;\n\t\t::else::\n\t\tfloat deltaX = uOffset.x;\n\t\tfloat deltaY = uOffset.y;\n\t\tvec2 zoom = uZoom;\n\t\t::end::\n\t\t\n\t\t::if isPIXELSNAPPING::\n\t\tpos = floor( pos * ::PIXELDIVISOR:: * zoom ) / ::PIXELDIVISOR:: / zoom;\n\t\t::end::\n\t\t\n\t\tgl_Position = vec4 (\n\t\t\t 2.0 * zoom.x/width  * (pos.x + deltaX) - 1.0,\n\t\t\t-2.0 * zoom.y/height * (pos.y + deltaY) + 1.0,\n\t\t\t- 0.0,\n\t\t\t1.0\n\t\t);\t\t\n\t\t\n\t}\n\t";
 	}
 	,getFragmentShader: function() {
-		return "\n\t::if isES3::#version 300 es::end::\n\t::foreach FRAGMENT_EXTENSIONS::#extension ::EXTENSION:: : enable\n\t::end::\n\t\n\t::if FRAGMENT_INT_PRECISION::precision ::FRAGMENT_INT_PRECISION:: int; ::end::\n\t::if FRAGMENT_FLOAT_PRECISION::precision ::FRAGMENT_FLOAT_PRECISION:: float; ::end::\n\t::if FRAGMENT_SAMPLER_PRECISION::precision ::FRAGMENT_SAMPLER_PRECISION:: sampler2D; ::end::\n\t\n\t// Uniforms -------------------------\t\n\t::FRAGMENT_PROGRAM_UNIFORMS::\n\t\n\t// Varyings ---------------------------\n\t::if isPICKING::\n\t\t::if isINSTANCED::\n\t\t\tflat ::VARIN:: int vElement;\n\t\t::else::\n\t\t\t::VARIN:: vec4 vElement;\n\t\t::end::\n\t::end::\n\n\t::if isES3::flat ::end::::VARIN:: vec4 vColor0; \n\t\n\t\t\t\n\t::if (hasTEXTURES || hasFRAGMENT_INJECTION)::\n\t\t::VARIN:: vec2 vTexCoord;\n\t\t\n\t::end::\t\n\t\n\t\n\t::if isES3::\n\t\t::if (isPICKING && isINSTANCED)::\n\t\t\tout int Color;\n\t\t::else::\n\t\t\tout vec4 Color;\n\t\t::end::\n\t::end::\n\n\t::if hasTEXTURE_FUNCTIONS::\n\t\t// function to get texture color\n\t\tvec4 getTextureColor(int TXTNUM, vec2 vTexCoord) {\n\t\t::foreach TEXTURES::\n\t\t\t\n\t\t\t::if (LAYER >= 0)::\n\t\t\t::if USED_ID::\n\t\t\t\tif (TXTNUM == ::LAYER::) {\n\t\t\t\t\t::foreach UNITS::\n\t\t\t\t\t::if !FIRST ::else ::end::::if !LAST ::if (0.0 < ::UNIT_VALUE::)::end::\n\t\t\t\t\t\treturn(texture::if !isES3::2D::end::(::TEXTURE::, vec2(vTexCoord.x * ::SLOTS_WIDTH::, vTexCoord.y * ::SLOTS_HEIGHT::)));\n\t\t\t\t\t::end::\n\t\t\t\t}\n\t\t\t::end::\n\t\t\t::end::\n\t\t\t\n\t\t::end::\n\t\t// default values:\n\t\t::foreach TEXTURE_DEFAULTS::\n\t\t\tif (TXTNUM == ::LAYER::) {return(::DEFAULT_VALUE::);}\t\t\n\t\t::end::\n\t\t}\n\t::else:: \n\t\t::if hasFRAGMENT_INJECTION::#define getTextureColor(a,b) vec4(0.0,0.0,0.0,0.0)::end::\n\t::end::\n\n\t::if hasTEXTURE_FUNCTIONS::\n\t\t// function to get full texture size\n\t\tvec2 getTextureResolution(int TXTNUM) {\n\t\t::foreach TEXTURES::\n\t\t\t\n\t\t\t::if (LAYER >= 0)::\n\t\t\t::if USED_ID::\n\t\t\t\tif (TXTNUM == ::LAYER::) {\n\t\t\t\t\t::foreach UNITS::\n\t\t\t\t\t::if !FIRST ::else ::end::::if !LAST ::if (0.0 < ::UNIT_VALUE::)::end::\n\t\t\t\t\t\treturn( vec2(::TEXTURE_WIDTH::, ::TEXTURE_HEIGHT::) );\n\t\t\t\t\t::end::\n\t\t\t\t}\n\t\t\t::end::\n\t\t\t::end::\n\t\t\t\n\t\t::end::\n\t\t// default values:\n\t\t::foreach TEXTURE_DEFAULTS::\n\t\t\tif (TXTNUM == ::LAYER::) {return(vec2(0.0,0.0));}\t\t\n\t\t::end::\n\t\t}\n\t::else:: \n\t\t::if hasFRAGMENT_INJECTION::#define getTextureResolution(a) vec2(0.0,0.0)::end::\n\t::end::\n\n\t// custom functions -------------------\n\t::FRAGMENT_INJECTION::\n\t\n\t// --------- fragment main ------------\n\tvoid main(void)\n\t{\t\n\t\tvec4 c0 = vColor0; \n\t\t\n\t\t::if hasTEXTURES::\n\t\t\t::foreach TEXTURES::\n\t\t\t\t// ------------- LAYER ::LAYER:: --------------\n\t\t\t\t\n\t\t\t\t::if (LAYER >= 0)::\n\t\t\t\t::if USED::\n\t\t\t\t\tvec4 t::LAYER::;\n\t\t\t\t\t::foreach UNITS::\n\t\t\t\t\t::if !FIRST ::else ::end::::if !LAST ::if (0.0 < ::UNIT_VALUE::)::end::\n\t\t\t\t\t\tt::LAYER:: = texture::if !isES3::2D::end::(::TEXTURE::, vec2(vTexCoord.x * ::SLOTS_WIDTH::, vTexCoord.y * ::SLOTS_HEIGHT::));\n\t\t\t\t\t::end::\n\t\t\t\t::end::\n\t\t\t\t::end::\n\t\t\t\t\n\t\t\t::end::\n\t\t::end::\n\t\t\n\t\t// calc final color from all layers\n\t\tvec4 col = ::FRAGMENT_CALC_LAYER::;\n\t\t\n\t\t::if isDISCARD:: \n\t\t\tif (col.a <= ::DISCARD::) discard;\n\t\t::end::\n\t\t\n\t\t::if isPICKING::\n\t\t\t::if !isES3::gl_Frag::end::Color = vElement;\n\t\t::else::\n\t\t\t::if !isES3::gl_Frag::end::Color = col;\n\t\t\t// this fixing problem on old FF if alpha goes zero\n\t\t\t// ::if !isES3::gl_Frag::end::Color.w = clamp(::if !isES3::gl_Frag::end::Color.w, 0.003, 1.0);\n\t\t::end::\n\t}\n\t";
+		return "\n\t::if isES3::#version 300 es::end::\n\t::foreach FRAGMENT_EXTENSIONS::#extension ::EXTENSION:: : enable\n\t::end::\n\t\n\t::if FRAGMENT_INT_PRECISION::precision ::FRAGMENT_INT_PRECISION:: int; ::end::\n\t::if FRAGMENT_FLOAT_PRECISION::precision ::FRAGMENT_FLOAT_PRECISION:: float; ::end::\n\t::if FRAGMENT_SAMPLER_PRECISION::precision ::FRAGMENT_SAMPLER_PRECISION:: sampler2D; ::end::\n\t\n\t// Uniforms -------------------------\t\n\t::FRAGMENT_PROGRAM_UNIFORMS::\n\t\n\t// Varyings ---------------------------\n\t::if isPICKING::\n\t\t::if isINSTANCED::\n\t\t\tflat ::VARIN:: int vElement;\n\t\t::else::\n\t\t\t::VARIN:: vec4 vElement;\n\t\t::end::\n\t::end::\n\n\t\n\t\n\t\t\t\n\t::if (hasTEXTURES || hasFRAGMENT_INJECTION)::\n\t\t::VARIN:: vec2 vTexCoord;\n\t\t::if isES3::flat ::end:: ::VARIN:: float vTexPack0;\n\t::end::\t\n\t\n\t\n\t::if isES3::\n\t\t::if (isPICKING && isINSTANCED)::\n\t\t\tout int Color;\n\t\t::else::\n\t\t\tout vec4 Color;\n\t\t::end::\n\t::end::\n\n\t::if hasTEXTURE_FUNCTIONS::\n\t\t// function to get texture color\n\t\tvec4 getTextureColor(int TXTNUM, vec2 vTexCoord) {\n\t\t::foreach TEXTURES::\n\t\t\t\n\t\t\t::if (LAYER >= 0)::\n\t\t\t::if USED_ID::\n\t\t\t\tif (TXTNUM == ::LAYER::) {\n\t\t\t\t\t::foreach UNITS::\n\t\t\t\t\t::if !FIRST ::else ::end::::if !LAST ::if (0.0 < ::UNIT_VALUE::)::end::\n\t\t\t\t\t\treturn(texture::if !isES3::2D::end::(::TEXTURE::, vec2(vTexCoord.x * ::SLOT_WIDTH:: + floor(mod(vTexPack0, ::SLOTS_X::)) * ::SLOT_WIDTH::, vTexCoord.y * ::SLOT_HEIGHT:: + floor(floor(vTexPack0)/::SLOTS_X::) * ::SLOT_HEIGHT::)));\n\t\t\t\t\t::end::\n\t\t\t\t}\n\t\t\t::end::\n\t\t\t::end::\n\t\t\t\n\t\t::end::\n\t\t// default values:\n\t\t::foreach TEXTURE_DEFAULTS::\n\t\t\tif (TXTNUM == ::LAYER::) {return(::DEFAULT_VALUE::);}\t\t\n\t\t::end::\n\t\t}\n\t::else:: \n\t\t::if hasFRAGMENT_INJECTION::#define getTextureColor(a,b) vec4(0.0,0.0,0.0,0.0)::end::\n\t::end::\n\n\t::if hasTEXTURE_FUNCTIONS::\n\t\t// function to get full texture size\n\t\tvec2 getTextureResolution(int TXTNUM) {\n\t\t::foreach TEXTURES::\n\t\t\t\n\t\t\t::if (LAYER >= 0)::\n\t\t\t::if USED_ID::\n\t\t\t\tif (TXTNUM == ::LAYER::) {\n\t\t\t\t\t::foreach UNITS::\n\t\t\t\t\t::if !FIRST ::else ::end::::if !LAST ::if (0.0 < ::UNIT_VALUE::)::end::\n\t\t\t\t\t\treturn( vec2(::TEXTURE_WIDTH::, ::TEXTURE_HEIGHT::) );\n\t\t\t\t\t::end::\n\t\t\t\t}\n\t\t\t::end::\n\t\t\t::end::\n\t\t\t\n\t\t::end::\n\t\t// default values:\n\t\t::foreach TEXTURE_DEFAULTS::\n\t\t\tif (TXTNUM == ::LAYER::) {return(vec2(0.0,0.0));}\t\t\n\t\t::end::\n\t\t}\n\t::else:: \n\t\t::if hasFRAGMENT_INJECTION::#define getTextureResolution(a) vec2(0.0,0.0)::end::\n\t::end::\n\n\t// custom functions -------------------\n\t::FRAGMENT_INJECTION::\n\t\n\t// --------- fragment main ------------\n\tvoid main(void)\n\t{\t\n\t\t\n\t\t\n\t\t::if hasTEXTURES::\n\t\t\t::foreach TEXTURES::\n\t\t\t\t// ------------- LAYER ::LAYER:: --------------\n\t\t\t\t\n\t\t\t\t::if (LAYER >= 0)::\n\t\t\t\t::if USED::\n\t\t\t\t\tvec4 t::LAYER::;\n\t\t\t\t\t::foreach UNITS::\n\t\t\t\t\t::if !FIRST ::else ::end::::if !LAST ::if (0.0 < ::UNIT_VALUE::)::end::\n\t\t\t\t\t\tt::LAYER:: = texture::if !isES3::2D::end::(::TEXTURE::, vec2(vTexCoord.x * ::SLOT_WIDTH:: + floor(mod(vTexPack0, ::SLOTS_X::)) * ::SLOT_WIDTH::, vTexCoord.y * ::SLOT_HEIGHT:: + floor(floor(vTexPack0)/::SLOTS_X::) * ::SLOT_HEIGHT::));\n\t\t\t\t\t::end::\n\t\t\t\t::end::\n\t\t\t\t::end::\n\t\t\t\t\n\t\t\t::end::\n\t\t::end::\n\t\t\n\t\t// calc final color from all layers\n\t\tvec4 col = ::FRAGMENT_CALC_LAYER::;\n\t\t\n\t\t::if isDISCARD:: \n\t\t\tif (col.a <= ::DISCARD::) discard;\n\t\t::end::\n\t\t\n\t\t::if isPICKING::\n\t\t\t::if !isES3::gl_Frag::end::Color = vElement;\n\t\t::else::\n\t\t\t::if !isES3::gl_Frag::end::Color = col;\n\t\t\t// this fixing problem on old FF if alpha goes zero\n\t\t\t// ::if !isES3::gl_Frag::end::Color.w = clamp(::if !isES3::gl_Frag::end::Color.w, 0.003, 1.0);\n\t\t::end::\n\t}\n\t";
 	}
 	,getTextureIdentifiers: function() {
 		return [];
 	}
 	,getColorIdentifiers: function() {
-		return "c".split(",");
+		return [];
 	}
 	,getCustomIdentifiers: function() {
 		return [];
@@ -20667,29 +22501,29 @@ peote_view_Buffer_$Elem.prototype = {
 		return "";
 	}
 	,getDefaultFormulaVars: function() {
-		return peote_view_element_Elem.DEFAULT_FORMULA_VARS;
+		return justGraphix_target_openflTarget_$_PeoteBasicElement.DEFAULT_FORMULA_VARS;
 	}
 	,getFormulas: function() {
-		return peote_view_element_Elem.FORMULAS;
+		return justGraphix_target_openflTarget_$_PeoteBasicElement.FORMULAS;
 	}
 	,getAttributes: function() {
-		return peote_view_element_Elem.ATTRIBUTES;
+		return justGraphix_target_openflTarget_$_PeoteBasicElement.ATTRIBUTES;
 	}
 	,getFormulaNames: function() {
-		return peote_view_element_Elem.FORMULA_NAMES;
+		return justGraphix_target_openflTarget_$_PeoteBasicElement.FORMULA_NAMES;
 	}
 	,getFormulaVaryings: function() {
-		if(peote_view_element_Elem.FORMULA_VARYINGS == "") {
+		if(justGraphix_target_openflTarget_$_PeoteBasicElement.FORMULA_VARYINGS == "") {
 			return [];
 		} else {
-			return peote_view_element_Elem.FORMULA_VARYINGS.split(",");
+			return justGraphix_target_openflTarget_$_PeoteBasicElement.FORMULA_VARYINGS.split(",");
 		}
 	}
 	,getFormulaConstants: function() {
-		if(peote_view_element_Elem.FORMULA_CONSTANTS == "") {
+		if(justGraphix_target_openflTarget_$_PeoteBasicElement.FORMULA_CONSTANTS == "") {
 			return [];
 		} else {
-			return peote_view_element_Elem.FORMULA_CONSTANTS.split(",");
+			return justGraphix_target_openflTarget_$_PeoteBasicElement.FORMULA_CONSTANTS.split(",");
 		}
 	}
 	,getMaxZindex: function() {
@@ -20699,7 +22533,7 @@ peote_view_Buffer_$Elem.prototype = {
 		return false;
 	}
 	,hasZindex: function() {
-		return true;
+		return false;
 	}
 	,hasPicking: function() {
 		return false;
@@ -20709,18 +22543,14 @@ peote_view_Buffer_$Elem.prototype = {
 	}
 	,bindAttribLocations: function(gl,glProgram) {
 		if(peote_view_Version.isINSTANCED) {
-			gl.bindAttribLocation(glProgram,5,"aColorStart0");
-			gl.bindAttribLocation(glProgram,4,"aRotZ");
 			gl.bindAttribLocation(glProgram,1,"aPos");
 			gl.bindAttribLocation(glProgram,2,"aSize");
-			gl.bindAttribLocation(glProgram,3,"aPivot");
+			gl.bindAttribLocation(glProgram,3,"aShort0");
 			gl.bindAttribLocation(glProgram,0,"aPosition");
 		} else {
-			gl.bindAttribLocation(glProgram,5,"aColorStart0");
-			gl.bindAttribLocation(glProgram,4,"aRotZ");
 			gl.bindAttribLocation(glProgram,1,"aPos");
 			gl.bindAttribLocation(glProgram,2,"aSize");
-			gl.bindAttribLocation(glProgram,3,"aPivot");
+			gl.bindAttribLocation(glProgram,3,"aShort0");
 			gl.bindAttribLocation(glProgram,0,"aPosition");
 		}
 	}
@@ -20736,20 +22566,14 @@ peote_view_Buffer_$Elem.prototype = {
 				gl.enableVertexAttribArray(0);
 				gl.vertexAttribPointer(0,2,gl.UNSIGNED_BYTE,false,2,0);
 				gl.bindBuffer(gl.ARRAY_BUFFER,glBuffer);
-				gl.enableVertexAttribArray(5);
-				gl.vertexAttribPointer(5,4,gl.UNSIGNED_BYTE,true,24,0);
-				gl.vertexAttribDivisor(5,1);
-				gl.enableVertexAttribArray(4);
-				gl.vertexAttribPointer(4,2,gl.FLOAT,false,24,4);
-				gl.vertexAttribDivisor(4,1);
 				gl.enableVertexAttribArray(1);
-				gl.vertexAttribPointer(1,2,gl.SHORT,false,24,12);
+				gl.vertexAttribPointer(1,2,gl.SHORT,false,12,0);
 				gl.vertexAttribDivisor(1,1);
 				gl.enableVertexAttribArray(2);
-				gl.vertexAttribPointer(2,2,gl.SHORT,false,24,16);
+				gl.vertexAttribPointer(2,2,gl.SHORT,false,12,4);
 				gl.vertexAttribDivisor(2,1);
 				gl.enableVertexAttribArray(3);
-				gl.vertexAttribPointer(3,2,gl.SHORT,false,24,20);
+				gl.vertexAttribPointer(3,1,gl.SHORT,false,12,8);
 				gl.vertexAttribDivisor(3,1);
 			}
 			this._gl.drawArraysInstanced(this._gl.TRIANGLE_STRIP,0,6,toElement);
@@ -20758,8 +22582,6 @@ peote_view_Buffer_$Elem.prototype = {
 			} else {
 				var gl = this._gl;
 				gl.disableVertexAttribArray(0);
-				gl.disableVertexAttribArray(5);
-				gl.disableVertexAttribArray(4);
 				gl.disableVertexAttribArray(1);
 				gl.disableVertexAttribArray(2);
 				gl.disableVertexAttribArray(3);
@@ -20771,18 +22593,14 @@ peote_view_Buffer_$Elem.prototype = {
 			} else {
 				var gl = this._gl;
 				gl.bindBuffer(gl.ARRAY_BUFFER,this._glBuffer);
-				gl.enableVertexAttribArray(5);
-				gl.vertexAttribPointer(5,4,gl.UNSIGNED_BYTE,true,28,0);
-				gl.enableVertexAttribArray(4);
-				gl.vertexAttribPointer(4,2,gl.FLOAT,false,28,4);
 				gl.enableVertexAttribArray(1);
-				gl.vertexAttribPointer(1,2,gl.SHORT,false,28,12);
+				gl.vertexAttribPointer(1,2,gl.SHORT,false,12,0);
 				gl.enableVertexAttribArray(2);
-				gl.vertexAttribPointer(2,2,gl.SHORT,false,28,16);
+				gl.vertexAttribPointer(2,2,gl.SHORT,false,12,4);
 				gl.enableVertexAttribArray(3);
-				gl.vertexAttribPointer(3,2,gl.SHORT,false,28,20);
+				gl.vertexAttribPointer(3,1,gl.SHORT,false,12,8);
 				gl.enableVertexAttribArray(0);
-				gl.vertexAttribPointer(0,2,gl.UNSIGNED_BYTE,false,28,24);
+				gl.vertexAttribPointer(0,2,gl.UNSIGNED_BYTE,false,12,10);
 			}
 			this._gl.drawArrays(this._gl.TRIANGLE_STRIP,0,toElement * 6);
 			if(peote_view_Version.isVAO) {
@@ -20790,8 +22608,6 @@ peote_view_Buffer_$Elem.prototype = {
 			} else {
 				var gl = this._gl;
 				gl.disableVertexAttribArray(0);
-				gl.disableVertexAttribArray(5);
-				gl.disableVertexAttribArray(4);
 				gl.disableVertexAttribArray(1);
 				gl.disableVertexAttribArray(2);
 				gl.disableVertexAttribArray(3);
@@ -20799,7 +22615,7 @@ peote_view_Buffer_$Elem.prototype = {
 			this._gl.bindBuffer(this._gl.ARRAY_BUFFER,null);
 		}
 	}
-	,__class__: peote_view_Buffer_$Elem
+	,__class__: peote_view_Buffer_$PeoteBasicElement
 };
 var peote_view_Display = function(x,y,width,height,color) {
 	if(color == null) {
@@ -22861,6 +24677,433 @@ peote_view_ActiveTexture.__name__ = "peote.view.ActiveTexture";
 peote_view_ActiveTexture.prototype = {
 	__class__: peote_view_ActiveTexture
 };
+var peote_view_Texture = function(slotWidth,slotHeight,slots,textureConfig) {
+	this.displays = [];
+	this.programs = [];
+	this.updated = false;
+	this.usedSlots = new haxe_ds_IntMap();
+	this.tilesY = 1;
+	this.tilesX = 1;
+	this.slotsY = 1;
+	this.slotsX = 1;
+	this.maxSlots = 1;
+	this.height = 0;
+	this.width = 0;
+	this.smoothMipmap = false;
+	this.mipmap = false;
+	this.mipmapIsCreated = false;
+	this.smoothShrink = false;
+	this.smoothExpand = false;
+	this.clearOnRenderInto = true;
+	this.glDepthBuffer = null;
+	this.framebuffer = null;
+	this.glTexture = null;
+	this.gl = null;
+	if(textureConfig == null) {
+		textureConfig = new peote_view_TextureConfig(null,null,null,null,null,null,null,null,null,null,null);
+	}
+	this.slotWidth = slotWidth;
+	this.slotHeight = slotHeight;
+	this.tilesX = textureConfig.tilesX;
+	this.tilesY = textureConfig.tilesY;
+	this.format = textureConfig.format;
+	var b = textureConfig.smoothExpand;
+	if(this.gl != null) {
+		var gl = this.gl;
+		var smoothExpand = this.smoothExpand;
+		var smoothShrink = null;
+		var smoothMipmap = null;
+		var glTexture = this.glTexture;
+		if(glTexture != null) {
+			gl.bindTexture(gl.TEXTURE_2D,glTexture);
+		}
+		if(smoothExpand != null) {
+			gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,smoothExpand ? gl.LINEAR : gl.NEAREST);
+		}
+		if(smoothShrink != null) {
+			if(smoothMipmap != null) {
+				if(smoothMipmap) {
+					gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,smoothShrink ? gl.LINEAR_MIPMAP_LINEAR : gl.NEAREST_MIPMAP_LINEAR);
+				} else {
+					gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,smoothShrink ? gl.LINEAR_MIPMAP_NEAREST : gl.NEAREST_MIPMAP_NEAREST);
+				}
+			} else {
+				gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,smoothShrink ? gl.LINEAR : gl.NEAREST);
+			}
+		}
+		if(glTexture != null) {
+			gl.bindTexture(gl.TEXTURE_2D,null);
+		}
+	}
+	this.smoothExpand = b;
+	var b = textureConfig.smoothShrink;
+	if(this.gl != null) {
+		var gl = this.gl;
+		var smoothExpand = null;
+		var smoothShrink = this.smoothShrink;
+		var smoothMipmap = this.mipmap ? this.smoothMipmap : null;
+		var glTexture = this.glTexture;
+		if(glTexture != null) {
+			gl.bindTexture(gl.TEXTURE_2D,glTexture);
+		}
+		if(smoothExpand != null) {
+			gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,smoothExpand ? gl.LINEAR : gl.NEAREST);
+		}
+		if(smoothShrink != null) {
+			if(smoothMipmap != null) {
+				if(smoothMipmap) {
+					gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,smoothShrink ? gl.LINEAR_MIPMAP_LINEAR : gl.NEAREST_MIPMAP_LINEAR);
+				} else {
+					gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,smoothShrink ? gl.LINEAR_MIPMAP_NEAREST : gl.NEAREST_MIPMAP_NEAREST);
+				}
+			} else {
+				gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,smoothShrink ? gl.LINEAR : gl.NEAREST);
+			}
+		}
+		if(glTexture != null) {
+			gl.bindTexture(gl.TEXTURE_2D,null);
+		}
+	}
+	this.smoothShrink = b;
+	this.mipmap = textureConfig.mipmap;
+	var b = textureConfig.smoothMipmap;
+	if(this.gl != null) {
+		var gl = this.gl;
+		var smoothExpand = null;
+		var smoothShrink = this.smoothShrink;
+		var smoothMipmap = this.mipmap ? this.smoothMipmap : null;
+		var glTexture = this.glTexture;
+		if(glTexture != null) {
+			gl.bindTexture(gl.TEXTURE_2D,glTexture);
+		}
+		if(smoothExpand != null) {
+			gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,smoothExpand ? gl.LINEAR : gl.NEAREST);
+		}
+		if(smoothShrink != null) {
+			if(smoothMipmap != null) {
+				if(smoothMipmap) {
+					gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,smoothShrink ? gl.LINEAR_MIPMAP_LINEAR : gl.NEAREST_MIPMAP_LINEAR);
+				} else {
+					gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,smoothShrink ? gl.LINEAR_MIPMAP_NEAREST : gl.NEAREST_MIPMAP_NEAREST);
+				}
+			} else {
+				gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,smoothShrink ? gl.LINEAR : gl.NEAREST);
+			}
+		}
+		if(glTexture != null) {
+			gl.bindTexture(gl.TEXTURE_2D,null);
+		}
+	}
+	this.smoothMipmap = b;
+	if(slots == null) {
+		this.slotsX = textureConfig.slotsX;
+		this.slotsY = textureConfig.slotsY;
+		this.width = this.slotsX * slotWidth;
+		this.height = this.slotsY * slotHeight;
+		if(textureConfig.powerOfTwo) {
+			var tmp;
+			if(UInt.gt(3,this.width)) {
+				tmp = this.width;
+			} else {
+				var bitsize;
+				if(this.width - 1 >>> 8 == 1) {
+					bitsize = 9;
+				} else if(UInt.gt(1,this.width - 1 >>> 8)) {
+					if(this.width - 1 >>> 4 == 1) {
+						bitsize = 5;
+					} else if(UInt.gt(1,this.width - 1 >>> 4)) {
+						if(this.width - 1 >>> 2 == 1) {
+							bitsize = 3;
+						} else if(UInt.gt(1,this.width - 1 >>> 2)) {
+							if(this.width - 1 >>> 1 == 1) {
+								bitsize = 2;
+							} else if(UInt.gt(1,this.width - 1 >>> 1)) {
+								var tmp1 = this.width - 1;
+								throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
+							} else {
+								var tmp1 = this.width - 1;
+								throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
+							}
+						} else if(this.width - 1 >>> 3 == 1) {
+							bitsize = 4;
+						} else if(UInt.gt(1,this.width - 1 >>> 3)) {
+							var tmp1 = this.width - 1;
+							throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
+						} else {
+							var tmp1 = this.width - 1;
+							throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
+						}
+					} else if(this.width - 1 >>> 6 == 1) {
+						bitsize = 7;
+					} else if(UInt.gt(1,this.width - 1 >>> 6)) {
+						if(this.width - 1 >>> 5 == 1) {
+							bitsize = 6;
+						} else if(UInt.gt(1,this.width - 1 >>> 5)) {
+							var tmp1 = this.width - 1;
+							throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
+						} else {
+							var tmp1 = this.width - 1;
+							throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
+						}
+					} else if(this.width - 1 >>> 7 == 1) {
+						bitsize = 8;
+					} else if(UInt.gt(1,this.width - 1 >>> 7)) {
+						var tmp1 = this.width - 1;
+						throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
+					} else {
+						var tmp1 = this.width - 1;
+						throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
+					}
+				} else if(this.width - 1 >>> 12 == 1) {
+					bitsize = 13;
+				} else if(UInt.gt(1,this.width - 1 >>> 12)) {
+					if(this.width - 1 >>> 10 == 1) {
+						bitsize = 11;
+					} else if(UInt.gt(1,this.width - 1 >>> 10)) {
+						if(this.width - 1 >>> 9 == 1) {
+							bitsize = 10;
+						} else if(UInt.gt(1,this.width - 1 >>> 9)) {
+							var tmp1 = this.width - 1;
+							throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
+						} else {
+							var tmp1 = this.width - 1;
+							throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
+						}
+					} else if(this.width - 1 >>> 11 == 1) {
+						bitsize = 12;
+					} else if(UInt.gt(1,this.width - 1 >>> 11)) {
+						var tmp1 = this.width - 1;
+						throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
+					} else {
+						var tmp1 = this.width - 1;
+						throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
+					}
+				} else if(this.width - 1 >>> 14 == 1) {
+					bitsize = 15;
+				} else if(UInt.gt(1,this.width - 1 >>> 14)) {
+					if(this.width - 1 >>> 13 == 1) {
+						bitsize = 14;
+					} else if(UInt.gt(1,this.width - 1 >>> 13)) {
+						var tmp1 = this.width - 1;
+						throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
+					} else {
+						var tmp1 = this.width - 1;
+						throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
+					}
+				} else if(this.width - 1 >>> 15 == 1) {
+					bitsize = 16;
+				} else if(UInt.gt(1,this.width - 1 >>> 15)) {
+					var tmp1 = this.width - 1;
+					throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
+				} else {
+					var tmp1 = this.width - 1;
+					throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
+				}
+				if(bitsize >= 16) {
+					throw haxe_Exception.thrown("Error calculating nextPowerOfTwo: reaching maxBitSize of " + 16);
+				}
+				tmp = 1 << bitsize;
+			}
+			this.width = tmp;
+			var tmp;
+			if(UInt.gt(3,this.height)) {
+				tmp = this.height;
+			} else {
+				var bitsize;
+				if(this.height - 1 >>> 8 == 1) {
+					bitsize = 9;
+				} else if(UInt.gt(1,this.height - 1 >>> 8)) {
+					if(this.height - 1 >>> 4 == 1) {
+						bitsize = 5;
+					} else if(UInt.gt(1,this.height - 1 >>> 4)) {
+						if(this.height - 1 >>> 2 == 1) {
+							bitsize = 3;
+						} else if(UInt.gt(1,this.height - 1 >>> 2)) {
+							if(this.height - 1 >>> 1 == 1) {
+								bitsize = 2;
+							} else if(UInt.gt(1,this.height - 1 >>> 1)) {
+								var tmp1 = this.height - 1;
+								throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
+							} else {
+								var tmp1 = this.height - 1;
+								throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
+							}
+						} else if(this.height - 1 >>> 3 == 1) {
+							bitsize = 4;
+						} else if(UInt.gt(1,this.height - 1 >>> 3)) {
+							var tmp1 = this.height - 1;
+							throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
+						} else {
+							var tmp1 = this.height - 1;
+							throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
+						}
+					} else if(this.height - 1 >>> 6 == 1) {
+						bitsize = 7;
+					} else if(UInt.gt(1,this.height - 1 >>> 6)) {
+						if(this.height - 1 >>> 5 == 1) {
+							bitsize = 6;
+						} else if(UInt.gt(1,this.height - 1 >>> 5)) {
+							var tmp1 = this.height - 1;
+							throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
+						} else {
+							var tmp1 = this.height - 1;
+							throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
+						}
+					} else if(this.height - 1 >>> 7 == 1) {
+						bitsize = 8;
+					} else if(UInt.gt(1,this.height - 1 >>> 7)) {
+						var tmp1 = this.height - 1;
+						throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
+					} else {
+						var tmp1 = this.height - 1;
+						throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
+					}
+				} else if(this.height - 1 >>> 12 == 1) {
+					bitsize = 13;
+				} else if(UInt.gt(1,this.height - 1 >>> 12)) {
+					if(this.height - 1 >>> 10 == 1) {
+						bitsize = 11;
+					} else if(UInt.gt(1,this.height - 1 >>> 10)) {
+						if(this.height - 1 >>> 9 == 1) {
+							bitsize = 10;
+						} else if(UInt.gt(1,this.height - 1 >>> 9)) {
+							var tmp1 = this.height - 1;
+							throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
+						} else {
+							var tmp1 = this.height - 1;
+							throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
+						}
+					} else if(this.height - 1 >>> 11 == 1) {
+						bitsize = 12;
+					} else if(UInt.gt(1,this.height - 1 >>> 11)) {
+						var tmp1 = this.height - 1;
+						throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
+					} else {
+						var tmp1 = this.height - 1;
+						throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
+					}
+				} else if(this.height - 1 >>> 14 == 1) {
+					bitsize = 15;
+				} else if(UInt.gt(1,this.height - 1 >>> 14)) {
+					if(this.height - 1 >>> 13 == 1) {
+						bitsize = 14;
+					} else if(UInt.gt(1,this.height - 1 >>> 13)) {
+						var tmp1 = this.height - 1;
+						throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
+					} else {
+						var tmp1 = this.height - 1;
+						throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
+					}
+				} else if(this.height - 1 >>> 15 == 1) {
+					bitsize = 16;
+				} else if(UInt.gt(1,this.height - 1 >>> 15)) {
+					var tmp1 = this.height - 1;
+					throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
+				} else {
+					var tmp1 = this.height - 1;
+					throw haxe_Exception.thrown("Error calculating intBitLength: " + (tmp1 == null ? "null" : Std.string(UInt.toFloat(tmp1))) + " has more bits than maxBitSize of " + 16);
+				}
+				if(bitsize >= 16) {
+					throw haxe_Exception.thrown("Error calculating nextPowerOfTwo: reaching maxBitSize of " + 16);
+				}
+				tmp = 1 << bitsize;
+			}
+			this.height = tmp;
+		}
+		if(this.width > textureConfig.maxTextureSize || this.height > textureConfig.maxTextureSize) {
+			throw haxe_Exception.thrown("Error: max texture-size (" + textureConfig.maxTextureSize + ") is to small for " + slots + " images (" + slotWidth + " x " + slotHeight + ")");
+		}
+	} else {
+		var p = peote_view_intern_TexUtils.optimalTextureSize(slots,slotWidth,slotHeight,textureConfig.maxTextureSize,textureConfig.powerOfTwo);
+		this.width = p.width;
+		this.height = p.height;
+		this.slotsX = p.slotsX;
+		this.slotsY = p.slotsY;
+	}
+	this.maxSlots = this.slotsX * this.slotsY;
+};
+peote_view_Texture.__name__ = "peote.view.Texture";
+peote_view_Texture.prototype = {
+	setData: function(textureData,slot) {
+		if(slot == null) {
+			slot = 0;
+		}
+		if(this.format > 7 != textureData.format > 7) {
+			throw haxe_Exception.thrown("Error: Can not use " + (textureData.format > 7 ? "float" : "integer") + " TextureData for " + (this.format > 7 ? "float" : "integer") + " Texture");
+		} else {
+			var this1 = this.format;
+			var this2 = textureData.format;
+			if((this1 > 7 ? this1 - 7 : this1 < 5 ? this1 : this1 < 7 ? 1 : 2) != (this2 > 7 ? this2 - 7 : this2 < 5 ? this2 : this2 < 7 ? 1 : 2)) {
+				throw haxe_Exception.thrown("Error: Number of colorchannels of TextureData and Texture don't match");
+			}
+		}
+		this.usedSlots.h[slot] = textureData;
+		if(this.gl != null) {
+			if(this.glTexture == null) {
+				if(this.width > this.gl.getParameter(this.gl.MAX_TEXTURE_SIZE) || this.height > this.gl.getParameter(this.gl.MAX_TEXTURE_SIZE)) {
+					throw haxe_Exception.thrown("Error, texture size is greater then gl.MAX_TEXTURE_SIZE");
+				}
+				this.glTexture = peote_view_intern_TexUtils.createEmptyTexture(this.gl,this.width,this.height,this.format,this.smoothExpand,this.smoothShrink,this.mipmap,this.smoothMipmap);
+			}
+			peote_view_intern_TexUtils.dataToTexture(this.gl,this.slotWidth * (slot % this.slotsX),this.slotHeight * (slot / this.slotsX | 0),this.format,textureData,this.mipmap,this.glTexture);
+			if(this.mipmap) {
+				this.mipmapIsCreated = true;
+			}
+			this.updated = true;
+		}
+	}
+	,__class__: peote_view_Texture
+};
+var peote_view_TextureConfig = function(maxTextureSize,slotsX,slotsY,powerOfTwo,tilesX,tilesY,format,smoothExpand,smoothShrink,mipmap,smoothMipmap) {
+	this.smoothMipmap = false;
+	this.mipmap = false;
+	this.smoothShrink = false;
+	this.smoothExpand = false;
+	this.format = 4;
+	this.tilesY = 1;
+	this.tilesX = 1;
+	this.powerOfTwo = true;
+	this.slotsY = 1;
+	this.slotsX = 1;
+	this.maxTextureSize = 16384;
+	if(maxTextureSize != null) {
+		this.maxTextureSize = maxTextureSize;
+	}
+	if(slotsX != null) {
+		this.slotsX = slotsX;
+	}
+	if(slotsY != null) {
+		this.slotsY = slotsY;
+	}
+	if(powerOfTwo != null) {
+		this.powerOfTwo = powerOfTwo;
+	}
+	if(tilesX != null) {
+		this.tilesX = tilesX;
+	}
+	if(tilesY != null) {
+		this.tilesY = tilesY;
+	}
+	if(format != null) {
+		this.format = format;
+	}
+	if(smoothExpand != null) {
+		this.smoothExpand = smoothExpand;
+	}
+	if(smoothShrink != null) {
+		this.smoothShrink = smoothShrink;
+	}
+	if(mipmap != null) {
+		this.mipmap = mipmap;
+	}
+	if(smoothMipmap != null) {
+		this.smoothMipmap = smoothMipmap;
+	}
+};
+peote_view_TextureConfig.__name__ = "peote.view.TextureConfig";
+peote_view_TextureConfig.prototype = {
+	__class__: peote_view_TextureConfig
+};
 var peote_view_UniformFloat = function(name,value) {
 	this.name = name;
 	this.value = value;
@@ -22868,31 +25111,6 @@ var peote_view_UniformFloat = function(name,value) {
 peote_view_UniformFloat.__name__ = "peote.view.UniformFloat";
 peote_view_UniformFloat.prototype = {
 	__class__: peote_view_UniformFloat
-};
-var peote_view_element_Elem = function(positionX,positionY,width,height,rotation,pivotX,pivotY,zIndex,color) {
-	this.bytePos = -1;
-	this.z = 0;
-	this.c = -16776961;
-	this.py = 0;
-	this.px = 0;
-	this.r = 0.;
-	this.h = 100;
-	this.w = 100;
-	this.y = 0;
-	this.x = 0;
-	this.x = positionX;
-	this.y = positionY;
-	this.w = width;
-	this.h = height;
-	this.r = rotation;
-	this.px = pivotX;
-	this.py = pivotY;
-	this.z = zIndex;
-	this.c = color;
-};
-peote_view_element_Elem.__name__ = "peote.view.element.Elem";
-peote_view_element_Elem.prototype = {
-	__class__: peote_view_element_Elem
 };
 var peote_view_intern_Background = function(gl) {
 	this.gl = gl;
@@ -23284,6 +25502,495 @@ peote_view_intern_RenderList_$peote_$view_$Program.prototype = {
 		this.itemMap.set(value,newItem);
 	}
 	,__class__: peote_view_intern_RenderList_$peote_$view_$Program
+};
+var peote_view_intern_TexUtils = function() { };
+peote_view_intern_TexUtils.__name__ = "peote.view.intern.TexUtils";
+peote_view_intern_TexUtils.createEmptyTexture = function(gl,width,height,format,smoothExpand,smoothShrink,mipmap,smoothMipmap) {
+	if(smoothMipmap == null) {
+		smoothMipmap = false;
+	}
+	if(mipmap == null) {
+		mipmap = false;
+	}
+	if(smoothShrink == null) {
+		smoothShrink = false;
+	}
+	if(smoothExpand == null) {
+		smoothExpand = false;
+	}
+	var glTexture = gl.createTexture();
+	gl.bindTexture(gl.TEXTURE_2D,glTexture);
+	peote_view_intern_GLTool.clearGlErrorQueue(gl);
+	if(format > 7) {
+		var target = gl.TEXTURE_2D;
+		var internalformat;
+		switch(format) {
+		case 8:
+			internalformat = gl.R32F;
+			break;
+		case 9:
+			internalformat = gl.RG32F;
+			break;
+		case 10:
+			internalformat = gl.RGB32F;
+			break;
+		case 11:
+			internalformat = gl.RGBA32F;
+			break;
+		default:
+			internalformat = gl.RGBA32F;
+		}
+		var format1;
+		switch(format) {
+		case 8:
+			format1 = gl.RED;
+			break;
+		case 9:
+			format1 = gl.RG;
+			break;
+		case 10:
+			format1 = gl.RGB;
+			break;
+		case 11:
+			format1 = gl.RGBA;
+			break;
+		default:
+			format1 = gl.RGBA;
+		}
+		var type = gl.FLOAT;
+		var data = 0;
+		if(data == 0) {
+			gl.texImage2D(target,0,internalformat,width,height,0,format1,type,null);
+		} else {
+			gl.texImage2D(target,0,internalformat,width,height,0,format1,type,data);
+		}
+		if(peote_view_intern_GLTool.getLastGlError(gl) == gl.INVALID_VALUE) {
+			var target = gl.TEXTURE_2D;
+			var internalformat;
+			switch(format) {
+			case 8:
+				internalformat = gl.R16F;
+				break;
+			case 9:
+				internalformat = gl.RG16F;
+				break;
+			case 10:
+				internalformat = gl.RGB16F;
+				break;
+			case 11:
+				internalformat = gl.RGBA16F;
+				break;
+			default:
+				internalformat = gl.RGBA16F;
+			}
+			var format1;
+			switch(format) {
+			case 8:
+				format1 = gl.RED;
+				break;
+			case 9:
+				format1 = gl.RG;
+				break;
+			case 10:
+				format1 = gl.RGB;
+				break;
+			case 11:
+				format1 = gl.RGBA;
+				break;
+			default:
+				format1 = gl.RGBA;
+			}
+			var type = gl.FLOAT;
+			var data = 0;
+			if(data == 0) {
+				gl.texImage2D(target,0,internalformat,width,height,0,format1,type,null);
+			} else {
+				gl.texImage2D(target,0,internalformat,width,height,0,format1,type,data);
+			}
+			if(peote_view_intern_GLTool.getLastGlError(gl) == gl.INVALID_VALUE) {
+				var target = gl.TEXTURE_2D;
+				var internalformat;
+				switch(format) {
+				case 8:
+					internalformat = gl.RED;
+					break;
+				case 9:
+					internalformat = gl.RG;
+					break;
+				case 10:
+					internalformat = gl.RGB;
+					break;
+				case 11:
+					internalformat = gl.RGBA;
+					break;
+				default:
+					internalformat = gl.RGBA;
+				}
+				var format1;
+				switch(format) {
+				case 8:
+					format1 = gl.RED;
+					break;
+				case 9:
+					format1 = gl.RG;
+					break;
+				case 10:
+					format1 = gl.RGB;
+					break;
+				case 11:
+					format1 = gl.RGBA;
+					break;
+				default:
+					format1 = gl.RGBA;
+				}
+				var type = gl.FLOAT;
+				var data = 0;
+				if(data == 0) {
+					gl.texImage2D(target,0,internalformat,width,height,0,format1,type,null);
+				} else {
+					gl.texImage2D(target,0,internalformat,width,height,0,format1,type,data);
+				}
+			}
+		}
+	} else {
+		var target = gl.TEXTURE_2D;
+		var internalformat;
+		switch(format) {
+		case 1:
+			internalformat = gl.R8;
+			break;
+		case 2:
+			internalformat = gl.RG8;
+			break;
+		case 3:
+			internalformat = gl.RGB;
+			break;
+		case 4:
+			internalformat = gl.RGBA;
+			break;
+		case 5:
+			internalformat = gl.LUMINANCE;
+			break;
+		case 6:
+			internalformat = gl.ALPHA;
+			break;
+		case 7:
+			internalformat = gl.LUMINANCE_ALPHA;
+			break;
+		default:
+			internalformat = gl.RGBA;
+		}
+		var format1;
+		switch(format) {
+		case 1:
+			format1 = gl.RED;
+			break;
+		case 2:
+			format1 = gl.RG;
+			break;
+		case 3:
+			format1 = gl.RGB;
+			break;
+		case 4:
+			format1 = gl.RGBA;
+			break;
+		case 5:
+			format1 = gl.LUMINANCE;
+			break;
+		case 6:
+			format1 = gl.ALPHA;
+			break;
+		case 7:
+			format1 = gl.LUMINANCE_ALPHA;
+			break;
+		default:
+			format1 = gl.RGBA;
+		}
+		var type = gl.UNSIGNED_BYTE;
+		var data = 0;
+		if(data == 0) {
+			gl.texImage2D(target,0,internalformat,width,height,0,format1,type,null);
+		} else {
+			gl.texImage2D(target,0,internalformat,width,height,0,format1,type,data);
+		}
+	}
+	if(peote_view_intern_GLTool.getLastGlError(gl) == gl.OUT_OF_MEMORY) {
+		throw haxe_Exception.thrown("OUT OF GPU MEMORY while texture creation");
+	}
+	var smoothMipmap1 = mipmap ? smoothMipmap : null;
+	var glTexture1 = null;
+	if(glTexture1 != null) {
+		gl.bindTexture(gl.TEXTURE_2D,glTexture1);
+	}
+	if(smoothExpand != null) {
+		gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,smoothExpand ? gl.LINEAR : gl.NEAREST);
+	}
+	if(smoothShrink != null) {
+		if(smoothMipmap1 != null) {
+			if(smoothMipmap1) {
+				gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,smoothShrink ? gl.LINEAR_MIPMAP_LINEAR : gl.NEAREST_MIPMAP_LINEAR);
+			} else {
+				gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,smoothShrink ? gl.LINEAR_MIPMAP_NEAREST : gl.NEAREST_MIPMAP_NEAREST);
+			}
+		} else {
+			gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,smoothShrink ? gl.LINEAR : gl.NEAREST);
+		}
+	}
+	if(glTexture1 != null) {
+		gl.bindTexture(gl.TEXTURE_2D,null);
+	}
+	gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);
+	gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
+	gl.bindTexture(gl.TEXTURE_2D,null);
+	return glTexture;
+};
+peote_view_intern_TexUtils.dataToTexture = function(gl,x,y,format,textureData,genMipmap,glTexture) {
+	if(glTexture != null) {
+		gl.bindTexture(gl.TEXTURE_2D,glTexture);
+	}
+	peote_view_intern_GLTool.clearGlErrorQueue(gl);
+	if(format > 7) {
+		var target = gl.TEXTURE_2D;
+		var width = textureData.width;
+		var height = textureData.height;
+		var format1;
+		switch(format) {
+		case 8:
+			format1 = gl.RED;
+			break;
+		case 9:
+			format1 = gl.RG;
+			break;
+		case 10:
+			format1 = gl.RGB;
+			break;
+		case 11:
+			format1 = gl.RGBA;
+			break;
+		default:
+			format1 = gl.RGBA;
+		}
+		var type = gl.FLOAT;
+		var data = haxe_io_Float32Array.fromBytes(textureData.bytes);
+		gl.texSubImage2D(target,0,x,y,width,height,format1,type,data);
+		var tmp = peote_view_intern_GLTool.getLastGlError(gl) == gl.INVALID_VALUE;
+	} else {
+		var target = gl.TEXTURE_2D;
+		var width = textureData.width;
+		var height = textureData.height;
+		var format1;
+		switch(format) {
+		case 1:
+			format1 = gl.RED;
+			break;
+		case 2:
+			format1 = gl.RG;
+			break;
+		case 3:
+			format1 = gl.RGB;
+			break;
+		case 4:
+			format1 = gl.RGBA;
+			break;
+		case 5:
+			format1 = gl.LUMINANCE;
+			break;
+		case 6:
+			format1 = gl.ALPHA;
+			break;
+		case 7:
+			format1 = gl.LUMINANCE_ALPHA;
+			break;
+		default:
+			format1 = gl.RGBA;
+		}
+		var type = gl.UNSIGNED_BYTE;
+		var data = haxe_io_UInt8Array.fromBytes(textureData.bytes);
+		gl.texSubImage2D(target,0,x,y,width,height,format1,type,data);
+	}
+	if(peote_view_intern_GLTool.getLastGlError(gl) == gl.OUT_OF_MEMORY) {
+		throw haxe_Exception.thrown("OUT OF GPU MEMORY while texture creation");
+	}
+	if(genMipmap) {
+		var glTexture1 = null;
+		if(glTexture1 != null) {
+			gl.bindTexture(gl.TEXTURE_2D,glTexture1);
+		}
+		gl.generateMipmap(gl.TEXTURE_2D);
+		if(glTexture1 != null) {
+			gl.bindTexture(gl.TEXTURE_2D,null);
+		}
+	}
+	if(glTexture != null) {
+		gl.bindTexture(gl.TEXTURE_2D,null);
+	}
+};
+peote_view_intern_TexUtils.createPickingTexture = function(gl,isRGBA32I) {
+	if(isRGBA32I == null) {
+		isRGBA32I = false;
+	}
+	var glTexture = gl.createTexture();
+	gl.bindTexture(gl.TEXTURE_2D,glTexture);
+	if(isRGBA32I) {
+		var target = gl.TEXTURE_2D;
+		var internalformat = gl.RGBA32I;
+		var format = gl.RGBA_INTEGER;
+		var type = gl.INT;
+		var data = 0;
+		if(data == 0) {
+			gl.texImage2D(target,0,internalformat,1,1,0,format,type,null);
+		} else {
+			gl.texImage2D(target,0,internalformat,1,1,0,format,type,data);
+		}
+	} else {
+		var target = gl.TEXTURE_2D;
+		var internalformat = gl.RGBA;
+		var format = gl.RGBA;
+		var type = gl.UNSIGNED_BYTE;
+		var data = 0;
+		if(data == 0) {
+			gl.texImage2D(target,0,internalformat,1,1,0,format,type,null);
+		} else {
+			gl.texImage2D(target,0,internalformat,1,1,0,format,type,data);
+		}
+	}
+	gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MAG_FILTER,gl.NEAREST);
+	gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_MIN_FILTER,gl.NEAREST);
+	gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_S,gl.CLAMP_TO_EDGE);
+	gl.texParameteri(gl.TEXTURE_2D,gl.TEXTURE_WRAP_T,gl.CLAMP_TO_EDGE);
+	gl.bindTexture(gl.TEXTURE_2D,null);
+	return glTexture;
+};
+peote_view_intern_TexUtils.optimalTextureSize = function(slots,slotWidth,slotHeight,maxTextureSize,powerOfTwo,errorIfNotFit,debug) {
+	if(debug == null) {
+		debug = true;
+	}
+	if(errorIfNotFit == null) {
+		errorIfNotFit = true;
+	}
+	if(powerOfTwo == null) {
+		powerOfTwo = true;
+	}
+	if(powerOfTwo) {
+		var errorIfNotFit1 = errorIfNotFit;
+		var debug1 = debug;
+		if(errorIfNotFit1 == null) {
+			errorIfNotFit1 = true;
+		}
+		var mts = Math.ceil(Math.log(maxTextureSize) / Math.log(2));
+		var a = Math.ceil(Math.log(slots * slotWidth * slotHeight) / Math.log(2));
+		var r;
+		var w = 1;
+		var h = a - 1;
+		var delta = Math.floor(Math.abs(w - h));
+		var rmin = (1 << mts) * (1 << mts);
+		var found = false;
+		var n = Math.floor(Math.min(mts,a));
+		var m;
+		while(1 << n >= slotWidth) {
+			m = Math.floor(Math.min(mts,a - n + 1));
+			while(1 << m >= slotHeight) {
+				if(Math.floor((1 << n) / slotWidth) * Math.floor((1 << m) / slotHeight) < slots) {
+					break;
+				}
+				r = (1 << n) * (1 << m) - slots * slotWidth * slotHeight;
+				if(r < 0) {
+					break;
+				}
+				if(r <= rmin) {
+					if(r == rmin) {
+						if(Math.abs(n - m) < delta) {
+							delta = Math.floor(Math.abs(n - m));
+							w = n;
+							h = m;
+							found = true;
+						}
+					} else {
+						w = n;
+						h = m;
+						rmin = r;
+						found = true;
+					}
+				}
+				--m;
+			}
+			--n;
+		}
+		if(found) {
+			w = 1 << w;
+			h = 1 << h;
+		} else {
+			if(errorIfNotFit1) {
+				throw haxe_Exception.thrown("Error: max texture-size (" + maxTextureSize + ") is to small for " + slots + " images (" + slotWidth + " x " + slotHeight + ")");
+			}
+			if(slotWidth > maxTextureSize || slotHeight > maxTextureSize) {
+				throw haxe_Exception.thrown("Error: max texture-size (" + maxTextureSize + ") is to small for image (" + slotWidth + " x " + slotHeight + ")");
+			}
+			h = maxTextureSize;
+			w = h;
+		}
+		return { width : w, height : h, slotsX : w / slotWidth | 0, slotsY : h / slotHeight | 0};
+	}
+	if(slots < 1) {
+		throw haxe_Exception.thrown("Error: the slots have to be greater then 1");
+	} else if(slots == 1) {
+		if(slotWidth > maxTextureSize || slotHeight > maxTextureSize) {
+			throw haxe_Exception.thrown("Error: max texture-size (" + maxTextureSize + ") is to small for image (" + slotWidth + " x " + slotHeight + ")");
+		} else {
+			return { width : slotWidth, height : slotHeight, slotsX : 1, slotsY : 1};
+		}
+	}
+	var wMax = maxTextureSize / slotWidth | 0;
+	var hMax = maxTextureSize / slotHeight | 0;
+	var w = Math.sqrt(slots * slotHeight / slotWidth) | 0;
+	var best = w;
+	var h = Math.ceil(slots / w);
+	var r = w * h - slots;
+	var aspect = null;
+	if(h <= hMax && w <= wMax) {
+		while(r > 0 && w < slots && w < wMax) {
+			++w;
+			h = Math.ceil(slots / w);
+			if(w * h - slots < r) {
+				r = w * h - slots;
+				best = w;
+			}
+		}
+		w = best;
+		h = Math.ceil(slots / w);
+		aspect = w * slotWidth > h * slotHeight ? w * slotWidth / (h * slotHeight) : h * slotHeight / (w * slotWidth);
+	}
+	if(aspect == null || aspect != 1.0) {
+		var _h = Math.sqrt(slots * slotWidth / slotHeight) | 0;
+		best = _h;
+		var _w = Math.ceil(slots / _h);
+		var _r = _w * _h - slots;
+		var _aspect = null;
+		if(_w <= wMax && _h <= hMax) {
+			while(_r > 0 && _h < slots && _h < hMax) {
+				++_h;
+				_w = Math.ceil(slots / _h);
+				if(_w * _h - slots < _r) {
+					_r = _w * _h - slots;
+					best = _h;
+				}
+			}
+			_h = best;
+			_w = Math.ceil(slots / _h);
+			aspect = _w * slotWidth > _h * slotHeight ? _w * slotWidth / (_h * slotHeight) : _h * slotHeight / (_w * slotWidth);
+		}
+		if(aspect == null && _aspect == null) {
+			if(errorIfNotFit) {
+				throw haxe_Exception.thrown("Error: max texture-size (" + maxTextureSize + ") is to small for " + slots + " images (" + slotWidth + " x " + slotHeight + ")");
+			}
+			w = wMax;
+			h = hMax;
+		} else if(aspect == null || _aspect != null && (_r < r || _r == r && aspect > _aspect)) {
+			w = _w;
+			h = _h;
+		}
+	}
+	return { width : w * slotWidth, height : h * slotHeight, slotsX : w, slotsY : h};
 };
 var peote_view_intern_UniformBufferDisplay = function() {
 	this.uniformBytes = new peote_view_intern_BufferBytes(new ArrayBuffer(32));
@@ -24051,12 +26758,46 @@ justGraphix_target_openflTarget_$_LimeImage.toLimeImageBuffer_ = justGraphix_tar
 justGraphix_target_openflTarget_$_LimeImage.fromLimeImageBuffer_ = justGraphix_target_openflTarget_$_LimeImage_fromLimeImageBuffer;
 justGraphix_target_openflTarget_$_LimeImage.toLimeImage_ = justGraphix_target_openflTarget_$_LimeImage_toLimeImage;
 justGraphix_target_openflTarget_$_LimeImage.fromLimeImage_ = justGraphix_target_openflTarget_$_LimeImage_fromLimeImage;
-justGraphix_target_openflTarget_$_PeoteV.toPeoteTexture_ = justGraphix_target_openflTarget_$_PeoteTexture_toPeoteTexture;
-justGraphix_target_openflTarget_$_PeoteV.fromPeoteTexture_ = justGraphix_target_openflTarget_$_PeoteTexture_fromPeoteTexture;
-justGraphix_target_openflTarget_$_PeoteV.toPeoteTextureData_ = justGraphix_target_openflTarget_$_PeoteTexture_toPeoteTextureData;
-justGraphix_target_openflTarget_$_PeoteV.fromPeoteTextureData_ = justGraphix_target_openflTarget_$_PeoteTexture_fromPeoteTextureData;
-justGraphix_target_openflTarget_$_PeoteV.toPeotePixels_ = justGraphix_target_openflTarget_$_PeoteTexture_toPeotePixels;
-justGraphix_target_openflTarget_$_PeoteV.fromPeotePixels_ = justGraphix_target_openflTarget_$_PeoteTexture_fromPeotePixels;
+justGraphix_target_openflTarget_$_PeoteBasicElement.__meta__ = { fields : { x : { posX : null}, y : { posY : null}, wide : { sizeX : null}, hi : { sizeY : null}, slot : { texSlot : null}}};
+justGraphix_target_openflTarget_$_PeoteBasicElement.FORMULAS = new haxe_ds_StringMap();
+justGraphix_target_openflTarget_$_PeoteBasicElement.ATTRIBUTES = (function($this) {
+	var $r;
+	var _g = new haxe_ds_StringMap();
+	_g.h["yStart"] = "aPos.y";
+	_g.h["yEnd"] = "aPos.y";
+	_g.h["y"] = "aPos.y";
+	_g.h["xStart"] = "aPos.x";
+	_g.h["xEnd"] = "aPos.x";
+	_g.h["x"] = "aPos.x";
+	_g.h["wideStart"] = "aSize.x";
+	_g.h["wideEnd"] = "aSize.x";
+	_g.h["wide"] = "aSize.x";
+	_g.h["slotStart"] = "aShort0";
+	_g.h["slotEnd"] = "aShort0";
+	_g.h["slot"] = "aShort0";
+	_g.h["hiStart"] = "aSize.y";
+	_g.h["hiEnd"] = "aSize.y";
+	_g.h["hi"] = "aSize.y";
+	$r = _g;
+	return $r;
+}(this));
+justGraphix_target_openflTarget_$_PeoteBasicElement.FORMULA_NAMES = (function($this) {
+	var $r;
+	var _g = new haxe_ds_StringMap();
+	_g.h["sizeX"] = "wide";
+	_g.h["sizeY"] = "hi";
+	_g.h["posX"] = "x";
+	_g.h["posY"] = "y";
+	$r = _g;
+	return $r;
+}(this));
+justGraphix_target_openflTarget_$_PeoteBasicElement.FORMULA_VARYINGS = "slot";
+justGraphix_target_openflTarget_$_PeoteBasicElement.FORMULA_CONSTANTS = "";
+justGraphix_target_openflTarget_$_PeoteBasicElement.DEFAULT_FORMULA_VARS = new haxe_ds_StringMap();
+justGraphix_target_openflTarget_$_PeoteV.toPeoteTextureData_ = justGraphix_target_openflTarget_$_PeoteTextureData_toPeoteTextureData;
+justGraphix_target_openflTarget_$_PeoteV.fromPeoteTextureData_ = justGraphix_target_openflTarget_$_PeoteTextureData_fromPeoteTextureData;
+justGraphix_target_openflTarget_$_PeoteV.toPeotePixels_ = justGraphix_target_openflTarget_$_PeoteTextureData_toPeotePixels;
+justGraphix_target_openflTarget_$_PeoteV.fromPeotePixels_ = justGraphix_target_openflTarget_$_PeoteTextureData_fromPeotePixels;
 lime__$internal_backend_html5_HTML5Window.windowID = 0;
 lime_system_Sensor.sensorByID = new haxe_ds_IntMap();
 lime_system_Sensor.sensors = [];
@@ -24079,55 +26820,6 @@ peote_view_Precision.VertexSampler = { high : 0, medium : 0, low : 0};
 peote_view_Precision.FragmentFloat = { high : 0, medium : 0, low : 0};
 peote_view_Precision.FragmentInt = { high : 0, medium : 0, low : 0};
 peote_view_Precision.FragmentSampler = { high : 0, medium : 0, low : 0};
-peote_view_element_Elem.__meta__ = { fields : { x : { posX : null}, y : { posY : null}, w : { sizeX : null}, h : { sizeY : null}, r : { rotation : null}, px : { pivotX : null}, py : { pivotY : null}, c : { color : null}, z : { zIndex : null}}};
-peote_view_element_Elem.FORMULAS = new haxe_ds_StringMap();
-peote_view_element_Elem.ATTRIBUTES = (function($this) {
-	var $r;
-	var _g = new haxe_ds_StringMap();
-	_g.h["zStart"] = "aRotZ.y";
-	_g.h["zEnd"] = "aRotZ.y";
-	_g.h["z"] = "aRotZ.y";
-	_g.h["yStart"] = "aPos.y";
-	_g.h["yEnd"] = "aPos.y";
-	_g.h["y"] = "aPos.y";
-	_g.h["xStart"] = "aPos.x";
-	_g.h["xEnd"] = "aPos.x";
-	_g.h["x"] = "aPos.x";
-	_g.h["wStart"] = "aSize.x";
-	_g.h["wEnd"] = "aSize.x";
-	_g.h["w"] = "aSize.x";
-	_g.h["rStart"] = "aRotZ.x";
-	_g.h["rEnd"] = "aRotZ.x";
-	_g.h["r"] = "aRotZ.x";
-	_g.h["pyStart"] = "aPivot.y";
-	_g.h["pyEnd"] = "aPivot.y";
-	_g.h["py"] = "aPivot.y";
-	_g.h["pxStart"] = "aPivot.x";
-	_g.h["pxEnd"] = "aPivot.x";
-	_g.h["px"] = "aPivot.x";
-	_g.h["hStart"] = "aSize.y";
-	_g.h["hEnd"] = "aSize.y";
-	_g.h["h"] = "aSize.y";
-	$r = _g;
-	return $r;
-}(this));
-peote_view_element_Elem.FORMULA_NAMES = (function($this) {
-	var $r;
-	var _g = new haxe_ds_StringMap();
-	_g.h["sizeX"] = "w";
-	_g.h["sizeY"] = "h";
-	_g.h["posX"] = "x";
-	_g.h["posY"] = "y";
-	_g.h["rotation"] = "r";
-	_g.h["zIndex"] = "z";
-	_g.h["pivotX"] = "px";
-	_g.h["pivotY"] = "py";
-	$r = _g;
-	return $r;
-}(this));
-peote_view_element_Elem.FORMULA_VARYINGS = "";
-peote_view_element_Elem.FORMULA_CONSTANTS = "";
-peote_view_element_Elem.DEFAULT_FORMULA_VARS = new haxe_ds_StringMap();
 peote_view_intern_GLTool.rEmptylines = new EReg("([ \t]*\r?\n)+","g");
 peote_view_intern_GLTool.rStartspaces = new EReg("^([ \t]*\r?\n)+","g");
 utils_MultipassTemplate.splitter = new EReg("(::[A-Za-z0-9_ ()&|!+=/><*.\"-]+::|\\$\\$([A-Za-z0-9_-]+)\\()","");

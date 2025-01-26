@@ -29,7 +29,7 @@ import justGraphix.image.imageAbstracts.GradientShape;
 import justGraphix.image.imageAbstracts.ImageShape;
 import justGraphix.image.imageAbstracts.LineShape;
 import justGraphix.image.imageAbstracts.PatternShape;
-import justGraphix.image.imageAbstracts.PeoteTexture;
+import justGraphix.image.imageAbstracts.PeoteTextureData;
 import justGraphix.image.imageAbstracts.RectanglePad;
 import justGraphix.image.imageAbstracts.TileShape;
 import justGraphix.target.canvas_.JsCanvasContext;
@@ -620,9 +620,9 @@ abstract Pixelimage(ImageStruct) from ImageStruct to ImageStruct {
     }
     #end
     #if peote_view
-    public var peoteTexture( get, never ): justGraphix.target.openflTarget_.PeoteTexture;
-    inline function get_peoteTexture():justGraphix.target.openflTarget_.PeoteTexture {
-        return ( abstract: justGraphix.target.openflTarget_.PeoteTexture );
+    public var peoteTextureData( get, never ): justGraphix.target.openflTarget_.PeoteTextureData;
+    inline function get_peoteTextureData():justGraphix.target.openflTarget_.PeoteTextureData {
+        return ( abstract: justGraphix.target.openflTarget_.PeoteTextureData );
     }
     #end
     #if lime

@@ -14,34 +14,20 @@ typedef PeotePixels = haxe.io.Bytes; //RGBA
 
 @:forward
 @:transient
-abstract PeoteTexture( Pixelimage ) from Pixelimage to Pixelimage {
+abstract PeoteTextureData( Pixelimage ) from Pixelimage to Pixelimage {
     inline
     public function new( w: Int, h: Int ){
        this = new Pixelimage( w, h );
     }
     @:to
     public inline
-    function to(): peote.view.Texture {
-        return PeoteV.toPeoteTexture_( this );
-    }
-    @:to
-    public inline
-    function toTextureData(): peote.view.TextureData {
+    function to(): peote.view.TextureData {
         return PeoteV.toPeoteTextureData_( this );
-    }
-    // unsure when/how/if feasible to grab the texture.
-    public static inline
-    function createPixelImage( texture: peote.view.Texture ): Pixelimage {
-        return PeoteV.fromPeoteTexture_( texture );
     }
 }
 
 // module PeoteTexture
 class PeoteV {
-    @:keep
-    public static var toPeoteTexture_ = toPeoteTexture;
-    @:keep
-    public static var fromPeoteTexture_ = fromPeoteTexture;
     @:keep
     public static var toPeoteTextureData_ = toPeoteTextureData;
     @:keep
@@ -120,14 +106,6 @@ function fromPeoteTextureData( textureData: peote.view.TextureData ): Null<Pixel
         return fromPeotePixels( peotePixels, textureData.width, textureData.height );
     }
 }
-
-inline
-function toPeoteTexture( pixelImage: Pixelimage, slot:Int = 0): peote.view.Texture {
-    var texture = new peote.view.Texture( pixelImage.width, pixelImage.height );
-    texture.setData( toPeoteTextureData( pixelImage ), slot );
-    return texture;
-}
-
 inline
 function fromPeoteTexture( texture: peote.view.Texture, transparent: Bool = true ): Pixelimage {
         var lh = texture.height; 

@@ -24,7 +24,7 @@ import justGraphix.application.image.A_PeoteView;
 
 		#if !munit
 		var app = new justGraphix.application.image.A_PeoteView();
-		app.meta.set("build", "6");
+		app.meta.set("build", "7");
 		app.meta.set("company", "Justinfront");
 		app.meta.set("file", "Application");
 		app.meta.set("name", "A_PeoteView");
