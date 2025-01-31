@@ -1,6 +1,9 @@
 package justGraphix.image;
 
 // import vision.ds.Image;
+import justGraphix.target.image_.GIF;
+import justGraphix.target.image_.BMP;
+import justGraphix.target.image_.PNG;
 import haxe.io.UInt32Array;
 import pi_xy.imageAbstracts.*;
 import justGraphix.iterMagix.BoundIterator;
@@ -16,7 +19,7 @@ import justGraphix.hit.HitQuad;
 import justGraphix.hit.HitTriArray;
 import justGraphix.image.Img.ImageType;
 import justGraphix.image.Img.ImgMulti;
-
+import justGraphix.image.transformation.BinaryPatternFill;
 import justGraphix.image.imageAbstracts.RawImage;
 
 import justGraphix.image.imageAbstracts.TransformImage;

@@ -69,7 +69,7 @@ function fromPNG( name: String, transparent: Bool = true ): Pixelimage {
     var data = reader.read();
     var header = format.png.Tools.getHeader( data );
     var bytes: haxe.io.Bytes = format.png.Tools.extract32( data );
-    var bytesCameleon  = new pi_xy.formats.BytesCameleon( bytes ); // BGRA
+    var bytesCameleon  = new BytesCameleon( bytes ); // BGRA
     var pixelImage: Pixelimage = new Pixelimage( header.width, header.height );
     pixelImage.transparent = true;
     // pixelImage.imageTypeString();
@@ -89,7 +89,7 @@ function toBMP( pixelImage: Pixelimage, name: String ){
         , true )
     );
     var bytes = pixelImage.getBytes();
-    var bytesCameleon  = new pi_xy.formats.BytesCameleon( bytes );
+    var bytesCameleon  = new BytesCameleon( bytes );
     bytesCameleon.RGBA_ARGB();
     var bmpData = format.bmp.Tools.buildFromARGB( pixelImage.width, pixelImage.height, bytesCameleon );
     bmpWriter.write( bmpData );
@@ -110,7 +110,7 @@ function fromBMP( name: String, transparent: Bool = true ){
     var data = reader.read();
     var header = data.header;
     var bytes: haxe.io.Bytes = format.bmp.Tools.extractARGB( data );
-    var bytesCameleon  = new pi_xy.formats.BytesCameleon( bytes ); // ARGB
+    var bytesCameleon  = new BytesCameleon( bytes ); // ARGB
     var pixelImage: Pixelimage = new Pixelimage( header.width, header.height );
     pixelImage.transparent = transparent;
     bytesCameleon.ARGB_RGBA();
@@ -156,7 +156,7 @@ function fromGIF( name: String, transparent: Bool = true, cumlative: Bool = fals
     var frameData: format.gif.Data.Frame;
     var arr = new Array<Pixelimage>();
     var bytes: haxe.io.Bytes;
-    var bytesCameleon: pi_xy.formats.BytesCameleon;
+    var bytesCameleon: BytesCameleon;
     for( i in 0...totalFrames ){
         frameData = format.gif.Tools.frame( data, i );
         bytes = (cumlative)? format.gif.Tools.extractFullRGBA( data, i ): format.gif.Tools.extractRGBA( data, i ); 
