@@ -15,8 +15,7 @@ abstract PatternShape( Pixelimage ) from Pixelimage to Pixelimage {
                         , w: Float, h: Float
                         , foreColor: Int, backColor: Int
                         , patternFill: Array<Bool> ){
-        return BinaryPatternFill
-            .patternRectangle( this
+        return patternRectangle( this
                              , x, y, w, h
                              , foreColor, backColor, patternFill );
     }
@@ -25,8 +24,7 @@ abstract PatternShape( Pixelimage ) from Pixelimage to Pixelimage {
                             , w: Float, h: Float
                             , foreColor: Int, backColor: Int
                             , patternFill: Array<Bool> ){
-        return BinaryPatternFill
-            .patternRectangleDown( this
+        return patternRectangleDown( this
                                  , x, y, w, h
                                  , foreColor, backColor, patternFill );
     }

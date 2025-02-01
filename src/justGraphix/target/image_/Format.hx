@@ -156,7 +156,7 @@ function fromGIF( name: String, transparent: Bool = true, cumlative: Bool = fals
     var frameData: format.gif.Data.Frame;
     var arr = new Array<Pixelimage>();
     var bytes: haxe.io.Bytes;
-    var bytesCameleon: pi_xy.formats.BytesCameleon;
+    var bytesCameleon: BytesCameleon;
     for( i in 0...totalFrames ){
         frameData = format.gif.Tools.frame( data, i );
         bytes = (cumlative)? format.gif.Tools.extractFullRGBA( data, i ): format.gif.Tools.extractRGBA( data, i ); 
