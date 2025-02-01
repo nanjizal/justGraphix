@@ -18,6 +18,9 @@
 	<!--<haxelib name="justGraphic" />-->
 	<haxelib name="peote-view" />
   	<haxelib name="format" />
+
+	<!--to let make childclass of Display for custom rendering-->
+	<haxedef name="peoteview_customdisplay" />
 	
 	<!-- force compiling for a special opengl-es version (only set one of them) -->
 	<!-- this optimizes the build and forces no-runtimecheck for the gl-features -->

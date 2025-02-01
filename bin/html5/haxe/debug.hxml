@@ -9,6 +9,7 @@
 -cp /home/nanjizalmac/haxe/haxelib/format/3,7,0
 -D format=3.7.0
 -cp src
+-D peoteview_customdisplay
 -D tools=8.1.2
 -D lime-canvas
 -D howlerjs
