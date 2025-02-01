@@ -171,7 +171,7 @@ class Pen implements IPen {
                         , cx: Float32, cy: Float32, cz: Float32 ){
         // don't need to reorder corners and Trilateral can do that!
         var windAdjust = paintType.triangle( ax, ay, az, bx, by, bz, cx, cy, cz );
-        if( Trilateral.transformMatrix != null ) paintType.transform( Trilateral.transformMatrix );
+        if( transformMatrix != null ) paintType.transform( transformMatrix );
         return windAdjust;
     }
     #else
@@ -192,7 +192,7 @@ class Pen implements IPen {
                         , cx: Float32, cy: Float32, cz: Float32 ){
         // don't need to reorder corners and Trilateral can do that!
         var windAdjust = paintType.triangle( ax, ay, az, bx, by, bz, cx, cy, cz );
-        if( Trilateral.transformMatrix != null ) paintType.transform( Trilateral.transformMatrix );
+        if( transformMatrix != null ) paintType.transform( transformMatrix );
         if( useTexture ) {
             ax = ax/2000;
             ay = ay/2000;

@@ -15,6 +15,7 @@ import peote.view.intern.UniformBufferDisplay;
 
 import lime.graphics.opengl.GLBuffer;
 import lime.graphics.opengl.GLShader;
+import lime.graphics.opengl.GLProgram;
 import lime.graphics.opengl.GLVertexArrayObject;
 
 import justGraphix.contour.Pen2D;
@@ -33,7 +34,7 @@ class PeoteColorDisplayES2 extends Display {
     public static var hi:   Int;
     private var pen:             Pen2D;
     private var gradient:        GRADIENT;
-    private var program:         Program;
+    private var program:         GLProgram;
     private var vertex_shader:   GLShader;
     private var fragment_shader: GLShader;
     private var vertexBytes:     BufferBytes;

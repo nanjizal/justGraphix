@@ -56,12 +56,12 @@ class A_PeoteView extends Application {
         var peoteView = new PeoteView( window) ;
         var display   = new Display( 10, 10, window.width - 20, window.height - 20, Color.WHITE );
         peoteView.addDisplay( display );
-        //textureUsage( display );
+        textureUsage( display );
         
-        var pen2D = new Pen2D( 0xFF0000FF );
-        birdSVG( pen2D );
-        var customDisplay = new PeoteColorDisplayES2( 0, 0, 800, 600, pen2D, false );
-        peoteView.addDisplay( customDisplay );
+        //var pen2D = new Pen2D( 0xFF0000FF );
+        //birdSVG( pen2D );
+        //var customDisplay = new PeoteColorDisplayES2( 0, 0, 800, 600, pen2D, false );
+        //peoteView.addDisplay( customDisplay );
     }
     
     public

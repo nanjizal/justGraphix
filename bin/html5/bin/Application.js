@@ -867,7 +867,7 @@ ApplicationMain.main = function() {
 };
 ApplicationMain.create = function(config) {
 	var app = new justGraphix_application_image_A_$PeoteView();
-	app.meta.h["build"] = "8";
+	app.meta.h["build"] = "12";
 	app.meta.h["company"] = "Justinfront";
 	app.meta.h["file"] = "Application";
 	app.meta.h["name"] = "A_PeoteView";
@@ -2012,17 +2012,3374 @@ justGraphix_application_image_A_$PeoteView.prototype = $extend(lime_app_Applicat
 		var peoteView = new peote_view_PeoteView($window);
 		var display = new peote_view_Display(10,10,$window.__width - 20,$window.__height - 20,-1);
 		peoteView.addDisplay(display);
-		var pen2D = new justGraphix_contour_Pen2D(-16776961);
-		this.birdSVG(pen2D);
-		var customDisplay = new justGraphix_target_openflTarget_$_PeoteColorDisplayES2(0,0,800,600,pen2D,false);
-		peoteView.addDisplay(customDisplay);
+		this.textureUsage(display);
 	}
-	,birdSVG: function(pen2D) {
-		var sketcher = new justGraphix_contour_Sketcher(pen2D,4,3);
-		sketcher.width = 2;
-		var scaleTranslateContext = new justGraphix_path_ScaleTranslateContext(sketcher,20,0,1,1);
-		var p = new justGraphix_path_SvgPath(scaleTranslateContext);
-		p.parse(justGraphix_path_Path_$D_kiwi_d);
+	,textureUsage: function(display) {
+		var buffer = new peote_view_Buffer_$PeoteBasicElement(10);
+		var program = new peote_view_Program(buffer);
+		var pixelImage = this.createPixelImage();
+		var texture = new peote_view_Texture(pixelImage.width,pixelImage.height,2);
+		texture.setData(justGraphix_target_openflTarget_$_PeoteV.toPeoteTextureData_(pixelImage),0);
+		var this1 = pixelImage;
+		var w = this1.width;
+		var h = this1.height;
+		var transparent = this1.transparent;
+		var inPlace = true;
+		var includeMask = false;
+		if(includeMask == null) {
+			includeMask = false;
+		}
+		if(inPlace == null) {
+			inPlace = false;
+		}
+		if(transparent == null) {
+			transparent = false;
+		}
+		var transparent1 = transparent;
+		var inPlace1 = inPlace;
+		var includeMask1 = includeMask;
+		if(includeMask1 == null) {
+			includeMask1 = false;
+		}
+		if(inPlace1 == null) {
+			inPlace1 = false;
+		}
+		if(transparent1 == null) {
+			transparent1 = false;
+		}
+		var r = { x : 0, y : 0, w : w, h : h};
+		var xmax = r.x + r.w + 1 | 0;
+		var ymax = r.y + r.h + 1 | 0;
+		var ii_min = r.x | 0;
+		var ii_max = xmax;
+		var xRange__start = ii_min;
+		var xRange__max = ii_max;
+		var ii_min = r.y | 0;
+		var ii_max = ymax;
+		var yRange__start = ii_min;
+		var yRange__max = ii_max;
+		var range_x = xRange__start;
+		var range_y = yRange__start - 1;
+		var range_xReset = range_x;
+		var range_yReset = range_y;
+		var range_xMax = xRange__max - 2;
+		var range_yMax = yRange__max - 2;
+		var _this_min = 0;
+		var _this_max = (xRange__max - xRange__start) * (yRange__max - yRange__start) | 0;
+		var nextImage = justGraphix_image_Pixelimage._new(w | 0,h | 0);
+		nextImage.transparent = transparent1;
+		while(_this_min < _this_max) {
+			var i = _this_min++;
+			if(range_y > range_yMax) {
+				range_y = range_yReset;
+				++range_x;
+			}
+			++range_y;
+			var i1 = i;
+			var x = range_x;
+			var y = range_y;
+			var x1 = range_x;
+			var y1 = range_yMax - range_y;
+			var c = this1.image.get(this1.useVirtualPos ? (y1 - this1.virtualY) * this1.width + x1 - this1.virtualX | 0 : y1 * this1.width + x1 | 0);
+			var color = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+			var c1 = color;
+			if((c1 >> 24 & 255) < 254 && nextImage.transparent) {
+				var location = nextImage.useVirtualPos ? (y - nextImage.virtualY) * nextImage.width + x - nextImage.virtualX | 0 : y * nextImage.width + x | 0;
+				var this2 = nextImage.image.get(location);
+				var this3 = justGraphix_image_Endian_isLittleEndian ? (this2 >> 24 & 255) << 24 | (this2 & 255) << 16 | (this2 >> 8 & 255) << 8 | this2 >> 16 & 255 : this2;
+				var this4 = this3 >> 24 & 255;
+				var a1 = this4 == 0 ? 0. : this4 / 255;
+				var this5 = this3 >> 16 & 255;
+				var r1 = this5 == 0 ? 0. : this5 / 255;
+				var this6 = this3 >> 8 & 255;
+				var g1 = this6 == 0 ? 0. : this6 / 255;
+				var this7 = this3 & 255;
+				var b1 = this7 == 0 ? 0. : this7 / 255;
+				var this8 = color >> 24 & 255;
+				var a2 = this8 == 0 ? 0. : this8 / 255;
+				var this9 = color >> 16 & 255;
+				var r2 = this9 == 0 ? 0. : this9 / 255;
+				var this10 = color >> 8 & 255;
+				var g2 = this10 == 0 ? 0. : this10 / 255;
+				var this11 = color & 255;
+				var b2 = this11 == 0 ? 0. : this11 / 255;
+				var a3 = a1 * (1 - a2);
+				var r = 255 * (r1 * a3 + r2 * a2) | 0;
+				var g = 255 * (g1 * a3 + g2 * a2) | 0;
+				var b = 255 * (b1 * a3 + b2 * a2) | 0;
+				var a = 255 * (a3 + a2) | 0;
+				var blended = a << 24 | r << 16 | g << 8 | b;
+				nextImage.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+			} else {
+				nextImage.image.set(nextImage.useVirtualPos ? (y - nextImage.virtualY) * nextImage.width + x - nextImage.virtualX | 0 : y * nextImage.width + x | 0,justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1);
+			}
+		}
+		var this2;
+		if(inPlace1) {
+			var x = 0;
+			var y = 0;
+			var _g = 0;
+			var _g1 = nextImage.height;
+			while(_g < _g1) {
+				var dy = _g++;
+				var _g2 = 0;
+				var _g3 = nextImage.width;
+				while(_g2 < _g3) {
+					var dx = _g2++;
+					var c = nextImage.image.get(nextImage.useVirtualPos ? (dy - nextImage.virtualY) * nextImage.width + dx - nextImage.virtualX | 0 : dy * nextImage.width + dx | 0);
+					var col = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+					if(nextImage.useMask && nextImage.mask != null) {
+						var this3 = nextImage.mask;
+						var c1 = this3.image.get(this3.useVirtualPos ? (dy - this3.virtualY) * this3.width + dx - this3.virtualX | 0 : dy * this3.width + dx | 0);
+						var maskPixel = justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1;
+						var this4 = col;
+						if(maskPixel == 0) {
+							col = this4;
+						} else {
+							var this5 = maskPixel >> 24 & 255;
+							var m0 = this5 == 0 ? 0. : this5 / 255;
+							var this6 = maskPixel >> 16 & 255;
+							var m1 = this6 == 0 ? 0. : this6 / 255;
+							var this7 = maskPixel >> 8 & 255;
+							var m2 = this7 == 0 ? 0. : this7 / 255;
+							var this8 = maskPixel & 255;
+							var m3 = this8 == 0 ? 0. : this8 / 255;
+							var ch0 = (1. - m0) * (this4 >> 24 & 255) | 0;
+							var ch1 = (1. - m1) * (this4 >> 16 & 255) | 0;
+							var ch2 = (1. - m2) * (this4 >> 8 & 255) | 0;
+							var ch3 = (1. - m3) * (this4 & 255) | 0;
+							col = Math.round(ch0 * 255) << 24 | Math.round(ch1 * 255) << 16 | Math.round(ch2 * 255) << 8 | Math.round(ch3 * 255);
+						}
+					}
+					if(col != 0) {
+						var x1 = x + dx;
+						var y1 = y + dy;
+						var c2 = col;
+						if((c2 >> 24 & 255) < 254 && this1.transparent) {
+							var location = this1.useVirtualPos ? (y1 - this1.virtualY) * this1.width + x1 - this1.virtualX | 0 : y1 * this1.width + x1 | 0;
+							var this9 = this1.image.get(location);
+							var this10 = justGraphix_image_Endian_isLittleEndian ? (this9 >> 24 & 255) << 24 | (this9 & 255) << 16 | (this9 >> 8 & 255) << 8 | this9 >> 16 & 255 : this9;
+							var this11 = this10 >> 24 & 255;
+							var a1 = this11 == 0 ? 0. : this11 / 255;
+							var this12 = this10 >> 16 & 255;
+							var r1 = this12 == 0 ? 0. : this12 / 255;
+							var this13 = this10 >> 8 & 255;
+							var g1 = this13 == 0 ? 0. : this13 / 255;
+							var this14 = this10 & 255;
+							var b1 = this14 == 0 ? 0. : this14 / 255;
+							var this15 = col >> 24 & 255;
+							var a2 = this15 == 0 ? 0. : this15 / 255;
+							var this16 = col >> 16 & 255;
+							var r2 = this16 == 0 ? 0. : this16 / 255;
+							var this17 = col >> 8 & 255;
+							var g2 = this17 == 0 ? 0. : this17 / 255;
+							var this18 = col & 255;
+							var b2 = this18 == 0 ? 0. : this18 / 255;
+							var a3 = a1 * (1 - a2);
+							var r = 255 * (r1 * a3 + r2 * a2) | 0;
+							var g = 255 * (g1 * a3 + g2 * a2) | 0;
+							var b = 255 * (b1 * a3 + b2 * a2) | 0;
+							var a = 255 * (a3 + a2) | 0;
+							var blended = a << 24 | r << 16 | g << 8 | b;
+							this1.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+						} else {
+							this1.image.set(this1.useVirtualPos ? (y1 - this1.virtualY) * this1.width + x1 - this1.virtualX | 0 : y1 * this1.width + x1 | 0,justGraphix_image_Endian_isLittleEndian ? (c2 >> 24 & 255) << 24 | (c2 & 255) << 16 | (c2 >> 8 & 255) << 8 | c2 >> 16 & 255 : c2);
+						}
+					}
+				}
+			}
+			if(this1.mask != null && includeMask1) {
+				var this3 = this1.mask;
+				var w = this1.width;
+				var h = this1.height;
+				var transparent = this1.mask.transparent;
+				var inPlace = inPlace1;
+				var includeMask = includeMask1;
+				if(includeMask == null) {
+					includeMask = false;
+				}
+				if(inPlace == null) {
+					inPlace = false;
+				}
+				if(transparent == null) {
+					transparent = false;
+				}
+				var transparent1 = transparent;
+				var inPlace2 = inPlace;
+				var includeMask2 = includeMask;
+				if(includeMask2 == null) {
+					includeMask2 = false;
+				}
+				if(inPlace2 == null) {
+					inPlace2 = false;
+				}
+				if(transparent1 == null) {
+					transparent1 = false;
+				}
+				var r = { x : 0, y : 0, w : w, h : h};
+				var xmax = r.x + r.w + 1 | 0;
+				var ymax = r.y + r.h + 1 | 0;
+				var ii_min = r.x | 0;
+				var ii_max = xmax;
+				var xRange__start = ii_min;
+				var xRange__max = ii_max;
+				var ii_min = r.y | 0;
+				var ii_max = ymax;
+				var yRange__start = ii_min;
+				var yRange__max = ii_max;
+				var range_x = xRange__start;
+				var range_y = yRange__start - 1;
+				var range_xReset = range_x;
+				var range_yReset = range_y;
+				var range_xMax = xRange__max - 2;
+				var range_yMax = yRange__max - 2;
+				var _this_min = 0;
+				var _this_max = (xRange__max - xRange__start) * (yRange__max - yRange__start) | 0;
+				var nextImage1 = justGraphix_image_Pixelimage._new(w | 0,h | 0);
+				nextImage1.transparent = transparent1;
+				while(_this_min < _this_max) {
+					var i = _this_min++;
+					if(range_y > range_yMax) {
+						range_y = range_yReset;
+						++range_x;
+					}
+					++range_y;
+					var i1 = i;
+					var x = range_x;
+					var y = range_y;
+					var x1 = range_x;
+					var y1 = range_yMax - range_y;
+					var c = this3.image.get(this3.useVirtualPos ? (y1 - this3.virtualY) * this3.width + x1 - this3.virtualX | 0 : y1 * this3.width + x1 | 0);
+					var color = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+					var c1 = color;
+					if((c1 >> 24 & 255) < 254 && nextImage1.transparent) {
+						var location = nextImage1.useVirtualPos ? (y - nextImage1.virtualY) * nextImage1.width + x - nextImage1.virtualX | 0 : y * nextImage1.width + x | 0;
+						var this4 = nextImage1.image.get(location);
+						var this5 = justGraphix_image_Endian_isLittleEndian ? (this4 >> 24 & 255) << 24 | (this4 & 255) << 16 | (this4 >> 8 & 255) << 8 | this4 >> 16 & 255 : this4;
+						var this6 = this5 >> 24 & 255;
+						var a1 = this6 == 0 ? 0. : this6 / 255;
+						var this7 = this5 >> 16 & 255;
+						var r1 = this7 == 0 ? 0. : this7 / 255;
+						var this8 = this5 >> 8 & 255;
+						var g1 = this8 == 0 ? 0. : this8 / 255;
+						var this9 = this5 & 255;
+						var b1 = this9 == 0 ? 0. : this9 / 255;
+						var this10 = color >> 24 & 255;
+						var a2 = this10 == 0 ? 0. : this10 / 255;
+						var this11 = color >> 16 & 255;
+						var r2 = this11 == 0 ? 0. : this11 / 255;
+						var this12 = color >> 8 & 255;
+						var g2 = this12 == 0 ? 0. : this12 / 255;
+						var this13 = color & 255;
+						var b2 = this13 == 0 ? 0. : this13 / 255;
+						var a3 = a1 * (1 - a2);
+						var r = 255 * (r1 * a3 + r2 * a2) | 0;
+						var g = 255 * (g1 * a3 + g2 * a2) | 0;
+						var b = 255 * (b1 * a3 + b2 * a2) | 0;
+						var a = 255 * (a3 + a2) | 0;
+						var blended = a << 24 | r << 16 | g << 8 | b;
+						nextImage1.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+					} else {
+						nextImage1.image.set(nextImage1.useVirtualPos ? (y - nextImage1.virtualY) * nextImage1.width + x - nextImage1.virtualX | 0 : y * nextImage1.width + x | 0,justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1);
+					}
+				}
+				var v;
+				if(inPlace2) {
+					var x = 0;
+					var y = 0;
+					var _g = 0;
+					var _g1 = nextImage1.height;
+					while(_g < _g1) {
+						var dy = _g++;
+						var _g2 = 0;
+						var _g3 = nextImage1.width;
+						while(_g2 < _g3) {
+							var dx = _g2++;
+							var c = nextImage1.image.get(nextImage1.useVirtualPos ? (dy - nextImage1.virtualY) * nextImage1.width + dx - nextImage1.virtualX | 0 : dy * nextImage1.width + dx | 0);
+							var col = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+							if(nextImage1.useMask && nextImage1.mask != null) {
+								var this4 = nextImage1.mask;
+								var c1 = this4.image.get(this4.useVirtualPos ? (dy - this4.virtualY) * this4.width + dx - this4.virtualX | 0 : dy * this4.width + dx | 0);
+								var maskPixel = justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1;
+								var this5 = col;
+								if(maskPixel == 0) {
+									col = this5;
+								} else {
+									var this6 = maskPixel >> 24 & 255;
+									var m0 = this6 == 0 ? 0. : this6 / 255;
+									var this7 = maskPixel >> 16 & 255;
+									var m1 = this7 == 0 ? 0. : this7 / 255;
+									var this8 = maskPixel >> 8 & 255;
+									var m2 = this8 == 0 ? 0. : this8 / 255;
+									var this9 = maskPixel & 255;
+									var m3 = this9 == 0 ? 0. : this9 / 255;
+									var ch0 = (1. - m0) * (this5 >> 24 & 255) | 0;
+									var ch1 = (1. - m1) * (this5 >> 16 & 255) | 0;
+									var ch2 = (1. - m2) * (this5 >> 8 & 255) | 0;
+									var ch3 = (1. - m3) * (this5 & 255) | 0;
+									col = Math.round(ch0 * 255) << 24 | Math.round(ch1 * 255) << 16 | Math.round(ch2 * 255) << 8 | Math.round(ch3 * 255);
+								}
+							}
+							if(col != 0) {
+								var x1 = x + dx;
+								var y1 = y + dy;
+								var c2 = col;
+								if((c2 >> 24 & 255) < 254 && this3.transparent) {
+									var location = this3.useVirtualPos ? (y1 - this3.virtualY) * this3.width + x1 - this3.virtualX | 0 : y1 * this3.width + x1 | 0;
+									var this10 = this3.image.get(location);
+									var this11 = justGraphix_image_Endian_isLittleEndian ? (this10 >> 24 & 255) << 24 | (this10 & 255) << 16 | (this10 >> 8 & 255) << 8 | this10 >> 16 & 255 : this10;
+									var this12 = this11 >> 24 & 255;
+									var a1 = this12 == 0 ? 0. : this12 / 255;
+									var this13 = this11 >> 16 & 255;
+									var r1 = this13 == 0 ? 0. : this13 / 255;
+									var this14 = this11 >> 8 & 255;
+									var g1 = this14 == 0 ? 0. : this14 / 255;
+									var this15 = this11 & 255;
+									var b1 = this15 == 0 ? 0. : this15 / 255;
+									var this16 = col >> 24 & 255;
+									var a2 = this16 == 0 ? 0. : this16 / 255;
+									var this17 = col >> 16 & 255;
+									var r2 = this17 == 0 ? 0. : this17 / 255;
+									var this18 = col >> 8 & 255;
+									var g2 = this18 == 0 ? 0. : this18 / 255;
+									var this19 = col & 255;
+									var b2 = this19 == 0 ? 0. : this19 / 255;
+									var a3 = a1 * (1 - a2);
+									var r = 255 * (r1 * a3 + r2 * a2) | 0;
+									var g = 255 * (g1 * a3 + g2 * a2) | 0;
+									var b = 255 * (b1 * a3 + b2 * a2) | 0;
+									var a = 255 * (a3 + a2) | 0;
+									var blended = a << 24 | r << 16 | g << 8 | b;
+									this3.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+								} else {
+									this3.image.set(this3.useVirtualPos ? (y1 - this3.virtualY) * this3.width + x1 - this3.virtualX | 0 : y1 * this3.width + x1 | 0,justGraphix_image_Endian_isLittleEndian ? (c2 >> 24 & 255) << 24 | (c2 & 255) << 16 | (c2 >> 8 & 255) << 8 | c2 >> 16 & 255 : c2);
+								}
+							}
+						}
+					}
+					if(this3.mask != null && includeMask2) {
+						var this4 = this3.mask;
+						var w = this3.width;
+						var h = this3.height;
+						var transparent = this3.mask.transparent;
+						var inPlace = inPlace2;
+						var includeMask = includeMask2;
+						if(includeMask == null) {
+							includeMask = false;
+						}
+						if(inPlace == null) {
+							inPlace = false;
+						}
+						if(transparent == null) {
+							transparent = false;
+						}
+						var transparent1 = transparent;
+						var inPlace3 = inPlace;
+						var includeMask3 = includeMask;
+						if(includeMask3 == null) {
+							includeMask3 = false;
+						}
+						if(inPlace3 == null) {
+							inPlace3 = false;
+						}
+						if(transparent1 == null) {
+							transparent1 = false;
+						}
+						var r = { x : 0, y : 0, w : w, h : h};
+						var xmax = r.x + r.w + 1 | 0;
+						var ymax = r.y + r.h + 1 | 0;
+						var ii_min = r.x | 0;
+						var ii_max = xmax;
+						var xRange__start = ii_min;
+						var xRange__max = ii_max;
+						var ii_min = r.y | 0;
+						var ii_max = ymax;
+						var yRange__start = ii_min;
+						var yRange__max = ii_max;
+						var range_x = xRange__start;
+						var range_y = yRange__start - 1;
+						var range_xReset = range_x;
+						var range_yReset = range_y;
+						var range_xMax = xRange__max - 2;
+						var range_yMax = yRange__max - 2;
+						var _this_min = 0;
+						var _this_max = (xRange__max - xRange__start) * (yRange__max - yRange__start) | 0;
+						var nextImage2 = justGraphix_image_Pixelimage._new(w | 0,h | 0);
+						nextImage2.transparent = transparent1;
+						while(_this_min < _this_max) {
+							var i = _this_min++;
+							if(range_y > range_yMax) {
+								range_y = range_yReset;
+								++range_x;
+							}
+							++range_y;
+							var i1 = i;
+							var x = range_x;
+							var y = range_y;
+							var x1 = range_x;
+							var y1 = range_yMax - range_y;
+							var c = this4.image.get(this4.useVirtualPos ? (y1 - this4.virtualY) * this4.width + x1 - this4.virtualX | 0 : y1 * this4.width + x1 | 0);
+							var color = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+							var c1 = color;
+							if((c1 >> 24 & 255) < 254 && nextImage2.transparent) {
+								var location = nextImage2.useVirtualPos ? (y - nextImage2.virtualY) * nextImage2.width + x - nextImage2.virtualX | 0 : y * nextImage2.width + x | 0;
+								var this5 = nextImage2.image.get(location);
+								var this6 = justGraphix_image_Endian_isLittleEndian ? (this5 >> 24 & 255) << 24 | (this5 & 255) << 16 | (this5 >> 8 & 255) << 8 | this5 >> 16 & 255 : this5;
+								var this7 = this6 >> 24 & 255;
+								var a1 = this7 == 0 ? 0. : this7 / 255;
+								var this8 = this6 >> 16 & 255;
+								var r1 = this8 == 0 ? 0. : this8 / 255;
+								var this9 = this6 >> 8 & 255;
+								var g1 = this9 == 0 ? 0. : this9 / 255;
+								var this10 = this6 & 255;
+								var b1 = this10 == 0 ? 0. : this10 / 255;
+								var this11 = color >> 24 & 255;
+								var a2 = this11 == 0 ? 0. : this11 / 255;
+								var this12 = color >> 16 & 255;
+								var r2 = this12 == 0 ? 0. : this12 / 255;
+								var this13 = color >> 8 & 255;
+								var g2 = this13 == 0 ? 0. : this13 / 255;
+								var this14 = color & 255;
+								var b2 = this14 == 0 ? 0. : this14 / 255;
+								var a3 = a1 * (1 - a2);
+								var r = 255 * (r1 * a3 + r2 * a2) | 0;
+								var g = 255 * (g1 * a3 + g2 * a2) | 0;
+								var b = 255 * (b1 * a3 + b2 * a2) | 0;
+								var a = 255 * (a3 + a2) | 0;
+								var blended = a << 24 | r << 16 | g << 8 | b;
+								nextImage2.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+							} else {
+								nextImage2.image.set(nextImage2.useVirtualPos ? (y - nextImage2.virtualY) * nextImage2.width + x - nextImage2.virtualX | 0 : y * nextImage2.width + x | 0,justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1);
+							}
+						}
+						var v1;
+						if(inPlace3) {
+							var x = 0;
+							var y = 0;
+							var _g = 0;
+							var _g1 = nextImage2.height;
+							while(_g < _g1) {
+								var dy = _g++;
+								var _g2 = 0;
+								var _g3 = nextImage2.width;
+								while(_g2 < _g3) {
+									var dx = _g2++;
+									var c = nextImage2.image.get(nextImage2.useVirtualPos ? (dy - nextImage2.virtualY) * nextImage2.width + dx - nextImage2.virtualX | 0 : dy * nextImage2.width + dx | 0);
+									var col = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+									if(nextImage2.useMask && nextImage2.mask != null) {
+										var this5 = nextImage2.mask;
+										var c1 = this5.image.get(this5.useVirtualPos ? (dy - this5.virtualY) * this5.width + dx - this5.virtualX | 0 : dy * this5.width + dx | 0);
+										var maskPixel = justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1;
+										var this6 = col;
+										if(maskPixel == 0) {
+											col = this6;
+										} else {
+											var this7 = maskPixel >> 24 & 255;
+											var m0 = this7 == 0 ? 0. : this7 / 255;
+											var this8 = maskPixel >> 16 & 255;
+											var m1 = this8 == 0 ? 0. : this8 / 255;
+											var this9 = maskPixel >> 8 & 255;
+											var m2 = this9 == 0 ? 0. : this9 / 255;
+											var this10 = maskPixel & 255;
+											var m3 = this10 == 0 ? 0. : this10 / 255;
+											var ch0 = (1. - m0) * (this6 >> 24 & 255) | 0;
+											var ch1 = (1. - m1) * (this6 >> 16 & 255) | 0;
+											var ch2 = (1. - m2) * (this6 >> 8 & 255) | 0;
+											var ch3 = (1. - m3) * (this6 & 255) | 0;
+											col = Math.round(ch0 * 255) << 24 | Math.round(ch1 * 255) << 16 | Math.round(ch2 * 255) << 8 | Math.round(ch3 * 255);
+										}
+									}
+									if(col != 0) {
+										var x1 = x + dx;
+										var y1 = y + dy;
+										var c2 = col;
+										if((c2 >> 24 & 255) < 254 && this4.transparent) {
+											var location = this4.useVirtualPos ? (y1 - this4.virtualY) * this4.width + x1 - this4.virtualX | 0 : y1 * this4.width + x1 | 0;
+											var this11 = this4.image.get(location);
+											var this12 = justGraphix_image_Endian_isLittleEndian ? (this11 >> 24 & 255) << 24 | (this11 & 255) << 16 | (this11 >> 8 & 255) << 8 | this11 >> 16 & 255 : this11;
+											var this13 = this12 >> 24 & 255;
+											var a1 = this13 == 0 ? 0. : this13 / 255;
+											var this14 = this12 >> 16 & 255;
+											var r1 = this14 == 0 ? 0. : this14 / 255;
+											var this15 = this12 >> 8 & 255;
+											var g1 = this15 == 0 ? 0. : this15 / 255;
+											var this16 = this12 & 255;
+											var b1 = this16 == 0 ? 0. : this16 / 255;
+											var this17 = col >> 24 & 255;
+											var a2 = this17 == 0 ? 0. : this17 / 255;
+											var this18 = col >> 16 & 255;
+											var r2 = this18 == 0 ? 0. : this18 / 255;
+											var this19 = col >> 8 & 255;
+											var g2 = this19 == 0 ? 0. : this19 / 255;
+											var this20 = col & 255;
+											var b2 = this20 == 0 ? 0. : this20 / 255;
+											var a3 = a1 * (1 - a2);
+											var r = 255 * (r1 * a3 + r2 * a2) | 0;
+											var g = 255 * (g1 * a3 + g2 * a2) | 0;
+											var b = 255 * (b1 * a3 + b2 * a2) | 0;
+											var a = 255 * (a3 + a2) | 0;
+											var blended = a << 24 | r << 16 | g << 8 | b;
+											this4.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+										} else {
+											this4.image.set(this4.useVirtualPos ? (y1 - this4.virtualY) * this4.width + x1 - this4.virtualX | 0 : y1 * this4.width + x1 | 0,justGraphix_image_Endian_isLittleEndian ? (c2 >> 24 & 255) << 24 | (c2 & 255) << 16 | (c2 >> 8 & 255) << 8 | c2 >> 16 & 255 : c2);
+										}
+									}
+								}
+							}
+							if(this4.mask != null && includeMask3) {
+								var this5 = this4.mask;
+								var w = this4.width;
+								var h = this4.height;
+								var transparent = this4.mask.transparent;
+								var inPlace = inPlace3;
+								var includeMask = includeMask3;
+								if(includeMask == null) {
+									includeMask = false;
+								}
+								if(inPlace == null) {
+									inPlace = false;
+								}
+								if(transparent == null) {
+									transparent = false;
+								}
+								var transparent1 = transparent;
+								var inPlace4 = inPlace;
+								var includeMask4 = includeMask;
+								if(includeMask4 == null) {
+									includeMask4 = false;
+								}
+								if(inPlace4 == null) {
+									inPlace4 = false;
+								}
+								if(transparent1 == null) {
+									transparent1 = false;
+								}
+								var r = { x : 0, y : 0, w : w, h : h};
+								var xmax = r.x + r.w + 1 | 0;
+								var ymax = r.y + r.h + 1 | 0;
+								var ii_min = r.x | 0;
+								var ii_max = xmax;
+								var xRange__start = ii_min;
+								var xRange__max = ii_max;
+								var ii_min = r.y | 0;
+								var ii_max = ymax;
+								var yRange__start = ii_min;
+								var yRange__max = ii_max;
+								var range_x = xRange__start;
+								var range_y = yRange__start - 1;
+								var range_xReset = range_x;
+								var range_yReset = range_y;
+								var range_xMax = xRange__max - 2;
+								var range_yMax = yRange__max - 2;
+								var _this_min = 0;
+								var _this_max = (xRange__max - xRange__start) * (yRange__max - yRange__start) | 0;
+								var nextImage3 = justGraphix_image_Pixelimage._new(w | 0,h | 0);
+								nextImage3.transparent = transparent1;
+								while(_this_min < _this_max) {
+									var i = _this_min++;
+									if(range_y > range_yMax) {
+										range_y = range_yReset;
+										++range_x;
+									}
+									++range_y;
+									var i1 = i;
+									var x = range_x;
+									var y = range_y;
+									var x1 = range_x;
+									var y1 = range_yMax - range_y;
+									var c = this5.image.get(this5.useVirtualPos ? (y1 - this5.virtualY) * this5.width + x1 - this5.virtualX | 0 : y1 * this5.width + x1 | 0);
+									var color = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+									var c1 = color;
+									if((c1 >> 24 & 255) < 254 && nextImage3.transparent) {
+										var location = nextImage3.useVirtualPos ? (y - nextImage3.virtualY) * nextImage3.width + x - nextImage3.virtualX | 0 : y * nextImage3.width + x | 0;
+										var this6 = nextImage3.image.get(location);
+										var this7 = justGraphix_image_Endian_isLittleEndian ? (this6 >> 24 & 255) << 24 | (this6 & 255) << 16 | (this6 >> 8 & 255) << 8 | this6 >> 16 & 255 : this6;
+										var this8 = this7 >> 24 & 255;
+										var a1 = this8 == 0 ? 0. : this8 / 255;
+										var this9 = this7 >> 16 & 255;
+										var r1 = this9 == 0 ? 0. : this9 / 255;
+										var this10 = this7 >> 8 & 255;
+										var g1 = this10 == 0 ? 0. : this10 / 255;
+										var this11 = this7 & 255;
+										var b1 = this11 == 0 ? 0. : this11 / 255;
+										var this12 = color >> 24 & 255;
+										var a2 = this12 == 0 ? 0. : this12 / 255;
+										var this13 = color >> 16 & 255;
+										var r2 = this13 == 0 ? 0. : this13 / 255;
+										var this14 = color >> 8 & 255;
+										var g2 = this14 == 0 ? 0. : this14 / 255;
+										var this15 = color & 255;
+										var b2 = this15 == 0 ? 0. : this15 / 255;
+										var a3 = a1 * (1 - a2);
+										var r = 255 * (r1 * a3 + r2 * a2) | 0;
+										var g = 255 * (g1 * a3 + g2 * a2) | 0;
+										var b = 255 * (b1 * a3 + b2 * a2) | 0;
+										var a = 255 * (a3 + a2) | 0;
+										var blended = a << 24 | r << 16 | g << 8 | b;
+										nextImage3.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+									} else {
+										nextImage3.image.set(nextImage3.useVirtualPos ? (y - nextImage3.virtualY) * nextImage3.width + x - nextImage3.virtualX | 0 : y * nextImage3.width + x | 0,justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1);
+									}
+								}
+								var v2;
+								if(inPlace4) {
+									var x = 0;
+									var y = 0;
+									var _g = 0;
+									var _g1 = nextImage3.height;
+									while(_g < _g1) {
+										var dy = _g++;
+										var _g2 = 0;
+										var _g3 = nextImage3.width;
+										while(_g2 < _g3) {
+											var dx = _g2++;
+											var c = nextImage3.image.get(nextImage3.useVirtualPos ? (dy - nextImage3.virtualY) * nextImage3.width + dx - nextImage3.virtualX | 0 : dy * nextImage3.width + dx | 0);
+											var col = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+											if(nextImage3.useMask && nextImage3.mask != null) {
+												var this6 = nextImage3.mask;
+												var c1 = this6.image.get(this6.useVirtualPos ? (dy - this6.virtualY) * this6.width + dx - this6.virtualX | 0 : dy * this6.width + dx | 0);
+												var maskPixel = justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1;
+												var this7 = col;
+												if(maskPixel == 0) {
+													col = this7;
+												} else {
+													var this8 = maskPixel >> 24 & 255;
+													var m0 = this8 == 0 ? 0. : this8 / 255;
+													var this9 = maskPixel >> 16 & 255;
+													var m1 = this9 == 0 ? 0. : this9 / 255;
+													var this10 = maskPixel >> 8 & 255;
+													var m2 = this10 == 0 ? 0. : this10 / 255;
+													var this11 = maskPixel & 255;
+													var m3 = this11 == 0 ? 0. : this11 / 255;
+													var ch0 = (1. - m0) * (this7 >> 24 & 255) | 0;
+													var ch1 = (1. - m1) * (this7 >> 16 & 255) | 0;
+													var ch2 = (1. - m2) * (this7 >> 8 & 255) | 0;
+													var ch3 = (1. - m3) * (this7 & 255) | 0;
+													col = Math.round(ch0 * 255) << 24 | Math.round(ch1 * 255) << 16 | Math.round(ch2 * 255) << 8 | Math.round(ch3 * 255);
+												}
+											}
+											if(col != 0) {
+												var x1 = x + dx;
+												var y1 = y + dy;
+												var c2 = col;
+												if((c2 >> 24 & 255) < 254 && this5.transparent) {
+													var location = this5.useVirtualPos ? (y1 - this5.virtualY) * this5.width + x1 - this5.virtualX | 0 : y1 * this5.width + x1 | 0;
+													var this12 = this5.image.get(location);
+													var this13 = justGraphix_image_Endian_isLittleEndian ? (this12 >> 24 & 255) << 24 | (this12 & 255) << 16 | (this12 >> 8 & 255) << 8 | this12 >> 16 & 255 : this12;
+													var this14 = this13 >> 24 & 255;
+													var a1 = this14 == 0 ? 0. : this14 / 255;
+													var this15 = this13 >> 16 & 255;
+													var r1 = this15 == 0 ? 0. : this15 / 255;
+													var this16 = this13 >> 8 & 255;
+													var g1 = this16 == 0 ? 0. : this16 / 255;
+													var this17 = this13 & 255;
+													var b1 = this17 == 0 ? 0. : this17 / 255;
+													var this18 = col >> 24 & 255;
+													var a2 = this18 == 0 ? 0. : this18 / 255;
+													var this19 = col >> 16 & 255;
+													var r2 = this19 == 0 ? 0. : this19 / 255;
+													var this20 = col >> 8 & 255;
+													var g2 = this20 == 0 ? 0. : this20 / 255;
+													var this21 = col & 255;
+													var b2 = this21 == 0 ? 0. : this21 / 255;
+													var a3 = a1 * (1 - a2);
+													var r = 255 * (r1 * a3 + r2 * a2) | 0;
+													var g = 255 * (g1 * a3 + g2 * a2) | 0;
+													var b = 255 * (b1 * a3 + b2 * a2) | 0;
+													var a = 255 * (a3 + a2) | 0;
+													var blended = a << 24 | r << 16 | g << 8 | b;
+													this5.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+												} else {
+													this5.image.set(this5.useVirtualPos ? (y1 - this5.virtualY) * this5.width + x1 - this5.virtualX | 0 : y1 * this5.width + x1 | 0,justGraphix_image_Endian_isLittleEndian ? (c2 >> 24 & 255) << 24 | (c2 & 255) << 16 | (c2 >> 8 & 255) << 8 | c2 >> 16 & 255 : c2);
+												}
+											}
+										}
+									}
+									if(this5.mask != null && includeMask4) {
+										var v3 = justGraphix_image_imageAbstracts_TransformImage.flippedY(this5.mask,0,0,this5.width,this5.height,this5.mask.transparent,inPlace4,includeMask4);
+										this5.useMask = true;
+										this5.mask = v3;
+									}
+									nextImage3 = null;
+									v2 = this5;
+								} else {
+									if(this5.mask != null && includeMask4) {
+										var v3 = justGraphix_image_imageAbstracts_TransformImage.flippedY(this5.mask,0,0,this5.width,this5.height,this5.mask.transparent,inPlace4,includeMask4);
+										nextImage3.useMask = true;
+										nextImage3.mask = v3;
+									}
+									v2 = nextImage3;
+								}
+								this4.useMask = true;
+								this4.mask = v2;
+							}
+							nextImage2 = null;
+							v1 = this4;
+						} else {
+							if(this4.mask != null && includeMask3) {
+								var this5 = this4.mask;
+								var w = this4.width;
+								var h = this4.height;
+								var transparent = this4.mask.transparent;
+								var inPlace = inPlace3;
+								var includeMask = includeMask3;
+								if(includeMask == null) {
+									includeMask = false;
+								}
+								if(inPlace == null) {
+									inPlace = false;
+								}
+								if(transparent == null) {
+									transparent = false;
+								}
+								var transparent1 = transparent;
+								var inPlace3 = inPlace;
+								var includeMask3 = includeMask;
+								if(includeMask3 == null) {
+									includeMask3 = false;
+								}
+								if(inPlace3 == null) {
+									inPlace3 = false;
+								}
+								if(transparent1 == null) {
+									transparent1 = false;
+								}
+								var r = { x : 0, y : 0, w : w, h : h};
+								var xmax = r.x + r.w + 1 | 0;
+								var ymax = r.y + r.h + 1 | 0;
+								var ii_min = r.x | 0;
+								var ii_max = xmax;
+								var xRange__start = ii_min;
+								var xRange__max = ii_max;
+								var ii_min = r.y | 0;
+								var ii_max = ymax;
+								var yRange__start = ii_min;
+								var yRange__max = ii_max;
+								var range_x = xRange__start;
+								var range_y = yRange__start - 1;
+								var range_xReset = range_x;
+								var range_yReset = range_y;
+								var range_xMax = xRange__max - 2;
+								var range_yMax = yRange__max - 2;
+								var _this_min = 0;
+								var _this_max = (xRange__max - xRange__start) * (yRange__max - yRange__start) | 0;
+								var nextImage3 = justGraphix_image_Pixelimage._new(w | 0,h | 0);
+								nextImage3.transparent = transparent1;
+								while(_this_min < _this_max) {
+									var i = _this_min++;
+									if(range_y > range_yMax) {
+										range_y = range_yReset;
+										++range_x;
+									}
+									++range_y;
+									var i1 = i;
+									var x = range_x;
+									var y = range_y;
+									var x1 = range_x;
+									var y1 = range_yMax - range_y;
+									var c = this5.image.get(this5.useVirtualPos ? (y1 - this5.virtualY) * this5.width + x1 - this5.virtualX | 0 : y1 * this5.width + x1 | 0);
+									var color = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+									var c1 = color;
+									if((c1 >> 24 & 255) < 254 && nextImage3.transparent) {
+										var location = nextImage3.useVirtualPos ? (y - nextImage3.virtualY) * nextImage3.width + x - nextImage3.virtualX | 0 : y * nextImage3.width + x | 0;
+										var this4 = nextImage3.image.get(location);
+										var this6 = justGraphix_image_Endian_isLittleEndian ? (this4 >> 24 & 255) << 24 | (this4 & 255) << 16 | (this4 >> 8 & 255) << 8 | this4 >> 16 & 255 : this4;
+										var this7 = this6 >> 24 & 255;
+										var a1 = this7 == 0 ? 0. : this7 / 255;
+										var this8 = this6 >> 16 & 255;
+										var r1 = this8 == 0 ? 0. : this8 / 255;
+										var this9 = this6 >> 8 & 255;
+										var g1 = this9 == 0 ? 0. : this9 / 255;
+										var this10 = this6 & 255;
+										var b1 = this10 == 0 ? 0. : this10 / 255;
+										var this11 = color >> 24 & 255;
+										var a2 = this11 == 0 ? 0. : this11 / 255;
+										var this12 = color >> 16 & 255;
+										var r2 = this12 == 0 ? 0. : this12 / 255;
+										var this13 = color >> 8 & 255;
+										var g2 = this13 == 0 ? 0. : this13 / 255;
+										var this14 = color & 255;
+										var b2 = this14 == 0 ? 0. : this14 / 255;
+										var a3 = a1 * (1 - a2);
+										var r = 255 * (r1 * a3 + r2 * a2) | 0;
+										var g = 255 * (g1 * a3 + g2 * a2) | 0;
+										var b = 255 * (b1 * a3 + b2 * a2) | 0;
+										var a = 255 * (a3 + a2) | 0;
+										var blended = a << 24 | r << 16 | g << 8 | b;
+										nextImage3.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+									} else {
+										nextImage3.image.set(nextImage3.useVirtualPos ? (y - nextImage3.virtualY) * nextImage3.width + x - nextImage3.virtualX | 0 : y * nextImage3.width + x | 0,justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1);
+									}
+								}
+								var v2;
+								if(inPlace3) {
+									var x = 0;
+									var y = 0;
+									var _g = 0;
+									var _g1 = nextImage3.height;
+									while(_g < _g1) {
+										var dy = _g++;
+										var _g2 = 0;
+										var _g3 = nextImage3.width;
+										while(_g2 < _g3) {
+											var dx = _g2++;
+											var c = nextImage3.image.get(nextImage3.useVirtualPos ? (dy - nextImage3.virtualY) * nextImage3.width + dx - nextImage3.virtualX | 0 : dy * nextImage3.width + dx | 0);
+											var col = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+											if(nextImage3.useMask && nextImage3.mask != null) {
+												var this4 = nextImage3.mask;
+												var c1 = this4.image.get(this4.useVirtualPos ? (dy - this4.virtualY) * this4.width + dx - this4.virtualX | 0 : dy * this4.width + dx | 0);
+												var maskPixel = justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1;
+												var this6 = col;
+												if(maskPixel == 0) {
+													col = this6;
+												} else {
+													var this7 = maskPixel >> 24 & 255;
+													var m0 = this7 == 0 ? 0. : this7 / 255;
+													var this8 = maskPixel >> 16 & 255;
+													var m1 = this8 == 0 ? 0. : this8 / 255;
+													var this9 = maskPixel >> 8 & 255;
+													var m2 = this9 == 0 ? 0. : this9 / 255;
+													var this10 = maskPixel & 255;
+													var m3 = this10 == 0 ? 0. : this10 / 255;
+													var ch0 = (1. - m0) * (this6 >> 24 & 255) | 0;
+													var ch1 = (1. - m1) * (this6 >> 16 & 255) | 0;
+													var ch2 = (1. - m2) * (this6 >> 8 & 255) | 0;
+													var ch3 = (1. - m3) * (this6 & 255) | 0;
+													col = Math.round(ch0 * 255) << 24 | Math.round(ch1 * 255) << 16 | Math.round(ch2 * 255) << 8 | Math.round(ch3 * 255);
+												}
+											}
+											if(col != 0) {
+												var x1 = x + dx;
+												var y1 = y + dy;
+												var c2 = col;
+												if((c2 >> 24 & 255) < 254 && this5.transparent) {
+													var location = this5.useVirtualPos ? (y1 - this5.virtualY) * this5.width + x1 - this5.virtualX | 0 : y1 * this5.width + x1 | 0;
+													var this11 = this5.image.get(location);
+													var this12 = justGraphix_image_Endian_isLittleEndian ? (this11 >> 24 & 255) << 24 | (this11 & 255) << 16 | (this11 >> 8 & 255) << 8 | this11 >> 16 & 255 : this11;
+													var this13 = this12 >> 24 & 255;
+													var a1 = this13 == 0 ? 0. : this13 / 255;
+													var this14 = this12 >> 16 & 255;
+													var r1 = this14 == 0 ? 0. : this14 / 255;
+													var this15 = this12 >> 8 & 255;
+													var g1 = this15 == 0 ? 0. : this15 / 255;
+													var this16 = this12 & 255;
+													var b1 = this16 == 0 ? 0. : this16 / 255;
+													var this17 = col >> 24 & 255;
+													var a2 = this17 == 0 ? 0. : this17 / 255;
+													var this18 = col >> 16 & 255;
+													var r2 = this18 == 0 ? 0. : this18 / 255;
+													var this19 = col >> 8 & 255;
+													var g2 = this19 == 0 ? 0. : this19 / 255;
+													var this20 = col & 255;
+													var b2 = this20 == 0 ? 0. : this20 / 255;
+													var a3 = a1 * (1 - a2);
+													var r = 255 * (r1 * a3 + r2 * a2) | 0;
+													var g = 255 * (g1 * a3 + g2 * a2) | 0;
+													var b = 255 * (b1 * a3 + b2 * a2) | 0;
+													var a = 255 * (a3 + a2) | 0;
+													var blended = a << 24 | r << 16 | g << 8 | b;
+													this5.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+												} else {
+													this5.image.set(this5.useVirtualPos ? (y1 - this5.virtualY) * this5.width + x1 - this5.virtualX | 0 : y1 * this5.width + x1 | 0,justGraphix_image_Endian_isLittleEndian ? (c2 >> 24 & 255) << 24 | (c2 & 255) << 16 | (c2 >> 8 & 255) << 8 | c2 >> 16 & 255 : c2);
+												}
+											}
+										}
+									}
+									if(this5.mask != null && includeMask3) {
+										var v3 = justGraphix_image_imageAbstracts_TransformImage.flippedY(this5.mask,0,0,this5.width,this5.height,this5.mask.transparent,inPlace3,includeMask3);
+										this5.useMask = true;
+										this5.mask = v3;
+									}
+									nextImage3 = null;
+									v2 = this5;
+								} else {
+									if(this5.mask != null && includeMask3) {
+										var v3 = justGraphix_image_imageAbstracts_TransformImage.flippedY(this5.mask,0,0,this5.width,this5.height,this5.mask.transparent,inPlace3,includeMask3);
+										nextImage3.useMask = true;
+										nextImage3.mask = v3;
+									}
+									v2 = nextImage3;
+								}
+								nextImage2.useMask = true;
+								nextImage2.mask = v2;
+							}
+							v1 = nextImage2;
+						}
+						this3.useMask = true;
+						this3.mask = v1;
+					}
+					nextImage1 = null;
+					v = this3;
+				} else {
+					if(this3.mask != null && includeMask2) {
+						var this4 = this3.mask;
+						var w = this3.width;
+						var h = this3.height;
+						var transparent = this3.mask.transparent;
+						var inPlace = inPlace2;
+						var includeMask = includeMask2;
+						if(includeMask == null) {
+							includeMask = false;
+						}
+						if(inPlace == null) {
+							inPlace = false;
+						}
+						if(transparent == null) {
+							transparent = false;
+						}
+						var transparent1 = transparent;
+						var inPlace2 = inPlace;
+						var includeMask2 = includeMask;
+						if(includeMask2 == null) {
+							includeMask2 = false;
+						}
+						if(inPlace2 == null) {
+							inPlace2 = false;
+						}
+						if(transparent1 == null) {
+							transparent1 = false;
+						}
+						var r = { x : 0, y : 0, w : w, h : h};
+						var xmax = r.x + r.w + 1 | 0;
+						var ymax = r.y + r.h + 1 | 0;
+						var ii_min = r.x | 0;
+						var ii_max = xmax;
+						var xRange__start = ii_min;
+						var xRange__max = ii_max;
+						var ii_min = r.y | 0;
+						var ii_max = ymax;
+						var yRange__start = ii_min;
+						var yRange__max = ii_max;
+						var range_x = xRange__start;
+						var range_y = yRange__start - 1;
+						var range_xReset = range_x;
+						var range_yReset = range_y;
+						var range_xMax = xRange__max - 2;
+						var range_yMax = yRange__max - 2;
+						var _this_min = 0;
+						var _this_max = (xRange__max - xRange__start) * (yRange__max - yRange__start) | 0;
+						var nextImage2 = justGraphix_image_Pixelimage._new(w | 0,h | 0);
+						nextImage2.transparent = transparent1;
+						while(_this_min < _this_max) {
+							var i = _this_min++;
+							if(range_y > range_yMax) {
+								range_y = range_yReset;
+								++range_x;
+							}
+							++range_y;
+							var i1 = i;
+							var x = range_x;
+							var y = range_y;
+							var x1 = range_x;
+							var y1 = range_yMax - range_y;
+							var c = this4.image.get(this4.useVirtualPos ? (y1 - this4.virtualY) * this4.width + x1 - this4.virtualX | 0 : y1 * this4.width + x1 | 0);
+							var color = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+							var c1 = color;
+							if((c1 >> 24 & 255) < 254 && nextImage2.transparent) {
+								var location = nextImage2.useVirtualPos ? (y - nextImage2.virtualY) * nextImage2.width + x - nextImage2.virtualX | 0 : y * nextImage2.width + x | 0;
+								var this3 = nextImage2.image.get(location);
+								var this5 = justGraphix_image_Endian_isLittleEndian ? (this3 >> 24 & 255) << 24 | (this3 & 255) << 16 | (this3 >> 8 & 255) << 8 | this3 >> 16 & 255 : this3;
+								var this6 = this5 >> 24 & 255;
+								var a1 = this6 == 0 ? 0. : this6 / 255;
+								var this7 = this5 >> 16 & 255;
+								var r1 = this7 == 0 ? 0. : this7 / 255;
+								var this8 = this5 >> 8 & 255;
+								var g1 = this8 == 0 ? 0. : this8 / 255;
+								var this9 = this5 & 255;
+								var b1 = this9 == 0 ? 0. : this9 / 255;
+								var this10 = color >> 24 & 255;
+								var a2 = this10 == 0 ? 0. : this10 / 255;
+								var this11 = color >> 16 & 255;
+								var r2 = this11 == 0 ? 0. : this11 / 255;
+								var this12 = color >> 8 & 255;
+								var g2 = this12 == 0 ? 0. : this12 / 255;
+								var this13 = color & 255;
+								var b2 = this13 == 0 ? 0. : this13 / 255;
+								var a3 = a1 * (1 - a2);
+								var r = 255 * (r1 * a3 + r2 * a2) | 0;
+								var g = 255 * (g1 * a3 + g2 * a2) | 0;
+								var b = 255 * (b1 * a3 + b2 * a2) | 0;
+								var a = 255 * (a3 + a2) | 0;
+								var blended = a << 24 | r << 16 | g << 8 | b;
+								nextImage2.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+							} else {
+								nextImage2.image.set(nextImage2.useVirtualPos ? (y - nextImage2.virtualY) * nextImage2.width + x - nextImage2.virtualX | 0 : y * nextImage2.width + x | 0,justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1);
+							}
+						}
+						var v1;
+						if(inPlace2) {
+							var x = 0;
+							var y = 0;
+							var _g = 0;
+							var _g1 = nextImage2.height;
+							while(_g < _g1) {
+								var dy = _g++;
+								var _g2 = 0;
+								var _g3 = nextImage2.width;
+								while(_g2 < _g3) {
+									var dx = _g2++;
+									var c = nextImage2.image.get(nextImage2.useVirtualPos ? (dy - nextImage2.virtualY) * nextImage2.width + dx - nextImage2.virtualX | 0 : dy * nextImage2.width + dx | 0);
+									var col = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+									if(nextImage2.useMask && nextImage2.mask != null) {
+										var this3 = nextImage2.mask;
+										var c1 = this3.image.get(this3.useVirtualPos ? (dy - this3.virtualY) * this3.width + dx - this3.virtualX | 0 : dy * this3.width + dx | 0);
+										var maskPixel = justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1;
+										var this5 = col;
+										if(maskPixel == 0) {
+											col = this5;
+										} else {
+											var this6 = maskPixel >> 24 & 255;
+											var m0 = this6 == 0 ? 0. : this6 / 255;
+											var this7 = maskPixel >> 16 & 255;
+											var m1 = this7 == 0 ? 0. : this7 / 255;
+											var this8 = maskPixel >> 8 & 255;
+											var m2 = this8 == 0 ? 0. : this8 / 255;
+											var this9 = maskPixel & 255;
+											var m3 = this9 == 0 ? 0. : this9 / 255;
+											var ch0 = (1. - m0) * (this5 >> 24 & 255) | 0;
+											var ch1 = (1. - m1) * (this5 >> 16 & 255) | 0;
+											var ch2 = (1. - m2) * (this5 >> 8 & 255) | 0;
+											var ch3 = (1. - m3) * (this5 & 255) | 0;
+											col = Math.round(ch0 * 255) << 24 | Math.round(ch1 * 255) << 16 | Math.round(ch2 * 255) << 8 | Math.round(ch3 * 255);
+										}
+									}
+									if(col != 0) {
+										var x1 = x + dx;
+										var y1 = y + dy;
+										var c2 = col;
+										if((c2 >> 24 & 255) < 254 && this4.transparent) {
+											var location = this4.useVirtualPos ? (y1 - this4.virtualY) * this4.width + x1 - this4.virtualX | 0 : y1 * this4.width + x1 | 0;
+											var this10 = this4.image.get(location);
+											var this11 = justGraphix_image_Endian_isLittleEndian ? (this10 >> 24 & 255) << 24 | (this10 & 255) << 16 | (this10 >> 8 & 255) << 8 | this10 >> 16 & 255 : this10;
+											var this12 = this11 >> 24 & 255;
+											var a1 = this12 == 0 ? 0. : this12 / 255;
+											var this13 = this11 >> 16 & 255;
+											var r1 = this13 == 0 ? 0. : this13 / 255;
+											var this14 = this11 >> 8 & 255;
+											var g1 = this14 == 0 ? 0. : this14 / 255;
+											var this15 = this11 & 255;
+											var b1 = this15 == 0 ? 0. : this15 / 255;
+											var this16 = col >> 24 & 255;
+											var a2 = this16 == 0 ? 0. : this16 / 255;
+											var this17 = col >> 16 & 255;
+											var r2 = this17 == 0 ? 0. : this17 / 255;
+											var this18 = col >> 8 & 255;
+											var g2 = this18 == 0 ? 0. : this18 / 255;
+											var this19 = col & 255;
+											var b2 = this19 == 0 ? 0. : this19 / 255;
+											var a3 = a1 * (1 - a2);
+											var r = 255 * (r1 * a3 + r2 * a2) | 0;
+											var g = 255 * (g1 * a3 + g2 * a2) | 0;
+											var b = 255 * (b1 * a3 + b2 * a2) | 0;
+											var a = 255 * (a3 + a2) | 0;
+											var blended = a << 24 | r << 16 | g << 8 | b;
+											this4.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+										} else {
+											this4.image.set(this4.useVirtualPos ? (y1 - this4.virtualY) * this4.width + x1 - this4.virtualX | 0 : y1 * this4.width + x1 | 0,justGraphix_image_Endian_isLittleEndian ? (c2 >> 24 & 255) << 24 | (c2 & 255) << 16 | (c2 >> 8 & 255) << 8 | c2 >> 16 & 255 : c2);
+										}
+									}
+								}
+							}
+							if(this4.mask != null && includeMask2) {
+								var this3 = this4.mask;
+								var w = this4.width;
+								var h = this4.height;
+								var transparent = this4.mask.transparent;
+								var inPlace = inPlace2;
+								var includeMask = includeMask2;
+								if(includeMask == null) {
+									includeMask = false;
+								}
+								if(inPlace == null) {
+									inPlace = false;
+								}
+								if(transparent == null) {
+									transparent = false;
+								}
+								var transparent1 = transparent;
+								var inPlace3 = inPlace;
+								var includeMask3 = includeMask;
+								if(includeMask3 == null) {
+									includeMask3 = false;
+								}
+								if(inPlace3 == null) {
+									inPlace3 = false;
+								}
+								if(transparent1 == null) {
+									transparent1 = false;
+								}
+								var r = { x : 0, y : 0, w : w, h : h};
+								var xmax = r.x + r.w + 1 | 0;
+								var ymax = r.y + r.h + 1 | 0;
+								var ii_min = r.x | 0;
+								var ii_max = xmax;
+								var xRange__start = ii_min;
+								var xRange__max = ii_max;
+								var ii_min = r.y | 0;
+								var ii_max = ymax;
+								var yRange__start = ii_min;
+								var yRange__max = ii_max;
+								var range_x = xRange__start;
+								var range_y = yRange__start - 1;
+								var range_xReset = range_x;
+								var range_yReset = range_y;
+								var range_xMax = xRange__max - 2;
+								var range_yMax = yRange__max - 2;
+								var _this_min = 0;
+								var _this_max = (xRange__max - xRange__start) * (yRange__max - yRange__start) | 0;
+								var nextImage3 = justGraphix_image_Pixelimage._new(w | 0,h | 0);
+								nextImage3.transparent = transparent1;
+								while(_this_min < _this_max) {
+									var i = _this_min++;
+									if(range_y > range_yMax) {
+										range_y = range_yReset;
+										++range_x;
+									}
+									++range_y;
+									var i1 = i;
+									var x = range_x;
+									var y = range_y;
+									var x1 = range_x;
+									var y1 = range_yMax - range_y;
+									var c = this3.image.get(this3.useVirtualPos ? (y1 - this3.virtualY) * this3.width + x1 - this3.virtualX | 0 : y1 * this3.width + x1 | 0);
+									var color = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+									var c1 = color;
+									if((c1 >> 24 & 255) < 254 && nextImage3.transparent) {
+										var location = nextImage3.useVirtualPos ? (y - nextImage3.virtualY) * nextImage3.width + x - nextImage3.virtualX | 0 : y * nextImage3.width + x | 0;
+										var this5 = nextImage3.image.get(location);
+										var this6 = justGraphix_image_Endian_isLittleEndian ? (this5 >> 24 & 255) << 24 | (this5 & 255) << 16 | (this5 >> 8 & 255) << 8 | this5 >> 16 & 255 : this5;
+										var this7 = this6 >> 24 & 255;
+										var a1 = this7 == 0 ? 0. : this7 / 255;
+										var this8 = this6 >> 16 & 255;
+										var r1 = this8 == 0 ? 0. : this8 / 255;
+										var this9 = this6 >> 8 & 255;
+										var g1 = this9 == 0 ? 0. : this9 / 255;
+										var this10 = this6 & 255;
+										var b1 = this10 == 0 ? 0. : this10 / 255;
+										var this11 = color >> 24 & 255;
+										var a2 = this11 == 0 ? 0. : this11 / 255;
+										var this12 = color >> 16 & 255;
+										var r2 = this12 == 0 ? 0. : this12 / 255;
+										var this13 = color >> 8 & 255;
+										var g2 = this13 == 0 ? 0. : this13 / 255;
+										var this14 = color & 255;
+										var b2 = this14 == 0 ? 0. : this14 / 255;
+										var a3 = a1 * (1 - a2);
+										var r = 255 * (r1 * a3 + r2 * a2) | 0;
+										var g = 255 * (g1 * a3 + g2 * a2) | 0;
+										var b = 255 * (b1 * a3 + b2 * a2) | 0;
+										var a = 255 * (a3 + a2) | 0;
+										var blended = a << 24 | r << 16 | g << 8 | b;
+										nextImage3.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+									} else {
+										nextImage3.image.set(nextImage3.useVirtualPos ? (y - nextImage3.virtualY) * nextImage3.width + x - nextImage3.virtualX | 0 : y * nextImage3.width + x | 0,justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1);
+									}
+								}
+								var v2;
+								if(inPlace3) {
+									var x = 0;
+									var y = 0;
+									var _g = 0;
+									var _g1 = nextImage3.height;
+									while(_g < _g1) {
+										var dy = _g++;
+										var _g2 = 0;
+										var _g3 = nextImage3.width;
+										while(_g2 < _g3) {
+											var dx = _g2++;
+											var c = nextImage3.image.get(nextImage3.useVirtualPos ? (dy - nextImage3.virtualY) * nextImage3.width + dx - nextImage3.virtualX | 0 : dy * nextImage3.width + dx | 0);
+											var col = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+											if(nextImage3.useMask && nextImage3.mask != null) {
+												var this5 = nextImage3.mask;
+												var c1 = this5.image.get(this5.useVirtualPos ? (dy - this5.virtualY) * this5.width + dx - this5.virtualX | 0 : dy * this5.width + dx | 0);
+												var maskPixel = justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1;
+												var this6 = col;
+												if(maskPixel == 0) {
+													col = this6;
+												} else {
+													var this7 = maskPixel >> 24 & 255;
+													var m0 = this7 == 0 ? 0. : this7 / 255;
+													var this8 = maskPixel >> 16 & 255;
+													var m1 = this8 == 0 ? 0. : this8 / 255;
+													var this9 = maskPixel >> 8 & 255;
+													var m2 = this9 == 0 ? 0. : this9 / 255;
+													var this10 = maskPixel & 255;
+													var m3 = this10 == 0 ? 0. : this10 / 255;
+													var ch0 = (1. - m0) * (this6 >> 24 & 255) | 0;
+													var ch1 = (1. - m1) * (this6 >> 16 & 255) | 0;
+													var ch2 = (1. - m2) * (this6 >> 8 & 255) | 0;
+													var ch3 = (1. - m3) * (this6 & 255) | 0;
+													col = Math.round(ch0 * 255) << 24 | Math.round(ch1 * 255) << 16 | Math.round(ch2 * 255) << 8 | Math.round(ch3 * 255);
+												}
+											}
+											if(col != 0) {
+												var x1 = x + dx;
+												var y1 = y + dy;
+												var c2 = col;
+												if((c2 >> 24 & 255) < 254 && this3.transparent) {
+													var location = this3.useVirtualPos ? (y1 - this3.virtualY) * this3.width + x1 - this3.virtualX | 0 : y1 * this3.width + x1 | 0;
+													var this11 = this3.image.get(location);
+													var this12 = justGraphix_image_Endian_isLittleEndian ? (this11 >> 24 & 255) << 24 | (this11 & 255) << 16 | (this11 >> 8 & 255) << 8 | this11 >> 16 & 255 : this11;
+													var this13 = this12 >> 24 & 255;
+													var a1 = this13 == 0 ? 0. : this13 / 255;
+													var this14 = this12 >> 16 & 255;
+													var r1 = this14 == 0 ? 0. : this14 / 255;
+													var this15 = this12 >> 8 & 255;
+													var g1 = this15 == 0 ? 0. : this15 / 255;
+													var this16 = this12 & 255;
+													var b1 = this16 == 0 ? 0. : this16 / 255;
+													var this17 = col >> 24 & 255;
+													var a2 = this17 == 0 ? 0. : this17 / 255;
+													var this18 = col >> 16 & 255;
+													var r2 = this18 == 0 ? 0. : this18 / 255;
+													var this19 = col >> 8 & 255;
+													var g2 = this19 == 0 ? 0. : this19 / 255;
+													var this20 = col & 255;
+													var b2 = this20 == 0 ? 0. : this20 / 255;
+													var a3 = a1 * (1 - a2);
+													var r = 255 * (r1 * a3 + r2 * a2) | 0;
+													var g = 255 * (g1 * a3 + g2 * a2) | 0;
+													var b = 255 * (b1 * a3 + b2 * a2) | 0;
+													var a = 255 * (a3 + a2) | 0;
+													var blended = a << 24 | r << 16 | g << 8 | b;
+													this3.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+												} else {
+													this3.image.set(this3.useVirtualPos ? (y1 - this3.virtualY) * this3.width + x1 - this3.virtualX | 0 : y1 * this3.width + x1 | 0,justGraphix_image_Endian_isLittleEndian ? (c2 >> 24 & 255) << 24 | (c2 & 255) << 16 | (c2 >> 8 & 255) << 8 | c2 >> 16 & 255 : c2);
+												}
+											}
+										}
+									}
+									if(this3.mask != null && includeMask3) {
+										var v3 = justGraphix_image_imageAbstracts_TransformImage.flippedY(this3.mask,0,0,this3.width,this3.height,this3.mask.transparent,inPlace3,includeMask3);
+										this3.useMask = true;
+										this3.mask = v3;
+									}
+									nextImage3 = null;
+									v2 = this3;
+								} else {
+									if(this3.mask != null && includeMask3) {
+										var v3 = justGraphix_image_imageAbstracts_TransformImage.flippedY(this3.mask,0,0,this3.width,this3.height,this3.mask.transparent,inPlace3,includeMask3);
+										nextImage3.useMask = true;
+										nextImage3.mask = v3;
+									}
+									v2 = nextImage3;
+								}
+								this4.useMask = true;
+								this4.mask = v2;
+							}
+							nextImage2 = null;
+							v1 = this4;
+						} else {
+							if(this4.mask != null && includeMask2) {
+								var this3 = this4.mask;
+								var w = this4.width;
+								var h = this4.height;
+								var transparent = this4.mask.transparent;
+								var inPlace = inPlace2;
+								var includeMask = includeMask2;
+								if(includeMask == null) {
+									includeMask = false;
+								}
+								if(inPlace == null) {
+									inPlace = false;
+								}
+								if(transparent == null) {
+									transparent = false;
+								}
+								var transparent1 = transparent;
+								var inPlace2 = inPlace;
+								var includeMask2 = includeMask;
+								if(includeMask2 == null) {
+									includeMask2 = false;
+								}
+								if(inPlace2 == null) {
+									inPlace2 = false;
+								}
+								if(transparent1 == null) {
+									transparent1 = false;
+								}
+								var r = { x : 0, y : 0, w : w, h : h};
+								var xmax = r.x + r.w + 1 | 0;
+								var ymax = r.y + r.h + 1 | 0;
+								var ii_min = r.x | 0;
+								var ii_max = xmax;
+								var xRange__start = ii_min;
+								var xRange__max = ii_max;
+								var ii_min = r.y | 0;
+								var ii_max = ymax;
+								var yRange__start = ii_min;
+								var yRange__max = ii_max;
+								var range_x = xRange__start;
+								var range_y = yRange__start - 1;
+								var range_xReset = range_x;
+								var range_yReset = range_y;
+								var range_xMax = xRange__max - 2;
+								var range_yMax = yRange__max - 2;
+								var _this_min = 0;
+								var _this_max = (xRange__max - xRange__start) * (yRange__max - yRange__start) | 0;
+								var nextImage3 = justGraphix_image_Pixelimage._new(w | 0,h | 0);
+								nextImage3.transparent = transparent1;
+								while(_this_min < _this_max) {
+									var i = _this_min++;
+									if(range_y > range_yMax) {
+										range_y = range_yReset;
+										++range_x;
+									}
+									++range_y;
+									var i1 = i;
+									var x = range_x;
+									var y = range_y;
+									var x1 = range_x;
+									var y1 = range_yMax - range_y;
+									var c = this3.image.get(this3.useVirtualPos ? (y1 - this3.virtualY) * this3.width + x1 - this3.virtualX | 0 : y1 * this3.width + x1 | 0);
+									var color = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+									var c1 = color;
+									if((c1 >> 24 & 255) < 254 && nextImage3.transparent) {
+										var location = nextImage3.useVirtualPos ? (y - nextImage3.virtualY) * nextImage3.width + x - nextImage3.virtualX | 0 : y * nextImage3.width + x | 0;
+										var this4 = nextImage3.image.get(location);
+										var this5 = justGraphix_image_Endian_isLittleEndian ? (this4 >> 24 & 255) << 24 | (this4 & 255) << 16 | (this4 >> 8 & 255) << 8 | this4 >> 16 & 255 : this4;
+										var this6 = this5 >> 24 & 255;
+										var a1 = this6 == 0 ? 0. : this6 / 255;
+										var this7 = this5 >> 16 & 255;
+										var r1 = this7 == 0 ? 0. : this7 / 255;
+										var this8 = this5 >> 8 & 255;
+										var g1 = this8 == 0 ? 0. : this8 / 255;
+										var this9 = this5 & 255;
+										var b1 = this9 == 0 ? 0. : this9 / 255;
+										var this10 = color >> 24 & 255;
+										var a2 = this10 == 0 ? 0. : this10 / 255;
+										var this11 = color >> 16 & 255;
+										var r2 = this11 == 0 ? 0. : this11 / 255;
+										var this12 = color >> 8 & 255;
+										var g2 = this12 == 0 ? 0. : this12 / 255;
+										var this13 = color & 255;
+										var b2 = this13 == 0 ? 0. : this13 / 255;
+										var a3 = a1 * (1 - a2);
+										var r = 255 * (r1 * a3 + r2 * a2) | 0;
+										var g = 255 * (g1 * a3 + g2 * a2) | 0;
+										var b = 255 * (b1 * a3 + b2 * a2) | 0;
+										var a = 255 * (a3 + a2) | 0;
+										var blended = a << 24 | r << 16 | g << 8 | b;
+										nextImage3.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+									} else {
+										nextImage3.image.set(nextImage3.useVirtualPos ? (y - nextImage3.virtualY) * nextImage3.width + x - nextImage3.virtualX | 0 : y * nextImage3.width + x | 0,justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1);
+									}
+								}
+								var v2;
+								if(inPlace2) {
+									var x = 0;
+									var y = 0;
+									var _g = 0;
+									var _g1 = nextImage3.height;
+									while(_g < _g1) {
+										var dy = _g++;
+										var _g2 = 0;
+										var _g3 = nextImage3.width;
+										while(_g2 < _g3) {
+											var dx = _g2++;
+											var c = nextImage3.image.get(nextImage3.useVirtualPos ? (dy - nextImage3.virtualY) * nextImage3.width + dx - nextImage3.virtualX | 0 : dy * nextImage3.width + dx | 0);
+											var col = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+											if(nextImage3.useMask && nextImage3.mask != null) {
+												var this4 = nextImage3.mask;
+												var c1 = this4.image.get(this4.useVirtualPos ? (dy - this4.virtualY) * this4.width + dx - this4.virtualX | 0 : dy * this4.width + dx | 0);
+												var maskPixel = justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1;
+												var this5 = col;
+												if(maskPixel == 0) {
+													col = this5;
+												} else {
+													var this6 = maskPixel >> 24 & 255;
+													var m0 = this6 == 0 ? 0. : this6 / 255;
+													var this7 = maskPixel >> 16 & 255;
+													var m1 = this7 == 0 ? 0. : this7 / 255;
+													var this8 = maskPixel >> 8 & 255;
+													var m2 = this8 == 0 ? 0. : this8 / 255;
+													var this9 = maskPixel & 255;
+													var m3 = this9 == 0 ? 0. : this9 / 255;
+													var ch0 = (1. - m0) * (this5 >> 24 & 255) | 0;
+													var ch1 = (1. - m1) * (this5 >> 16 & 255) | 0;
+													var ch2 = (1. - m2) * (this5 >> 8 & 255) | 0;
+													var ch3 = (1. - m3) * (this5 & 255) | 0;
+													col = Math.round(ch0 * 255) << 24 | Math.round(ch1 * 255) << 16 | Math.round(ch2 * 255) << 8 | Math.round(ch3 * 255);
+												}
+											}
+											if(col != 0) {
+												var x1 = x + dx;
+												var y1 = y + dy;
+												var c2 = col;
+												if((c2 >> 24 & 255) < 254 && this3.transparent) {
+													var location = this3.useVirtualPos ? (y1 - this3.virtualY) * this3.width + x1 - this3.virtualX | 0 : y1 * this3.width + x1 | 0;
+													var this10 = this3.image.get(location);
+													var this11 = justGraphix_image_Endian_isLittleEndian ? (this10 >> 24 & 255) << 24 | (this10 & 255) << 16 | (this10 >> 8 & 255) << 8 | this10 >> 16 & 255 : this10;
+													var this12 = this11 >> 24 & 255;
+													var a1 = this12 == 0 ? 0. : this12 / 255;
+													var this13 = this11 >> 16 & 255;
+													var r1 = this13 == 0 ? 0. : this13 / 255;
+													var this14 = this11 >> 8 & 255;
+													var g1 = this14 == 0 ? 0. : this14 / 255;
+													var this15 = this11 & 255;
+													var b1 = this15 == 0 ? 0. : this15 / 255;
+													var this16 = col >> 24 & 255;
+													var a2 = this16 == 0 ? 0. : this16 / 255;
+													var this17 = col >> 16 & 255;
+													var r2 = this17 == 0 ? 0. : this17 / 255;
+													var this18 = col >> 8 & 255;
+													var g2 = this18 == 0 ? 0. : this18 / 255;
+													var this19 = col & 255;
+													var b2 = this19 == 0 ? 0. : this19 / 255;
+													var a3 = a1 * (1 - a2);
+													var r = 255 * (r1 * a3 + r2 * a2) | 0;
+													var g = 255 * (g1 * a3 + g2 * a2) | 0;
+													var b = 255 * (b1 * a3 + b2 * a2) | 0;
+													var a = 255 * (a3 + a2) | 0;
+													var blended = a << 24 | r << 16 | g << 8 | b;
+													this3.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+												} else {
+													this3.image.set(this3.useVirtualPos ? (y1 - this3.virtualY) * this3.width + x1 - this3.virtualX | 0 : y1 * this3.width + x1 | 0,justGraphix_image_Endian_isLittleEndian ? (c2 >> 24 & 255) << 24 | (c2 & 255) << 16 | (c2 >> 8 & 255) << 8 | c2 >> 16 & 255 : c2);
+												}
+											}
+										}
+									}
+									if(this3.mask != null && includeMask2) {
+										var v3 = justGraphix_image_imageAbstracts_TransformImage.flippedY(this3.mask,0,0,this3.width,this3.height,this3.mask.transparent,inPlace2,includeMask2);
+										this3.useMask = true;
+										this3.mask = v3;
+									}
+									nextImage3 = null;
+									v2 = this3;
+								} else {
+									if(this3.mask != null && includeMask2) {
+										var v3 = justGraphix_image_imageAbstracts_TransformImage.flippedY(this3.mask,0,0,this3.width,this3.height,this3.mask.transparent,inPlace2,includeMask2);
+										nextImage3.useMask = true;
+										nextImage3.mask = v3;
+									}
+									v2 = nextImage3;
+								}
+								nextImage2.useMask = true;
+								nextImage2.mask = v2;
+							}
+							v1 = nextImage2;
+						}
+						nextImage1.useMask = true;
+						nextImage1.mask = v1;
+					}
+					v = nextImage1;
+				}
+				this1.useMask = true;
+				this1.mask = v;
+			}
+			nextImage = null;
+			this2 = this1;
+		} else {
+			if(this1.mask != null && includeMask1) {
+				var this3 = this1.mask;
+				var w = this1.width;
+				var h = this1.height;
+				var transparent = this1.mask.transparent;
+				var inPlace = inPlace1;
+				var includeMask = includeMask1;
+				if(includeMask == null) {
+					includeMask = false;
+				}
+				if(inPlace == null) {
+					inPlace = false;
+				}
+				if(transparent == null) {
+					transparent = false;
+				}
+				var transparent1 = transparent;
+				var inPlace1 = inPlace;
+				var includeMask1 = includeMask;
+				if(includeMask1 == null) {
+					includeMask1 = false;
+				}
+				if(inPlace1 == null) {
+					inPlace1 = false;
+				}
+				if(transparent1 == null) {
+					transparent1 = false;
+				}
+				var r = { x : 0, y : 0, w : w, h : h};
+				var xmax = r.x + r.w + 1 | 0;
+				var ymax = r.y + r.h + 1 | 0;
+				var ii_min = r.x | 0;
+				var ii_max = xmax;
+				var xRange__start = ii_min;
+				var xRange__max = ii_max;
+				var ii_min = r.y | 0;
+				var ii_max = ymax;
+				var yRange__start = ii_min;
+				var yRange__max = ii_max;
+				var range_x = xRange__start;
+				var range_y = yRange__start - 1;
+				var range_xReset = range_x;
+				var range_yReset = range_y;
+				var range_xMax = xRange__max - 2;
+				var range_yMax = yRange__max - 2;
+				var _this_min = 0;
+				var _this_max = (xRange__max - xRange__start) * (yRange__max - yRange__start) | 0;
+				var nextImage1 = justGraphix_image_Pixelimage._new(w | 0,h | 0);
+				nextImage1.transparent = transparent1;
+				while(_this_min < _this_max) {
+					var i = _this_min++;
+					if(range_y > range_yMax) {
+						range_y = range_yReset;
+						++range_x;
+					}
+					++range_y;
+					var i1 = i;
+					var x = range_x;
+					var y = range_y;
+					var x1 = range_x;
+					var y1 = range_yMax - range_y;
+					var c = this3.image.get(this3.useVirtualPos ? (y1 - this3.virtualY) * this3.width + x1 - this3.virtualX | 0 : y1 * this3.width + x1 | 0);
+					var color = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+					var c1 = color;
+					if((c1 >> 24 & 255) < 254 && nextImage1.transparent) {
+						var location = nextImage1.useVirtualPos ? (y - nextImage1.virtualY) * nextImage1.width + x - nextImage1.virtualX | 0 : y * nextImage1.width + x | 0;
+						var this1 = nextImage1.image.get(location);
+						var this4 = justGraphix_image_Endian_isLittleEndian ? (this1 >> 24 & 255) << 24 | (this1 & 255) << 16 | (this1 >> 8 & 255) << 8 | this1 >> 16 & 255 : this1;
+						var this5 = this4 >> 24 & 255;
+						var a1 = this5 == 0 ? 0. : this5 / 255;
+						var this6 = this4 >> 16 & 255;
+						var r1 = this6 == 0 ? 0. : this6 / 255;
+						var this7 = this4 >> 8 & 255;
+						var g1 = this7 == 0 ? 0. : this7 / 255;
+						var this8 = this4 & 255;
+						var b1 = this8 == 0 ? 0. : this8 / 255;
+						var this9 = color >> 24 & 255;
+						var a2 = this9 == 0 ? 0. : this9 / 255;
+						var this10 = color >> 16 & 255;
+						var r2 = this10 == 0 ? 0. : this10 / 255;
+						var this11 = color >> 8 & 255;
+						var g2 = this11 == 0 ? 0. : this11 / 255;
+						var this12 = color & 255;
+						var b2 = this12 == 0 ? 0. : this12 / 255;
+						var a3 = a1 * (1 - a2);
+						var r = 255 * (r1 * a3 + r2 * a2) | 0;
+						var g = 255 * (g1 * a3 + g2 * a2) | 0;
+						var b = 255 * (b1 * a3 + b2 * a2) | 0;
+						var a = 255 * (a3 + a2) | 0;
+						var blended = a << 24 | r << 16 | g << 8 | b;
+						nextImage1.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+					} else {
+						nextImage1.image.set(nextImage1.useVirtualPos ? (y - nextImage1.virtualY) * nextImage1.width + x - nextImage1.virtualX | 0 : y * nextImage1.width + x | 0,justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1);
+					}
+				}
+				var v;
+				if(inPlace1) {
+					var x = 0;
+					var y = 0;
+					var _g = 0;
+					var _g1 = nextImage1.height;
+					while(_g < _g1) {
+						var dy = _g++;
+						var _g2 = 0;
+						var _g3 = nextImage1.width;
+						while(_g2 < _g3) {
+							var dx = _g2++;
+							var c = nextImage1.image.get(nextImage1.useVirtualPos ? (dy - nextImage1.virtualY) * nextImage1.width + dx - nextImage1.virtualX | 0 : dy * nextImage1.width + dx | 0);
+							var col = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+							if(nextImage1.useMask && nextImage1.mask != null) {
+								var this1 = nextImage1.mask;
+								var c1 = this1.image.get(this1.useVirtualPos ? (dy - this1.virtualY) * this1.width + dx - this1.virtualX | 0 : dy * this1.width + dx | 0);
+								var maskPixel = justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1;
+								var this4 = col;
+								if(maskPixel == 0) {
+									col = this4;
+								} else {
+									var this5 = maskPixel >> 24 & 255;
+									var m0 = this5 == 0 ? 0. : this5 / 255;
+									var this6 = maskPixel >> 16 & 255;
+									var m1 = this6 == 0 ? 0. : this6 / 255;
+									var this7 = maskPixel >> 8 & 255;
+									var m2 = this7 == 0 ? 0. : this7 / 255;
+									var this8 = maskPixel & 255;
+									var m3 = this8 == 0 ? 0. : this8 / 255;
+									var ch0 = (1. - m0) * (this4 >> 24 & 255) | 0;
+									var ch1 = (1. - m1) * (this4 >> 16 & 255) | 0;
+									var ch2 = (1. - m2) * (this4 >> 8 & 255) | 0;
+									var ch3 = (1. - m3) * (this4 & 255) | 0;
+									col = Math.round(ch0 * 255) << 24 | Math.round(ch1 * 255) << 16 | Math.round(ch2 * 255) << 8 | Math.round(ch3 * 255);
+								}
+							}
+							if(col != 0) {
+								var x1 = x + dx;
+								var y1 = y + dy;
+								var c2 = col;
+								if((c2 >> 24 & 255) < 254 && this3.transparent) {
+									var location = this3.useVirtualPos ? (y1 - this3.virtualY) * this3.width + x1 - this3.virtualX | 0 : y1 * this3.width + x1 | 0;
+									var this9 = this3.image.get(location);
+									var this10 = justGraphix_image_Endian_isLittleEndian ? (this9 >> 24 & 255) << 24 | (this9 & 255) << 16 | (this9 >> 8 & 255) << 8 | this9 >> 16 & 255 : this9;
+									var this11 = this10 >> 24 & 255;
+									var a1 = this11 == 0 ? 0. : this11 / 255;
+									var this12 = this10 >> 16 & 255;
+									var r1 = this12 == 0 ? 0. : this12 / 255;
+									var this13 = this10 >> 8 & 255;
+									var g1 = this13 == 0 ? 0. : this13 / 255;
+									var this14 = this10 & 255;
+									var b1 = this14 == 0 ? 0. : this14 / 255;
+									var this15 = col >> 24 & 255;
+									var a2 = this15 == 0 ? 0. : this15 / 255;
+									var this16 = col >> 16 & 255;
+									var r2 = this16 == 0 ? 0. : this16 / 255;
+									var this17 = col >> 8 & 255;
+									var g2 = this17 == 0 ? 0. : this17 / 255;
+									var this18 = col & 255;
+									var b2 = this18 == 0 ? 0. : this18 / 255;
+									var a3 = a1 * (1 - a2);
+									var r = 255 * (r1 * a3 + r2 * a2) | 0;
+									var g = 255 * (g1 * a3 + g2 * a2) | 0;
+									var b = 255 * (b1 * a3 + b2 * a2) | 0;
+									var a = 255 * (a3 + a2) | 0;
+									var blended = a << 24 | r << 16 | g << 8 | b;
+									this3.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+								} else {
+									this3.image.set(this3.useVirtualPos ? (y1 - this3.virtualY) * this3.width + x1 - this3.virtualX | 0 : y1 * this3.width + x1 | 0,justGraphix_image_Endian_isLittleEndian ? (c2 >> 24 & 255) << 24 | (c2 & 255) << 16 | (c2 >> 8 & 255) << 8 | c2 >> 16 & 255 : c2);
+								}
+							}
+						}
+					}
+					if(this3.mask != null && includeMask1) {
+						var this1 = this3.mask;
+						var w = this3.width;
+						var h = this3.height;
+						var transparent = this3.mask.transparent;
+						var inPlace = inPlace1;
+						var includeMask = includeMask1;
+						if(includeMask == null) {
+							includeMask = false;
+						}
+						if(inPlace == null) {
+							inPlace = false;
+						}
+						if(transparent == null) {
+							transparent = false;
+						}
+						var transparent1 = transparent;
+						var inPlace2 = inPlace;
+						var includeMask2 = includeMask;
+						if(includeMask2 == null) {
+							includeMask2 = false;
+						}
+						if(inPlace2 == null) {
+							inPlace2 = false;
+						}
+						if(transparent1 == null) {
+							transparent1 = false;
+						}
+						var r = { x : 0, y : 0, w : w, h : h};
+						var xmax = r.x + r.w + 1 | 0;
+						var ymax = r.y + r.h + 1 | 0;
+						var ii_min = r.x | 0;
+						var ii_max = xmax;
+						var xRange__start = ii_min;
+						var xRange__max = ii_max;
+						var ii_min = r.y | 0;
+						var ii_max = ymax;
+						var yRange__start = ii_min;
+						var yRange__max = ii_max;
+						var range_x = xRange__start;
+						var range_y = yRange__start - 1;
+						var range_xReset = range_x;
+						var range_yReset = range_y;
+						var range_xMax = xRange__max - 2;
+						var range_yMax = yRange__max - 2;
+						var _this_min = 0;
+						var _this_max = (xRange__max - xRange__start) * (yRange__max - yRange__start) | 0;
+						var nextImage2 = justGraphix_image_Pixelimage._new(w | 0,h | 0);
+						nextImage2.transparent = transparent1;
+						while(_this_min < _this_max) {
+							var i = _this_min++;
+							if(range_y > range_yMax) {
+								range_y = range_yReset;
+								++range_x;
+							}
+							++range_y;
+							var i1 = i;
+							var x = range_x;
+							var y = range_y;
+							var x1 = range_x;
+							var y1 = range_yMax - range_y;
+							var c = this1.image.get(this1.useVirtualPos ? (y1 - this1.virtualY) * this1.width + x1 - this1.virtualX | 0 : y1 * this1.width + x1 | 0);
+							var color = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+							var c1 = color;
+							if((c1 >> 24 & 255) < 254 && nextImage2.transparent) {
+								var location = nextImage2.useVirtualPos ? (y - nextImage2.virtualY) * nextImage2.width + x - nextImage2.virtualX | 0 : y * nextImage2.width + x | 0;
+								var this4 = nextImage2.image.get(location);
+								var this5 = justGraphix_image_Endian_isLittleEndian ? (this4 >> 24 & 255) << 24 | (this4 & 255) << 16 | (this4 >> 8 & 255) << 8 | this4 >> 16 & 255 : this4;
+								var this6 = this5 >> 24 & 255;
+								var a1 = this6 == 0 ? 0. : this6 / 255;
+								var this7 = this5 >> 16 & 255;
+								var r1 = this7 == 0 ? 0. : this7 / 255;
+								var this8 = this5 >> 8 & 255;
+								var g1 = this8 == 0 ? 0. : this8 / 255;
+								var this9 = this5 & 255;
+								var b1 = this9 == 0 ? 0. : this9 / 255;
+								var this10 = color >> 24 & 255;
+								var a2 = this10 == 0 ? 0. : this10 / 255;
+								var this11 = color >> 16 & 255;
+								var r2 = this11 == 0 ? 0. : this11 / 255;
+								var this12 = color >> 8 & 255;
+								var g2 = this12 == 0 ? 0. : this12 / 255;
+								var this13 = color & 255;
+								var b2 = this13 == 0 ? 0. : this13 / 255;
+								var a3 = a1 * (1 - a2);
+								var r = 255 * (r1 * a3 + r2 * a2) | 0;
+								var g = 255 * (g1 * a3 + g2 * a2) | 0;
+								var b = 255 * (b1 * a3 + b2 * a2) | 0;
+								var a = 255 * (a3 + a2) | 0;
+								var blended = a << 24 | r << 16 | g << 8 | b;
+								nextImage2.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+							} else {
+								nextImage2.image.set(nextImage2.useVirtualPos ? (y - nextImage2.virtualY) * nextImage2.width + x - nextImage2.virtualX | 0 : y * nextImage2.width + x | 0,justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1);
+							}
+						}
+						var v1;
+						if(inPlace2) {
+							var x = 0;
+							var y = 0;
+							var _g = 0;
+							var _g1 = nextImage2.height;
+							while(_g < _g1) {
+								var dy = _g++;
+								var _g2 = 0;
+								var _g3 = nextImage2.width;
+								while(_g2 < _g3) {
+									var dx = _g2++;
+									var c = nextImage2.image.get(nextImage2.useVirtualPos ? (dy - nextImage2.virtualY) * nextImage2.width + dx - nextImage2.virtualX | 0 : dy * nextImage2.width + dx | 0);
+									var col = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+									if(nextImage2.useMask && nextImage2.mask != null) {
+										var this4 = nextImage2.mask;
+										var c1 = this4.image.get(this4.useVirtualPos ? (dy - this4.virtualY) * this4.width + dx - this4.virtualX | 0 : dy * this4.width + dx | 0);
+										var maskPixel = justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1;
+										var this5 = col;
+										if(maskPixel == 0) {
+											col = this5;
+										} else {
+											var this6 = maskPixel >> 24 & 255;
+											var m0 = this6 == 0 ? 0. : this6 / 255;
+											var this7 = maskPixel >> 16 & 255;
+											var m1 = this7 == 0 ? 0. : this7 / 255;
+											var this8 = maskPixel >> 8 & 255;
+											var m2 = this8 == 0 ? 0. : this8 / 255;
+											var this9 = maskPixel & 255;
+											var m3 = this9 == 0 ? 0. : this9 / 255;
+											var ch0 = (1. - m0) * (this5 >> 24 & 255) | 0;
+											var ch1 = (1. - m1) * (this5 >> 16 & 255) | 0;
+											var ch2 = (1. - m2) * (this5 >> 8 & 255) | 0;
+											var ch3 = (1. - m3) * (this5 & 255) | 0;
+											col = Math.round(ch0 * 255) << 24 | Math.round(ch1 * 255) << 16 | Math.round(ch2 * 255) << 8 | Math.round(ch3 * 255);
+										}
+									}
+									if(col != 0) {
+										var x1 = x + dx;
+										var y1 = y + dy;
+										var c2 = col;
+										if((c2 >> 24 & 255) < 254 && this1.transparent) {
+											var location = this1.useVirtualPos ? (y1 - this1.virtualY) * this1.width + x1 - this1.virtualX | 0 : y1 * this1.width + x1 | 0;
+											var this10 = this1.image.get(location);
+											var this11 = justGraphix_image_Endian_isLittleEndian ? (this10 >> 24 & 255) << 24 | (this10 & 255) << 16 | (this10 >> 8 & 255) << 8 | this10 >> 16 & 255 : this10;
+											var this12 = this11 >> 24 & 255;
+											var a1 = this12 == 0 ? 0. : this12 / 255;
+											var this13 = this11 >> 16 & 255;
+											var r1 = this13 == 0 ? 0. : this13 / 255;
+											var this14 = this11 >> 8 & 255;
+											var g1 = this14 == 0 ? 0. : this14 / 255;
+											var this15 = this11 & 255;
+											var b1 = this15 == 0 ? 0. : this15 / 255;
+											var this16 = col >> 24 & 255;
+											var a2 = this16 == 0 ? 0. : this16 / 255;
+											var this17 = col >> 16 & 255;
+											var r2 = this17 == 0 ? 0. : this17 / 255;
+											var this18 = col >> 8 & 255;
+											var g2 = this18 == 0 ? 0. : this18 / 255;
+											var this19 = col & 255;
+											var b2 = this19 == 0 ? 0. : this19 / 255;
+											var a3 = a1 * (1 - a2);
+											var r = 255 * (r1 * a3 + r2 * a2) | 0;
+											var g = 255 * (g1 * a3 + g2 * a2) | 0;
+											var b = 255 * (b1 * a3 + b2 * a2) | 0;
+											var a = 255 * (a3 + a2) | 0;
+											var blended = a << 24 | r << 16 | g << 8 | b;
+											this1.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+										} else {
+											this1.image.set(this1.useVirtualPos ? (y1 - this1.virtualY) * this1.width + x1 - this1.virtualX | 0 : y1 * this1.width + x1 | 0,justGraphix_image_Endian_isLittleEndian ? (c2 >> 24 & 255) << 24 | (c2 & 255) << 16 | (c2 >> 8 & 255) << 8 | c2 >> 16 & 255 : c2);
+										}
+									}
+								}
+							}
+							if(this1.mask != null && includeMask2) {
+								var this4 = this1.mask;
+								var w = this1.width;
+								var h = this1.height;
+								var transparent = this1.mask.transparent;
+								var inPlace = inPlace2;
+								var includeMask = includeMask2;
+								if(includeMask == null) {
+									includeMask = false;
+								}
+								if(inPlace == null) {
+									inPlace = false;
+								}
+								if(transparent == null) {
+									transparent = false;
+								}
+								var transparent1 = transparent;
+								var inPlace3 = inPlace;
+								var includeMask3 = includeMask;
+								if(includeMask3 == null) {
+									includeMask3 = false;
+								}
+								if(inPlace3 == null) {
+									inPlace3 = false;
+								}
+								if(transparent1 == null) {
+									transparent1 = false;
+								}
+								var r = { x : 0, y : 0, w : w, h : h};
+								var xmax = r.x + r.w + 1 | 0;
+								var ymax = r.y + r.h + 1 | 0;
+								var ii_min = r.x | 0;
+								var ii_max = xmax;
+								var xRange__start = ii_min;
+								var xRange__max = ii_max;
+								var ii_min = r.y | 0;
+								var ii_max = ymax;
+								var yRange__start = ii_min;
+								var yRange__max = ii_max;
+								var range_x = xRange__start;
+								var range_y = yRange__start - 1;
+								var range_xReset = range_x;
+								var range_yReset = range_y;
+								var range_xMax = xRange__max - 2;
+								var range_yMax = yRange__max - 2;
+								var _this_min = 0;
+								var _this_max = (xRange__max - xRange__start) * (yRange__max - yRange__start) | 0;
+								var nextImage3 = justGraphix_image_Pixelimage._new(w | 0,h | 0);
+								nextImage3.transparent = transparent1;
+								while(_this_min < _this_max) {
+									var i = _this_min++;
+									if(range_y > range_yMax) {
+										range_y = range_yReset;
+										++range_x;
+									}
+									++range_y;
+									var i1 = i;
+									var x = range_x;
+									var y = range_y;
+									var x1 = range_x;
+									var y1 = range_yMax - range_y;
+									var c = this4.image.get(this4.useVirtualPos ? (y1 - this4.virtualY) * this4.width + x1 - this4.virtualX | 0 : y1 * this4.width + x1 | 0);
+									var color = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+									var c1 = color;
+									if((c1 >> 24 & 255) < 254 && nextImage3.transparent) {
+										var location = nextImage3.useVirtualPos ? (y - nextImage3.virtualY) * nextImage3.width + x - nextImage3.virtualX | 0 : y * nextImage3.width + x | 0;
+										var this5 = nextImage3.image.get(location);
+										var this6 = justGraphix_image_Endian_isLittleEndian ? (this5 >> 24 & 255) << 24 | (this5 & 255) << 16 | (this5 >> 8 & 255) << 8 | this5 >> 16 & 255 : this5;
+										var this7 = this6 >> 24 & 255;
+										var a1 = this7 == 0 ? 0. : this7 / 255;
+										var this8 = this6 >> 16 & 255;
+										var r1 = this8 == 0 ? 0. : this8 / 255;
+										var this9 = this6 >> 8 & 255;
+										var g1 = this9 == 0 ? 0. : this9 / 255;
+										var this10 = this6 & 255;
+										var b1 = this10 == 0 ? 0. : this10 / 255;
+										var this11 = color >> 24 & 255;
+										var a2 = this11 == 0 ? 0. : this11 / 255;
+										var this12 = color >> 16 & 255;
+										var r2 = this12 == 0 ? 0. : this12 / 255;
+										var this13 = color >> 8 & 255;
+										var g2 = this13 == 0 ? 0. : this13 / 255;
+										var this14 = color & 255;
+										var b2 = this14 == 0 ? 0. : this14 / 255;
+										var a3 = a1 * (1 - a2);
+										var r = 255 * (r1 * a3 + r2 * a2) | 0;
+										var g = 255 * (g1 * a3 + g2 * a2) | 0;
+										var b = 255 * (b1 * a3 + b2 * a2) | 0;
+										var a = 255 * (a3 + a2) | 0;
+										var blended = a << 24 | r << 16 | g << 8 | b;
+										nextImage3.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+									} else {
+										nextImage3.image.set(nextImage3.useVirtualPos ? (y - nextImage3.virtualY) * nextImage3.width + x - nextImage3.virtualX | 0 : y * nextImage3.width + x | 0,justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1);
+									}
+								}
+								var v2;
+								if(inPlace3) {
+									var x = 0;
+									var y = 0;
+									var _g = 0;
+									var _g1 = nextImage3.height;
+									while(_g < _g1) {
+										var dy = _g++;
+										var _g2 = 0;
+										var _g3 = nextImage3.width;
+										while(_g2 < _g3) {
+											var dx = _g2++;
+											var c = nextImage3.image.get(nextImage3.useVirtualPos ? (dy - nextImage3.virtualY) * nextImage3.width + dx - nextImage3.virtualX | 0 : dy * nextImage3.width + dx | 0);
+											var col = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+											if(nextImage3.useMask && nextImage3.mask != null) {
+												var this5 = nextImage3.mask;
+												var c1 = this5.image.get(this5.useVirtualPos ? (dy - this5.virtualY) * this5.width + dx - this5.virtualX | 0 : dy * this5.width + dx | 0);
+												var maskPixel = justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1;
+												var this6 = col;
+												if(maskPixel == 0) {
+													col = this6;
+												} else {
+													var this7 = maskPixel >> 24 & 255;
+													var m0 = this7 == 0 ? 0. : this7 / 255;
+													var this8 = maskPixel >> 16 & 255;
+													var m1 = this8 == 0 ? 0. : this8 / 255;
+													var this9 = maskPixel >> 8 & 255;
+													var m2 = this9 == 0 ? 0. : this9 / 255;
+													var this10 = maskPixel & 255;
+													var m3 = this10 == 0 ? 0. : this10 / 255;
+													var ch0 = (1. - m0) * (this6 >> 24 & 255) | 0;
+													var ch1 = (1. - m1) * (this6 >> 16 & 255) | 0;
+													var ch2 = (1. - m2) * (this6 >> 8 & 255) | 0;
+													var ch3 = (1. - m3) * (this6 & 255) | 0;
+													col = Math.round(ch0 * 255) << 24 | Math.round(ch1 * 255) << 16 | Math.round(ch2 * 255) << 8 | Math.round(ch3 * 255);
+												}
+											}
+											if(col != 0) {
+												var x1 = x + dx;
+												var y1 = y + dy;
+												var c2 = col;
+												if((c2 >> 24 & 255) < 254 && this4.transparent) {
+													var location = this4.useVirtualPos ? (y1 - this4.virtualY) * this4.width + x1 - this4.virtualX | 0 : y1 * this4.width + x1 | 0;
+													var this11 = this4.image.get(location);
+													var this12 = justGraphix_image_Endian_isLittleEndian ? (this11 >> 24 & 255) << 24 | (this11 & 255) << 16 | (this11 >> 8 & 255) << 8 | this11 >> 16 & 255 : this11;
+													var this13 = this12 >> 24 & 255;
+													var a1 = this13 == 0 ? 0. : this13 / 255;
+													var this14 = this12 >> 16 & 255;
+													var r1 = this14 == 0 ? 0. : this14 / 255;
+													var this15 = this12 >> 8 & 255;
+													var g1 = this15 == 0 ? 0. : this15 / 255;
+													var this16 = this12 & 255;
+													var b1 = this16 == 0 ? 0. : this16 / 255;
+													var this17 = col >> 24 & 255;
+													var a2 = this17 == 0 ? 0. : this17 / 255;
+													var this18 = col >> 16 & 255;
+													var r2 = this18 == 0 ? 0. : this18 / 255;
+													var this19 = col >> 8 & 255;
+													var g2 = this19 == 0 ? 0. : this19 / 255;
+													var this20 = col & 255;
+													var b2 = this20 == 0 ? 0. : this20 / 255;
+													var a3 = a1 * (1 - a2);
+													var r = 255 * (r1 * a3 + r2 * a2) | 0;
+													var g = 255 * (g1 * a3 + g2 * a2) | 0;
+													var b = 255 * (b1 * a3 + b2 * a2) | 0;
+													var a = 255 * (a3 + a2) | 0;
+													var blended = a << 24 | r << 16 | g << 8 | b;
+													this4.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+												} else {
+													this4.image.set(this4.useVirtualPos ? (y1 - this4.virtualY) * this4.width + x1 - this4.virtualX | 0 : y1 * this4.width + x1 | 0,justGraphix_image_Endian_isLittleEndian ? (c2 >> 24 & 255) << 24 | (c2 & 255) << 16 | (c2 >> 8 & 255) << 8 | c2 >> 16 & 255 : c2);
+												}
+											}
+										}
+									}
+									if(this4.mask != null && includeMask3) {
+										var v3 = justGraphix_image_imageAbstracts_TransformImage.flippedY(this4.mask,0,0,this4.width,this4.height,this4.mask.transparent,inPlace3,includeMask3);
+										this4.useMask = true;
+										this4.mask = v3;
+									}
+									nextImage3 = null;
+									v2 = this4;
+								} else {
+									if(this4.mask != null && includeMask3) {
+										var v3 = justGraphix_image_imageAbstracts_TransformImage.flippedY(this4.mask,0,0,this4.width,this4.height,this4.mask.transparent,inPlace3,includeMask3);
+										nextImage3.useMask = true;
+										nextImage3.mask = v3;
+									}
+									v2 = nextImage3;
+								}
+								this1.useMask = true;
+								this1.mask = v2;
+							}
+							nextImage2 = null;
+							v1 = this1;
+						} else {
+							if(this1.mask != null && includeMask2) {
+								var this4 = this1.mask;
+								var w = this1.width;
+								var h = this1.height;
+								var transparent = this1.mask.transparent;
+								var inPlace = inPlace2;
+								var includeMask = includeMask2;
+								if(includeMask == null) {
+									includeMask = false;
+								}
+								if(inPlace == null) {
+									inPlace = false;
+								}
+								if(transparent == null) {
+									transparent = false;
+								}
+								var transparent1 = transparent;
+								var inPlace2 = inPlace;
+								var includeMask2 = includeMask;
+								if(includeMask2 == null) {
+									includeMask2 = false;
+								}
+								if(inPlace2 == null) {
+									inPlace2 = false;
+								}
+								if(transparent1 == null) {
+									transparent1 = false;
+								}
+								var r = { x : 0, y : 0, w : w, h : h};
+								var xmax = r.x + r.w + 1 | 0;
+								var ymax = r.y + r.h + 1 | 0;
+								var ii_min = r.x | 0;
+								var ii_max = xmax;
+								var xRange__start = ii_min;
+								var xRange__max = ii_max;
+								var ii_min = r.y | 0;
+								var ii_max = ymax;
+								var yRange__start = ii_min;
+								var yRange__max = ii_max;
+								var range_x = xRange__start;
+								var range_y = yRange__start - 1;
+								var range_xReset = range_x;
+								var range_yReset = range_y;
+								var range_xMax = xRange__max - 2;
+								var range_yMax = yRange__max - 2;
+								var _this_min = 0;
+								var _this_max = (xRange__max - xRange__start) * (yRange__max - yRange__start) | 0;
+								var nextImage3 = justGraphix_image_Pixelimage._new(w | 0,h | 0);
+								nextImage3.transparent = transparent1;
+								while(_this_min < _this_max) {
+									var i = _this_min++;
+									if(range_y > range_yMax) {
+										range_y = range_yReset;
+										++range_x;
+									}
+									++range_y;
+									var i1 = i;
+									var x = range_x;
+									var y = range_y;
+									var x1 = range_x;
+									var y1 = range_yMax - range_y;
+									var c = this4.image.get(this4.useVirtualPos ? (y1 - this4.virtualY) * this4.width + x1 - this4.virtualX | 0 : y1 * this4.width + x1 | 0);
+									var color = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+									var c1 = color;
+									if((c1 >> 24 & 255) < 254 && nextImage3.transparent) {
+										var location = nextImage3.useVirtualPos ? (y - nextImage3.virtualY) * nextImage3.width + x - nextImage3.virtualX | 0 : y * nextImage3.width + x | 0;
+										var this1 = nextImage3.image.get(location);
+										var this5 = justGraphix_image_Endian_isLittleEndian ? (this1 >> 24 & 255) << 24 | (this1 & 255) << 16 | (this1 >> 8 & 255) << 8 | this1 >> 16 & 255 : this1;
+										var this6 = this5 >> 24 & 255;
+										var a1 = this6 == 0 ? 0. : this6 / 255;
+										var this7 = this5 >> 16 & 255;
+										var r1 = this7 == 0 ? 0. : this7 / 255;
+										var this8 = this5 >> 8 & 255;
+										var g1 = this8 == 0 ? 0. : this8 / 255;
+										var this9 = this5 & 255;
+										var b1 = this9 == 0 ? 0. : this9 / 255;
+										var this10 = color >> 24 & 255;
+										var a2 = this10 == 0 ? 0. : this10 / 255;
+										var this11 = color >> 16 & 255;
+										var r2 = this11 == 0 ? 0. : this11 / 255;
+										var this12 = color >> 8 & 255;
+										var g2 = this12 == 0 ? 0. : this12 / 255;
+										var this13 = color & 255;
+										var b2 = this13 == 0 ? 0. : this13 / 255;
+										var a3 = a1 * (1 - a2);
+										var r = 255 * (r1 * a3 + r2 * a2) | 0;
+										var g = 255 * (g1 * a3 + g2 * a2) | 0;
+										var b = 255 * (b1 * a3 + b2 * a2) | 0;
+										var a = 255 * (a3 + a2) | 0;
+										var blended = a << 24 | r << 16 | g << 8 | b;
+										nextImage3.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+									} else {
+										nextImage3.image.set(nextImage3.useVirtualPos ? (y - nextImage3.virtualY) * nextImage3.width + x - nextImage3.virtualX | 0 : y * nextImage3.width + x | 0,justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1);
+									}
+								}
+								var v2;
+								if(inPlace2) {
+									var x = 0;
+									var y = 0;
+									var _g = 0;
+									var _g1 = nextImage3.height;
+									while(_g < _g1) {
+										var dy = _g++;
+										var _g2 = 0;
+										var _g3 = nextImage3.width;
+										while(_g2 < _g3) {
+											var dx = _g2++;
+											var c = nextImage3.image.get(nextImage3.useVirtualPos ? (dy - nextImage3.virtualY) * nextImage3.width + dx - nextImage3.virtualX | 0 : dy * nextImage3.width + dx | 0);
+											var col = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+											if(nextImage3.useMask && nextImage3.mask != null) {
+												var this1 = nextImage3.mask;
+												var c1 = this1.image.get(this1.useVirtualPos ? (dy - this1.virtualY) * this1.width + dx - this1.virtualX | 0 : dy * this1.width + dx | 0);
+												var maskPixel = justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1;
+												var this5 = col;
+												if(maskPixel == 0) {
+													col = this5;
+												} else {
+													var this6 = maskPixel >> 24 & 255;
+													var m0 = this6 == 0 ? 0. : this6 / 255;
+													var this7 = maskPixel >> 16 & 255;
+													var m1 = this7 == 0 ? 0. : this7 / 255;
+													var this8 = maskPixel >> 8 & 255;
+													var m2 = this8 == 0 ? 0. : this8 / 255;
+													var this9 = maskPixel & 255;
+													var m3 = this9 == 0 ? 0. : this9 / 255;
+													var ch0 = (1. - m0) * (this5 >> 24 & 255) | 0;
+													var ch1 = (1. - m1) * (this5 >> 16 & 255) | 0;
+													var ch2 = (1. - m2) * (this5 >> 8 & 255) | 0;
+													var ch3 = (1. - m3) * (this5 & 255) | 0;
+													col = Math.round(ch0 * 255) << 24 | Math.round(ch1 * 255) << 16 | Math.round(ch2 * 255) << 8 | Math.round(ch3 * 255);
+												}
+											}
+											if(col != 0) {
+												var x1 = x + dx;
+												var y1 = y + dy;
+												var c2 = col;
+												if((c2 >> 24 & 255) < 254 && this4.transparent) {
+													var location = this4.useVirtualPos ? (y1 - this4.virtualY) * this4.width + x1 - this4.virtualX | 0 : y1 * this4.width + x1 | 0;
+													var this10 = this4.image.get(location);
+													var this11 = justGraphix_image_Endian_isLittleEndian ? (this10 >> 24 & 255) << 24 | (this10 & 255) << 16 | (this10 >> 8 & 255) << 8 | this10 >> 16 & 255 : this10;
+													var this12 = this11 >> 24 & 255;
+													var a1 = this12 == 0 ? 0. : this12 / 255;
+													var this13 = this11 >> 16 & 255;
+													var r1 = this13 == 0 ? 0. : this13 / 255;
+													var this14 = this11 >> 8 & 255;
+													var g1 = this14 == 0 ? 0. : this14 / 255;
+													var this15 = this11 & 255;
+													var b1 = this15 == 0 ? 0. : this15 / 255;
+													var this16 = col >> 24 & 255;
+													var a2 = this16 == 0 ? 0. : this16 / 255;
+													var this17 = col >> 16 & 255;
+													var r2 = this17 == 0 ? 0. : this17 / 255;
+													var this18 = col >> 8 & 255;
+													var g2 = this18 == 0 ? 0. : this18 / 255;
+													var this19 = col & 255;
+													var b2 = this19 == 0 ? 0. : this19 / 255;
+													var a3 = a1 * (1 - a2);
+													var r = 255 * (r1 * a3 + r2 * a2) | 0;
+													var g = 255 * (g1 * a3 + g2 * a2) | 0;
+													var b = 255 * (b1 * a3 + b2 * a2) | 0;
+													var a = 255 * (a3 + a2) | 0;
+													var blended = a << 24 | r << 16 | g << 8 | b;
+													this4.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+												} else {
+													this4.image.set(this4.useVirtualPos ? (y1 - this4.virtualY) * this4.width + x1 - this4.virtualX | 0 : y1 * this4.width + x1 | 0,justGraphix_image_Endian_isLittleEndian ? (c2 >> 24 & 255) << 24 | (c2 & 255) << 16 | (c2 >> 8 & 255) << 8 | c2 >> 16 & 255 : c2);
+												}
+											}
+										}
+									}
+									if(this4.mask != null && includeMask2) {
+										var v3 = justGraphix_image_imageAbstracts_TransformImage.flippedY(this4.mask,0,0,this4.width,this4.height,this4.mask.transparent,inPlace2,includeMask2);
+										this4.useMask = true;
+										this4.mask = v3;
+									}
+									nextImage3 = null;
+									v2 = this4;
+								} else {
+									if(this4.mask != null && includeMask2) {
+										var v3 = justGraphix_image_imageAbstracts_TransformImage.flippedY(this4.mask,0,0,this4.width,this4.height,this4.mask.transparent,inPlace2,includeMask2);
+										nextImage3.useMask = true;
+										nextImage3.mask = v3;
+									}
+									v2 = nextImage3;
+								}
+								nextImage2.useMask = true;
+								nextImage2.mask = v2;
+							}
+							v1 = nextImage2;
+						}
+						this3.useMask = true;
+						this3.mask = v1;
+					}
+					nextImage1 = null;
+					v = this3;
+				} else {
+					if(this3.mask != null && includeMask1) {
+						var this1 = this3.mask;
+						var w = this3.width;
+						var h = this3.height;
+						var transparent = this3.mask.transparent;
+						var inPlace = inPlace1;
+						var includeMask = includeMask1;
+						if(includeMask == null) {
+							includeMask = false;
+						}
+						if(inPlace == null) {
+							inPlace = false;
+						}
+						if(transparent == null) {
+							transparent = false;
+						}
+						var transparent1 = transparent;
+						var inPlace1 = inPlace;
+						var includeMask1 = includeMask;
+						if(includeMask1 == null) {
+							includeMask1 = false;
+						}
+						if(inPlace1 == null) {
+							inPlace1 = false;
+						}
+						if(transparent1 == null) {
+							transparent1 = false;
+						}
+						var r = { x : 0, y : 0, w : w, h : h};
+						var xmax = r.x + r.w + 1 | 0;
+						var ymax = r.y + r.h + 1 | 0;
+						var ii_min = r.x | 0;
+						var ii_max = xmax;
+						var xRange__start = ii_min;
+						var xRange__max = ii_max;
+						var ii_min = r.y | 0;
+						var ii_max = ymax;
+						var yRange__start = ii_min;
+						var yRange__max = ii_max;
+						var range_x = xRange__start;
+						var range_y = yRange__start - 1;
+						var range_xReset = range_x;
+						var range_yReset = range_y;
+						var range_xMax = xRange__max - 2;
+						var range_yMax = yRange__max - 2;
+						var _this_min = 0;
+						var _this_max = (xRange__max - xRange__start) * (yRange__max - yRange__start) | 0;
+						var nextImage2 = justGraphix_image_Pixelimage._new(w | 0,h | 0);
+						nextImage2.transparent = transparent1;
+						while(_this_min < _this_max) {
+							var i = _this_min++;
+							if(range_y > range_yMax) {
+								range_y = range_yReset;
+								++range_x;
+							}
+							++range_y;
+							var i1 = i;
+							var x = range_x;
+							var y = range_y;
+							var x1 = range_x;
+							var y1 = range_yMax - range_y;
+							var c = this1.image.get(this1.useVirtualPos ? (y1 - this1.virtualY) * this1.width + x1 - this1.virtualX | 0 : y1 * this1.width + x1 | 0);
+							var color = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+							var c1 = color;
+							if((c1 >> 24 & 255) < 254 && nextImage2.transparent) {
+								var location = nextImage2.useVirtualPos ? (y - nextImage2.virtualY) * nextImage2.width + x - nextImage2.virtualX | 0 : y * nextImage2.width + x | 0;
+								var this3 = nextImage2.image.get(location);
+								var this4 = justGraphix_image_Endian_isLittleEndian ? (this3 >> 24 & 255) << 24 | (this3 & 255) << 16 | (this3 >> 8 & 255) << 8 | this3 >> 16 & 255 : this3;
+								var this5 = this4 >> 24 & 255;
+								var a1 = this5 == 0 ? 0. : this5 / 255;
+								var this6 = this4 >> 16 & 255;
+								var r1 = this6 == 0 ? 0. : this6 / 255;
+								var this7 = this4 >> 8 & 255;
+								var g1 = this7 == 0 ? 0. : this7 / 255;
+								var this8 = this4 & 255;
+								var b1 = this8 == 0 ? 0. : this8 / 255;
+								var this9 = color >> 24 & 255;
+								var a2 = this9 == 0 ? 0. : this9 / 255;
+								var this10 = color >> 16 & 255;
+								var r2 = this10 == 0 ? 0. : this10 / 255;
+								var this11 = color >> 8 & 255;
+								var g2 = this11 == 0 ? 0. : this11 / 255;
+								var this12 = color & 255;
+								var b2 = this12 == 0 ? 0. : this12 / 255;
+								var a3 = a1 * (1 - a2);
+								var r = 255 * (r1 * a3 + r2 * a2) | 0;
+								var g = 255 * (g1 * a3 + g2 * a2) | 0;
+								var b = 255 * (b1 * a3 + b2 * a2) | 0;
+								var a = 255 * (a3 + a2) | 0;
+								var blended = a << 24 | r << 16 | g << 8 | b;
+								nextImage2.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+							} else {
+								nextImage2.image.set(nextImage2.useVirtualPos ? (y - nextImage2.virtualY) * nextImage2.width + x - nextImage2.virtualX | 0 : y * nextImage2.width + x | 0,justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1);
+							}
+						}
+						var v1;
+						if(inPlace1) {
+							var x = 0;
+							var y = 0;
+							var _g = 0;
+							var _g1 = nextImage2.height;
+							while(_g < _g1) {
+								var dy = _g++;
+								var _g2 = 0;
+								var _g3 = nextImage2.width;
+								while(_g2 < _g3) {
+									var dx = _g2++;
+									var c = nextImage2.image.get(nextImage2.useVirtualPos ? (dy - nextImage2.virtualY) * nextImage2.width + dx - nextImage2.virtualX | 0 : dy * nextImage2.width + dx | 0);
+									var col = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+									if(nextImage2.useMask && nextImage2.mask != null) {
+										var this3 = nextImage2.mask;
+										var c1 = this3.image.get(this3.useVirtualPos ? (dy - this3.virtualY) * this3.width + dx - this3.virtualX | 0 : dy * this3.width + dx | 0);
+										var maskPixel = justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1;
+										var this4 = col;
+										if(maskPixel == 0) {
+											col = this4;
+										} else {
+											var this5 = maskPixel >> 24 & 255;
+											var m0 = this5 == 0 ? 0. : this5 / 255;
+											var this6 = maskPixel >> 16 & 255;
+											var m1 = this6 == 0 ? 0. : this6 / 255;
+											var this7 = maskPixel >> 8 & 255;
+											var m2 = this7 == 0 ? 0. : this7 / 255;
+											var this8 = maskPixel & 255;
+											var m3 = this8 == 0 ? 0. : this8 / 255;
+											var ch0 = (1. - m0) * (this4 >> 24 & 255) | 0;
+											var ch1 = (1. - m1) * (this4 >> 16 & 255) | 0;
+											var ch2 = (1. - m2) * (this4 >> 8 & 255) | 0;
+											var ch3 = (1. - m3) * (this4 & 255) | 0;
+											col = Math.round(ch0 * 255) << 24 | Math.round(ch1 * 255) << 16 | Math.round(ch2 * 255) << 8 | Math.round(ch3 * 255);
+										}
+									}
+									if(col != 0) {
+										var x1 = x + dx;
+										var y1 = y + dy;
+										var c2 = col;
+										if((c2 >> 24 & 255) < 254 && this1.transparent) {
+											var location = this1.useVirtualPos ? (y1 - this1.virtualY) * this1.width + x1 - this1.virtualX | 0 : y1 * this1.width + x1 | 0;
+											var this9 = this1.image.get(location);
+											var this10 = justGraphix_image_Endian_isLittleEndian ? (this9 >> 24 & 255) << 24 | (this9 & 255) << 16 | (this9 >> 8 & 255) << 8 | this9 >> 16 & 255 : this9;
+											var this11 = this10 >> 24 & 255;
+											var a1 = this11 == 0 ? 0. : this11 / 255;
+											var this12 = this10 >> 16 & 255;
+											var r1 = this12 == 0 ? 0. : this12 / 255;
+											var this13 = this10 >> 8 & 255;
+											var g1 = this13 == 0 ? 0. : this13 / 255;
+											var this14 = this10 & 255;
+											var b1 = this14 == 0 ? 0. : this14 / 255;
+											var this15 = col >> 24 & 255;
+											var a2 = this15 == 0 ? 0. : this15 / 255;
+											var this16 = col >> 16 & 255;
+											var r2 = this16 == 0 ? 0. : this16 / 255;
+											var this17 = col >> 8 & 255;
+											var g2 = this17 == 0 ? 0. : this17 / 255;
+											var this18 = col & 255;
+											var b2 = this18 == 0 ? 0. : this18 / 255;
+											var a3 = a1 * (1 - a2);
+											var r = 255 * (r1 * a3 + r2 * a2) | 0;
+											var g = 255 * (g1 * a3 + g2 * a2) | 0;
+											var b = 255 * (b1 * a3 + b2 * a2) | 0;
+											var a = 255 * (a3 + a2) | 0;
+											var blended = a << 24 | r << 16 | g << 8 | b;
+											this1.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+										} else {
+											this1.image.set(this1.useVirtualPos ? (y1 - this1.virtualY) * this1.width + x1 - this1.virtualX | 0 : y1 * this1.width + x1 | 0,justGraphix_image_Endian_isLittleEndian ? (c2 >> 24 & 255) << 24 | (c2 & 255) << 16 | (c2 >> 8 & 255) << 8 | c2 >> 16 & 255 : c2);
+										}
+									}
+								}
+							}
+							if(this1.mask != null && includeMask1) {
+								var this3 = this1.mask;
+								var w = this1.width;
+								var h = this1.height;
+								var transparent = this1.mask.transparent;
+								var inPlace = inPlace1;
+								var includeMask = includeMask1;
+								if(includeMask == null) {
+									includeMask = false;
+								}
+								if(inPlace == null) {
+									inPlace = false;
+								}
+								if(transparent == null) {
+									transparent = false;
+								}
+								var transparent1 = transparent;
+								var inPlace2 = inPlace;
+								var includeMask2 = includeMask;
+								if(includeMask2 == null) {
+									includeMask2 = false;
+								}
+								if(inPlace2 == null) {
+									inPlace2 = false;
+								}
+								if(transparent1 == null) {
+									transparent1 = false;
+								}
+								var r = { x : 0, y : 0, w : w, h : h};
+								var xmax = r.x + r.w + 1 | 0;
+								var ymax = r.y + r.h + 1 | 0;
+								var ii_min = r.x | 0;
+								var ii_max = xmax;
+								var xRange__start = ii_min;
+								var xRange__max = ii_max;
+								var ii_min = r.y | 0;
+								var ii_max = ymax;
+								var yRange__start = ii_min;
+								var yRange__max = ii_max;
+								var range_x = xRange__start;
+								var range_y = yRange__start - 1;
+								var range_xReset = range_x;
+								var range_yReset = range_y;
+								var range_xMax = xRange__max - 2;
+								var range_yMax = yRange__max - 2;
+								var _this_min = 0;
+								var _this_max = (xRange__max - xRange__start) * (yRange__max - yRange__start) | 0;
+								var nextImage3 = justGraphix_image_Pixelimage._new(w | 0,h | 0);
+								nextImage3.transparent = transparent1;
+								while(_this_min < _this_max) {
+									var i = _this_min++;
+									if(range_y > range_yMax) {
+										range_y = range_yReset;
+										++range_x;
+									}
+									++range_y;
+									var i1 = i;
+									var x = range_x;
+									var y = range_y;
+									var x1 = range_x;
+									var y1 = range_yMax - range_y;
+									var c = this3.image.get(this3.useVirtualPos ? (y1 - this3.virtualY) * this3.width + x1 - this3.virtualX | 0 : y1 * this3.width + x1 | 0);
+									var color = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+									var c1 = color;
+									if((c1 >> 24 & 255) < 254 && nextImage3.transparent) {
+										var location = nextImage3.useVirtualPos ? (y - nextImage3.virtualY) * nextImage3.width + x - nextImage3.virtualX | 0 : y * nextImage3.width + x | 0;
+										var this4 = nextImage3.image.get(location);
+										var this5 = justGraphix_image_Endian_isLittleEndian ? (this4 >> 24 & 255) << 24 | (this4 & 255) << 16 | (this4 >> 8 & 255) << 8 | this4 >> 16 & 255 : this4;
+										var this6 = this5 >> 24 & 255;
+										var a1 = this6 == 0 ? 0. : this6 / 255;
+										var this7 = this5 >> 16 & 255;
+										var r1 = this7 == 0 ? 0. : this7 / 255;
+										var this8 = this5 >> 8 & 255;
+										var g1 = this8 == 0 ? 0. : this8 / 255;
+										var this9 = this5 & 255;
+										var b1 = this9 == 0 ? 0. : this9 / 255;
+										var this10 = color >> 24 & 255;
+										var a2 = this10 == 0 ? 0. : this10 / 255;
+										var this11 = color >> 16 & 255;
+										var r2 = this11 == 0 ? 0. : this11 / 255;
+										var this12 = color >> 8 & 255;
+										var g2 = this12 == 0 ? 0. : this12 / 255;
+										var this13 = color & 255;
+										var b2 = this13 == 0 ? 0. : this13 / 255;
+										var a3 = a1 * (1 - a2);
+										var r = 255 * (r1 * a3 + r2 * a2) | 0;
+										var g = 255 * (g1 * a3 + g2 * a2) | 0;
+										var b = 255 * (b1 * a3 + b2 * a2) | 0;
+										var a = 255 * (a3 + a2) | 0;
+										var blended = a << 24 | r << 16 | g << 8 | b;
+										nextImage3.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+									} else {
+										nextImage3.image.set(nextImage3.useVirtualPos ? (y - nextImage3.virtualY) * nextImage3.width + x - nextImage3.virtualX | 0 : y * nextImage3.width + x | 0,justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1);
+									}
+								}
+								var v2;
+								if(inPlace2) {
+									var x = 0;
+									var y = 0;
+									var _g = 0;
+									var _g1 = nextImage3.height;
+									while(_g < _g1) {
+										var dy = _g++;
+										var _g2 = 0;
+										var _g3 = nextImage3.width;
+										while(_g2 < _g3) {
+											var dx = _g2++;
+											var c = nextImage3.image.get(nextImage3.useVirtualPos ? (dy - nextImage3.virtualY) * nextImage3.width + dx - nextImage3.virtualX | 0 : dy * nextImage3.width + dx | 0);
+											var col = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+											if(nextImage3.useMask && nextImage3.mask != null) {
+												var this4 = nextImage3.mask;
+												var c1 = this4.image.get(this4.useVirtualPos ? (dy - this4.virtualY) * this4.width + dx - this4.virtualX | 0 : dy * this4.width + dx | 0);
+												var maskPixel = justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1;
+												var this5 = col;
+												if(maskPixel == 0) {
+													col = this5;
+												} else {
+													var this6 = maskPixel >> 24 & 255;
+													var m0 = this6 == 0 ? 0. : this6 / 255;
+													var this7 = maskPixel >> 16 & 255;
+													var m1 = this7 == 0 ? 0. : this7 / 255;
+													var this8 = maskPixel >> 8 & 255;
+													var m2 = this8 == 0 ? 0. : this8 / 255;
+													var this9 = maskPixel & 255;
+													var m3 = this9 == 0 ? 0. : this9 / 255;
+													var ch0 = (1. - m0) * (this5 >> 24 & 255) | 0;
+													var ch1 = (1. - m1) * (this5 >> 16 & 255) | 0;
+													var ch2 = (1. - m2) * (this5 >> 8 & 255) | 0;
+													var ch3 = (1. - m3) * (this5 & 255) | 0;
+													col = Math.round(ch0 * 255) << 24 | Math.round(ch1 * 255) << 16 | Math.round(ch2 * 255) << 8 | Math.round(ch3 * 255);
+												}
+											}
+											if(col != 0) {
+												var x1 = x + dx;
+												var y1 = y + dy;
+												var c2 = col;
+												if((c2 >> 24 & 255) < 254 && this3.transparent) {
+													var location = this3.useVirtualPos ? (y1 - this3.virtualY) * this3.width + x1 - this3.virtualX | 0 : y1 * this3.width + x1 | 0;
+													var this10 = this3.image.get(location);
+													var this11 = justGraphix_image_Endian_isLittleEndian ? (this10 >> 24 & 255) << 24 | (this10 & 255) << 16 | (this10 >> 8 & 255) << 8 | this10 >> 16 & 255 : this10;
+													var this12 = this11 >> 24 & 255;
+													var a1 = this12 == 0 ? 0. : this12 / 255;
+													var this13 = this11 >> 16 & 255;
+													var r1 = this13 == 0 ? 0. : this13 / 255;
+													var this14 = this11 >> 8 & 255;
+													var g1 = this14 == 0 ? 0. : this14 / 255;
+													var this15 = this11 & 255;
+													var b1 = this15 == 0 ? 0. : this15 / 255;
+													var this16 = col >> 24 & 255;
+													var a2 = this16 == 0 ? 0. : this16 / 255;
+													var this17 = col >> 16 & 255;
+													var r2 = this17 == 0 ? 0. : this17 / 255;
+													var this18 = col >> 8 & 255;
+													var g2 = this18 == 0 ? 0. : this18 / 255;
+													var this19 = col & 255;
+													var b2 = this19 == 0 ? 0. : this19 / 255;
+													var a3 = a1 * (1 - a2);
+													var r = 255 * (r1 * a3 + r2 * a2) | 0;
+													var g = 255 * (g1 * a3 + g2 * a2) | 0;
+													var b = 255 * (b1 * a3 + b2 * a2) | 0;
+													var a = 255 * (a3 + a2) | 0;
+													var blended = a << 24 | r << 16 | g << 8 | b;
+													this3.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+												} else {
+													this3.image.set(this3.useVirtualPos ? (y1 - this3.virtualY) * this3.width + x1 - this3.virtualX | 0 : y1 * this3.width + x1 | 0,justGraphix_image_Endian_isLittleEndian ? (c2 >> 24 & 255) << 24 | (c2 & 255) << 16 | (c2 >> 8 & 255) << 8 | c2 >> 16 & 255 : c2);
+												}
+											}
+										}
+									}
+									if(this3.mask != null && includeMask2) {
+										var v3 = justGraphix_image_imageAbstracts_TransformImage.flippedY(this3.mask,0,0,this3.width,this3.height,this3.mask.transparent,inPlace2,includeMask2);
+										this3.useMask = true;
+										this3.mask = v3;
+									}
+									nextImage3 = null;
+									v2 = this3;
+								} else {
+									if(this3.mask != null && includeMask2) {
+										var v3 = justGraphix_image_imageAbstracts_TransformImage.flippedY(this3.mask,0,0,this3.width,this3.height,this3.mask.transparent,inPlace2,includeMask2);
+										nextImage3.useMask = true;
+										nextImage3.mask = v3;
+									}
+									v2 = nextImage3;
+								}
+								this1.useMask = true;
+								this1.mask = v2;
+							}
+							nextImage2 = null;
+							v1 = this1;
+						} else {
+							if(this1.mask != null && includeMask1) {
+								var this3 = this1.mask;
+								var w = this1.width;
+								var h = this1.height;
+								var transparent = this1.mask.transparent;
+								var inPlace = inPlace1;
+								var includeMask = includeMask1;
+								if(includeMask == null) {
+									includeMask = false;
+								}
+								if(inPlace == null) {
+									inPlace = false;
+								}
+								if(transparent == null) {
+									transparent = false;
+								}
+								var transparent1 = transparent;
+								var inPlace1 = inPlace;
+								var includeMask1 = includeMask;
+								if(includeMask1 == null) {
+									includeMask1 = false;
+								}
+								if(inPlace1 == null) {
+									inPlace1 = false;
+								}
+								if(transparent1 == null) {
+									transparent1 = false;
+								}
+								var r = { x : 0, y : 0, w : w, h : h};
+								var xmax = r.x + r.w + 1 | 0;
+								var ymax = r.y + r.h + 1 | 0;
+								var ii_min = r.x | 0;
+								var ii_max = xmax;
+								var xRange__start = ii_min;
+								var xRange__max = ii_max;
+								var ii_min = r.y | 0;
+								var ii_max = ymax;
+								var yRange__start = ii_min;
+								var yRange__max = ii_max;
+								var range_x = xRange__start;
+								var range_y = yRange__start - 1;
+								var range_xReset = range_x;
+								var range_yReset = range_y;
+								var range_xMax = xRange__max - 2;
+								var range_yMax = yRange__max - 2;
+								var _this_min = 0;
+								var _this_max = (xRange__max - xRange__start) * (yRange__max - yRange__start) | 0;
+								var nextImage3 = justGraphix_image_Pixelimage._new(w | 0,h | 0);
+								nextImage3.transparent = transparent1;
+								while(_this_min < _this_max) {
+									var i = _this_min++;
+									if(range_y > range_yMax) {
+										range_y = range_yReset;
+										++range_x;
+									}
+									++range_y;
+									var i1 = i;
+									var x = range_x;
+									var y = range_y;
+									var x1 = range_x;
+									var y1 = range_yMax - range_y;
+									var c = this3.image.get(this3.useVirtualPos ? (y1 - this3.virtualY) * this3.width + x1 - this3.virtualX | 0 : y1 * this3.width + x1 | 0);
+									var color = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+									var c1 = color;
+									if((c1 >> 24 & 255) < 254 && nextImage3.transparent) {
+										var location = nextImage3.useVirtualPos ? (y - nextImage3.virtualY) * nextImage3.width + x - nextImage3.virtualX | 0 : y * nextImage3.width + x | 0;
+										var this1 = nextImage3.image.get(location);
+										var this4 = justGraphix_image_Endian_isLittleEndian ? (this1 >> 24 & 255) << 24 | (this1 & 255) << 16 | (this1 >> 8 & 255) << 8 | this1 >> 16 & 255 : this1;
+										var this5 = this4 >> 24 & 255;
+										var a1 = this5 == 0 ? 0. : this5 / 255;
+										var this6 = this4 >> 16 & 255;
+										var r1 = this6 == 0 ? 0. : this6 / 255;
+										var this7 = this4 >> 8 & 255;
+										var g1 = this7 == 0 ? 0. : this7 / 255;
+										var this8 = this4 & 255;
+										var b1 = this8 == 0 ? 0. : this8 / 255;
+										var this9 = color >> 24 & 255;
+										var a2 = this9 == 0 ? 0. : this9 / 255;
+										var this10 = color >> 16 & 255;
+										var r2 = this10 == 0 ? 0. : this10 / 255;
+										var this11 = color >> 8 & 255;
+										var g2 = this11 == 0 ? 0. : this11 / 255;
+										var this12 = color & 255;
+										var b2 = this12 == 0 ? 0. : this12 / 255;
+										var a3 = a1 * (1 - a2);
+										var r = 255 * (r1 * a3 + r2 * a2) | 0;
+										var g = 255 * (g1 * a3 + g2 * a2) | 0;
+										var b = 255 * (b1 * a3 + b2 * a2) | 0;
+										var a = 255 * (a3 + a2) | 0;
+										var blended = a << 24 | r << 16 | g << 8 | b;
+										nextImage3.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+									} else {
+										nextImage3.image.set(nextImage3.useVirtualPos ? (y - nextImage3.virtualY) * nextImage3.width + x - nextImage3.virtualX | 0 : y * nextImage3.width + x | 0,justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1);
+									}
+								}
+								var v2;
+								if(inPlace1) {
+									var x = 0;
+									var y = 0;
+									var _g = 0;
+									var _g1 = nextImage3.height;
+									while(_g < _g1) {
+										var dy = _g++;
+										var _g2 = 0;
+										var _g3 = nextImage3.width;
+										while(_g2 < _g3) {
+											var dx = _g2++;
+											var c = nextImage3.image.get(nextImage3.useVirtualPos ? (dy - nextImage3.virtualY) * nextImage3.width + dx - nextImage3.virtualX | 0 : dy * nextImage3.width + dx | 0);
+											var col = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+											if(nextImage3.useMask && nextImage3.mask != null) {
+												var this1 = nextImage3.mask;
+												var c1 = this1.image.get(this1.useVirtualPos ? (dy - this1.virtualY) * this1.width + dx - this1.virtualX | 0 : dy * this1.width + dx | 0);
+												var maskPixel = justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1;
+												var this4 = col;
+												if(maskPixel == 0) {
+													col = this4;
+												} else {
+													var this5 = maskPixel >> 24 & 255;
+													var m0 = this5 == 0 ? 0. : this5 / 255;
+													var this6 = maskPixel >> 16 & 255;
+													var m1 = this6 == 0 ? 0. : this6 / 255;
+													var this7 = maskPixel >> 8 & 255;
+													var m2 = this7 == 0 ? 0. : this7 / 255;
+													var this8 = maskPixel & 255;
+													var m3 = this8 == 0 ? 0. : this8 / 255;
+													var ch0 = (1. - m0) * (this4 >> 24 & 255) | 0;
+													var ch1 = (1. - m1) * (this4 >> 16 & 255) | 0;
+													var ch2 = (1. - m2) * (this4 >> 8 & 255) | 0;
+													var ch3 = (1. - m3) * (this4 & 255) | 0;
+													col = Math.round(ch0 * 255) << 24 | Math.round(ch1 * 255) << 16 | Math.round(ch2 * 255) << 8 | Math.round(ch3 * 255);
+												}
+											}
+											if(col != 0) {
+												var x1 = x + dx;
+												var y1 = y + dy;
+												var c2 = col;
+												if((c2 >> 24 & 255) < 254 && this3.transparent) {
+													var location = this3.useVirtualPos ? (y1 - this3.virtualY) * this3.width + x1 - this3.virtualX | 0 : y1 * this3.width + x1 | 0;
+													var this9 = this3.image.get(location);
+													var this10 = justGraphix_image_Endian_isLittleEndian ? (this9 >> 24 & 255) << 24 | (this9 & 255) << 16 | (this9 >> 8 & 255) << 8 | this9 >> 16 & 255 : this9;
+													var this11 = this10 >> 24 & 255;
+													var a1 = this11 == 0 ? 0. : this11 / 255;
+													var this12 = this10 >> 16 & 255;
+													var r1 = this12 == 0 ? 0. : this12 / 255;
+													var this13 = this10 >> 8 & 255;
+													var g1 = this13 == 0 ? 0. : this13 / 255;
+													var this14 = this10 & 255;
+													var b1 = this14 == 0 ? 0. : this14 / 255;
+													var this15 = col >> 24 & 255;
+													var a2 = this15 == 0 ? 0. : this15 / 255;
+													var this16 = col >> 16 & 255;
+													var r2 = this16 == 0 ? 0. : this16 / 255;
+													var this17 = col >> 8 & 255;
+													var g2 = this17 == 0 ? 0. : this17 / 255;
+													var this18 = col & 255;
+													var b2 = this18 == 0 ? 0. : this18 / 255;
+													var a3 = a1 * (1 - a2);
+													var r = 255 * (r1 * a3 + r2 * a2) | 0;
+													var g = 255 * (g1 * a3 + g2 * a2) | 0;
+													var b = 255 * (b1 * a3 + b2 * a2) | 0;
+													var a = 255 * (a3 + a2) | 0;
+													var blended = a << 24 | r << 16 | g << 8 | b;
+													this3.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+												} else {
+													this3.image.set(this3.useVirtualPos ? (y1 - this3.virtualY) * this3.width + x1 - this3.virtualX | 0 : y1 * this3.width + x1 | 0,justGraphix_image_Endian_isLittleEndian ? (c2 >> 24 & 255) << 24 | (c2 & 255) << 16 | (c2 >> 8 & 255) << 8 | c2 >> 16 & 255 : c2);
+												}
+											}
+										}
+									}
+									if(this3.mask != null && includeMask1) {
+										var v3 = justGraphix_image_imageAbstracts_TransformImage.flippedY(this3.mask,0,0,this3.width,this3.height,this3.mask.transparent,inPlace1,includeMask1);
+										this3.useMask = true;
+										this3.mask = v3;
+									}
+									nextImage3 = null;
+									v2 = this3;
+								} else {
+									if(this3.mask != null && includeMask1) {
+										var v3 = justGraphix_image_imageAbstracts_TransformImage.flippedY(this3.mask,0,0,this3.width,this3.height,this3.mask.transparent,inPlace1,includeMask1);
+										nextImage3.useMask = true;
+										nextImage3.mask = v3;
+									}
+									v2 = nextImage3;
+								}
+								nextImage2.useMask = true;
+								nextImage2.mask = v2;
+							}
+							v1 = nextImage2;
+						}
+						nextImage1.useMask = true;
+						nextImage1.mask = v1;
+					}
+					v = nextImage1;
+				}
+				nextImage.useMask = true;
+				nextImage.mask = v;
+			}
+			this2 = nextImage;
+		}
+		texture.setData(justGraphix_target_openflTarget_$_PeoteV.toPeoteTextureData_(this2),1);
+		var wid = pixelImage.width;
+		var hi = pixelImage.height;
+		var element1 = new justGraphix_target_openflTarget_$_PeoteBasicElement(0,0,wid,hi,0);
+		buffer.addElement(element1);
+		var element2 = new justGraphix_target_openflTarget_$_PeoteBasicElement(800,0,wid,hi,1);
+		buffer.addElement(element2);
+		program.setTexture(texture,"justGraphix_image");
+		display.addProgram(program);
+	}
+	,createPixelImage: function() {
+		var pixelImage = justGraphix_image_Pixelimage._new(800,600);
+		pixelImage.transparent = true;
+		var r_x = 0;
+		var r_y = 0;
+		var r_w = pixelImage.width | 0;
+		var r_h = pixelImage.height | 0;
+		var xmax = r_x + r_w + 1;
+		var ymax = r_y + r_h + 1;
+		var ii_min = r_x;
+		var ii_max = xmax;
+		var xRange__start = ii_min;
+		var xRange__max = ii_max;
+		var ii_min = r_y;
+		var ii_max = ymax;
+		var yRange__start = ii_min;
+		var yRange__max = ii_max;
+		var range_x = xRange__start;
+		var range_y = yRange__start - 1;
+		var range_xReset = range_x;
+		var range_yReset = range_y;
+		var range_xMax = xRange__max - 2;
+		var range_yMax = yRange__max - 2;
+		var _this_min = 0;
+		var _this_max = (xRange__max - xRange__start) * (yRange__max - yRange__start) | 0;
+		while(_this_min < _this_max) {
+			var i = _this_min++;
+			if(range_y > range_yMax) {
+				range_y = range_yReset;
+				++range_x;
+			}
+			++range_y;
+			var i1 = i;
+			var x = range_x;
+			var y = range_y;
+			var c = -3554365;
+			if((c >> 24 & 255) < 254 && pixelImage.transparent) {
+				var location = pixelImage.useVirtualPos ? (y - pixelImage.virtualY) * pixelImage.width + x - pixelImage.virtualX | 0 : y * pixelImage.width + x | 0;
+				var this1 = pixelImage.image.get(location);
+				var this2 = justGraphix_image_Endian_isLittleEndian ? (this1 >> 24 & 255) << 24 | (this1 & 255) << 16 | (this1 >> 8 & 255) << 8 | this1 >> 16 & 255 : this1;
+				var this3 = this2 >> 24 & 255;
+				var a1 = this3 == 0 ? 0. : this3 / 255;
+				var this4 = this2 >> 16 & 255;
+				var r1 = this4 == 0 ? 0. : this4 / 255;
+				var this5 = this2 >> 8 & 255;
+				var g1 = this5 == 0 ? 0. : this5 / 255;
+				var this6 = this2 & 255;
+				var b1 = this6 == 0 ? 0. : this6 / 255;
+				var this7 = 255;
+				var a2 = this7 == 0 ? 0. : this7 / 255;
+				var this8 = 201;
+				var r2 = this8 == 0 ? 0. : this8 / 255;
+				var this9 = 195;
+				var g2 = this9 == 0 ? 0. : this9 / 255;
+				var this10 = 195;
+				var b2 = this10 == 0 ? 0. : this10 / 255;
+				var a3 = a1 * (1 - a2);
+				var r = 255 * (r1 * a3 + r2 * a2) | 0;
+				var g = 255 * (g1 * a3 + g2 * a2) | 0;
+				var b = 255 * (b1 * a3 + b2 * a2) | 0;
+				var a = 255 * (a3 + a2) | 0;
+				var blended = a << 24 | r << 16 | g << 8 | b;
+				pixelImage.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+			} else {
+				pixelImage.image.set(pixelImage.useVirtualPos ? (y - pixelImage.virtualY) * pixelImage.width + x - pixelImage.virtualX | 0 : y * pixelImage.width + x | 0,justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c);
+			}
+		}
+		pixelImage.transparent = true;
+		var scale = 10;
+		var pixelTest = justGraphix_image_Pixelimage._new(80 * scale,80 * scale);
+		pixelTest.transparent = true;
+		var colors = [-7077677,-11861886,-16776961,-16711936,-256,-65536];
+		var vertColor = colors[0];
+		var _g = 0;
+		var _g1 = 70 * scale;
+		while(_g < _g1) {
+			var x = _g++;
+			vertColor = colors[Math.floor(x / scale / 10)];
+			var _g2 = 0;
+			var _g3 = 653;
+			while(_g2 < _g3) {
+				var y = _g2++;
+				var c = vertColor;
+				if((c >> 24 & 255) < 254 && pixelTest.transparent) {
+					var location = pixelTest.useVirtualPos ? (y - pixelTest.virtualY) * pixelTest.width + x - pixelTest.virtualX | 0 : y * pixelTest.width + x | 0;
+					var this1 = pixelTest.image.get(location);
+					var this2 = justGraphix_image_Endian_isLittleEndian ? (this1 >> 24 & 255) << 24 | (this1 & 255) << 16 | (this1 >> 8 & 255) << 8 | this1 >> 16 & 255 : this1;
+					var this3 = this2 >> 24 & 255;
+					var a1 = this3 == 0 ? 0. : this3 / 255;
+					var this4 = this2 >> 16 & 255;
+					var r1 = this4 == 0 ? 0. : this4 / 255;
+					var this5 = this2 >> 8 & 255;
+					var g1 = this5 == 0 ? 0. : this5 / 255;
+					var this6 = this2 & 255;
+					var b1 = this6 == 0 ? 0. : this6 / 255;
+					var this7 = vertColor >> 24 & 255;
+					var a2 = this7 == 0 ? 0. : this7 / 255;
+					var this8 = vertColor >> 16 & 255;
+					var r2 = this8 == 0 ? 0. : this8 / 255;
+					var this9 = vertColor >> 8 & 255;
+					var g2 = this9 == 0 ? 0. : this9 / 255;
+					var this10 = vertColor & 255;
+					var b2 = this10 == 0 ? 0. : this10 / 255;
+					var a3 = a1 * (1 - a2);
+					var r = 255 * (r1 * a3 + r2 * a2) | 0;
+					var g = 255 * (g1 * a3 + g2 * a2) | 0;
+					var b = 255 * (b1 * a3 + b2 * a2) | 0;
+					var a = 255 * (a3 + a2) | 0;
+					var blended = a << 24 | r << 16 | g << 8 | b;
+					pixelTest.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+				} else {
+					pixelTest.image.set(pixelTest.useVirtualPos ? (y - pixelTest.virtualY) * pixelTest.width + x - pixelTest.virtualX | 0 : y * pixelTest.width + x | 0,justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c);
+				}
+			}
+		}
+		var this1 = pixelTest;
+		var aA = 240;
+		var rA = 0;
+		var gA = 207;
+		var bA = 255;
+		var aB = 240;
+		var rB = 255;
+		var gB = 207;
+		var bB = 0;
+		var aC = 240;
+		var rC = 207;
+		var gC = 0;
+		var bC = 255;
+		var bcx = 180;
+		var bcy = -80;
+		var acx = -20;
+		var acy = -200;
+		var dot11 = bcx * bcx + bcy * bcy;
+		var dot12 = bcx * acx + bcy * acy;
+		var dot22 = acx * acx + acy * acy;
+		var denom1 = 1 / (dot11 * dot22 - dot12 * dot12);
+		var ii_min = Math.ceil(100);
+		var ii_max = Math.ceil(300);
+		var xIter3_start = ii_min;
+		var xIter3_max = ii_max;
+		var ii_min = Math.floor(100);
+		var ii_max = Math.ceil(300);
+		var yIter3_start = ii_min;
+		var yIter3_max = ii_max;
+		var _g_min = xIter3_start;
+		var _g_max = xIter3_max;
+		while(_g_min < _g_max) {
+			var px = _g_min++;
+			var pcx = px - 120;
+			var _g_min1 = yIter3_start;
+			var _g_max1 = yIter3_max;
+			while(_g_min1 < _g_max1) {
+				var py = _g_min1++;
+				var pcy = py - 300;
+				var dot31 = pcx * bcx + pcy * bcy;
+				var dot32 = pcx * acx + pcy * acy;
+				var ratioA = (dot22 * dot31 - dot12 * dot32) * denom1;
+				var ratioB = (dot11 * dot32 - dot12 * dot31) * denom1;
+				var ratioC = 1.0 - ratioB - ratioA;
+				if(ratioA >= 0 && ratioB >= 0 && ratioC >= 0) {
+					var i = aA * ratioA + aB * ratioB + aC * ratioC | 0;
+					if(i > 255) {
+						i = 255;
+					}
+					if(i < 0) {
+						i = 0;
+					}
+					var a = i;
+					var i1 = rA * ratioA + rB * ratioB + rC * ratioC | 0;
+					if(i1 > 255) {
+						i1 = 255;
+					}
+					if(i1 < 0) {
+						i1 = 0;
+					}
+					var r = i1;
+					var i2 = gA * ratioA + gB * ratioB + gC * ratioC | 0;
+					if(i2 > 255) {
+						i2 = 255;
+					}
+					if(i2 < 0) {
+						i2 = 0;
+					}
+					var g = i2;
+					var i3 = bA * ratioA + bB * ratioB + bC * ratioC | 0;
+					if(i3 > 255) {
+						i3 = 255;
+					}
+					if(i3 < 0) {
+						i3 = 0;
+					}
+					var b = i3;
+					var location = this1.useVirtualPos ? (py - this1.virtualY) * this1.width + px - this1.virtualX | 0 : py * this1.width + px | 0;
+					if(this1.transparent && a < 254) {
+						var this2 = this1.image.get(location);
+						var old = justGraphix_image_Endian_isLittleEndian ? (this2 >> 24 & 255) << 24 | (this2 & 255) << 16 | (this2 >> 8 & 255) << 8 | this2 >> 16 & 255 : this2;
+						var rhs = a << 24 | r << 16 | g << 8 | b;
+						var this3 = old >> 24 & 255;
+						var a1 = this3 == 0 ? 0. : this3 / 255;
+						var this4 = old >> 16 & 255;
+						var r1 = this4 == 0 ? 0. : this4 / 255;
+						var this5 = old >> 8 & 255;
+						var g1 = this5 == 0 ? 0. : this5 / 255;
+						var this6 = old & 255;
+						var b1 = this6 == 0 ? 0. : this6 / 255;
+						var this7 = rhs >> 24 & 255;
+						var a2 = this7 == 0 ? 0. : this7 / 255;
+						var this8 = rhs >> 16 & 255;
+						var r2 = this8 == 0 ? 0. : this8 / 255;
+						var this9 = rhs >> 8 & 255;
+						var g2 = this9 == 0 ? 0. : this9 / 255;
+						var this10 = rhs & 255;
+						var b2 = this10 == 0 ? 0. : this10 / 255;
+						var a3 = a1 * (1 - a2);
+						var r3 = 255 * (r1 * a3 + r2 * a2) | 0;
+						var g3 = 255 * (g1 * a3 + g2 * a2) | 0;
+						var b3 = 255 * (b1 * a3 + b2 * a2) | 0;
+						var a4 = 255 * (a3 + a2) | 0;
+						var blended = a4 << 24 | r3 << 16 | g3 << 8 | b3;
+						this1.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+					} else {
+						this1.image.set(location,this1.isLittle ? a << 24 | b << 16 | g << 8 | r : a << 24 | r << 16 | g << 8 | b);
+					}
+				}
+			}
+		}
+		var v_yIter3;
+		var v_xIter3;
+		var v_ty;
+		var v_tx;
+		var v_t0;
+		var v_sy;
+		var v_sx;
+		var v_s0;
+		var v_A;
+		var preCalculated = true;
+		if(preCalculated == null) {
+			preCalculated = true;
+		}
+		var bx = 300;
+		var by = 220;
+		var cx = 120;
+		var cy = 300;
+		var adjustWinding = 100 * by - bx * 100 + (bx * cy - cx * by) + (cx * 100 - 100 * cy) > 0;
+		if(!adjustWinding) {
+			var bx_ = bx;
+			var by_ = by;
+			bx = cx;
+			by = cy;
+			cx = bx_;
+			cy = by_;
+		}
+		var v_ax = 100;
+		var v_ay = 100;
+		var v_bx = bx;
+		var v_by = by;
+		var v_cx = cx;
+		var v_cy = cy;
+		var v_preCalculated = preCalculated;
+		if(preCalculated) {
+			v_s0 = v_ay * v_cx - v_ax * v_cy;
+			v_sx = v_cy - v_ay;
+			v_sy = v_ax - v_cx;
+			v_t0 = v_ax * v_by - v_ay * v_bx;
+			v_tx = v_ay - v_by;
+			v_ty = v_bx - v_ax;
+			v_A = -v_by * v_cx + v_ay * (-v_bx + v_cx) + v_ax * (v_by - v_cy) + v_bx * v_cy;
+			var a = v_ax;
+			var b = v_bx;
+			var c = v_cx;
+			if(a > b) {
+				if(a > c) {
+					var ii_min = b > c ? Math.floor(c) : Math.floor(b);
+					var ii_max = Math.ceil(a);
+					v_xIter3 = new justGraphix_iterMagix_IntIterStart(ii_min,ii_max);
+				} else {
+					var ii_min = Math.floor(b);
+					var ii_max = Math.ceil(c);
+					v_xIter3 = new justGraphix_iterMagix_IntIterStart(ii_min,ii_max);
+				}
+			} else if(b > c) {
+				var ii_min = a > c ? Math.floor(c) : Math.ceil(a);
+				var ii_max = Math.ceil(b);
+				v_xIter3 = new justGraphix_iterMagix_IntIterStart(ii_min,ii_max);
+			} else {
+				var ii_min = Math.floor(a);
+				var ii_max = Math.ceil(c);
+				v_xIter3 = new justGraphix_iterMagix_IntIterStart(ii_min,ii_max);
+			}
+			var a = v_ay;
+			var b = v_by;
+			var c = v_cy;
+			if(a > b) {
+				if(a > c) {
+					var ii_min = b > c ? Math.floor(c) : Math.floor(b);
+					var ii_max = Math.ceil(a);
+					v_yIter3 = new justGraphix_iterMagix_IntIterStart(ii_min,ii_max);
+				} else {
+					var ii_min = Math.floor(b);
+					var ii_max = Math.ceil(c);
+					v_yIter3 = new justGraphix_iterMagix_IntIterStart(ii_min,ii_max);
+				}
+			} else if(b > c) {
+				var ii_min = a > c ? Math.floor(c) : Math.ceil(a);
+				var ii_max = Math.ceil(b);
+				v_yIter3 = new justGraphix_iterMagix_IntIterStart(ii_min,ii_max);
+			} else {
+				var ii_min = Math.floor(a);
+				var ii_max = Math.ceil(c);
+				v_yIter3 = new justGraphix_iterMagix_IntIterStart(ii_min,ii_max);
+			}
+		}
+		var this1 = pixelTest;
+		var aA = 204;
+		var rA = 0;
+		var gA = 0;
+		var bA = 255;
+		var aB = 204;
+		var rB = 255;
+		var gB = 0;
+		var bB = 0;
+		var aC = 204;
+		var rC = 0;
+		var gC = 255;
+		var bC = 0;
+		var bcx = 180;
+		var bcy = -80;
+		var acx = -20;
+		var acy = -200;
+		var dot11 = bcx * bcx + bcy * bcy;
+		var dot12 = bcx * acx + bcy * acy;
+		var dot22 = acx * acx + acy * acy;
+		var denom1 = 1 / (dot11 * dot22 - dot12 * dot12);
+		var ii_min = Math.ceil(220);
+		var ii_max = Math.ceil(420);
+		var xIter3_start = ii_min;
+		var xIter3_max = ii_max;
+		var ii_min = Math.floor(120);
+		var ii_max = Math.ceil(320);
+		var yIter3_start = ii_min;
+		var yIter3_max = ii_max;
+		var _g_min = xIter3_start;
+		var _g_max = xIter3_max;
+		while(_g_min < _g_max) {
+			var px = _g_min++;
+			var pcx = px - 240;
+			var _g_min1 = yIter3_start;
+			var _g_max1 = yIter3_max;
+			while(_g_min1 < _g_max1) {
+				var py = _g_min1++;
+				var pcy = py - 320;
+				var dot31 = pcx * bcx + pcy * bcy;
+				var dot32 = pcx * acx + pcy * acy;
+				var ratioA = (dot22 * dot31 - dot12 * dot32) * denom1;
+				var ratioB = (dot11 * dot32 - dot12 * dot31) * denom1;
+				var ratioC = 1.0 - ratioB - ratioA;
+				if(ratioA >= 0 && ratioB >= 0 && ratioC >= 0) {
+					var i = aA * ratioA + aB * ratioB + aC * ratioC | 0;
+					if(i > 255) {
+						i = 255;
+					}
+					if(i < 0) {
+						i = 0;
+					}
+					var a = i;
+					var i1 = rA * ratioA + rB * ratioB + rC * ratioC | 0;
+					if(i1 > 255) {
+						i1 = 255;
+					}
+					if(i1 < 0) {
+						i1 = 0;
+					}
+					var r = i1;
+					var i2 = gA * ratioA + gB * ratioB + gC * ratioC | 0;
+					if(i2 > 255) {
+						i2 = 255;
+					}
+					if(i2 < 0) {
+						i2 = 0;
+					}
+					var g = i2;
+					var i3 = bA * ratioA + bB * ratioB + bC * ratioC | 0;
+					if(i3 > 255) {
+						i3 = 255;
+					}
+					if(i3 < 0) {
+						i3 = 0;
+					}
+					var b = i3;
+					var location = this1.useVirtualPos ? (py - this1.virtualY) * this1.width + px - this1.virtualX | 0 : py * this1.width + px | 0;
+					if(this1.transparent && a < 254) {
+						var this2 = this1.image.get(location);
+						var old = justGraphix_image_Endian_isLittleEndian ? (this2 >> 24 & 255) << 24 | (this2 & 255) << 16 | (this2 >> 8 & 255) << 8 | this2 >> 16 & 255 : this2;
+						var rhs = a << 24 | r << 16 | g << 8 | b;
+						var this3 = old >> 24 & 255;
+						var a1 = this3 == 0 ? 0. : this3 / 255;
+						var this4 = old >> 16 & 255;
+						var r1 = this4 == 0 ? 0. : this4 / 255;
+						var this5 = old >> 8 & 255;
+						var g1 = this5 == 0 ? 0. : this5 / 255;
+						var this6 = old & 255;
+						var b1 = this6 == 0 ? 0. : this6 / 255;
+						var this7 = rhs >> 24 & 255;
+						var a2 = this7 == 0 ? 0. : this7 / 255;
+						var this8 = rhs >> 16 & 255;
+						var r2 = this8 == 0 ? 0. : this8 / 255;
+						var this9 = rhs >> 8 & 255;
+						var g2 = this9 == 0 ? 0. : this9 / 255;
+						var this10 = rhs & 255;
+						var b2 = this10 == 0 ? 0. : this10 / 255;
+						var a3 = a1 * (1 - a2);
+						var r3 = 255 * (r1 * a3 + r2 * a2) | 0;
+						var g3 = 255 * (g1 * a3 + g2 * a2) | 0;
+						var b3 = 255 * (b1 * a3 + b2 * a2) | 0;
+						var a4 = 255 * (a3 + a2) | 0;
+						var blended = a4 << 24 | r3 << 16 | g3 << 8 | b3;
+						this1.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+					} else {
+						this1.image.set(location,this1.isLittle ? a << 24 | b << 16 | g << 8 | r : a << 24 | r << 16 | g << 8 | b);
+					}
+				}
+			}
+		}
+		var v_yIter3;
+		var v_xIter3;
+		var v_ty;
+		var v_tx;
+		var v_t0;
+		var v_sy;
+		var v_sx;
+		var v_s0;
+		var v_A;
+		var preCalculated = true;
+		if(preCalculated == null) {
+			preCalculated = true;
+		}
+		var bx = 420;
+		var by = 240;
+		var cx = 240;
+		var cy = 320;
+		var adjustWinding = 220 * by - bx * 120 + (bx * cy - cx * by) + (cx * 120 - 220 * cy) > 0;
+		if(!adjustWinding) {
+			var bx_ = bx;
+			var by_ = by;
+			bx = cx;
+			by = cy;
+			cx = bx_;
+			cy = by_;
+		}
+		var v_ax = 220;
+		var v_ay = 120;
+		var v_bx = bx;
+		var v_by = by;
+		var v_cx = cx;
+		var v_cy = cy;
+		var v_preCalculated = preCalculated;
+		if(preCalculated) {
+			v_s0 = v_ay * v_cx - v_ax * v_cy;
+			v_sx = v_cy - v_ay;
+			v_sy = v_ax - v_cx;
+			v_t0 = v_ax * v_by - v_ay * v_bx;
+			v_tx = v_ay - v_by;
+			v_ty = v_bx - v_ax;
+			v_A = -v_by * v_cx + v_ay * (-v_bx + v_cx) + v_ax * (v_by - v_cy) + v_bx * v_cy;
+			var a = v_ax;
+			var b = v_bx;
+			var c = v_cx;
+			if(a > b) {
+				if(a > c) {
+					var ii_min = b > c ? Math.floor(c) : Math.floor(b);
+					var ii_max = Math.ceil(a);
+					v_xIter3 = new justGraphix_iterMagix_IntIterStart(ii_min,ii_max);
+				} else {
+					var ii_min = Math.floor(b);
+					var ii_max = Math.ceil(c);
+					v_xIter3 = new justGraphix_iterMagix_IntIterStart(ii_min,ii_max);
+				}
+			} else if(b > c) {
+				var ii_min = a > c ? Math.floor(c) : Math.ceil(a);
+				var ii_max = Math.ceil(b);
+				v_xIter3 = new justGraphix_iterMagix_IntIterStart(ii_min,ii_max);
+			} else {
+				var ii_min = Math.floor(a);
+				var ii_max = Math.ceil(c);
+				v_xIter3 = new justGraphix_iterMagix_IntIterStart(ii_min,ii_max);
+			}
+			var a = v_ay;
+			var b = v_by;
+			var c = v_cy;
+			if(a > b) {
+				if(a > c) {
+					var ii_min = b > c ? Math.floor(c) : Math.floor(b);
+					var ii_max = Math.ceil(a);
+					v_yIter3 = new justGraphix_iterMagix_IntIterStart(ii_min,ii_max);
+				} else {
+					var ii_min = Math.floor(b);
+					var ii_max = Math.ceil(c);
+					v_yIter3 = new justGraphix_iterMagix_IntIterStart(ii_min,ii_max);
+				}
+			} else if(b > c) {
+				var ii_min = a > c ? Math.floor(c) : Math.ceil(a);
+				var ii_max = Math.ceil(b);
+				v_yIter3 = new justGraphix_iterMagix_IntIterStart(ii_min,ii_max);
+			} else {
+				var ii_min = Math.floor(a);
+				var ii_max = Math.ceil(c);
+				v_yIter3 = new justGraphix_iterMagix_IntIterStart(ii_min,ii_max);
+			}
+		}
+		var path = justGraphix_path_Path_$D_kiwi_d;
+		var translateX = 0.;
+		var translateY = 0.;
+		var scaleX = 1.;
+		var scaleY = 1.;
+		if(scaleY == null) {
+			scaleY = 1.;
+		}
+		if(scaleX == null) {
+			scaleX = 1.;
+		}
+		if(translateY == null) {
+			translateY = 0.;
+		}
+		if(translateX == null) {
+			translateX = 0.;
+		}
+		var translateX1 = translateX;
+		var translateY1 = translateY;
+		var scaleX1 = scaleX;
+		var scaleY1 = scaleY;
+		var hitsAllowed = false;
+		if(hitsAllowed == null) {
+			hitsAllowed = false;
+		}
+		if(scaleY1 == null) {
+			scaleY1 = 1.;
+		}
+		if(scaleX1 == null) {
+			scaleX1 = 1.;
+		}
+		if(translateY1 == null) {
+			translateY1 = 0.;
+		}
+		if(translateX1 == null) {
+			translateX1 = 0.;
+		}
+		var drawShapeHelper = new justGraphix_contour_contourPath_DrawThinLineHelper(pixelTest,-255013684,translateX1,translateY1,scaleX1,scaleY1,hitsAllowed);
+		drawShapeHelper.svgLinePath.parse(path);
+		var _g = 0;
+		var _g1 = pixelTest.height;
+		while(_g < _g1) {
+			var dy = _g++;
+			var _g2 = 0;
+			var _g3 = pixelTest.width;
+			while(_g2 < _g3) {
+				var dx = _g2++;
+				var c = pixelTest.image.get(pixelTest.useVirtualPos ? (dy - pixelTest.virtualY) * pixelTest.width + dx - pixelTest.virtualX | 0 : dy * pixelTest.width + dx | 0);
+				var col = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+				if(pixelTest.useMask && pixelTest.mask != null) {
+					var this1 = pixelTest.mask;
+					var c1 = this1.image.get(this1.useVirtualPos ? (dy - this1.virtualY) * this1.width + dx - this1.virtualX | 0 : dy * this1.width + dx | 0);
+					var maskPixel = justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1;
+					var this2 = col;
+					if(maskPixel == 0) {
+						col = this2;
+					} else {
+						var this3 = maskPixel >> 24 & 255;
+						var m0 = this3 == 0 ? 0. : this3 / 255;
+						var this4 = maskPixel >> 16 & 255;
+						var m1 = this4 == 0 ? 0. : this4 / 255;
+						var this5 = maskPixel >> 8 & 255;
+						var m2 = this5 == 0 ? 0. : this5 / 255;
+						var this6 = maskPixel & 255;
+						var m3 = this6 == 0 ? 0. : this6 / 255;
+						var ch0 = (1. - m0) * (this2 >> 24 & 255) | 0;
+						var ch1 = (1. - m1) * (this2 >> 16 & 255) | 0;
+						var ch2 = (1. - m2) * (this2 >> 8 & 255) | 0;
+						var ch3 = (1. - m3) * (this2 & 255) | 0;
+						col = Math.round(ch0 * 255) << 24 | Math.round(ch1 * 255) << 16 | Math.round(ch2 * 255) << 8 | Math.round(ch3 * 255);
+					}
+				}
+				if(col != 0) {
+					var x = 45 + dx;
+					var y = 45 + dy;
+					var c2 = col;
+					if((c2 >> 24 & 255) < 254 && pixelImage.transparent) {
+						var location = pixelImage.useVirtualPos ? (y - pixelImage.virtualY) * pixelImage.width + x - pixelImage.virtualX | 0 : y * pixelImage.width + x | 0;
+						var this7 = pixelImage.image.get(location);
+						var this8 = justGraphix_image_Endian_isLittleEndian ? (this7 >> 24 & 255) << 24 | (this7 & 255) << 16 | (this7 >> 8 & 255) << 8 | this7 >> 16 & 255 : this7;
+						var this9 = this8 >> 24 & 255;
+						var a1 = this9 == 0 ? 0. : this9 / 255;
+						var this10 = this8 >> 16 & 255;
+						var r1 = this10 == 0 ? 0. : this10 / 255;
+						var this11 = this8 >> 8 & 255;
+						var g1 = this11 == 0 ? 0. : this11 / 255;
+						var this12 = this8 & 255;
+						var b1 = this12 == 0 ? 0. : this12 / 255;
+						var this13 = col >> 24 & 255;
+						var a2 = this13 == 0 ? 0. : this13 / 255;
+						var this14 = col >> 16 & 255;
+						var r2 = this14 == 0 ? 0. : this14 / 255;
+						var this15 = col >> 8 & 255;
+						var g2 = this15 == 0 ? 0. : this15 / 255;
+						var this16 = col & 255;
+						var b2 = this16 == 0 ? 0. : this16 / 255;
+						var a3 = a1 * (1 - a2);
+						var r = 255 * (r1 * a3 + r2 * a2) | 0;
+						var g = 255 * (g1 * a3 + g2 * a2) | 0;
+						var b = 255 * (b1 * a3 + b2 * a2) | 0;
+						var a = 255 * (a3 + a2) | 0;
+						var blended = a << 24 | r << 16 | g << 8 | b;
+						pixelImage.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+					} else {
+						pixelImage.image.set(pixelImage.useVirtualPos ? (y - pixelImage.virtualY) * pixelImage.width + x - pixelImage.virtualX | 0 : y * pixelImage.width + x | 0,justGraphix_image_Endian_isLittleEndian ? (c2 >> 24 & 255) << 24 | (c2 & 255) << 16 | (c2 >> 8 & 255) << 8 | c2 >> 16 & 255 : c2);
+					}
+				}
+			}
+		}
+		return pixelImage;
 	}
 	,onPreloadComplete: function() {
 	}
@@ -2030,9458 +5387,1073 @@ justGraphix_application_image_A_$PeoteView.prototype = $extend(lime_app_Applicat
 	}
 	,__class__: justGraphix_application_image_A_$PeoteView
 });
-var justGraphix_contour_IContour = function() { };
-justGraphix_contour_IContour.__name__ = "justGraphix.contour.IContour";
-justGraphix_contour_IContour.__isInterface__ = true;
-justGraphix_contour_IContour.prototype = {
-	__class__: justGraphix_contour_IContour
-};
-var justGraphix_contour_Contour = function(pen_,endLine_) {
-	if(endLine_ == null) {
-		endLine_ = 0;
-	}
-	this.count = 0;
-	this.endCapFactor = 0.5;
-	this.useMitre = true;
-	this.mitreLimit = 1.2;
-	this.pointsAnti = [];
-	this.pointsClock = [];
-	this.pen = pen_;
-	this.endLine = endLine_;
-};
-justGraphix_contour_Contour.__name__ = "justGraphix.contour.Contour";
-justGraphix_contour_Contour.__interfaces__ = [justGraphix_contour_IContour];
-justGraphix_contour_Contour.prototype = {
-	reset: function() {
-		this.angleA = 0;
-		this.count = 0;
-		this.kax = 0;
-		this.kay = 0;
-		this.kbx = 0;
-		this.kby = 0;
-		this.kcx = 0;
-		this.kcy = 0;
-		this.ncx = 0;
-		this.ncy = 0;
-		this.ax = 0;
-		this.ay = 0;
-		this.bx = 0;
-		this.by = 0;
-		this.cx = 0;
-		this.cy = 0;
-		this.dx = null;
-		this.dy = null;
-		this.ex = null;
-		this.ey = null;
-		this.pointsClock.length = 0;
-		this.pointsAnti.length = 0;
-	}
-	,triangleJoin: function(ax_,ay_,bx_,by_,width_,curveEnds,overlap) {
-		if(overlap == null) {
-			overlap = false;
-		}
-		if(curveEnds == null) {
-			curveEnds = false;
-		}
-		var oldAngle = this.dx != null ? this.angle1 : null;
-		this.halfA = Math.PI / 2;
-		this.ax = bx_;
-		this.ay = by_;
-		this.bx = ax_;
-		this.by = ay_;
-		this.beta = Math.PI / 2 - this.halfA;
-		this.r = width_ / 2 * Math.cos(this.beta);
-		this.theta = Math.atan2(this.ay - this.by,this.ax - this.bx);
-		if(this.theta > 0) {
-			if(this.halfA < 0) {
-				this.angle2 = this.theta + this.halfA + Math.PI / 2;
-				this.angle1 = this.theta - this.halfA;
-			} else {
-				this.angle1 = this.theta + this.halfA - Math.PI;
-				this.angle2 = this.theta + this.halfA;
-			}
-		} else if(this.halfA > 0) {
-			this.angle1 = this.theta + this.halfA - Math.PI;
-			this.angle2 = this.theta + this.halfA;
-		} else {
-			this.angle2 = this.theta + this.halfA + Math.PI / 2;
-			this.angle1 = this.theta - this.halfA;
-		}
-		if(this.dxPrev != null) {
-			this.dxOld = this.dxPrev;
-		}
-		if(this.dyPrev != null) {
-			this.dyOld = this.dyPrev;
-		}
-		if(this.exPrev != null) {
-			this.exOld = this.exPrev;
-		}
-		if(this.eyPrev != null) {
-			this.eyOld = this.eyPrev;
-		}
-		if(this.dx != null) {
-			this.dxPrev = this.dx;
-		}
-		if(this.dy != null) {
-			this.dyPrev = this.dy;
-		}
-		if(this.ex != null) {
-			this.exPrev = this.ex;
-		}
-		if(this.ey != null) {
-			this.eyPrev = this.ey;
-		}
-		this.dx = this.bx + this.r * Math.cos(this.angle1);
-		this.dy = this.by + this.r * Math.sin(this.angle1);
-		this.ex = this.bx + this.r * Math.cos(this.angle2);
-		this.ey = this.by + this.r * Math.sin(this.angle2);
-		this.ax = ax_;
-		this.ay = ay_;
-		this.bx = bx_;
-		this.by = by_;
-		this.theta = Math.atan2(this.ay - this.by,this.ax - this.bx);
-		if(this.theta > 0) {
-			if(this.halfA < 0) {
-				this.angle2 = this.theta + this.halfA + Math.PI / 2;
-				this.angle1 = this.theta - this.halfA;
-			} else {
-				this.angle1 = this.theta + this.halfA - Math.PI;
-				this.angle2 = this.theta + this.halfA;
-			}
-		} else if(this.halfA > 0) {
-			this.angle1 = this.theta + this.halfA - Math.PI;
-			this.angle2 = this.theta + this.halfA;
-		} else {
-			this.angle2 = this.theta + this.halfA + Math.PI / 2;
-			this.angle1 = this.theta - this.halfA;
-		}
-		if(this.dxPrev != null) {
-			this.dxOld = this.dxPrev;
-		}
-		if(this.dyPrev != null) {
-			this.dyOld = this.dyPrev;
-		}
-		if(this.exPrev != null) {
-			this.exOld = this.exPrev;
-		}
-		if(this.eyPrev != null) {
-			this.eyOld = this.eyPrev;
-		}
-		if(this.dx != null) {
-			this.dxPrev = this.dx;
-		}
-		if(this.dy != null) {
-			this.dyPrev = this.dy;
-		}
-		if(this.ex != null) {
-			this.exPrev = this.ex;
-		}
-		if(this.ey != null) {
-			this.eyPrev = this.ey;
-		}
-		this.dx = this.bx + this.r * Math.cos(this.angle1);
-		this.dy = this.by + this.r * Math.sin(this.angle1);
-		this.ex = this.bx + this.r * Math.cos(this.angle2);
-		this.ey = this.by + this.r * Math.sin(this.angle2);
-		var x = this.dxOld - bx_;
-		var y = this.dyOld - by_;
-		var x1 = this.exOld - bx_;
-		var y1 = this.eyOld - by_;
-		var clockWise = x * x + y * y > x1 * x1 + y1 * y1;
-		var theta0;
-		var theta1;
-		if(clockWise) {
-			theta0 = -Math.atan2(this.ay - this.dyOld,this.ax - this.dxOld) - Math.PI / 2;
-			theta1 = -Math.atan2(this.ay - this.eyPrev,this.ax - this.exPrev) - Math.PI / 2;
-		} else {
-			theta0 = -Math.atan2(this.ay - this.eyOld,this.ax - this.exOld) - Math.PI / 2;
-			theta1 = -Math.atan2(this.ay - this.dyPrev,this.ax - this.dxPrev) - Math.PI / 2;
-		}
-		var dif;
-		switch(justGraphix_rose_DifferencePreference.SMALL._hx_index) {
-		case 0:
-			var zero = true;
-			if(zero == null) {
-				zero = false;
-			}
-			var out;
-			if(theta0 >= 0) {
-				var divisor = Math.ceil(theta0 / (2 * Math.PI)) - 1.;
-				out = theta0 - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-			} else {
-				var val = -theta0;
-				var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-				out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-			}
-			var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-			var zero = true;
-			if(zero == null) {
-				zero = false;
-			}
-			var out;
-			if(theta1 >= 0) {
-				var divisor = Math.ceil(theta1 / (2 * Math.PI)) - 1.;
-				out = theta1 - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-			} else {
-				var val = -theta1;
-				var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-				out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-			}
-			var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-			var fa = za;
-			var fb = zb;
-			var theta = Math.abs(fa - fb);
-			var clockwise = fa < fb;
-			var dif1 = clockwise ? theta : -theta;
-			dif = dif1 > 0 ? dif1 : 2 * Math.PI + dif1;
-			break;
-		case 1:
-			var zero = true;
-			if(zero == null) {
-				zero = false;
-			}
-			var out;
-			if(theta0 >= 0) {
-				var divisor = Math.ceil(theta0 / (2 * Math.PI)) - 1.;
-				out = theta0 - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-			} else {
-				var val = -theta0;
-				var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-				out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-			}
-			var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-			var zero = true;
-			if(zero == null) {
-				zero = false;
-			}
-			var out;
-			if(theta1 >= 0) {
-				var divisor = Math.ceil(theta1 / (2 * Math.PI)) - 1.;
-				out = theta1 - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-			} else {
-				var val = -theta1;
-				var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-				out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-			}
-			var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-			var fa = za;
-			var fb = zb;
-			var theta = Math.abs(fa - fb);
-			var clockwise = fa < fb;
-			var dif1 = clockwise ? theta : -theta;
-			dif = dif1 < 0 ? dif1 : -2 * Math.PI + dif1;
-			break;
-		case 2:
-			var zero = true;
-			if(zero == null) {
-				zero = false;
-			}
-			var out;
-			if(theta0 >= 0) {
-				var divisor = Math.ceil(theta0 / (2 * Math.PI)) - 1.;
-				out = theta0 - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-			} else {
-				var val = -theta0;
-				var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-				out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-			}
-			var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-			var zero = true;
-			if(zero == null) {
-				zero = false;
-			}
-			var out;
-			if(theta1 >= 0) {
-				var divisor = Math.ceil(theta1 / (2 * Math.PI)) - 1.;
-				out = theta1 - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-			} else {
-				var val = -theta1;
-				var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-				out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-			}
-			var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-			var fa = za;
-			var fb = zb;
-			var theta = Math.abs(fa - fb);
-			var smallest = theta <= Math.PI;
-			var clockwise = fa < fb;
-			var dif1 = clockwise ? theta : -theta;
-			dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-			break;
-		case 3:
-			var zero = true;
-			if(zero == null) {
-				zero = false;
-			}
-			var out;
-			if(theta0 >= 0) {
-				var divisor = Math.ceil(theta0 / (2 * Math.PI)) - 1.;
-				out = theta0 - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-			} else {
-				var val = -theta0;
-				var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-				out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-			}
-			var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-			var zero = true;
-			if(zero == null) {
-				zero = false;
-			}
-			var out;
-			if(theta1 >= 0) {
-				var divisor = Math.ceil(theta1 / (2 * Math.PI)) - 1.;
-				out = theta1 - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-			} else {
-				var val = -theta1;
-				var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-				out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-			}
-			var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-			var fa = za;
-			var fb = zb;
-			var theta = Math.abs(fa - fb);
-			var largest = theta > Math.PI;
-			var clockwise = fa < fb;
-			var dif1 = clockwise ? theta : -theta;
-			dif = largest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-			break;
-		case 4:
-			var zero = true;
-			if(zero == null) {
-				zero = false;
-			}
-			var out;
-			if(theta0 >= 0) {
-				var divisor = Math.ceil(theta0 / (2 * Math.PI)) - 1.;
-				out = theta0 - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-			} else {
-				var val = -theta0;
-				var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-				out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-			}
-			var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-			var zero = true;
-			if(zero == null) {
-				zero = false;
-			}
-			var out;
-			if(theta1 >= 0) {
-				var divisor = Math.ceil(theta1 / (2 * Math.PI)) - 1.;
-				out = theta1 - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-			} else {
-				var val = -theta1;
-				var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-				out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-			}
-			var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-			var fa = theta0;
-			var fb = theta1;
-			var theta = Math.abs(theta0 - theta1);
-			var smallest = theta <= Math.PI;
-			var clockwise = theta0 < theta1;
-			var dif1 = clockwise ? theta : -theta;
-			dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-			break;
-		}
-		if(!overlap && this.count != 0) {
-			var gamma = Math.abs(dif) / 2;
-			var h = width_ / 2 / Math.cos(gamma);
-			var f;
-			if(theta0 >= 0) {
-				var divisor = Math.ceil(theta0 / (2 * Math.PI)) - 1.;
-				var temp = theta0 - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				f = temp > Math.PI ? -2 * Math.PI + temp : temp;
-			} else {
-				var val = -theta0;
-				var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-				var temp = -(val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				f = temp < -Math.PI ? temp + 2 * Math.PI : temp;
-			}
-			var start = f;
-			var start2 = start;
-			var delta = start2 + dif / 2 + Math.PI;
-			this.jx = this.ax + h * Math.sin(delta);
-			this.jy = this.ay + h * Math.cos(delta);
-		}
-		if(this.count == 0 && (this.endLine == 1 || this.endLine == 3 || this.endLine == 6 || this.endLine == 8 || this.endLine == 11 || this.endLine == 9 || this.endLine == 15 || this.endLine == 17 || this.endLine == 12 || this.endLine == 14 || this.endLine == 18 || this.endLine == 20)) {
-			var ax = this.ax;
-			var ay = this.ay;
-			var beta = -this.angle1 - Math.PI / 2;
-			var gamma = -this.angle1 - Math.PI / 2 + Math.PI;
-			var temp = [];
-			this.startShape(ax,ay,width_ / 2,beta,gamma,justGraphix_rose_DifferencePreference.SMALL_OLD,temp,-1,36);
-			var pA = this.pointsAnti.length;
-			var len = temp.length / 2 | 0;
-			var p4 = temp.length / 4 | 0;
-			var _g = 0;
-			var _g1 = p4;
-			while(_g < _g1) {
-				var i = _g++;
-				this.pointsAnti[pA++] = temp[len - 2 * i + 1];
-				this.pointsAnti[pA++] = temp[len - 2 * i];
-			}
-			var pC = this.pointsClock.length;
-			var _g = 0;
-			var _g1 = p4;
-			while(_g < _g1) {
-				var i = _g++;
-				this.pointsClock[pC++] = temp[i * 2 + len + 1];
-				this.pointsClock[pC++] = temp[i * 2 + len];
-			}
-		}
-		if(this.count == 0 && (this.endLine == 4 || this.endLine == 5)) {
-			var ax = this.ax;
-			var ay = this.ay;
-			var beta = -this.angle1 - Math.PI / 2;
-			var gamma = -this.angle1 - Math.PI / 2 + Math.PI / 2;
-			var temp = [];
-			this.startShape(ax,ay,width_ / 2,beta,gamma,justGraphix_rose_DifferencePreference.SMALL_OLD,temp,-1,36);
-			var pA = this.pointsAnti.length;
-			var len = temp.length / 2 | 0;
-			var p4 = temp.length / 4 | 0;
-			var _g = 0;
-			var _g1 = p4;
-			while(_g < _g1) {
-				var i = _g++;
-				this.pointsAnti[pA++] = temp[len - 2 * i + 1];
-				this.pointsAnti[pA++] = temp[len - 2 * i];
-			}
-			var pC = this.pointsClock.length;
-			var _g = 0;
-			var _g1 = p4;
-			while(_g < _g1) {
-				var i = _g++;
-				this.pointsClock[pC++] = temp[i * 2 + len + 1];
-				this.pointsClock[pC++] = temp[i * 2 + len];
-			}
-		}
-		if(overlap) {
-			this.pen.triangle2DFill(this.dxPrev,this.dyPrev,this.dx,this.dy,this.ex,this.ey,-1);
-			this.pen.triangle2DFill(this.dxPrev,this.dyPrev,this.dx,this.dy,this.exPrev,this.eyPrev,-1);
-		} else {
-			if(this.count != 0) {
-				this.addQuads(clockWise,width_);
-			}
-			this.quadIndex = this.pen.get_pos();
-			if(this.count == 0) {
-				this.penultimateAX = this.dxPrev;
-				this.penultimateAY = this.dyPrev;
-				this.lastAntiX = this.ex;
-				this.lastAntiY = this.ey;
-				this.penultimateCX = this.dx;
-				this.penultimateCY = this.dy;
-				this.lastClockX = this.exPrev;
-				this.lastClockY = this.eyPrev;
-				this.pen.triangle2DFill(this.dxPrev,this.dyPrev,this.dx,this.dy,this.ex,this.ey,-1);
-				this.pen.triangle2DFill(this.dxPrev,this.dyPrev,this.dx,this.dy,this.exPrev,this.eyPrev,-1);
-			} else {
-				if(clockWise && !this.lastClock) {
-					this.penultimateAX = this.jx;
-					this.penultimateAY = this.jy;
-					this.lastAntiX = this.ex;
-					this.lastAntiY = this.ey;
-					this.penultimateCX = this.dx;
-					this.penultimateCY = this.dy;
-					this.lastClockX = this.exPrev;
-					this.lastClockY = this.eyPrev;
-					this.pen.triangle2DFill(this.jx,this.jy,this.dx,this.dy,this.ex,this.ey,-1);
-					this.pen.triangle2DFill(this.jx,this.jy,this.dx,this.dy,this.exPrev,this.eyPrev,-1);
-				}
-				if(clockWise && this.lastClock) {
-					this.penultimateAX = this.jx;
-					this.penultimateAY = this.jy;
-					this.lastAntiX = this.ex;
-					this.lastAntiY = this.ey;
-					this.penultimateCX = this.dx;
-					this.penultimateCY = this.dy;
-					this.lastClockX = this.exPrev;
-					this.lastClockY = this.eyPrev;
-					this.pen.triangle2DFill(this.jx,this.jy,this.dx,this.dy,this.ex,this.ey,-1);
-					this.pen.triangle2DFill(this.jx,this.jy,this.dx,this.dy,this.exPrev,this.eyPrev,-1);
-				}
-				if(!clockWise && !this.lastClock) {
-					this.penultimateCX = this.dx;
-					this.penultimateCY = this.dy;
-					this.lastClockX = this.jx;
-					this.lastClockY = this.jy;
-					this.penultimateAX = this.dxPrev;
-					this.penultimateAY = this.dyPrev;
-					this.lastAntiX = this.ex;
-					this.lastAntiY = this.ey;
-					this.pen.triangle2DFill(this.dxPrev,this.dyPrev,this.dx,this.dy,this.jx,this.jy,-1);
-					this.pen.triangle2DFill(this.dxPrev,this.dyPrev,this.dx,this.dy,this.ex,this.ey,-1);
-				}
-				if(!clockWise && this.lastClock) {
-					this.penultimateAX = this.dxPrev;
-					this.penultimateAY = this.dyPrev;
-					this.lastAntiX = this.ex;
-					this.lastAntiY = this.ey;
-					this.penultimateCX = this.jx;
-					this.penultimateCY = this.jy;
-					this.lastClockX = this.dx;
-					this.lastClockY = this.dy;
-					this.pen.triangle2DFill(this.jx,this.jy,this.dx,this.dy,this.ex,this.ey,-1);
-					this.pen.triangle2DFill(this.dxPrev,this.dyPrev,this.jx,this.jy,this.ex,this.ey,-1);
-				}
-			}
-		}
-		if(this.useMitre) {
-			if(this.jx != null && this.jy != null) {
-				var deltaX = ax_ - this.jx;
-				var deltaY = ay_ - this.jy;
-				var mitreCornerX = ax_ + deltaX;
-				var mitreCornerY = ay_ + deltaY;
-				var distXY = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-				var mitreVal = this.mitreLimit * width_ / 2;
-				var mitreLimited = distXY > mitreVal;
-				var mitreRatio = mitreVal / distXY;
-				if(clockWise) {
-					if(!mitreLimited) {
-						this.pen.triangle2DFill(this.dxOld,this.dyOld,mitreCornerX,mitreCornerY,this.exPrev,this.eyPrev,-1);
-					} else {
-						var deltaX1 = this.dxOld + mitreRatio * (mitreCornerX - this.dxOld);
-						var deltaY1 = this.dyOld + mitreRatio * (mitreCornerY - this.dyOld);
-						var deltaX2 = this.exPrev + mitreRatio * (mitreCornerX - this.exPrev);
-						var deltaY2 = this.eyPrev + mitreRatio * (mitreCornerY - this.eyPrev);
-						this.pen.triangle2DFill(this.dxOld,this.dyOld,deltaX1,deltaY1,deltaX2,deltaY2,-1);
-						this.pen.triangle2DFill(this.dxOld,this.dyOld,deltaX2,deltaY2,this.exPrev,this.eyPrev,-1);
-					}
-					this.pen.triangle2DFill(this.dxOld,this.dyOld,this.exPrev,this.eyPrev,this.jx,this.jy,-1);
-				} else {
-					if(!mitreLimited) {
-						this.pen.triangle2DFill(this.exOld,this.eyOld,mitreCornerX,mitreCornerY,this.dxPrev,this.dyPrev,-1);
-					} else {
-						var deltaX1 = this.exOld + mitreRatio * (mitreCornerX - this.exOld);
-						var deltaY1 = this.eyOld + mitreRatio * (mitreCornerY - this.eyOld);
-						var deltaX2 = this.dxPrev + mitreRatio * (mitreCornerX - this.dxPrev);
-						var deltaY2 = this.dyPrev + mitreRatio * (mitreCornerY - this.dyPrev);
-						this.pen.triangle2DFill(this.exOld,this.eyOld,deltaX1,deltaY1,deltaX2,deltaY2,-1);
-						this.pen.triangle2DFill(this.exOld,this.eyOld,deltaX2,deltaY2,this.dxPrev,this.dyPrev,-1);
-					}
-					this.pen.triangle2DFill(this.exOld,this.eyOld,this.dxPrev,this.dyPrev,this.jx,this.jy,-1);
-				}
-			}
-		} else if(curveEnds) {
-			if(clockWise) {
-				var radius = width_ / 2;
-				var edgePoly = this.pointsClock;
-				var pi = Math.PI;
-				var step = pi * 2 / 36;
-				var positive = dif >= 0;
-				var totalSteps = Math.ceil(Math.abs(dif) / step);
-				var step = dif / totalSteps;
-				var angle = theta0;
-				var cx = 0.;
-				var cy = 0.;
-				var bx = 0.;
-				var by = 0.;
-				var p2 = edgePoly.length;
-				var _g = 0;
-				var _g1 = totalSteps + 1;
-				while(_g < _g1) {
-					var i = _g++;
-					cx = ax_ + radius * Math.sin(angle);
-					cy = ay_ + radius * Math.cos(angle);
-					edgePoly[p2++] = cx;
-					edgePoly[p2++] = cy;
-					if(i != 0) {
-						var color_ = -1;
-						if(color_ == null) {
-							color_ = -1;
-						}
-						this.pen.triangle2DFill(ax_,ay_,bx,by,cx,cy,color_);
-					}
-					angle += step;
-					bx = cx;
-					by = cy;
-				}
-				this.pen.triangle2DFill(this.dxOld,this.dyOld,this.exPrev,this.eyPrev,this.jx,this.jy,-1);
-			} else {
-				var radius = width_ / 2;
-				var edgePoly = this.pointsAnti;
-				var pi = Math.PI;
-				var step = pi * 2 / 36;
-				var positive = dif >= 0;
-				var totalSteps = Math.ceil(Math.abs(dif) / step);
-				var step = dif / totalSteps;
-				var angle = theta0;
-				var cx = 0.;
-				var cy = 0.;
-				var bx = 0.;
-				var by = 0.;
-				var p2 = edgePoly.length;
-				var _g = 0;
-				var _g1 = totalSteps + 1;
-				while(_g < _g1) {
-					var i = _g++;
-					cx = ax_ + radius * Math.sin(angle);
-					cy = ay_ + radius * Math.cos(angle);
-					edgePoly[p2++] = cx;
-					edgePoly[p2++] = cy;
-					if(i != 0) {
-						var color_ = -1;
-						if(color_ == null) {
-							color_ = -1;
-						}
-						this.pen.triangle2DFill(ax_,ay_,bx,by,cx,cy,color_);
-					}
-					angle += step;
-					bx = cx;
-					by = cy;
-				}
-				this.pen.triangle2DFill(this.exOld,this.eyOld,this.dxPrev,this.dyPrev,this.jx,this.jy,-1);
-			}
-		} else if(this.count != 0) {
-			if(overlap) {
-				if(clockWise) {
-					this.pen.triangle2DFill(this.dxOld,this.dyOld,this.exPrev,this.eyPrev,this.ax,this.ay,-1);
-				} else {
-					this.pen.triangle2DFill(this.exOld,this.eyOld,this.dxPrev,this.dyPrev,this.ax,this.ay,-1);
-				}
-			} else if(clockWise) {
-				this.pen.triangle2DFill(this.dxOld,this.dyOld,this.exPrev,this.eyPrev,this.jx,this.jy,-1);
-			} else {
-				this.pen.triangle2DFill(this.exOld,this.eyOld,this.dxPrev,this.dyPrev,this.jx,this.jy,-1);
-			}
-		}
-		this.kax = this.dxPrev;
-		this.kay = this.dyPrev;
-		this.kbx = this.dx;
-		this.kby = this.dy;
-		this.ncx = this.exPrev;
-		this.ncy = this.eyPrev;
-		this.kcx = this.ex;
-		this.kcy = this.ey;
-		this.jxOld = this.jx;
-		this.jyOld = this.jy;
-		this.lastClock = clockWise;
-		this.count++;
-	}
-	,end: function(width_) {
-		this.endEdges();
-		if(this.count != 0 && (this.endLine == 2 || this.endLine == 3 || this.endLine == 7 || this.endLine == 8 || this.endLine == 11 || this.endLine == 10 || this.endLine == 16 || this.endLine == 17 || this.endLine == 13 || this.endLine == 14 || this.endLine == 19 || this.endLine == 20)) {
-			var ax = this.bx;
-			var ay = this.by;
-			var beta = -this.angle1 - Math.PI / 2;
-			var gamma = -this.angle1 - Math.PI / 2 - Math.PI;
-			var temp = [];
-			var ax1 = ax;
-			var ay1 = ay;
-			var radius = width_ / 2;
-			var color = -1;
-			var sides = 36;
-			if(sides == null) {
-				sides = 36;
-			}
-			if(color == null) {
-				color = -1;
-			}
-			var pi = Math.PI;
-			var step = pi * 2 / sides;
-			var dif;
-			switch(justGraphix_rose_DifferencePreference.SMALL_OLD._hx_index) {
-			case 0:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 > 0 ? dif1 : 2 * Math.PI + dif1;
-				break;
-			case 1:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 < 0 ? dif1 : -2 * Math.PI + dif1;
-				break;
-			case 2:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var smallest = theta <= Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 3:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var largest = theta > Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = largest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 4:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = beta;
-				var fb = gamma;
-				var theta = Math.abs(beta - gamma);
-				var smallest = theta <= Math.PI;
-				var clockwise = beta < gamma;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			}
-			var positive = dif >= 0;
-			var totalSteps = Math.ceil(Math.abs(dif) / step);
-			var step = dif / totalSteps;
-			var angle = beta;
-			var beta2 = 0.;
-			var this1 = this.endLine;
-			if(this1 == 19 || this1 == 20) {
-				angle = Math.PI / 2;
-				beta2 = 2 * Math.PI - beta + Math.PI / 2;
-			}
-			var cx = 0.;
-			var cy = 0.;
-			var bx = 0.;
-			var by = 0.;
-			var p2 = temp.length;
-			var ex = 0.;
-			var ey = 0.;
-			var fx = 0.;
-			var fy = 0.;
-			var gx = 0.;
-			var gy = 0.;
-			var delta = 0.;
-			var this1 = this.endLine;
-			if(this1 == 13 || this1 == 14) {
-				var angle2 = beta - step * totalSteps / 2;
-				fx = ax1 - 0.75 * this.endCapFactor * radius * Math.sin(angle2);
-				fy = ay1 - 0.75 * this.endCapFactor * radius * Math.cos(angle2);
-				radius *= 2;
-				delta = Math.pow(radius / 2,2);
-			}
-			var ddx = ax1 + radius * Math.sin(angle);
-			var ddy = ay1 + radius * Math.cos(angle);
-			var this1 = this.endLine;
-			if(!(this1 == 7 || this1 == 8 || (this1 == 10 || this1 == 11) || (this1 == 16 || this1 == 17))) {
-				if(this.endLine == 5) {
-					var angle2 = beta - 2 * step * totalSteps;
-					ax1 += radius * Math.sin(angle2);
-					ay1 += radius * Math.cos(angle2);
-					radius *= 2;
-				}
-				var _g = 0;
-				var _g1 = totalSteps + 1;
-				while(_g < _g1) {
-					var i = _g++;
-					var this1 = this.endLine;
-					if(this1 == 13 || this1 == 14) {
-						cx = fx + 0.5 * this.endCapFactor * radius * Math.sin(angle);
-						cy = fy + 0.5 * this.endCapFactor * radius * Math.cos(angle);
-						ex = fx - 0.5 * this.endCapFactor * radius * Math.sin(angle);
-						ey = fy - 0.5 * this.endCapFactor * radius * Math.cos(angle);
-					} else {
-						var this2 = this.endLine;
-						if(this2 == 19 || this2 == 20) {
-							var ry = this.endCapFactor * radius;
-							cx = ax1 + radius * Math.sin(angle);
-							cy = ay1 + ry * Math.cos(angle);
-							var cos = Math.cos(beta2);
-							var sin = Math.sin(beta2);
-							cx -= ax1;
-							cy -= ay1;
-							var ccx = cx;
-							var ccy = cy;
-							cx = ccx * cos - ccy * sin;
-							cy = ccx * sin + ccy * cos;
-							cx += ax1;
-							cy += ay1;
-						} else {
-							cx = ax1 + radius * Math.sin(angle);
-							cy = ay1 + radius * Math.cos(angle);
-						}
-					}
-					temp[p2++] = cx;
-					temp[p2++] = cy;
-					if(i != 0) {
-						var color_ = color;
-						if(color_ == null) {
-							color_ = -1;
-						}
-						this.pen.triangle2DFill(ax1,ay1,bx,by,cx,cy,color_);
-						var this3 = this.endLine;
-						if(this3 == 13 || this3 == 14) {
-							var deltaG = Math.pow(ay1 - gy,2) + Math.pow(ax1 - gx,2);
-							var deltaE = Math.pow(ay1 - ey,2) + Math.pow(ax1 - ex,2);
-							if(deltaE > delta || deltaG > delta) {
-								var color_1 = color;
-								if(color_1 == null) {
-									color_1 = -1;
-								}
-								this.pen.triangle2DFill(ax1,ay1,gx,gy,ex,ey,color_1);
-							}
-						}
-					}
-					angle += step;
-					bx = cx;
-					by = cy;
-					var this4 = this.endLine;
-					if(this4 == 13 || this4 == 14) {
-						gx = ex;
-						gy = ey;
-					}
-				}
-				if(this.endLine == 4) {
-					angle = angle + step * totalSteps / 2 - step;
-					cx = ax1 + radius * Math.sin(angle) * Math.sqrt(2);
-					cy = ay1 + radius * Math.cos(angle) * Math.sqrt(2);
-					var color_ = color;
-					if(color_ == null) {
-						color_ = -1;
-					}
-					this.pen.triangle2DFill(ax1,ay1,bx,by,cx,cy,color_);
-					bx = cx;
-					by = cy;
-					angle += step * (totalSteps / 2);
-					cx = ax1 + radius * Math.sin(angle);
-					cy = ay1 + radius * Math.cos(angle);
-					var color_ = color;
-					if(color_ == null) {
-						color_ = -1;
-					}
-					this.pen.triangle2DFill(ax1,ay1,bx,by,cx,cy,color_);
-					totalSteps += 2;
-				}
-			} else {
-				if(this.endLine == 11 || this.endLine == 10) {
-					angle = beta;
-					var dx = ax1 - radius * this.endCapFactor * Math.sin(angle);
-					var dy = ay1 - radius * this.endCapFactor * Math.cos(angle);
-					angle = beta - step * totalSteps / 2;
-					cx = ax1 - radius * this.endCapFactor * Math.sin(angle);
-					cy = ay1 - radius * this.endCapFactor * Math.cos(angle);
-					var color_ = color;
-					if(color_ == null) {
-						color_ = -1;
-					}
-					this.pen.triangle2DFill(ddx,ddy,cx,cy,ax1,ay1,color_);
-					bx = cx;
-					by = cy;
-					angle += step * totalSteps / 2;
-					cx = ax1 + radius * this.endCapFactor * Math.sin(angle);
-					cy = ay1 + radius * this.endCapFactor * Math.cos(angle);
-					var color_ = color;
-					if(color_ == null) {
-						color_ = -1;
-					}
-					this.pen.triangle2DFill(ax1,ay1,bx,by,cx,cy,color_);
-				} else {
-					var this1 = this.endLine;
-					if(this1 == 7 || this1 == 8) {
-						angle = beta;
-						var dx = ax1 - radius * Math.sin(angle);
-						var dy = ay1 - radius * Math.cos(angle);
-						angle = beta - step * totalSteps / 2;
-						cx = ax1 - radius * Math.sin(angle);
-						cy = ay1 - radius * Math.cos(angle);
-						var color_ = color;
-						if(color_ == null) {
-							color_ = -1;
-						}
-						this.pen.triangle2DFill(ddx,ddy,cx,cy,ax1,ay1,color_);
-						bx = cx;
-						by = cy;
-						angle += step * totalSteps / 2;
-						cx = ax1 + radius * Math.sin(angle);
-						cy = ay1 + radius * Math.cos(angle);
-						var color_ = color;
-						if(color_ == null) {
-							color_ = -1;
-						}
-						this.pen.triangle2DFill(ax1,ay1,bx,by,cx,cy,color_);
-					} else {
-						var this1 = this.endLine;
-						if(this1 == 16 || this1 == 17) {
-							angle = beta;
-							var dx = ax1 - radius * this.endCapFactor * Math.sin(angle);
-							var dy = ay1 - radius * this.endCapFactor * Math.cos(angle);
-							angle = beta - step * totalSteps / 2;
-							cx = dx - 2 * radius * this.endCapFactor * Math.sin(angle);
-							cy = dy - 2 * radius * this.endCapFactor * Math.cos(angle);
-							var lastAngle = angle;
-							angle += step * totalSteps / 2;
-							ex = ax1 + radius * this.endCapFactor * Math.sin(angle);
-							ey = ay1 + radius * this.endCapFactor * Math.cos(angle);
-							fx = ex - 2 * radius * this.endCapFactor * Math.sin(lastAngle);
-							fy = ey - 2 * radius * this.endCapFactor * Math.cos(lastAngle);
-							var color_ = color;
-							if(color_ == null) {
-								color_ = -1;
-							}
-							this.pen.triangle2DFill(fx,fy,cx,cy,ddx,ddy,color_);
-							var color_ = color;
-							if(color_ == null) {
-								color_ = -1;
-							}
-							this.pen.triangle2DFill(fx,fy,ddx,ddy,ex,ey,color_);
-						}
-					}
-				}
-				totalSteps += 2;
-			}
-			var pA = this.pointsAnti.length;
-			var len = temp.length / 2 | 0;
-			var _g = 0;
-			var _g1 = len + 2;
-			while(_g < _g1) {
-				var i = _g++;
-				this.pointsAnti[pA++] = temp[i];
-			}
-			var pC = this.pointsClock.length;
-			var _g = 1;
-			var _g1 = len / 2 + 1 | 0;
-			while(_g < _g1) {
-				var i = _g++;
-				this.pointsClock[pC++] = temp[temp.length - 2 * i];
-				this.pointsClock[pC++] = temp[temp.length - 2 * i - 1];
-			}
-		}
-		if(this.count != 0 && (this.endLine == 4 || this.endLine == 5)) {
-			var ax = this.bx;
-			var ay = this.by;
-			var beta = -this.angle1 - Math.PI / 2;
-			var gamma = -this.angle1 - Math.PI / 2 - Math.PI / 2;
-			var temp = [];
-			var ax1 = ax;
-			var ay1 = ay;
-			var radius = width_ / 2;
-			var color = -1;
-			var sides = 36;
-			if(sides == null) {
-				sides = 36;
-			}
-			if(color == null) {
-				color = -1;
-			}
-			var pi = Math.PI;
-			var step = pi * 2 / sides;
-			var dif;
-			switch(justGraphix_rose_DifferencePreference.SMALL_OLD._hx_index) {
-			case 0:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 > 0 ? dif1 : 2 * Math.PI + dif1;
-				break;
-			case 1:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 < 0 ? dif1 : -2 * Math.PI + dif1;
-				break;
-			case 2:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var smallest = theta <= Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 3:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var largest = theta > Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = largest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 4:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = beta;
-				var fb = gamma;
-				var theta = Math.abs(beta - gamma);
-				var smallest = theta <= Math.PI;
-				var clockwise = beta < gamma;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			}
-			var positive = dif >= 0;
-			var totalSteps = Math.ceil(Math.abs(dif) / step);
-			var step = dif / totalSteps;
-			var angle = beta;
-			var beta2 = 0.;
-			var this1 = this.endLine;
-			if(this1 == 19 || this1 == 20) {
-				angle = Math.PI / 2;
-				beta2 = 2 * Math.PI - beta + Math.PI / 2;
-			}
-			var cx = 0.;
-			var cy = 0.;
-			var bx = 0.;
-			var by = 0.;
-			var p2 = temp.length;
-			var ex = 0.;
-			var ey = 0.;
-			var fx = 0.;
-			var fy = 0.;
-			var gx = 0.;
-			var gy = 0.;
-			var delta = 0.;
-			var this1 = this.endLine;
-			if(this1 == 13 || this1 == 14) {
-				var angle2 = beta - step * totalSteps / 2;
-				fx = ax1 - 0.75 * this.endCapFactor * radius * Math.sin(angle2);
-				fy = ay1 - 0.75 * this.endCapFactor * radius * Math.cos(angle2);
-				radius *= 2;
-				delta = Math.pow(radius / 2,2);
-			}
-			var ddx = ax1 + radius * Math.sin(angle);
-			var ddy = ay1 + radius * Math.cos(angle);
-			var this1 = this.endLine;
-			if(!(this1 == 7 || this1 == 8 || (this1 == 10 || this1 == 11) || (this1 == 16 || this1 == 17))) {
-				if(this.endLine == 5) {
-					var angle2 = beta - 2 * step * totalSteps;
-					ax1 += radius * Math.sin(angle2);
-					ay1 += radius * Math.cos(angle2);
-					radius *= 2;
-				}
-				var _g = 0;
-				var _g1 = totalSteps + 1;
-				while(_g < _g1) {
-					var i = _g++;
-					var this1 = this.endLine;
-					if(this1 == 13 || this1 == 14) {
-						cx = fx + 0.5 * this.endCapFactor * radius * Math.sin(angle);
-						cy = fy + 0.5 * this.endCapFactor * radius * Math.cos(angle);
-						ex = fx - 0.5 * this.endCapFactor * radius * Math.sin(angle);
-						ey = fy - 0.5 * this.endCapFactor * radius * Math.cos(angle);
-					} else {
-						var this2 = this.endLine;
-						if(this2 == 19 || this2 == 20) {
-							var ry = this.endCapFactor * radius;
-							cx = ax1 + radius * Math.sin(angle);
-							cy = ay1 + ry * Math.cos(angle);
-							var cos = Math.cos(beta2);
-							var sin = Math.sin(beta2);
-							cx -= ax1;
-							cy -= ay1;
-							var ccx = cx;
-							var ccy = cy;
-							cx = ccx * cos - ccy * sin;
-							cy = ccx * sin + ccy * cos;
-							cx += ax1;
-							cy += ay1;
-						} else {
-							cx = ax1 + radius * Math.sin(angle);
-							cy = ay1 + radius * Math.cos(angle);
-						}
-					}
-					temp[p2++] = cx;
-					temp[p2++] = cy;
-					if(i != 0) {
-						var color_ = color;
-						if(color_ == null) {
-							color_ = -1;
-						}
-						this.pen.triangle2DFill(ax1,ay1,bx,by,cx,cy,color_);
-						var this3 = this.endLine;
-						if(this3 == 13 || this3 == 14) {
-							var deltaG = Math.pow(ay1 - gy,2) + Math.pow(ax1 - gx,2);
-							var deltaE = Math.pow(ay1 - ey,2) + Math.pow(ax1 - ex,2);
-							if(deltaE > delta || deltaG > delta) {
-								var color_1 = color;
-								if(color_1 == null) {
-									color_1 = -1;
-								}
-								this.pen.triangle2DFill(ax1,ay1,gx,gy,ex,ey,color_1);
-							}
-						}
-					}
-					angle += step;
-					bx = cx;
-					by = cy;
-					var this4 = this.endLine;
-					if(this4 == 13 || this4 == 14) {
-						gx = ex;
-						gy = ey;
-					}
-				}
-				if(this.endLine == 4) {
-					angle = angle + step * totalSteps / 2 - step;
-					cx = ax1 + radius * Math.sin(angle) * Math.sqrt(2);
-					cy = ay1 + radius * Math.cos(angle) * Math.sqrt(2);
-					var color_ = color;
-					if(color_ == null) {
-						color_ = -1;
-					}
-					this.pen.triangle2DFill(ax1,ay1,bx,by,cx,cy,color_);
-					bx = cx;
-					by = cy;
-					angle += step * (totalSteps / 2);
-					cx = ax1 + radius * Math.sin(angle);
-					cy = ay1 + radius * Math.cos(angle);
-					var color_ = color;
-					if(color_ == null) {
-						color_ = -1;
-					}
-					this.pen.triangle2DFill(ax1,ay1,bx,by,cx,cy,color_);
-					totalSteps += 2;
-				}
-			} else {
-				if(this.endLine == 11 || this.endLine == 10) {
-					angle = beta;
-					var dx = ax1 - radius * this.endCapFactor * Math.sin(angle);
-					var dy = ay1 - radius * this.endCapFactor * Math.cos(angle);
-					angle = beta - step * totalSteps / 2;
-					cx = ax1 - radius * this.endCapFactor * Math.sin(angle);
-					cy = ay1 - radius * this.endCapFactor * Math.cos(angle);
-					var color_ = color;
-					if(color_ == null) {
-						color_ = -1;
-					}
-					this.pen.triangle2DFill(ddx,ddy,cx,cy,ax1,ay1,color_);
-					bx = cx;
-					by = cy;
-					angle += step * totalSteps / 2;
-					cx = ax1 + radius * this.endCapFactor * Math.sin(angle);
-					cy = ay1 + radius * this.endCapFactor * Math.cos(angle);
-					var color_ = color;
-					if(color_ == null) {
-						color_ = -1;
-					}
-					this.pen.triangle2DFill(ax1,ay1,bx,by,cx,cy,color_);
-				} else {
-					var this1 = this.endLine;
-					if(this1 == 7 || this1 == 8) {
-						angle = beta;
-						var dx = ax1 - radius * Math.sin(angle);
-						var dy = ay1 - radius * Math.cos(angle);
-						angle = beta - step * totalSteps / 2;
-						cx = ax1 - radius * Math.sin(angle);
-						cy = ay1 - radius * Math.cos(angle);
-						var color_ = color;
-						if(color_ == null) {
-							color_ = -1;
-						}
-						this.pen.triangle2DFill(ddx,ddy,cx,cy,ax1,ay1,color_);
-						bx = cx;
-						by = cy;
-						angle += step * totalSteps / 2;
-						cx = ax1 + radius * Math.sin(angle);
-						cy = ay1 + radius * Math.cos(angle);
-						var color_ = color;
-						if(color_ == null) {
-							color_ = -1;
-						}
-						this.pen.triangle2DFill(ax1,ay1,bx,by,cx,cy,color_);
-					} else {
-						var this1 = this.endLine;
-						if(this1 == 16 || this1 == 17) {
-							angle = beta;
-							var dx = ax1 - radius * this.endCapFactor * Math.sin(angle);
-							var dy = ay1 - radius * this.endCapFactor * Math.cos(angle);
-							angle = beta - step * totalSteps / 2;
-							cx = dx - 2 * radius * this.endCapFactor * Math.sin(angle);
-							cy = dy - 2 * radius * this.endCapFactor * Math.cos(angle);
-							var lastAngle = angle;
-							angle += step * totalSteps / 2;
-							ex = ax1 + radius * this.endCapFactor * Math.sin(angle);
-							ey = ay1 + radius * this.endCapFactor * Math.cos(angle);
-							fx = ex - 2 * radius * this.endCapFactor * Math.sin(lastAngle);
-							fy = ey - 2 * radius * this.endCapFactor * Math.cos(lastAngle);
-							var color_ = color;
-							if(color_ == null) {
-								color_ = -1;
-							}
-							this.pen.triangle2DFill(fx,fy,cx,cy,ddx,ddy,color_);
-							var color_ = color;
-							if(color_ == null) {
-								color_ = -1;
-							}
-							this.pen.triangle2DFill(fx,fy,ddx,ddy,ex,ey,color_);
-						}
-					}
-				}
-				totalSteps += 2;
-			}
-			var pA = this.pointsAnti.length;
-			var len = temp.length / 2 | 0;
-			var _g = 0;
-			var _g1 = len + 2;
-			while(_g < _g1) {
-				var i = _g++;
-				this.pointsAnti[pA++] = temp[i];
-			}
-			var pC = this.pointsClock.length;
-			var _g = 1;
-			var _g1 = len / 2 + 1 | 0;
-			while(_g < _g1) {
-				var i = _g++;
-				this.pointsClock[pC++] = temp[temp.length - 2 * i];
-				this.pointsClock[pC++] = temp[temp.length - 2 * i - 1];
-			}
-		}
-	}
-	,endEdges: function() {
-		var pC = this.pointsClock.length;
-		var pA = this.pointsAnti.length;
-		this.pointsClock[pC++] = this.penultimateCX;
-		this.pointsClock[pC++] = this.penultimateCY;
-		this.pointsClock[pC++] = this.lastClockX;
-		this.pointsClock[pC++] = this.lastClockY;
-		this.pointsAnti[pA++] = this.penultimateAX;
-		this.pointsAnti[pA++] = this.penultimateAY;
-		this.pointsAnti[pA++] = this.lastAntiX;
-		this.pointsAnti[pA++] = this.lastAntiY;
-	}
-	,addQuads: function(clockWise,width_) {
-		var currQuadIndex = this.pen.get_pos();
-		var pC = 0;
-		var pA = 0;
-		if(clockWise && !this.lastClock) {
-			if(this.count == 1) {
-				pA = this.pointsAnti.length;
-				this.pointsAnti[pA++] = this.kax;
-				this.pointsAnti[pA++] = this.kay;
-				this.pointsAnti[pA++] = this.jx;
-				this.pointsAnti[pA++] = this.jy;
-				pC = this.pointsClock.length;
-				this.pointsClock[pC++] = this.kbx;
-				this.pointsClock[pC++] = this.kby;
-				this.pointsClock[pC++] = this.ncx;
-				this.pointsClock[pC++] = this.ncy;
-				this.pen.set_pos(this.quadIndex + 1);
-				this.pen.triangle2DFill(this.kax,this.kay,this.kbx,this.kby,this.ncx,this.ncy,-1);
-			} else {
-				pA = this.pointsAnti.length;
-				this.pointsAnti[pA++] = this.kax;
-				this.pointsAnti[pA++] = this.kay;
-				this.pointsAnti[pA++] = this.jx;
-				this.pointsAnti[pA++] = this.jy;
-				pC = this.pointsClock.length;
-				this.pointsClock[pC++] = this.jxOld;
-				this.pointsClock[pC++] = this.jyOld;
-				this.pointsClock[pC++] = this.kbx;
-				this.pointsClock[pC++] = this.kby;
-				this.pen.set_pos(this.quadIndex + 1);
-				this.pen.triangle2DFill(this.kax,this.kay,this.kbx,this.kby,this.jxOld,this.jyOld,-1);
-			}
-			this.pen.set_pos(this.quadIndex);
-			this.pen.triangle2DFill(this.kax,this.kay,this.kbx,this.kby,this.jx,this.jy,-1);
-		}
-		if(clockWise && this.lastClock) {
-			if(this.count == 1) {
-				pA = this.pointsAnti.length;
-				this.pointsAnti[pA++] = this.jx;
-				this.pointsAnti[pA++] = this.jy;
-				this.pointsAnti[pA++] = this.kbx;
-				this.pointsAnti[pA++] = this.kby;
-				pC = this.pointsClock.length;
-				this.pointsClock[pC++] = this.kax;
-				this.pointsClock[pC++] = this.kay;
-				this.pointsClock[pC++] = this.kbx;
-				this.pointsClock[pC++] = this.kby;
-				this.pen.set_pos(this.quadIndex);
-				this.pen.triangle2DFill(this.kax,this.kay,this.kbx,this.kby,this.jx,this.jy,-1);
-				this.pen.set_pos(this.quadIndex + 1);
-				this.pen.triangle2DFill(this.kax,this.kay,this.kbx,this.kby,this.ncx,this.ncy,-1);
-			} else {
-				pA = this.pointsAnti.length;
-				this.pointsAnti[pA++] = this.jxOld;
-				this.pointsAnti[pA++] = this.jyOld;
-				this.pointsAnti[pA++] = this.jx;
-				this.pointsAnti[pA++] = this.jy;
-				pC = this.pointsClock.length;
-				this.pointsClock[pC++] = this.ncx;
-				this.pointsClock[pC++] = this.ncy;
-				this.pointsClock[pC++] = this.kbx;
-				this.pointsClock[pC++] = this.kby;
-				this.pen.set_pos(this.quadIndex);
-				this.pen.triangle2DFill(this.jxOld,this.jyOld,this.kbx,this.kby,this.jx,this.jy,-1);
-				this.pen.set_pos(this.quadIndex + 1);
-				this.pen.triangle2DFill(this.jxOld,this.jyOld,this.kbx,this.kby,this.ncx,this.ncy,-1);
-			}
-		}
-		if(!clockWise && !this.lastClock) {
-			this.pen.set_pos(this.quadIndex);
-			this.pen.triangle2DFill(this.kax,this.kay,this.jx,this.jy,this.kcx,this.kcy,-1);
-			if(this.count == 1) {
-				pA = this.pointsAnti.length;
-				this.pointsAnti[pA++] = this.kax;
-				this.pointsAnti[pA++] = this.kay;
-				this.pointsAnti[pA++] = this.kcx;
-				this.pointsAnti[pA++] = this.kcy;
-				pC = this.pointsClock.length;
-				this.pointsClock[pC++] = this.ncx;
-				this.pointsClock[pC++] = this.ncy;
-				this.pointsClock[pC++] = this.jx;
-				this.pointsClock[pC++] = this.jy;
-				this.pen.set_pos(this.quadIndex + 1);
-				this.pen.triangle2DFill(this.kax,this.kay,this.jx,this.jy,this.ncx,this.ncy,-1);
-			} else {
-				pA = this.pointsAnti.length;
-				this.pointsAnti[pA++] = this.kax;
-				this.pointsAnti[pA++] = this.kay;
-				this.pointsAnti[pA++] = this.kcx;
-				this.pointsAnti[pA++] = this.kcy;
-				pC = this.pointsClock.length;
-				this.pointsClock[pC++] = this.jxOld;
-				this.pointsClock[pC++] = this.jyOld;
-				this.pointsClock[pC++] = this.jx;
-				this.pointsClock[pC++] = this.jy;
-				this.pen.set_pos(this.quadIndex + 1);
-				this.pen.triangle2DFill(this.kax,this.kay,this.jx,this.jy,this.jxOld,this.jyOld,-1);
-			}
-		}
-		if(!clockWise && this.lastClock) {
-			if(this.count == 1) {
-				pA = this.pointsAnti.length;
-				this.pointsAnti[pA++] = this.kay;
-				this.pointsAnti[pA++] = this.kax;
-				this.pointsAnti[pA++] = this.kcx;
-				this.pointsAnti[pA++] = this.kcy;
-				pC = this.pointsClock.length;
-				this.pointsClock[pC++] = this.jx;
-				this.pointsClock[pC++] = this.jy;
-				this.pointsClock[pC++] = this.ncx;
-				this.pointsClock[pC++] = this.ncy;
-				this.pen.set_pos(this.quadIndex);
-				this.pen.triangle2DFill(this.kax,this.kay,this.jx,this.jy,this.kcx,this.kcy,-1);
-				this.pen.set_pos(this.quadIndex + 1);
-				this.pen.triangle2DFill(this.kax,this.kay,this.jx,this.jy,this.ncx,this.ncy,-1);
-			} else {
-				pA = this.pointsAnti.length;
-				this.pointsAnti[pA++] = this.jxOld;
-				this.pointsAnti[pA++] = this.jyOld;
-				this.pointsAnti[pA++] = this.kcx;
-				this.pointsAnti[pA++] = this.kcy;
-				pC = this.pointsClock.length;
-				this.pointsClock[pC++] = this.jx;
-				this.pointsClock[pC++] = this.jy;
-				this.pointsClock[pC++] = this.ncx;
-				this.pointsClock[pC++] = this.ncy;
-				this.pen.set_pos(this.quadIndex);
-				this.pen.triangle2DFill(this.jxOld,this.jyOld,this.jx,this.jy,this.kcx,this.kcy,-1);
-				this.pen.set_pos(this.quadIndex + 1);
-				this.pen.triangle2DFill(this.jxOld,this.jyOld,this.jx,this.jy,this.ncx,this.ncy,-1);
-			}
-		}
-		this.pen.set_pos(currQuadIndex);
-	}
-	,line: function(ax_,ay_,bx_,by_,width_,endLineCurve) {
-		if(endLineCurve == null) {
-			endLineCurve = 0;
-		}
-		this.ax = bx_;
-		this.ay = by_;
-		this.bx = ax_;
-		this.by = ay_;
-		this.halfA = Math.PI / 2;
-		this.beta = Math.PI / 2 - this.halfA;
-		this.r = width_ / 2 * Math.cos(this.beta);
-		this.theta = Math.atan2(this.ay - this.by,this.ax - this.bx);
-		if(this.theta > 0) {
-			if(this.halfA < 0) {
-				this.angle2 = this.theta + this.halfA + Math.PI / 2;
-				this.angle1 = this.theta - this.halfA;
-			} else {
-				this.angle1 = this.theta + this.halfA - Math.PI;
-				this.angle2 = this.theta + this.halfA;
-			}
-		} else if(this.halfA > 0) {
-			this.angle1 = this.theta + this.halfA - Math.PI;
-			this.angle2 = this.theta + this.halfA;
-		} else {
-			this.angle2 = this.theta + this.halfA + Math.PI / 2;
-			this.angle1 = this.theta - this.halfA;
-		}
-		if(this.dxPrev != null) {
-			this.dxOld = this.dxPrev;
-		}
-		if(this.dyPrev != null) {
-			this.dyOld = this.dyPrev;
-		}
-		if(this.exPrev != null) {
-			this.exOld = this.exPrev;
-		}
-		if(this.eyPrev != null) {
-			this.eyOld = this.eyPrev;
-		}
-		if(this.dx != null) {
-			this.dxPrev = this.dx;
-		}
-		if(this.dy != null) {
-			this.dyPrev = this.dy;
-		}
-		if(this.ex != null) {
-			this.exPrev = this.ex;
-		}
-		if(this.ey != null) {
-			this.eyPrev = this.ey;
-		}
-		this.dx = this.bx + this.r * Math.cos(this.angle1);
-		this.dy = this.by + this.r * Math.sin(this.angle1);
-		this.ex = this.bx + this.r * Math.cos(this.angle2);
-		this.ey = this.by + this.r * Math.sin(this.angle2);
-		var dxPrev_ = this.dx;
-		var dyPrev_ = this.dy;
-		var exPrev_ = this.ex;
-		var eyPrev_ = this.ey;
-		this.ax = ax_;
-		this.ay = ay_;
-		this.bx = bx_;
-		this.by = by_;
-		this.theta = Math.atan2(this.ay - this.by,this.ax - this.bx);
-		if(this.theta > 0) {
-			if(this.halfA < 0) {
-				this.angle2 = this.theta + this.halfA + Math.PI / 2;
-				this.angle1 = this.theta - this.halfA;
-			} else {
-				this.angle1 = this.theta + this.halfA - Math.PI;
-				this.angle2 = this.theta + this.halfA;
-			}
-		} else if(this.halfA > 0) {
-			this.angle1 = this.theta + this.halfA - Math.PI;
-			this.angle2 = this.theta + this.halfA;
-		} else {
-			this.angle2 = this.theta + this.halfA + Math.PI / 2;
-			this.angle1 = this.theta - this.halfA;
-		}
-		if(this.dxPrev != null) {
-			this.dxOld = this.dxPrev;
-		}
-		if(this.dyPrev != null) {
-			this.dyOld = this.dyPrev;
-		}
-		if(this.exPrev != null) {
-			this.exOld = this.exPrev;
-		}
-		if(this.eyPrev != null) {
-			this.eyOld = this.eyPrev;
-		}
-		if(this.dx != null) {
-			this.dxPrev = this.dx;
-		}
-		if(this.dy != null) {
-			this.dyPrev = this.dy;
-		}
-		if(this.ex != null) {
-			this.exPrev = this.ex;
-		}
-		if(this.ey != null) {
-			this.eyPrev = this.ey;
-		}
-		this.dx = this.bx + this.r * Math.cos(this.angle1);
-		this.dy = this.by + this.r * Math.sin(this.angle1);
-		this.ex = this.bx + this.r * Math.cos(this.angle2);
-		this.ey = this.by + this.r * Math.sin(this.angle2);
-		switch(endLineCurve) {
-		case 0:
-			break;
-		case 1:
-			var radius = width_ / 2;
-			var beta = -this.angle1 - Math.PI / 2;
-			var gamma = -this.angle1 - Math.PI / 2 + Math.PI;
-			var color = -1;
-			var sides = 36;
-			if(sides == null) {
-				sides = 36;
-			}
-			if(color == null) {
-				color = -1;
-			}
-			var pi = Math.PI;
-			var step = pi * 2 / sides;
-			var dif;
-			switch(justGraphix_rose_DifferencePreference.SMALL._hx_index) {
-			case 0:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 > 0 ? dif1 : 2 * Math.PI + dif1;
-				break;
-			case 1:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 < 0 ? dif1 : -2 * Math.PI + dif1;
-				break;
-			case 2:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var smallest = theta <= Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 3:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var largest = theta > Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = largest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 4:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = beta;
-				var fb = gamma;
-				var theta = Math.abs(beta - gamma);
-				var smallest = theta <= Math.PI;
-				var clockwise = beta < gamma;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			}
-			var positive = dif >= 0;
-			var totalSteps = Math.ceil(Math.abs(dif) / step);
-			var step = dif / totalSteps;
-			var angle = beta;
-			var cx = 0.;
-			var cy = 0.;
-			var bx = 0.;
-			var by = 0.;
-			var dx = ax_ + radius * Math.sin(angle);
-			var dy = ay_ + radius * Math.cos(angle);
-			var _g = 0;
-			var _g1 = totalSteps + 1;
-			while(_g < _g1) {
-				var i = _g++;
-				cx = ax_ + radius * Math.sin(angle);
-				cy = ay_ + radius * Math.cos(angle);
-				if(i != 0) {
-					var color_ = color;
-					if(color_ == null) {
-						color_ = -1;
-					}
-					this.pen.triangle2DFill(ax_,ay_,bx,by,cx,cy,color_);
-				}
-				angle += step;
-				bx = cx;
-				by = cy;
-			}
-			break;
-		case 2:
-			var radius = width_ / 2;
-			var beta = -this.angle1 - Math.PI / 2;
-			var gamma = -this.angle1 - Math.PI / 2 - Math.PI;
-			var color = -1;
-			var sides = 36;
-			if(sides == null) {
-				sides = 36;
-			}
-			if(color == null) {
-				color = -1;
-			}
-			var pi = Math.PI;
-			var step = pi * 2 / sides;
-			var dif;
-			switch(justGraphix_rose_DifferencePreference.SMALL._hx_index) {
-			case 0:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 > 0 ? dif1 : 2 * Math.PI + dif1;
-				break;
-			case 1:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 < 0 ? dif1 : -2 * Math.PI + dif1;
-				break;
-			case 2:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var smallest = theta <= Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 3:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var largest = theta > Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = largest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 4:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = beta;
-				var fb = gamma;
-				var theta = Math.abs(beta - gamma);
-				var smallest = theta <= Math.PI;
-				var clockwise = beta < gamma;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			}
-			var positive = dif >= 0;
-			var totalSteps = Math.ceil(Math.abs(dif) / step);
-			var step = dif / totalSteps;
-			var angle = beta;
-			var cx = 0.;
-			var cy = 0.;
-			var bx = 0.;
-			var by = 0.;
-			var dx = bx_ + radius * Math.sin(angle);
-			var dy = by_ + radius * Math.cos(angle);
-			var _g = 0;
-			var _g1 = totalSteps + 1;
-			while(_g < _g1) {
-				var i = _g++;
-				cx = bx_ + radius * Math.sin(angle);
-				cy = by_ + radius * Math.cos(angle);
-				if(i != 0) {
-					var color_ = color;
-					if(color_ == null) {
-						color_ = -1;
-					}
-					this.pen.triangle2DFill(bx_,by_,bx,by,cx,cy,color_);
-				}
-				angle += step;
-				bx = cx;
-				by = cy;
-			}
-			break;
-		case 3:
-			var radius = width_ / 2;
-			var beta = -this.angle1 - Math.PI / 2;
-			var gamma = -this.angle1 - Math.PI / 2 + Math.PI;
-			var color = -1;
-			var sides = 36;
-			if(sides == null) {
-				sides = 36;
-			}
-			if(color == null) {
-				color = -1;
-			}
-			var pi = Math.PI;
-			var step = pi * 2 / sides;
-			var dif;
-			switch(justGraphix_rose_DifferencePreference.SMALL._hx_index) {
-			case 0:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 > 0 ? dif1 : 2 * Math.PI + dif1;
-				break;
-			case 1:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 < 0 ? dif1 : -2 * Math.PI + dif1;
-				break;
-			case 2:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var smallest = theta <= Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 3:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var largest = theta > Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = largest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 4:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = beta;
-				var fb = gamma;
-				var theta = Math.abs(beta - gamma);
-				var smallest = theta <= Math.PI;
-				var clockwise = beta < gamma;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			}
-			var positive = dif >= 0;
-			var totalSteps = Math.ceil(Math.abs(dif) / step);
-			var step = dif / totalSteps;
-			var angle = beta;
-			var cx = 0.;
-			var cy = 0.;
-			var bx = 0.;
-			var by = 0.;
-			var dx = ax_ + radius * Math.sin(angle);
-			var dy = ay_ + radius * Math.cos(angle);
-			var _g = 0;
-			var _g1 = totalSteps + 1;
-			while(_g < _g1) {
-				var i = _g++;
-				cx = ax_ + radius * Math.sin(angle);
-				cy = ay_ + radius * Math.cos(angle);
-				if(i != 0) {
-					var color_ = color;
-					if(color_ == null) {
-						color_ = -1;
-					}
-					this.pen.triangle2DFill(ax_,ay_,bx,by,cx,cy,color_);
-				}
-				angle += step;
-				bx = cx;
-				by = cy;
-			}
-			var radius = width_ / 2;
-			var beta = -this.angle1 - Math.PI / 2;
-			var gamma = -this.angle1 - Math.PI / 2 - Math.PI;
-			var color = -1;
-			var sides = 36;
-			if(sides == null) {
-				sides = 36;
-			}
-			if(color == null) {
-				color = -1;
-			}
-			var pi = Math.PI;
-			var step = pi * 2 / sides;
-			var dif;
-			switch(justGraphix_rose_DifferencePreference.SMALL._hx_index) {
-			case 0:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 > 0 ? dif1 : 2 * Math.PI + dif1;
-				break;
-			case 1:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 < 0 ? dif1 : -2 * Math.PI + dif1;
-				break;
-			case 2:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var smallest = theta <= Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 3:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var largest = theta > Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = largest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 4:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = beta;
-				var fb = gamma;
-				var theta = Math.abs(beta - gamma);
-				var smallest = theta <= Math.PI;
-				var clockwise = beta < gamma;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			}
-			var positive = dif >= 0;
-			var totalSteps = Math.ceil(Math.abs(dif) / step);
-			var step = dif / totalSteps;
-			var angle = beta;
-			var cx = 0.;
-			var cy = 0.;
-			var bx = 0.;
-			var by = 0.;
-			var dx = bx_ + radius * Math.sin(angle);
-			var dy = by_ + radius * Math.cos(angle);
-			var _g = 0;
-			var _g1 = totalSteps + 1;
-			while(_g < _g1) {
-				var i = _g++;
-				cx = bx_ + radius * Math.sin(angle);
-				cy = by_ + radius * Math.cos(angle);
-				if(i != 0) {
-					var color_ = color;
-					if(color_ == null) {
-						color_ = -1;
-					}
-					this.pen.triangle2DFill(bx_,by_,bx,by,cx,cy,color_);
-				}
-				angle += step;
-				bx = cx;
-				by = cy;
-			}
-			break;
-		case 4:
-			var radius = width_ / 2;
-			var beta = -this.angle1 - Math.PI / 2;
-			var gamma = -this.angle1 - Math.PI / 2 + Math.PI / 2;
-			var color = -1;
-			var sides = 36;
-			if(sides == null) {
-				sides = 36;
-			}
-			if(color == null) {
-				color = -1;
-			}
-			var pi = Math.PI;
-			var step = pi * 2 / sides;
-			var dif;
-			switch(justGraphix_rose_DifferencePreference.SMALL._hx_index) {
-			case 0:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 > 0 ? dif1 : 2 * Math.PI + dif1;
-				break;
-			case 1:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 < 0 ? dif1 : -2 * Math.PI + dif1;
-				break;
-			case 2:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var smallest = theta <= Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 3:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var largest = theta > Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = largest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 4:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = beta;
-				var fb = gamma;
-				var theta = Math.abs(beta - gamma);
-				var smallest = theta <= Math.PI;
-				var clockwise = beta < gamma;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			}
-			var positive = dif >= 0;
-			var totalSteps = Math.ceil(Math.abs(dif) / step);
-			var step = dif / totalSteps;
-			var angle = beta;
-			var cx = 0.;
-			var cy = 0.;
-			var bx = 0.;
-			var by = 0.;
-			var dx = ax_ + radius * Math.sin(angle);
-			var dy = ay_ + radius * Math.cos(angle);
-			var _g = 0;
-			var _g1 = totalSteps + 1;
-			while(_g < _g1) {
-				var i = _g++;
-				cx = ax_ + radius * Math.sin(angle);
-				cy = ay_ + radius * Math.cos(angle);
-				if(i != 0) {
-					var color_ = color;
-					if(color_ == null) {
-						color_ = -1;
-					}
-					this.pen.triangle2DFill(ax_,ay_,bx,by,cx,cy,color_);
-				}
-				angle += step;
-				bx = cx;
-				by = cy;
-			}
-			var radius = width_ / 2;
-			var beta = -this.angle1 - Math.PI / 2;
-			var gamma = -this.angle1 - Math.PI / 2 - Math.PI / 2;
-			var color = -1;
-			var sides = 36;
-			if(sides == null) {
-				sides = 36;
-			}
-			if(color == null) {
-				color = -1;
-			}
-			var pi = Math.PI;
-			var step = pi * 2 / sides;
-			var dif;
-			switch(justGraphix_rose_DifferencePreference.SMALL._hx_index) {
-			case 0:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 > 0 ? dif1 : 2 * Math.PI + dif1;
-				break;
-			case 1:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 < 0 ? dif1 : -2 * Math.PI + dif1;
-				break;
-			case 2:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var smallest = theta <= Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 3:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var largest = theta > Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = largest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 4:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = beta;
-				var fb = gamma;
-				var theta = Math.abs(beta - gamma);
-				var smallest = theta <= Math.PI;
-				var clockwise = beta < gamma;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			}
-			var positive = dif >= 0;
-			var totalSteps = Math.ceil(Math.abs(dif) / step);
-			var step = dif / totalSteps;
-			var angle = beta;
-			var cx = 0.;
-			var cy = 0.;
-			var bx = 0.;
-			var by = 0.;
-			var dx = bx_ + radius * Math.sin(angle);
-			var dy = by_ + radius * Math.cos(angle);
-			var _g = 0;
-			var _g1 = totalSteps + 1;
-			while(_g < _g1) {
-				var i = _g++;
-				cx = bx_ + radius * Math.sin(angle);
-				cy = by_ + radius * Math.cos(angle);
-				if(i != 0) {
-					var color_ = color;
-					if(color_ == null) {
-						color_ = -1;
-					}
-					this.pen.triangle2DFill(bx_,by_,bx,by,cx,cy,color_);
-				}
-				angle += step;
-				bx = cx;
-				by = cy;
-			}
-			break;
-		case 5:
-			var radius = width_ / 2;
-			var beta = -this.angle1 - Math.PI / 2;
-			var gamma = -this.angle1 - Math.PI / 2 + Math.PI / 2;
-			var color = -1;
-			var sides = 36;
-			if(sides == null) {
-				sides = 36;
-			}
-			if(color == null) {
-				color = -1;
-			}
-			var pi = Math.PI;
-			var step = pi * 2 / sides;
-			var dif;
-			switch(justGraphix_rose_DifferencePreference.SMALL._hx_index) {
-			case 0:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 > 0 ? dif1 : 2 * Math.PI + dif1;
-				break;
-			case 1:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 < 0 ? dif1 : -2 * Math.PI + dif1;
-				break;
-			case 2:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var smallest = theta <= Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 3:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var largest = theta > Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = largest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 4:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = beta;
-				var fb = gamma;
-				var theta = Math.abs(beta - gamma);
-				var smallest = theta <= Math.PI;
-				var clockwise = beta < gamma;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			}
-			var positive = dif >= 0;
-			var totalSteps = Math.ceil(Math.abs(dif) / step);
-			var step = dif / totalSteps;
-			var angle = beta;
-			var cx = 0.;
-			var cy = 0.;
-			var bx = 0.;
-			var by = 0.;
-			var dx = ax_ + radius * Math.sin(angle);
-			var dy = ay_ + radius * Math.cos(angle);
-			var _g = 0;
-			var _g1 = totalSteps + 1;
-			while(_g < _g1) {
-				var i = _g++;
-				cx = ax_ + radius * Math.sin(angle);
-				cy = ay_ + radius * Math.cos(angle);
-				if(i != 0) {
-					var color_ = color;
-					if(color_ == null) {
-						color_ = -1;
-					}
-					this.pen.triangle2DFill(ax_,ay_,bx,by,cx,cy,color_);
-				}
-				angle += step;
-				bx = cx;
-				by = cy;
-			}
-			var radius = width_ / 2;
-			var beta = -this.angle1 - Math.PI / 2;
-			var gamma = -this.angle1 - Math.PI / 2 - Math.PI / 2;
-			var color = -1;
-			var sides = 36;
-			if(sides == null) {
-				sides = 36;
-			}
-			if(color == null) {
-				color = -1;
-			}
-			var pi = Math.PI;
-			var step = pi * 2 / sides;
-			var dif;
-			switch(justGraphix_rose_DifferencePreference.SMALL._hx_index) {
-			case 0:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 > 0 ? dif1 : 2 * Math.PI + dif1;
-				break;
-			case 1:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 < 0 ? dif1 : -2 * Math.PI + dif1;
-				break;
-			case 2:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var smallest = theta <= Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 3:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var largest = theta > Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = largest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 4:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = beta;
-				var fb = gamma;
-				var theta = Math.abs(beta - gamma);
-				var smallest = theta <= Math.PI;
-				var clockwise = beta < gamma;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			}
-			var positive = dif >= 0;
-			var totalSteps = Math.ceil(Math.abs(dif) / step);
-			var step = dif / totalSteps;
-			var angle = beta;
-			var cx = 0.;
-			var cy = 0.;
-			var bx = 0.;
-			var by = 0.;
-			var dx = bx_ + radius * Math.sin(angle);
-			var dy = by_ + radius * Math.cos(angle);
-			var _g = 0;
-			var _g1 = totalSteps + 1;
-			while(_g < _g1) {
-				var i = _g++;
-				cx = bx_ + radius * Math.sin(angle);
-				cy = by_ + radius * Math.cos(angle);
-				if(i != 0) {
-					var color_ = color;
-					if(color_ == null) {
-						color_ = -1;
-					}
-					this.pen.triangle2DFill(bx_,by_,bx,by,cx,cy,color_);
-				}
-				angle += step;
-				bx = cx;
-				by = cy;
-			}
-			break;
-		case 6:
-			var radius = width_ / 2;
-			var beta = -this.angle1 - Math.PI / 2;
-			var gamma = -this.angle1 - Math.PI / 2 + Math.PI;
-			var color = -1;
-			var sides = 36;
-			if(sides == null) {
-				sides = 36;
-			}
-			if(color == null) {
-				color = -1;
-			}
-			var pi = Math.PI;
-			var step = pi * 2 / sides;
-			var dif;
-			switch(justGraphix_rose_DifferencePreference.SMALL._hx_index) {
-			case 0:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 > 0 ? dif1 : 2 * Math.PI + dif1;
-				break;
-			case 1:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 < 0 ? dif1 : -2 * Math.PI + dif1;
-				break;
-			case 2:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var smallest = theta <= Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 3:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var largest = theta > Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = largest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 4:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = beta;
-				var fb = gamma;
-				var theta = Math.abs(beta - gamma);
-				var smallest = theta <= Math.PI;
-				var clockwise = beta < gamma;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			}
-			var positive = dif >= 0;
-			var totalSteps = Math.ceil(Math.abs(dif) / step);
-			var step = dif / totalSteps;
-			var angle = beta;
-			var cx = 0.;
-			var cy = 0.;
-			var bx = 0.;
-			var by = 0.;
-			var dx = ax_ + radius * Math.sin(angle);
-			var dy = ay_ + radius * Math.cos(angle);
-			var _g = 0;
-			var _g1 = totalSteps + 1;
-			while(_g < _g1) {
-				var i = _g++;
-				cx = ax_ + radius * Math.sin(angle);
-				cy = ay_ + radius * Math.cos(angle);
-				if(i != 0) {
-					var color_ = color;
-					if(color_ == null) {
-						color_ = -1;
-					}
-					this.pen.triangle2DFill(ax_,ay_,bx,by,cx,cy,color_);
-				}
-				angle += step;
-				bx = cx;
-				by = cy;
-			}
-			break;
-		case 7:
-			var radius = width_ / 2;
-			var beta = -this.angle1 - Math.PI / 2;
-			var gamma = -this.angle1 - Math.PI / 2 - Math.PI;
-			var color = -1;
-			var sides = 36;
-			if(sides == null) {
-				sides = 36;
-			}
-			if(color == null) {
-				color = -1;
-			}
-			var pi = Math.PI;
-			var step = pi * 2 / sides;
-			var dif;
-			switch(justGraphix_rose_DifferencePreference.SMALL._hx_index) {
-			case 0:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 > 0 ? dif1 : 2 * Math.PI + dif1;
-				break;
-			case 1:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 < 0 ? dif1 : -2 * Math.PI + dif1;
-				break;
-			case 2:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var smallest = theta <= Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 3:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var largest = theta > Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = largest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 4:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = beta;
-				var fb = gamma;
-				var theta = Math.abs(beta - gamma);
-				var smallest = theta <= Math.PI;
-				var clockwise = beta < gamma;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			}
-			var positive = dif >= 0;
-			var totalSteps = Math.ceil(Math.abs(dif) / step);
-			var step = dif / totalSteps;
-			var angle = beta;
-			var cx = 0.;
-			var cy = 0.;
-			var bx = 0.;
-			var by = 0.;
-			var dx = bx_ + radius * Math.sin(angle);
-			var dy = by_ + radius * Math.cos(angle);
-			var _g = 0;
-			var _g1 = totalSteps + 1;
-			while(_g < _g1) {
-				var i = _g++;
-				cx = bx_ + radius * Math.sin(angle);
-				cy = by_ + radius * Math.cos(angle);
-				if(i != 0) {
-					var color_ = color;
-					if(color_ == null) {
-						color_ = -1;
-					}
-					this.pen.triangle2DFill(bx_,by_,bx,by,cx,cy,color_);
-				}
-				angle += step;
-				bx = cx;
-				by = cy;
-			}
-			break;
-		case 8:
-			var radius = width_ / 2;
-			var beta = -this.angle1 - Math.PI / 2;
-			var gamma = -this.angle1 - Math.PI / 2 + Math.PI;
-			var color = -1;
-			var sides = 36;
-			if(sides == null) {
-				sides = 36;
-			}
-			if(color == null) {
-				color = -1;
-			}
-			var pi = Math.PI;
-			var step = pi * 2 / sides;
-			var dif;
-			switch(justGraphix_rose_DifferencePreference.SMALL._hx_index) {
-			case 0:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 > 0 ? dif1 : 2 * Math.PI + dif1;
-				break;
-			case 1:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 < 0 ? dif1 : -2 * Math.PI + dif1;
-				break;
-			case 2:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var smallest = theta <= Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 3:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var largest = theta > Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = largest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 4:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = beta;
-				var fb = gamma;
-				var theta = Math.abs(beta - gamma);
-				var smallest = theta <= Math.PI;
-				var clockwise = beta < gamma;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			}
-			var positive = dif >= 0;
-			var totalSteps = Math.ceil(Math.abs(dif) / step);
-			var step = dif / totalSteps;
-			var angle = beta;
-			var cx = 0.;
-			var cy = 0.;
-			var bx = 0.;
-			var by = 0.;
-			var dx = ax_ + radius * Math.sin(angle);
-			var dy = ay_ + radius * Math.cos(angle);
-			var _g = 0;
-			var _g1 = totalSteps + 1;
-			while(_g < _g1) {
-				var i = _g++;
-				cx = ax_ + radius * Math.sin(angle);
-				cy = ay_ + radius * Math.cos(angle);
-				if(i != 0) {
-					var color_ = color;
-					if(color_ == null) {
-						color_ = -1;
-					}
-					this.pen.triangle2DFill(ax_,ay_,bx,by,cx,cy,color_);
-				}
-				angle += step;
-				bx = cx;
-				by = cy;
-			}
-			var radius = width_ / 2;
-			var beta = -this.angle1 - Math.PI / 2;
-			var gamma = -this.angle1 - Math.PI / 2 - Math.PI;
-			var color = -1;
-			var sides = 36;
-			if(sides == null) {
-				sides = 36;
-			}
-			if(color == null) {
-				color = -1;
-			}
-			var pi = Math.PI;
-			var step = pi * 2 / sides;
-			var dif;
-			switch(justGraphix_rose_DifferencePreference.SMALL._hx_index) {
-			case 0:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 > 0 ? dif1 : 2 * Math.PI + dif1;
-				break;
-			case 1:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 < 0 ? dif1 : -2 * Math.PI + dif1;
-				break;
-			case 2:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var smallest = theta <= Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 3:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var largest = theta > Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = largest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 4:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = beta;
-				var fb = gamma;
-				var theta = Math.abs(beta - gamma);
-				var smallest = theta <= Math.PI;
-				var clockwise = beta < gamma;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			}
-			var positive = dif >= 0;
-			var totalSteps = Math.ceil(Math.abs(dif) / step);
-			var step = dif / totalSteps;
-			var angle = beta;
-			var cx = 0.;
-			var cy = 0.;
-			var bx = 0.;
-			var by = 0.;
-			var dx = bx_ + radius * Math.sin(angle);
-			var dy = by_ + radius * Math.cos(angle);
-			var _g = 0;
-			var _g1 = totalSteps + 1;
-			while(_g < _g1) {
-				var i = _g++;
-				cx = bx_ + radius * Math.sin(angle);
-				cy = by_ + radius * Math.cos(angle);
-				if(i != 0) {
-					var color_ = color;
-					if(color_ == null) {
-						color_ = -1;
-					}
-					this.pen.triangle2DFill(bx_,by_,bx,by,cx,cy,color_);
-				}
-				angle += step;
-				bx = cx;
-				by = cy;
-			}
-			break;
-		case 9:
-			var radius = width_ / 2;
-			var beta = -this.angle1 - Math.PI / 2;
-			var gamma = -this.angle1 - Math.PI / 2 + Math.PI;
-			var color = -1;
-			var sides = 36;
-			if(sides == null) {
-				sides = 36;
-			}
-			if(color == null) {
-				color = -1;
-			}
-			var pi = Math.PI;
-			var step = pi * 2 / sides;
-			var dif;
-			switch(justGraphix_rose_DifferencePreference.SMALL._hx_index) {
-			case 0:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 > 0 ? dif1 : 2 * Math.PI + dif1;
-				break;
-			case 1:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 < 0 ? dif1 : -2 * Math.PI + dif1;
-				break;
-			case 2:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var smallest = theta <= Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 3:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var largest = theta > Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = largest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 4:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = beta;
-				var fb = gamma;
-				var theta = Math.abs(beta - gamma);
-				var smallest = theta <= Math.PI;
-				var clockwise = beta < gamma;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			}
-			var positive = dif >= 0;
-			var totalSteps = Math.ceil(Math.abs(dif) / step);
-			var step = dif / totalSteps;
-			var angle = beta;
-			var cx = 0.;
-			var cy = 0.;
-			var bx = 0.;
-			var by = 0.;
-			var dx = ax_ + radius * Math.sin(angle);
-			var dy = ay_ + radius * Math.cos(angle);
-			var _g = 0;
-			var _g1 = totalSteps + 1;
-			while(_g < _g1) {
-				var i = _g++;
-				cx = ax_ + radius * Math.sin(angle);
-				cy = ay_ + radius * Math.cos(angle);
-				if(i != 0) {
-					var color_ = color;
-					if(color_ == null) {
-						color_ = -1;
-					}
-					this.pen.triangle2DFill(ax_,ay_,bx,by,cx,cy,color_);
-				}
-				angle += step;
-				bx = cx;
-				by = cy;
-			}
-			break;
-		case 10:
-			var radius = width_ / 2;
-			var beta = -this.angle1 - Math.PI / 2;
-			var gamma = -this.angle1 - Math.PI / 2 - Math.PI;
-			var color = -1;
-			var sides = 36;
-			if(sides == null) {
-				sides = 36;
-			}
-			if(color == null) {
-				color = -1;
-			}
-			var pi = Math.PI;
-			var step = pi * 2 / sides;
-			var dif;
-			switch(justGraphix_rose_DifferencePreference.SMALL._hx_index) {
-			case 0:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 > 0 ? dif1 : 2 * Math.PI + dif1;
-				break;
-			case 1:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 < 0 ? dif1 : -2 * Math.PI + dif1;
-				break;
-			case 2:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var smallest = theta <= Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 3:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var largest = theta > Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = largest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 4:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = beta;
-				var fb = gamma;
-				var theta = Math.abs(beta - gamma);
-				var smallest = theta <= Math.PI;
-				var clockwise = beta < gamma;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			}
-			var positive = dif >= 0;
-			var totalSteps = Math.ceil(Math.abs(dif) / step);
-			var step = dif / totalSteps;
-			var angle = beta;
-			var cx = 0.;
-			var cy = 0.;
-			var bx = 0.;
-			var by = 0.;
-			var dx = bx_ + radius * Math.sin(angle);
-			var dy = by_ + radius * Math.cos(angle);
-			var _g = 0;
-			var _g1 = totalSteps + 1;
-			while(_g < _g1) {
-				var i = _g++;
-				cx = bx_ + radius * Math.sin(angle);
-				cy = by_ + radius * Math.cos(angle);
-				if(i != 0) {
-					var color_ = color;
-					if(color_ == null) {
-						color_ = -1;
-					}
-					this.pen.triangle2DFill(bx_,by_,bx,by,cx,cy,color_);
-				}
-				angle += step;
-				bx = cx;
-				by = cy;
-			}
-			break;
-		case 11:
-			var radius = width_ / 2;
-			var beta = -this.angle1 - Math.PI / 2;
-			var gamma = -this.angle1 - Math.PI / 2 + Math.PI;
-			var color = -1;
-			var sides = 36;
-			if(sides == null) {
-				sides = 36;
-			}
-			if(color == null) {
-				color = -1;
-			}
-			var pi = Math.PI;
-			var step = pi * 2 / sides;
-			var dif;
-			switch(justGraphix_rose_DifferencePreference.SMALL._hx_index) {
-			case 0:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 > 0 ? dif1 : 2 * Math.PI + dif1;
-				break;
-			case 1:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 < 0 ? dif1 : -2 * Math.PI + dif1;
-				break;
-			case 2:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var smallest = theta <= Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 3:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var largest = theta > Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = largest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 4:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = beta;
-				var fb = gamma;
-				var theta = Math.abs(beta - gamma);
-				var smallest = theta <= Math.PI;
-				var clockwise = beta < gamma;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			}
-			var positive = dif >= 0;
-			var totalSteps = Math.ceil(Math.abs(dif) / step);
-			var step = dif / totalSteps;
-			var angle = beta;
-			var cx = 0.;
-			var cy = 0.;
-			var bx = 0.;
-			var by = 0.;
-			var dx = ax_ + radius * Math.sin(angle);
-			var dy = ay_ + radius * Math.cos(angle);
-			var _g = 0;
-			var _g1 = totalSteps + 1;
-			while(_g < _g1) {
-				var i = _g++;
-				cx = ax_ + radius * Math.sin(angle);
-				cy = ay_ + radius * Math.cos(angle);
-				if(i != 0) {
-					var color_ = color;
-					if(color_ == null) {
-						color_ = -1;
-					}
-					this.pen.triangle2DFill(ax_,ay_,bx,by,cx,cy,color_);
-				}
-				angle += step;
-				bx = cx;
-				by = cy;
-			}
-			var radius = width_ / 2;
-			var beta = -this.angle1 - Math.PI / 2;
-			var gamma = -this.angle1 - Math.PI / 2 - Math.PI;
-			var color = -1;
-			var sides = 36;
-			if(sides == null) {
-				sides = 36;
-			}
-			if(color == null) {
-				color = -1;
-			}
-			var pi = Math.PI;
-			var step = pi * 2 / sides;
-			var dif;
-			switch(justGraphix_rose_DifferencePreference.SMALL._hx_index) {
-			case 0:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 > 0 ? dif1 : 2 * Math.PI + dif1;
-				break;
-			case 1:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 < 0 ? dif1 : -2 * Math.PI + dif1;
-				break;
-			case 2:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var smallest = theta <= Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 3:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var largest = theta > Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = largest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 4:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = beta;
-				var fb = gamma;
-				var theta = Math.abs(beta - gamma);
-				var smallest = theta <= Math.PI;
-				var clockwise = beta < gamma;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			}
-			var positive = dif >= 0;
-			var totalSteps = Math.ceil(Math.abs(dif) / step);
-			var step = dif / totalSteps;
-			var angle = beta;
-			var cx = 0.;
-			var cy = 0.;
-			var bx = 0.;
-			var by = 0.;
-			var dx = bx_ + radius * Math.sin(angle);
-			var dy = by_ + radius * Math.cos(angle);
-			var _g = 0;
-			var _g1 = totalSteps + 1;
-			while(_g < _g1) {
-				var i = _g++;
-				cx = bx_ + radius * Math.sin(angle);
-				cy = by_ + radius * Math.cos(angle);
-				if(i != 0) {
-					var color_ = color;
-					if(color_ == null) {
-						color_ = -1;
-					}
-					this.pen.triangle2DFill(bx_,by_,bx,by,cx,cy,color_);
-				}
-				angle += step;
-				bx = cx;
-				by = cy;
-			}
-			break;
-		case 12:
-			var radius = width_ / 2;
-			var beta = -this.angle1 - Math.PI / 2;
-			var gamma = -this.angle1 - Math.PI / 2 + Math.PI;
-			var color = -1;
-			var sides = 36;
-			if(sides == null) {
-				sides = 36;
-			}
-			if(color == null) {
-				color = -1;
-			}
-			var pi = Math.PI;
-			var step = pi * 2 / sides;
-			var dif;
-			switch(justGraphix_rose_DifferencePreference.SMALL._hx_index) {
-			case 0:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 > 0 ? dif1 : 2 * Math.PI + dif1;
-				break;
-			case 1:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 < 0 ? dif1 : -2 * Math.PI + dif1;
-				break;
-			case 2:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var smallest = theta <= Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 3:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var largest = theta > Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = largest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 4:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = beta;
-				var fb = gamma;
-				var theta = Math.abs(beta - gamma);
-				var smallest = theta <= Math.PI;
-				var clockwise = beta < gamma;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			}
-			var positive = dif >= 0;
-			var totalSteps = Math.ceil(Math.abs(dif) / step);
-			var step = dif / totalSteps;
-			var angle = beta;
-			var cx = 0.;
-			var cy = 0.;
-			var bx = 0.;
-			var by = 0.;
-			var dx = ax_ + radius * Math.sin(angle);
-			var dy = ay_ + radius * Math.cos(angle);
-			var _g = 0;
-			var _g1 = totalSteps + 1;
-			while(_g < _g1) {
-				var i = _g++;
-				cx = ax_ + radius * Math.sin(angle);
-				cy = ay_ + radius * Math.cos(angle);
-				if(i != 0) {
-					var color_ = color;
-					if(color_ == null) {
-						color_ = -1;
-					}
-					this.pen.triangle2DFill(ax_,ay_,bx,by,cx,cy,color_);
-				}
-				angle += step;
-				bx = cx;
-				by = cy;
-			}
-			break;
-		case 13:
-			var radius = width_ / 2;
-			var beta = -this.angle1 - Math.PI / 2;
-			var gamma = -this.angle1 - Math.PI / 2 - Math.PI;
-			var color = -1;
-			var sides = 36;
-			if(sides == null) {
-				sides = 36;
-			}
-			if(color == null) {
-				color = -1;
-			}
-			var pi = Math.PI;
-			var step = pi * 2 / sides;
-			var dif;
-			switch(justGraphix_rose_DifferencePreference.SMALL._hx_index) {
-			case 0:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 > 0 ? dif1 : 2 * Math.PI + dif1;
-				break;
-			case 1:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 < 0 ? dif1 : -2 * Math.PI + dif1;
-				break;
-			case 2:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var smallest = theta <= Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 3:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var largest = theta > Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = largest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 4:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = beta;
-				var fb = gamma;
-				var theta = Math.abs(beta - gamma);
-				var smallest = theta <= Math.PI;
-				var clockwise = beta < gamma;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			}
-			var positive = dif >= 0;
-			var totalSteps = Math.ceil(Math.abs(dif) / step);
-			var step = dif / totalSteps;
-			var angle = beta;
-			var cx = 0.;
-			var cy = 0.;
-			var bx = 0.;
-			var by = 0.;
-			var dx = bx_ + radius * Math.sin(angle);
-			var dy = by_ + radius * Math.cos(angle);
-			var _g = 0;
-			var _g1 = totalSteps + 1;
-			while(_g < _g1) {
-				var i = _g++;
-				cx = bx_ + radius * Math.sin(angle);
-				cy = by_ + radius * Math.cos(angle);
-				if(i != 0) {
-					var color_ = color;
-					if(color_ == null) {
-						color_ = -1;
-					}
-					this.pen.triangle2DFill(bx_,by_,bx,by,cx,cy,color_);
-				}
-				angle += step;
-				bx = cx;
-				by = cy;
-			}
-			break;
-		case 14:
-			var radius = width_ / 2;
-			var beta = -this.angle1 - Math.PI / 2;
-			var gamma = -this.angle1 - Math.PI / 2 + Math.PI;
-			var color = -1;
-			var sides = 36;
-			if(sides == null) {
-				sides = 36;
-			}
-			if(color == null) {
-				color = -1;
-			}
-			var pi = Math.PI;
-			var step = pi * 2 / sides;
-			var dif;
-			switch(justGraphix_rose_DifferencePreference.SMALL._hx_index) {
-			case 0:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 > 0 ? dif1 : 2 * Math.PI + dif1;
-				break;
-			case 1:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 < 0 ? dif1 : -2 * Math.PI + dif1;
-				break;
-			case 2:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var smallest = theta <= Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 3:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var largest = theta > Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = largest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 4:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = beta;
-				var fb = gamma;
-				var theta = Math.abs(beta - gamma);
-				var smallest = theta <= Math.PI;
-				var clockwise = beta < gamma;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			}
-			var positive = dif >= 0;
-			var totalSteps = Math.ceil(Math.abs(dif) / step);
-			var step = dif / totalSteps;
-			var angle = beta;
-			var cx = 0.;
-			var cy = 0.;
-			var bx = 0.;
-			var by = 0.;
-			var dx = ax_ + radius * Math.sin(angle);
-			var dy = ay_ + radius * Math.cos(angle);
-			var _g = 0;
-			var _g1 = totalSteps + 1;
-			while(_g < _g1) {
-				var i = _g++;
-				cx = ax_ + radius * Math.sin(angle);
-				cy = ay_ + radius * Math.cos(angle);
-				if(i != 0) {
-					var color_ = color;
-					if(color_ == null) {
-						color_ = -1;
-					}
-					this.pen.triangle2DFill(ax_,ay_,bx,by,cx,cy,color_);
-				}
-				angle += step;
-				bx = cx;
-				by = cy;
-			}
-			var radius = width_ / 2;
-			var beta = -this.angle1 - Math.PI / 2;
-			var gamma = -this.angle1 - Math.PI / 2 - Math.PI;
-			var color = -1;
-			var sides = 36;
-			if(sides == null) {
-				sides = 36;
-			}
-			if(color == null) {
-				color = -1;
-			}
-			var pi = Math.PI;
-			var step = pi * 2 / sides;
-			var dif;
-			switch(justGraphix_rose_DifferencePreference.SMALL._hx_index) {
-			case 0:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 > 0 ? dif1 : 2 * Math.PI + dif1;
-				break;
-			case 1:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 < 0 ? dif1 : -2 * Math.PI + dif1;
-				break;
-			case 2:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var smallest = theta <= Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 3:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var largest = theta > Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = largest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 4:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = beta;
-				var fb = gamma;
-				var theta = Math.abs(beta - gamma);
-				var smallest = theta <= Math.PI;
-				var clockwise = beta < gamma;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			}
-			var positive = dif >= 0;
-			var totalSteps = Math.ceil(Math.abs(dif) / step);
-			var step = dif / totalSteps;
-			var angle = beta;
-			var cx = 0.;
-			var cy = 0.;
-			var bx = 0.;
-			var by = 0.;
-			var dx = bx_ + radius * Math.sin(angle);
-			var dy = by_ + radius * Math.cos(angle);
-			var _g = 0;
-			var _g1 = totalSteps + 1;
-			while(_g < _g1) {
-				var i = _g++;
-				cx = bx_ + radius * Math.sin(angle);
-				cy = by_ + radius * Math.cos(angle);
-				if(i != 0) {
-					var color_ = color;
-					if(color_ == null) {
-						color_ = -1;
-					}
-					this.pen.triangle2DFill(bx_,by_,bx,by,cx,cy,color_);
-				}
-				angle += step;
-				bx = cx;
-				by = cy;
-			}
-			break;
-		case 15:
-			var radius = width_ / 2;
-			var beta = -this.angle1 - Math.PI / 2;
-			var gamma = -this.angle1 - Math.PI / 2 + Math.PI;
-			var color = -1;
-			var sides = 36;
-			if(sides == null) {
-				sides = 36;
-			}
-			if(color == null) {
-				color = -1;
-			}
-			var pi = Math.PI;
-			var step = pi * 2 / sides;
-			var dif;
-			switch(justGraphix_rose_DifferencePreference.SMALL._hx_index) {
-			case 0:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 > 0 ? dif1 : 2 * Math.PI + dif1;
-				break;
-			case 1:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 < 0 ? dif1 : -2 * Math.PI + dif1;
-				break;
-			case 2:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var smallest = theta <= Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 3:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var largest = theta > Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = largest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 4:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = beta;
-				var fb = gamma;
-				var theta = Math.abs(beta - gamma);
-				var smallest = theta <= Math.PI;
-				var clockwise = beta < gamma;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			}
-			var positive = dif >= 0;
-			var totalSteps = Math.ceil(Math.abs(dif) / step);
-			var step = dif / totalSteps;
-			var angle = beta;
-			var cx = 0.;
-			var cy = 0.;
-			var bx = 0.;
-			var by = 0.;
-			var dx = ax_ + radius * Math.sin(angle);
-			var dy = ay_ + radius * Math.cos(angle);
-			var _g = 0;
-			var _g1 = totalSteps + 1;
-			while(_g < _g1) {
-				var i = _g++;
-				cx = ax_ + radius * Math.sin(angle);
-				cy = ay_ + radius * Math.cos(angle);
-				if(i != 0) {
-					var color_ = color;
-					if(color_ == null) {
-						color_ = -1;
-					}
-					this.pen.triangle2DFill(ax_,ay_,bx,by,cx,cy,color_);
-				}
-				angle += step;
-				bx = cx;
-				by = cy;
-			}
-			break;
-		case 16:
-			var radius = width_ / 2;
-			var beta = -this.angle1 - Math.PI / 2;
-			var gamma = -this.angle1 - Math.PI / 2 - Math.PI;
-			var color = -1;
-			var sides = 36;
-			if(sides == null) {
-				sides = 36;
-			}
-			if(color == null) {
-				color = -1;
-			}
-			var pi = Math.PI;
-			var step = pi * 2 / sides;
-			var dif;
-			switch(justGraphix_rose_DifferencePreference.SMALL._hx_index) {
-			case 0:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 > 0 ? dif1 : 2 * Math.PI + dif1;
-				break;
-			case 1:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 < 0 ? dif1 : -2 * Math.PI + dif1;
-				break;
-			case 2:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var smallest = theta <= Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 3:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var largest = theta > Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = largest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 4:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = beta;
-				var fb = gamma;
-				var theta = Math.abs(beta - gamma);
-				var smallest = theta <= Math.PI;
-				var clockwise = beta < gamma;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			}
-			var positive = dif >= 0;
-			var totalSteps = Math.ceil(Math.abs(dif) / step);
-			var step = dif / totalSteps;
-			var angle = beta;
-			var cx = 0.;
-			var cy = 0.;
-			var bx = 0.;
-			var by = 0.;
-			var dx = bx_ + radius * Math.sin(angle);
-			var dy = by_ + radius * Math.cos(angle);
-			var _g = 0;
-			var _g1 = totalSteps + 1;
-			while(_g < _g1) {
-				var i = _g++;
-				cx = bx_ + radius * Math.sin(angle);
-				cy = by_ + radius * Math.cos(angle);
-				if(i != 0) {
-					var color_ = color;
-					if(color_ == null) {
-						color_ = -1;
-					}
-					this.pen.triangle2DFill(bx_,by_,bx,by,cx,cy,color_);
-				}
-				angle += step;
-				bx = cx;
-				by = cy;
-			}
-			break;
-		case 17:
-			var radius = width_ / 2;
-			var beta = -this.angle1 - Math.PI / 2;
-			var gamma = -this.angle1 - Math.PI / 2 + Math.PI;
-			var color = -1;
-			var sides = 36;
-			if(sides == null) {
-				sides = 36;
-			}
-			if(color == null) {
-				color = -1;
-			}
-			var pi = Math.PI;
-			var step = pi * 2 / sides;
-			var dif;
-			switch(justGraphix_rose_DifferencePreference.SMALL._hx_index) {
-			case 0:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 > 0 ? dif1 : 2 * Math.PI + dif1;
-				break;
-			case 1:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 < 0 ? dif1 : -2 * Math.PI + dif1;
-				break;
-			case 2:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var smallest = theta <= Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 3:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var largest = theta > Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = largest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 4:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = beta;
-				var fb = gamma;
-				var theta = Math.abs(beta - gamma);
-				var smallest = theta <= Math.PI;
-				var clockwise = beta < gamma;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			}
-			var positive = dif >= 0;
-			var totalSteps = Math.ceil(Math.abs(dif) / step);
-			var step = dif / totalSteps;
-			var angle = beta;
-			var cx = 0.;
-			var cy = 0.;
-			var bx = 0.;
-			var by = 0.;
-			var dx = ax_ + radius * Math.sin(angle);
-			var dy = ay_ + radius * Math.cos(angle);
-			var _g = 0;
-			var _g1 = totalSteps + 1;
-			while(_g < _g1) {
-				var i = _g++;
-				cx = ax_ + radius * Math.sin(angle);
-				cy = ay_ + radius * Math.cos(angle);
-				if(i != 0) {
-					var color_ = color;
-					if(color_ == null) {
-						color_ = -1;
-					}
-					this.pen.triangle2DFill(ax_,ay_,bx,by,cx,cy,color_);
-				}
-				angle += step;
-				bx = cx;
-				by = cy;
-			}
-			var radius = width_ / 2;
-			var beta = -this.angle1 - Math.PI / 2;
-			var gamma = -this.angle1 - Math.PI / 2 - Math.PI;
-			var color = -1;
-			var sides = 36;
-			if(sides == null) {
-				sides = 36;
-			}
-			if(color == null) {
-				color = -1;
-			}
-			var pi = Math.PI;
-			var step = pi * 2 / sides;
-			var dif;
-			switch(justGraphix_rose_DifferencePreference.SMALL._hx_index) {
-			case 0:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 > 0 ? dif1 : 2 * Math.PI + dif1;
-				break;
-			case 1:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 < 0 ? dif1 : -2 * Math.PI + dif1;
-				break;
-			case 2:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var smallest = theta <= Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 3:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var largest = theta > Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = largest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 4:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = beta;
-				var fb = gamma;
-				var theta = Math.abs(beta - gamma);
-				var smallest = theta <= Math.PI;
-				var clockwise = beta < gamma;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			}
-			var positive = dif >= 0;
-			var totalSteps = Math.ceil(Math.abs(dif) / step);
-			var step = dif / totalSteps;
-			var angle = beta;
-			var cx = 0.;
-			var cy = 0.;
-			var bx = 0.;
-			var by = 0.;
-			var dx = bx_ + radius * Math.sin(angle);
-			var dy = by_ + radius * Math.cos(angle);
-			var _g = 0;
-			var _g1 = totalSteps + 1;
-			while(_g < _g1) {
-				var i = _g++;
-				cx = bx_ + radius * Math.sin(angle);
-				cy = by_ + radius * Math.cos(angle);
-				if(i != 0) {
-					var color_ = color;
-					if(color_ == null) {
-						color_ = -1;
-					}
-					this.pen.triangle2DFill(bx_,by_,bx,by,cx,cy,color_);
-				}
-				angle += step;
-				bx = cx;
-				by = cy;
-			}
-			break;
-		case 18:
-			var radius = width_ / 2;
-			var beta = -this.angle1 - Math.PI / 2;
-			var gamma = -this.angle1 - Math.PI / 2 + Math.PI;
-			var color = -1;
-			var sides = 36;
-			if(sides == null) {
-				sides = 36;
-			}
-			if(color == null) {
-				color = -1;
-			}
-			var pi = Math.PI;
-			var step = pi * 2 / sides;
-			var dif;
-			switch(justGraphix_rose_DifferencePreference.SMALL._hx_index) {
-			case 0:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 > 0 ? dif1 : 2 * Math.PI + dif1;
-				break;
-			case 1:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 < 0 ? dif1 : -2 * Math.PI + dif1;
-				break;
-			case 2:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var smallest = theta <= Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 3:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var largest = theta > Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = largest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 4:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = beta;
-				var fb = gamma;
-				var theta = Math.abs(beta - gamma);
-				var smallest = theta <= Math.PI;
-				var clockwise = beta < gamma;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			}
-			var positive = dif >= 0;
-			var totalSteps = Math.ceil(Math.abs(dif) / step);
-			var step = dif / totalSteps;
-			var angle = beta;
-			var cx = 0.;
-			var cy = 0.;
-			var bx = 0.;
-			var by = 0.;
-			var dx = ax_ + radius * Math.sin(angle);
-			var dy = ay_ + radius * Math.cos(angle);
-			var _g = 0;
-			var _g1 = totalSteps + 1;
-			while(_g < _g1) {
-				var i = _g++;
-				cx = ax_ + radius * Math.sin(angle);
-				cy = ay_ + radius * Math.cos(angle);
-				if(i != 0) {
-					var color_ = color;
-					if(color_ == null) {
-						color_ = -1;
-					}
-					this.pen.triangle2DFill(ax_,ay_,bx,by,cx,cy,color_);
-				}
-				angle += step;
-				bx = cx;
-				by = cy;
-			}
-			break;
-		case 19:
-			var radius = width_ / 2;
-			var beta = -this.angle1 - Math.PI / 2;
-			var gamma = -this.angle1 - Math.PI / 2 - Math.PI;
-			var color = -1;
-			var sides = 36;
-			if(sides == null) {
-				sides = 36;
-			}
-			if(color == null) {
-				color = -1;
-			}
-			var pi = Math.PI;
-			var step = pi * 2 / sides;
-			var dif;
-			switch(justGraphix_rose_DifferencePreference.SMALL._hx_index) {
-			case 0:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 > 0 ? dif1 : 2 * Math.PI + dif1;
-				break;
-			case 1:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 < 0 ? dif1 : -2 * Math.PI + dif1;
-				break;
-			case 2:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var smallest = theta <= Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 3:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var largest = theta > Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = largest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 4:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = beta;
-				var fb = gamma;
-				var theta = Math.abs(beta - gamma);
-				var smallest = theta <= Math.PI;
-				var clockwise = beta < gamma;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			}
-			var positive = dif >= 0;
-			var totalSteps = Math.ceil(Math.abs(dif) / step);
-			var step = dif / totalSteps;
-			var angle = beta;
-			var cx = 0.;
-			var cy = 0.;
-			var bx = 0.;
-			var by = 0.;
-			var dx = bx_ + radius * Math.sin(angle);
-			var dy = by_ + radius * Math.cos(angle);
-			var _g = 0;
-			var _g1 = totalSteps + 1;
-			while(_g < _g1) {
-				var i = _g++;
-				cx = bx_ + radius * Math.sin(angle);
-				cy = by_ + radius * Math.cos(angle);
-				if(i != 0) {
-					var color_ = color;
-					if(color_ == null) {
-						color_ = -1;
-					}
-					this.pen.triangle2DFill(bx_,by_,bx,by,cx,cy,color_);
-				}
-				angle += step;
-				bx = cx;
-				by = cy;
-			}
-			break;
-		case 20:
-			var radius = width_ / 2;
-			var beta = -this.angle1 - Math.PI / 2;
-			var gamma = -this.angle1 - Math.PI / 2 + Math.PI;
-			var color = -1;
-			var sides = 36;
-			if(sides == null) {
-				sides = 36;
-			}
-			if(color == null) {
-				color = -1;
-			}
-			var pi = Math.PI;
-			var step = pi * 2 / sides;
-			var dif;
-			switch(justGraphix_rose_DifferencePreference.SMALL._hx_index) {
-			case 0:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 > 0 ? dif1 : 2 * Math.PI + dif1;
-				break;
-			case 1:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 < 0 ? dif1 : -2 * Math.PI + dif1;
-				break;
-			case 2:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var smallest = theta <= Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 3:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var largest = theta > Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = largest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 4:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = beta;
-				var fb = gamma;
-				var theta = Math.abs(beta - gamma);
-				var smallest = theta <= Math.PI;
-				var clockwise = beta < gamma;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			}
-			var positive = dif >= 0;
-			var totalSteps = Math.ceil(Math.abs(dif) / step);
-			var step = dif / totalSteps;
-			var angle = beta;
-			var cx = 0.;
-			var cy = 0.;
-			var bx = 0.;
-			var by = 0.;
-			var dx = ax_ + radius * Math.sin(angle);
-			var dy = ay_ + radius * Math.cos(angle);
-			var _g = 0;
-			var _g1 = totalSteps + 1;
-			while(_g < _g1) {
-				var i = _g++;
-				cx = ax_ + radius * Math.sin(angle);
-				cy = ay_ + radius * Math.cos(angle);
-				if(i != 0) {
-					var color_ = color;
-					if(color_ == null) {
-						color_ = -1;
-					}
-					this.pen.triangle2DFill(ax_,ay_,bx,by,cx,cy,color_);
-				}
-				angle += step;
-				bx = cx;
-				by = cy;
-			}
-			var radius = width_ / 2;
-			var beta = -this.angle1 - Math.PI / 2;
-			var gamma = -this.angle1 - Math.PI / 2 - Math.PI;
-			var color = -1;
-			var sides = 36;
-			if(sides == null) {
-				sides = 36;
-			}
-			if(color == null) {
-				color = -1;
-			}
-			var pi = Math.PI;
-			var step = pi * 2 / sides;
-			var dif;
-			switch(justGraphix_rose_DifferencePreference.SMALL._hx_index) {
-			case 0:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 > 0 ? dif1 : 2 * Math.PI + dif1;
-				break;
-			case 1:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = dif1 < 0 ? dif1 : -2 * Math.PI + dif1;
-				break;
-			case 2:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var smallest = theta <= Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 3:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = za;
-				var fb = zb;
-				var theta = Math.abs(fa - fb);
-				var largest = theta > Math.PI;
-				var clockwise = fa < fb;
-				var dif1 = clockwise ? theta : -theta;
-				dif = largest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			case 4:
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(beta >= 0) {
-					var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-					out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -beta;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var zero = true;
-				if(zero == null) {
-					zero = false;
-				}
-				var out;
-				if(gamma >= 0) {
-					var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-					out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-				} else {
-					var val = -gamma;
-					var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-					out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-				}
-				var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-				var fa = beta;
-				var fb = gamma;
-				var theta = Math.abs(beta - gamma);
-				var smallest = theta <= Math.PI;
-				var clockwise = beta < gamma;
-				var dif1 = clockwise ? theta : -theta;
-				dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-				break;
-			}
-			var positive = dif >= 0;
-			var totalSteps = Math.ceil(Math.abs(dif) / step);
-			var step = dif / totalSteps;
-			var angle = beta;
-			var cx = 0.;
-			var cy = 0.;
-			var bx = 0.;
-			var by = 0.;
-			var dx = bx_ + radius * Math.sin(angle);
-			var dy = by_ + radius * Math.cos(angle);
-			var _g = 0;
-			var _g1 = totalSteps + 1;
-			while(_g < _g1) {
-				var i = _g++;
-				cx = bx_ + radius * Math.sin(angle);
-				cy = by_ + radius * Math.cos(angle);
-				if(i != 0) {
-					var color_ = color;
-					if(color_ == null) {
-						color_ = -1;
-					}
-					this.pen.triangle2DFill(bx_,by_,bx,by,cx,cy,color_);
-				}
-				angle += step;
-				bx = cx;
-				by = cy;
-			}
-			break;
-		}
-		this.pen.triangle2DFill(dxPrev_,dyPrev_,this.dx,this.dy,exPrev_,eyPrev_,-1);
-		this.pen.triangle2DFill(dxPrev_,dyPrev_,this.dx,this.dy,this.ex,this.ey,-1);
-	}
-	,startShape: function(ax,ay,radius,beta,gamma,prefer,edgePoly,color,sides) {
-		if(sides == null) {
-			sides = 36;
-		}
-		if(color == null) {
-			color = -1;
-		}
-		var pi = Math.PI;
-		var step = pi * 2 / sides;
-		var dif;
-		switch(prefer._hx_index) {
-		case 0:
-			var zero = true;
-			if(zero == null) {
-				zero = false;
-			}
-			var out;
-			if(beta >= 0) {
-				var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-				out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-			} else {
-				var val = -beta;
-				var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-				out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-			}
-			var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-			var zero = true;
-			if(zero == null) {
-				zero = false;
-			}
-			var out;
-			if(gamma >= 0) {
-				var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-				out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-			} else {
-				var val = -gamma;
-				var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-				out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-			}
-			var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-			var fa = za;
-			var fb = zb;
-			var theta = Math.abs(fa - fb);
-			var clockwise = fa < fb;
-			var dif1 = clockwise ? theta : -theta;
-			dif = dif1 > 0 ? dif1 : 2 * Math.PI + dif1;
-			break;
-		case 1:
-			var zero = true;
-			if(zero == null) {
-				zero = false;
-			}
-			var out;
-			if(beta >= 0) {
-				var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-				out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-			} else {
-				var val = -beta;
-				var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-				out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-			}
-			var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-			var zero = true;
-			if(zero == null) {
-				zero = false;
-			}
-			var out;
-			if(gamma >= 0) {
-				var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-				out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-			} else {
-				var val = -gamma;
-				var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-				out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-			}
-			var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-			var fa = za;
-			var fb = zb;
-			var theta = Math.abs(fa - fb);
-			var clockwise = fa < fb;
-			var dif1 = clockwise ? theta : -theta;
-			dif = dif1 < 0 ? dif1 : -2 * Math.PI + dif1;
-			break;
-		case 2:
-			var zero = true;
-			if(zero == null) {
-				zero = false;
-			}
-			var out;
-			if(beta >= 0) {
-				var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-				out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-			} else {
-				var val = -beta;
-				var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-				out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-			}
-			var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-			var zero = true;
-			if(zero == null) {
-				zero = false;
-			}
-			var out;
-			if(gamma >= 0) {
-				var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-				out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-			} else {
-				var val = -gamma;
-				var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-				out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-			}
-			var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-			var fa = za;
-			var fb = zb;
-			var theta = Math.abs(fa - fb);
-			var smallest = theta <= Math.PI;
-			var clockwise = fa < fb;
-			var dif1 = clockwise ? theta : -theta;
-			dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-			break;
-		case 3:
-			var zero = true;
-			if(zero == null) {
-				zero = false;
-			}
-			var out;
-			if(beta >= 0) {
-				var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-				out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-			} else {
-				var val = -beta;
-				var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-				out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-			}
-			var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-			var zero = true;
-			if(zero == null) {
-				zero = false;
-			}
-			var out;
-			if(gamma >= 0) {
-				var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-				out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-			} else {
-				var val = -gamma;
-				var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-				out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-			}
-			var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-			var fa = za;
-			var fb = zb;
-			var theta = Math.abs(fa - fb);
-			var largest = theta > Math.PI;
-			var clockwise = fa < fb;
-			var dif1 = clockwise ? theta : -theta;
-			dif = largest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-			break;
-		case 4:
-			var zero = true;
-			if(zero == null) {
-				zero = false;
-			}
-			var out;
-			if(beta >= 0) {
-				var divisor = Math.ceil(beta / (2 * Math.PI)) - 1.;
-				out = beta - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-			} else {
-				var val = -beta;
-				var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-				out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-			}
-			var za = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-			var zero = true;
-			if(zero == null) {
-				zero = false;
-			}
-			var out;
-			if(gamma >= 0) {
-				var divisor = Math.ceil(gamma / (2 * Math.PI)) - 1.;
-				out = gamma - (divisor > 0 ? 2 * Math.PI * divisor : 0);
-			} else {
-				var val = -gamma;
-				var divisor = Math.ceil(val / (2 * Math.PI)) - 1.;
-				out = 2 * Math.PI - (val - (divisor > 0 ? 2 * Math.PI * divisor : 0));
-			}
-			var zb = zero ? out > 2 * Math.PI - 0.000000000000005 && out < 2 * Math.PI + 0.000000000000005 || out > -5e-15 && out < 0.000000000000005 ? 0. : out : out;
-			var fa = beta;
-			var fb = gamma;
-			var theta = Math.abs(beta - gamma);
-			var smallest = theta <= Math.PI;
-			var clockwise = beta < gamma;
-			var dif1 = clockwise ? theta : -theta;
-			dif = smallest ? dif1 : clockwise ? -(2 * Math.PI - theta) : 2 * Math.PI - theta;
-			break;
-		}
-		var positive = dif >= 0;
-		var totalSteps = Math.ceil(Math.abs(dif) / step);
-		var step = dif / totalSteps;
-		var angle = beta;
-		var beta2 = 0.;
-		var this1 = this.endLine;
-		if(this1 == 18 || this1 == 20) {
-			angle = Math.PI / 2;
-			beta2 = 2 * Math.PI - beta + Math.PI / 2;
-		}
-		var cx = 0.;
-		var cy = 0.;
-		var bx = 0.;
-		var by = 0.;
-		var p2 = edgePoly.length;
-		var ex = 0.;
-		var ey = 0.;
-		var fx = 0.;
-		var fy = 0.;
-		var gx = 0.;
-		var gy = 0.;
-		var delta = 0.;
-		var this1 = this.endLine;
-		if(this1 == 12 || this1 == 14) {
-			var angle2 = beta - step * totalSteps / 2;
-			fx = ax - 0.75 * this.endCapFactor * radius * Math.sin(angle2);
-			fy = ay - 0.75 * this.endCapFactor * radius * Math.cos(angle2);
-			radius *= 2;
-			delta = Math.pow(radius / 2,2);
-		}
-		var this1 = this.endLine;
-		if(!(this1 == 6 || this1 == 8 || (this1 == 9 || this1 == 11) || (this1 == 15 || this1 == 17))) {
-			if(this.endLine == 5) {
-				var angle2 = beta - 2 * step * totalSteps;
-				ax += radius * Math.sin(angle2);
-				ay += radius * Math.cos(angle2);
-				radius *= 2;
-			}
-			var _g = 0;
-			var _g1 = totalSteps + 1;
-			while(_g < _g1) {
-				var i = _g++;
-				var this1 = this.endLine;
-				if(this1 == 12 || this1 == 14) {
-					cx = fx + 0.5 * this.endCapFactor * radius * Math.sin(angle);
-					cy = fy + 0.5 * this.endCapFactor * radius * Math.cos(angle);
-					ex = fx - 0.5 * this.endCapFactor * radius * Math.sin(angle);
-					ey = fy - 0.5 * this.endCapFactor * radius * Math.cos(angle);
-				} else {
-					var this2 = this.endLine;
-					if(this2 == 18 || this2 == 20) {
-						var ry = this.endCapFactor * radius;
-						cx = ax + radius * Math.sin(angle);
-						cy = ay + ry * Math.cos(angle);
-						var cos = Math.cos(beta2);
-						var sin = Math.sin(beta2);
-						cx -= ax;
-						cy -= ay;
-						var ccx = cx;
-						var ccy = cy;
-						cx = ccx * cos - ccy * sin;
-						cy = ccx * sin + ccy * cos;
-						cx += ax;
-						cy += ay;
-					} else {
-						cx = ax + radius * Math.sin(angle);
-						cy = ay + radius * Math.cos(angle);
-					}
-				}
-				edgePoly[p2++] = cx;
-				edgePoly[p2++] = cy;
-				if(i != 0) {
-					var color_ = color;
-					if(color_ == null) {
-						color_ = -1;
-					}
-					this.pen.triangle2DFill(ax,ay,bx,by,cx,cy,color_);
-					var this3 = this.endLine;
-					if(this3 == 12 || this3 == 14) {
-						var deltaG = Math.pow(ay - gy,2) + Math.pow(ax - gx,2);
-						var deltaE = Math.pow(ay - ey,2) + Math.pow(ax - ex,2);
-						if(deltaE > delta || deltaG > delta) {
-							var color_1 = color;
-							if(color_1 == null) {
-								color_1 = -1;
-							}
-							this.pen.triangle2DFill(ax,ay,gx,gy,ex,ey,color_1);
-						}
-					}
-				}
-				angle += step;
-				bx = cx;
-				by = cy;
-				var this4 = this.endLine;
-				if(this4 == 12 || this4 == 14) {
-					gx = ex;
-					gy = ey;
-				}
-			}
-			if(this.endLine == 4) {
-				angle = angle + step * totalSteps / 2 - step;
-				cx = ax + radius * Math.sin(angle) * Math.sqrt(2);
-				cy = ay + radius * Math.cos(angle) * Math.sqrt(2);
-				var color_ = color;
-				if(color_ == null) {
-					color_ = -1;
-				}
-				this.pen.triangle2DFill(ax,ay,bx,by,cx,cy,color_);
-				bx = cx;
-				by = cy;
-				angle += step * (totalSteps / 2);
-				cx = ax + radius * Math.sin(angle);
-				cy = ay + radius * Math.cos(angle);
-				var color_ = color;
-				if(color_ == null) {
-					color_ = -1;
-				}
-				this.pen.triangle2DFill(ax,ay,bx,by,cx,cy,color_);
-				totalSteps += 2;
-			}
-		} else {
-			var this1 = this.endLine;
-			if(this1 == 9 || this1 == 11) {
-				angle = beta;
-				var ddx = ax - radius * this.endCapFactor * Math.sin(angle);
-				var ddy = ay - radius * this.endCapFactor * Math.cos(angle);
-				angle = beta - step * totalSteps / 2;
-				cx = ax - radius * this.endCapFactor * Math.sin(angle);
-				cy = ay - radius * this.endCapFactor * Math.cos(angle);
-				var color_ = color;
-				if(color_ == null) {
-					color_ = -1;
-				}
-				this.pen.triangle2DFill(ddx,ddy,cx,cy,ax,ay,color_);
-				bx = cx;
-				by = cy;
-				angle += step * totalSteps / 2;
-				cx = ax + radius * this.endCapFactor * Math.sin(angle);
-				cy = ay + radius * this.endCapFactor * Math.cos(angle);
-				var color_ = color;
-				if(color_ == null) {
-					color_ = -1;
-				}
-				this.pen.triangle2DFill(ax,ay,bx,by,cx,cy,color_);
-			} else {
-				var this1 = this.endLine;
-				if(this1 == 6 || this1 == 8) {
-					angle = beta;
-					var ddx = ax - radius * Math.sin(angle);
-					var ddy = ay - radius * Math.cos(angle);
-					angle = beta + step * totalSteps / 2;
-					cx = ax + radius * Math.sin(angle);
-					cy = ay + radius * Math.cos(angle);
-					var color_ = color;
-					if(color_ == null) {
-						color_ = -1;
-					}
-					this.pen.triangle2DFill(ddx,ddy,cx,cy,ax,ay,color_);
-					bx = cx;
-					by = cy;
-					angle -= step * totalSteps / 2;
-					cx = ax + radius * Math.sin(angle);
-					cy = ay + radius * Math.cos(angle);
-					var color_ = color;
-					if(color_ == null) {
-						color_ = -1;
-					}
-					this.pen.triangle2DFill(ax,ay,bx,by,cx,cy,color_);
-				} else {
-					var this1 = this.endLine;
-					if(this1 == 15 || this1 == 17) {
-						angle = beta;
-						var ddx = ax - radius * this.endCapFactor * Math.sin(angle);
-						var ddy = ay - radius * this.endCapFactor * Math.cos(angle);
-						angle = beta - step * totalSteps / 2;
-						cx = ddx - 2 * radius * this.endCapFactor * Math.sin(angle);
-						cy = ddy - 2 * radius * this.endCapFactor * Math.cos(angle);
-						var lastAngle = angle;
-						angle += step * totalSteps / 2;
-						ex = ax + radius * this.endCapFactor * Math.sin(angle);
-						ey = ay + radius * this.endCapFactor * Math.cos(angle);
-						fx = ex - 2 * radius * this.endCapFactor * Math.sin(lastAngle);
-						fy = ey - 2 * radius * this.endCapFactor * Math.cos(lastAngle);
-						var color_ = color;
-						if(color_ == null) {
-							color_ = -1;
-						}
-						this.pen.triangle2DFill(fx,fy,cx,cy,ddx,ddy,color_);
-						var color_ = color;
-						if(color_ == null) {
-							color_ = -1;
-						}
-						this.pen.triangle2DFill(fx,fy,ddx,ddy,ex,ey,color_);
-					}
-				}
-			}
-			totalSteps += 2;
-		}
-		return totalSteps;
-	}
-	,__class__: justGraphix_contour_Contour
-};
-var justGraphix_contour_IPen = function() { };
-justGraphix_contour_IPen.__name__ = "justGraphix.contour.IPen";
-justGraphix_contour_IPen.__isInterface__ = true;
-justGraphix_contour_IPen.prototype = {
-	__class__: justGraphix_contour_IPen
-	,__properties__: {set_pos:"set_pos",get_pos:"get_pos"}
-};
-var justGraphix_contour_Pen2D = function(col) {
-	var this4 = [];
-	this4[0] = 0.;
-	this.arr = this4;
-	this.currentColor = col;
-};
-justGraphix_contour_Pen2D.__name__ = "justGraphix.contour.Pen2D";
-justGraphix_contour_Pen2D.__interfaces__ = [justGraphix_contour_IPen];
-justGraphix_contour_Pen2D.prototype = {
-	get_pos: function() {
-		return this.arr[0];
-	}
-	,set_pos: function(val) {
-		this.arr[0] = val;
-		return val;
-	}
-	,triangle2DFill: function(ax,ay,bx,by,cx,cy,color) {
-		if(color == null || color == -1) {
-			color = this.currentColor;
-		}
-		var this1 = this.arr;
-		justGraphix_contour_io_Array2DTriangles.triangle(this1,ax,ay,bx,by,cx,cy);
-		if(color == null) {
-			justGraphix_contour_io_Array2DTriangles.set_colorInt(this1,16711680);
-		} else {
-			justGraphix_contour_io_Array2DTriangles.set_colorInt(this1,color);
-		}
-		var pos_ = this.arr[0] + 1;
-		this.arr[0] = pos_;
-		return 1;
-	}
-	,__class__: justGraphix_contour_Pen2D
-	,__properties__: {set_pos:"set_pos",get_pos:"get_pos"}
-};
 var justGraphix_path_IPathContext = function() { };
 justGraphix_path_IPathContext.__name__ = "justGraphix.path.IPathContext";
 justGraphix_path_IPathContext.__isInterface__ = true;
-justGraphix_path_IPathContext.prototype = {
-	__class__: justGraphix_path_IPathContext
+var justGraphix_path_ILinePathContext = function() { };
+justGraphix_path_ILinePathContext.__name__ = "justGraphix.path.ILinePathContext";
+justGraphix_path_ILinePathContext.__isInterface__ = true;
+justGraphix_path_ILinePathContext.prototype = {
+	__class__: justGraphix_path_ILinePathContext
 };
-var justGraphix_contour_Sketcher = function(pen_,sketchForm_,endLine_) {
-	if(endLine_ == null) {
-		endLine_ = 0;
-	}
-	this.pwmToggle = true;
-	this.toggle3 = 0;
-	this.distTotal = 0.;
-	this.width = 0.01;
-	this.fill = false;
-	this.penIsDown = true;
-	this.y = 0.;
-	this.x = 0.;
-	this.wasMove = false;
-	this.shortestSeg = 10.;
-	this.pwm3 = 3.;
-	this.pwm2 = 5.;
-	this.pwm1 = 10.;
-	this.pen = pen_;
-	this.endLine = endLine_;
-	this.contour = this.createContour();
-	this.sketchForm = sketchForm_;
-	switch(sketchForm_) {
-	case 0:
-		this.line = $bind(this,this.tracerLine);
-		break;
-	case 1:
-		this.line = $bind(this,this.baseLine);
-		break;
-	case 2:
-		this.line = $bind(this,this.crudeLine);
-		break;
-	case 3:
-		this.line = $bind(this,this.fillOnlyLine);
-		break;
-	case 4:
-		this.line = $bind(this,this.fineLine);
-		break;
-	case 5:
-		this.line = $bind(this,this.dash);
-		break;
-	case 6:
-		this.line = $bind(this,this.equidistant);
-		break;
-	case 7:
-		this.line = $bind(this,this.fineOverlapLine);
-		break;
-	case 8:
-		this.line = $bind(this,this.mediumLine);
-		break;
-	case 9:
-		this.line = $bind(this,this.mediumOverlapLine);
-		break;
-	case 10:
-		this.line = $bind(this,this.roundEndLine);
-		break;
-	case 11:
-		this.line = $bind(this,this.mitreLine);
-		break;
-	}
-	this.points = [];
-	this.pointsClock = [];
-	this.pointsAnti = [];
-	this.points[0] = [];
-	this.dim = [];
+var justGraphix_path_DrawAbstractHelper = function() {
+	this.toggleDraw = true;
+	this.y0 = 0.;
+	this.x0 = 0.;
 };
-justGraphix_contour_Sketcher.__name__ = "justGraphix.contour.Sketcher";
-justGraphix_contour_Sketcher.__interfaces__ = [justGraphix_path_IPathContext];
-justGraphix_contour_Sketcher.prototype = {
-	tracerLine: function(x_,y_) {
-		haxe_Log.trace("lineTo( " + this.x + ", " + this.y + ", " + x_ + ", " + y_ + ", width )",{ fileName : "src/justGraphix/contour/Sketcher.hx", lineNumber : 42, className : "justGraphix.contour.Sketcher", methodName : "tracerLine"});
+justGraphix_path_DrawAbstractHelper.__name__ = "justGraphix.path.DrawAbstractHelper";
+justGraphix_path_DrawAbstractHelper.__interfaces__ = [justGraphix_path_IPathContext,justGraphix_path_ILinePathContext];
+justGraphix_path_DrawAbstractHelper.prototype = {
+	moveTo: function(x1,y1) {
+		this.x0 = x1;
+		this.y0 = y1;
+		this.toggleDraw = true;
 	}
-	,fillOnlyLine: function(x_,y_) {
+	,__class__: justGraphix_path_DrawAbstractHelper
+};
+var justGraphix_contour_contourPath_DrawContourHelper = function(pixelImage,translateX,translateY,scaleX,scaleY,hitsAllowed) {
+	if(hitsAllowed == null) {
+		hitsAllowed = false;
 	}
-	,baseLine: function(x_,y_) {
-		haxe_Log.trace("lineTo( " + this.x + ", " + this.y + ", " + x_ + ", " + y_ + ", width )",{ fileName : "src/justGraphix/contour/Sketcher.hx", lineNumber : 42, className : "justGraphix.contour.Sketcher", methodName : "tracerLine"});
-		this.contour.line(this.x,this.y,x_,y_,this.width);
+	if(scaleY == null) {
+		scaleY = 1.;
 	}
-	,crudeLine: function(x_,y_) {
-		this.contour.line(this.x,this.y,x_,y_,this.width);
+	if(scaleX == null) {
+		scaleX = 1.;
 	}
-	,roundEndLine: function(x_,y_) {
-		this.contour.line(this.x,this.y,x_,y_,this.width,3);
+	if(translateY == null) {
+		translateY = 0.;
 	}
-	,mediumLine: function(x_,y_) {
-		this.contour.triangleJoin(this.x,this.y,x_,y_,this.width,false);
+	if(translateX == null) {
+		translateX = 0.;
 	}
-	,mediumOverlapLine: function(x_,y_) {
-		this.contour.triangleJoin(this.x,this.y,x_,y_,this.width,false,true);
+	this.pixelImage = pixelImage;
+	this.translateX = translateX;
+	this.translateY = translateY;
+	this.scaleX = scaleX;
+	this.scaleY = scaleY;
+	this.hitsAllowed = hitsAllowed;
+	if(hitsAllowed) {
+		this.hitsArr = new justGraphix_hit_HitObjArray([]);
 	}
-	,fineLine: function(x_,y_) {
-		this.contour.triangleJoin(this.x,this.y,x_,y_,this.width,true);
+	justGraphix_path_DrawAbstractHelper.call(this);
+};
+justGraphix_contour_contourPath_DrawContourHelper.__name__ = "justGraphix.contour.contourPath.DrawContourHelper";
+justGraphix_contour_contourPath_DrawContourHelper.__super__ = justGraphix_path_DrawAbstractHelper;
+justGraphix_contour_contourPath_DrawContourHelper.prototype = $extend(justGraphix_path_DrawAbstractHelper.prototype,{
+	__class__: justGraphix_contour_contourPath_DrawContourHelper
+});
+var justGraphix_contour_contourPath_DrawThinLineHelper = function(pixelImage,strokeColor,translateX,translateY,scaleX,scaleY,hitsAllowed) {
+	if(hitsAllowed == null) {
+		hitsAllowed = false;
 	}
-	,mitreLine: function(x_,y_) {
-		this.contour.useMitre = true;
-		this.contour.triangleJoin(this.x,this.y,x_,y_,this.width);
+	if(scaleY == null) {
+		scaleY = 1.;
 	}
-	,dash: function(x_,y_) {
-		this.contour.triangleJoin(this.x,this.y,x_,y_,this.width,false);
+	if(scaleX == null) {
+		scaleX = 1.;
 	}
-	,equidistant: function(x_,y_) {
+	if(translateY == null) {
+		translateY = 0.;
 	}
-	,fineOverlapLine: function(x_,y_) {
-		this.contour.triangleJoin(this.x,this.y,x_,y_,this.width,true,true);
+	if(translateX == null) {
+		translateX = 0.;
 	}
-	,createContour: function() {
-		return new justGraphix_contour_Contour(this.pen,this.endLine);
-	}
-	,moveTo: function(x_,y_) {
-		this.wasMove = true;
-		var tmp;
-		switch(this.endLine) {
-		case 0:case 1:case 6:case 9:case 12:case 15:case 18:
-			tmp = false;
-			break;
-		case 2:case 3:case 4:case 5:case 7:case 8:case 10:case 11:case 13:case 14:case 16:case 17:case 19:case 20:
-			tmp = true;
-			break;
-		}
-		if(tmp) {
-			this.contour.end(this.width);
-		}
-		this.x = x_;
-		this.y = y_;
-		var l = this.points.length;
-		this.points[l] = [];
-		this.points[l][0] = x_;
-		this.points[l][1] = y_;
-		this.pointsClock[this.pointsClock.length] = this.contour.pointsClock.slice();
-		this.pointsAnti[this.pointsAnti.length] = this.contour.pointsAnti.slice();
-		this.dim[this.dim.length] = { minX : Infinity, maxX : -Infinity, minY : Infinity, maxY : -Infinity};
-		var d = this.dim[this.dim.length - 1];
-		if(x_ < d.minX) {
-			d.minX = x_;
-		}
-		if(x_ > d.maxX) {
-			d.maxX = x_;
-		}
-		if(y_ < d.minY) {
-			d.minY = y_;
-		}
-		if(y_ > d.maxY) {
-			d.maxY = y_;
-		}
-		this.contour.reset();
-	}
-	,dashCurveTo: function(x_,y_) {
-		var repeat = this.x == x_ && this.y == y_;
-		if(!repeat) {
-			if(this.widthFunction != null) {
-				this.width = this.widthFunction(this.width,this.x,this.y,x_,y_);
+	justGraphix_contour_contourPath_DrawContourHelper.call(this,pixelImage,translateX,translateY,scaleX,scaleY,hitsAllowed);
+	this.strokeColor = strokeColor;
+	this.svgLinePath = new justGraphix_path_SvgLinePath(this);
+};
+justGraphix_contour_contourPath_DrawThinLineHelper.__name__ = "justGraphix.contour.contourPath.DrawThinLineHelper";
+justGraphix_contour_contourPath_DrawThinLineHelper.__super__ = justGraphix_contour_contourPath_DrawContourHelper;
+justGraphix_contour_contourPath_DrawThinLineHelper.prototype = $extend(justGraphix_contour_contourPath_DrawContourHelper.prototype,{
+	lineSegmentTo: function(x2,y2) {
+		if(this.toggleDraw) {
+			this.oldInfo = this.info;
+			var this1 = this.pixelImage;
+			var ax = this.x0 * this.scaleX + this.translateX;
+			var ay = this.y0 * this.scaleY + this.translateY;
+			var bx = x2 * this.scaleX + this.translateX;
+			var by = y2 * this.scaleY + this.translateY;
+			var color = this.strokeColor;
+			var alpha = (((color | 0) >> 24 & 255) / 255 - 0.000000000000001) * 0.5;
+			var brightRange = alpha;
+			if(brightRange == null) {
+				brightRange = 0.25;
 			}
-			if(this.colourFunction != null) {
-				this.pen.currentColor = this.colourFunction(this.pen.currentColor,this.x,this.y,x_,y_);
+			var x0 = ax;
+			var y0 = ay;
+			var x1 = bx;
+			var y1 = by;
+			var brightRange1 = brightRange;
+			if(brightRange1 == null) {
+				brightRange1 = 0.25;
 			}
-			var x1 = x_;
-			var y1 = y_;
-			var xx = this.x - x_;
-			var yy = this.y - y_;
-			var a1 = Math.atan2(yy,xx) - Math.PI;
-			var sin = Math.sin(a1);
-			var cos = Math.cos(a1);
-			var dist = sin != 0 ? -yy / sin : cos != 0 ? -xx / cos : 0.;
-			this.distTotal += dist;
-			switch(this.toggle3) {
-			case 0:
-				if(this.pwmToggle) {
-					this.line(x_,y_);
-					if(this.distTotal > this.pwm1) {
-						this.toggle3++;
-						this.pwmToggle = !this.pwmToggle;
-						this.distTotal = 0.;
+			var a = color >> 24 & 255;
+			var r = color >> 16 & 255;
+			var g = color >> 8 & 255;
+			var b = color & 255;
+			var steep = Math.abs(y1 - y0) > Math.abs(x1 - x0);
+			var temp = 0.;
+			if(steep) {
+				temp = y0;
+				y0 = x0;
+				x0 = temp;
+				temp = y1;
+				y1 = x1;
+				x1 = temp;
+			}
+			if(x0 > x1) {
+				temp = x1;
+				x1 = x0;
+				x0 = temp;
+				temp = y1;
+				y1 = y0;
+				y0 = temp;
+			}
+			var dx = x1 - x0;
+			var dy = y1 - y0;
+			var gradient = dx == 0.0 ? 1. : dy / dx;
+			var xend = Math.floor(x0) + 0.5;
+			var yend = y0 + gradient * (xend - x0);
+			var v = x0 + 0.5;
+			var xgap = 1 - v + Math.floor(v);
+			var xpxl1 = xend | 0;
+			var ypxl1 = Math.floor(yend);
+			var a0 = 0;
+			var range = brightRange1;
+			var solid = 1 - range;
+			var intery = yend + gradient;
+			var xend = Math.floor(x1) + 0.5;
+			var yend = y1 + gradient * (xend - x1);
+			var v = x1 + 0.5;
+			var xgap = v - Math.floor(v);
+			var xpxl2 = xend | 0;
+			var ypxl2 = Math.floor(yend);
+			var startX = xpxl1 + 1;
+			var endX = xpxl2 + 1;
+			if(steep) {
+				var _g = startX;
+				var _g1 = endX;
+				while(_g < _g1) {
+					var x = _g++;
+					var i = a * solid + range * a * (1 - intery + Math.floor(intery)) | 0;
+					if(i > 255) {
+						i = 255;
+					}
+					if(i < 0) {
+						i = 0;
+					}
+					a0 = i;
+					var x1 = Math.floor(intery);
+					var location = this1.useVirtualPos ? (x - this1.virtualY) * this1.width + x1 - this1.virtualX | 0 : x * this1.width + x1 | 0;
+					if(this1.transparent && a0 < 254) {
+						var this2 = this1.image.get(location);
+						var old = justGraphix_image_Endian_isLittleEndian ? (this2 >> 24 & 255) << 24 | (this2 & 255) << 16 | (this2 >> 8 & 255) << 8 | this2 >> 16 & 255 : this2;
+						var rhs = a0 << 24 | r << 16 | g << 8 | b;
+						var this3 = old >> 24 & 255;
+						var a1 = this3 == 0 ? 0. : this3 / 255;
+						var this4 = old >> 16 & 255;
+						var r1 = this4 == 0 ? 0. : this4 / 255;
+						var this5 = old >> 8 & 255;
+						var g1 = this5 == 0 ? 0. : this5 / 255;
+						var this6 = old & 255;
+						var b1 = this6 == 0 ? 0. : this6 / 255;
+						var this7 = rhs >> 24 & 255;
+						var a2 = this7 == 0 ? 0. : this7 / 255;
+						var this8 = rhs >> 16 & 255;
+						var r2 = this8 == 0 ? 0. : this8 / 255;
+						var this9 = rhs >> 8 & 255;
+						var g2 = this9 == 0 ? 0. : this9 / 255;
+						var this10 = rhs & 255;
+						var b2 = this10 == 0 ? 0. : this10 / 255;
+						var a3 = a1 * (1 - a2);
+						var r3 = 255 * (r1 * a3 + r2 * a2) | 0;
+						var g3 = 255 * (g1 * a3 + g2 * a2) | 0;
+						var b3 = 255 * (b1 * a3 + b2 * a2) | 0;
+						var a4 = 255 * (a3 + a2) | 0;
+						var blended = a4 << 24 | r3 << 16 | g3 << 8 | b3;
+						this1.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+					} else {
+						this1.image.set(location,this1.isLittle ? a0 << 24 | b << 16 | g << 8 | r : a0 << 24 | r << 16 | g << 8 | b);
+					}
+					var i1 = a * solid + range * a * (intery - Math.floor(intery)) | 0;
+					if(i1 > 255) {
+						i1 = 255;
+					}
+					if(i1 < 0) {
+						i1 = 0;
+					}
+					a0 = i1;
+					var x3 = Math.floor(intery) + 1;
+					var location1 = this1.useVirtualPos ? (x - this1.virtualY) * this1.width + x3 - this1.virtualX | 0 : x * this1.width + x3 | 0;
+					if(this1.transparent && a0 < 254) {
+						var this11 = this1.image.get(location1);
+						var old1 = justGraphix_image_Endian_isLittleEndian ? (this11 >> 24 & 255) << 24 | (this11 & 255) << 16 | (this11 >> 8 & 255) << 8 | this11 >> 16 & 255 : this11;
+						var rhs1 = a0 << 24 | r << 16 | g << 8 | b;
+						var this12 = old1 >> 24 & 255;
+						var a11 = this12 == 0 ? 0. : this12 / 255;
+						var this13 = old1 >> 16 & 255;
+						var r11 = this13 == 0 ? 0. : this13 / 255;
+						var this14 = old1 >> 8 & 255;
+						var g11 = this14 == 0 ? 0. : this14 / 255;
+						var this15 = old1 & 255;
+						var b11 = this15 == 0 ? 0. : this15 / 255;
+						var this16 = rhs1 >> 24 & 255;
+						var a21 = this16 == 0 ? 0. : this16 / 255;
+						var this17 = rhs1 >> 16 & 255;
+						var r21 = this17 == 0 ? 0. : this17 / 255;
+						var this18 = rhs1 >> 8 & 255;
+						var g21 = this18 == 0 ? 0. : this18 / 255;
+						var this19 = rhs1 & 255;
+						var b21 = this19 == 0 ? 0. : this19 / 255;
+						var a31 = a11 * (1 - a21);
+						var r4 = 255 * (r11 * a31 + r21 * a21) | 0;
+						var g4 = 255 * (g11 * a31 + g21 * a21) | 0;
+						var b4 = 255 * (b11 * a31 + b21 * a21) | 0;
+						var a5 = 255 * (a31 + a21) | 0;
+						var blended1 = a5 << 24 | r4 << 16 | g4 << 8 | b4;
+						this1.image.set(location1,justGraphix_image_Endian_isLittleEndian ? (blended1 >> 24 & 255) << 24 | (blended1 & 255) << 16 | (blended1 >> 8 & 255) << 8 | blended1 >> 16 & 255 : blended1);
+					} else {
+						this1.image.set(location1,this1.isLittle ? a0 << 24 | b << 16 | g << 8 | r : a0 << 24 | r << 16 | g << 8 | b);
+					}
+					intery += gradient;
+				}
+			} else {
+				var _g = startX;
+				var _g1 = endX;
+				while(_g < _g1) {
+					var x = _g++;
+					var i = a * solid + range * a * (1 - intery + Math.floor(intery)) | 0;
+					if(i > 255) {
+						i = 255;
+					}
+					if(i < 0) {
+						i = 0;
+					}
+					a0 = i;
+					var y = Math.floor(intery);
+					var location = this1.useVirtualPos ? (y - this1.virtualY) * this1.width + x - this1.virtualX | 0 : y * this1.width + x | 0;
+					if(this1.transparent && a0 < 254) {
+						var this2 = this1.image.get(location);
+						var old = justGraphix_image_Endian_isLittleEndian ? (this2 >> 24 & 255) << 24 | (this2 & 255) << 16 | (this2 >> 8 & 255) << 8 | this2 >> 16 & 255 : this2;
+						var rhs = a0 << 24 | r << 16 | g << 8 | b;
+						var this3 = old >> 24 & 255;
+						var a1 = this3 == 0 ? 0. : this3 / 255;
+						var this4 = old >> 16 & 255;
+						var r1 = this4 == 0 ? 0. : this4 / 255;
+						var this5 = old >> 8 & 255;
+						var g1 = this5 == 0 ? 0. : this5 / 255;
+						var this6 = old & 255;
+						var b1 = this6 == 0 ? 0. : this6 / 255;
+						var this7 = rhs >> 24 & 255;
+						var a2 = this7 == 0 ? 0. : this7 / 255;
+						var this8 = rhs >> 16 & 255;
+						var r2 = this8 == 0 ? 0. : this8 / 255;
+						var this9 = rhs >> 8 & 255;
+						var g2 = this9 == 0 ? 0. : this9 / 255;
+						var this10 = rhs & 255;
+						var b2 = this10 == 0 ? 0. : this10 / 255;
+						var a3 = a1 * (1 - a2);
+						var r3 = 255 * (r1 * a3 + r2 * a2) | 0;
+						var g3 = 255 * (g1 * a3 + g2 * a2) | 0;
+						var b3 = 255 * (b1 * a3 + b2 * a2) | 0;
+						var a4 = 255 * (a3 + a2) | 0;
+						var blended = a4 << 24 | r3 << 16 | g3 << 8 | b3;
+						this1.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+					} else {
+						this1.image.set(location,this1.isLittle ? a0 << 24 | b << 16 | g << 8 | r : a0 << 24 | r << 16 | g << 8 | b);
+					}
+					var i1 = a * solid + range * a * (intery - Math.floor(intery)) | 0;
+					if(i1 > 255) {
+						i1 = 255;
+					}
+					if(i1 < 0) {
+						i1 = 0;
+					}
+					a0 = i1;
+					var y1 = Math.floor(intery) + 1;
+					var location1 = this1.useVirtualPos ? (y1 - this1.virtualY) * this1.width + x - this1.virtualX | 0 : y1 * this1.width + x | 0;
+					if(this1.transparent && a0 < 254) {
+						var this11 = this1.image.get(location1);
+						var old1 = justGraphix_image_Endian_isLittleEndian ? (this11 >> 24 & 255) << 24 | (this11 & 255) << 16 | (this11 >> 8 & 255) << 8 | this11 >> 16 & 255 : this11;
+						var rhs1 = a0 << 24 | r << 16 | g << 8 | b;
+						var this12 = old1 >> 24 & 255;
+						var a11 = this12 == 0 ? 0. : this12 / 255;
+						var this13 = old1 >> 16 & 255;
+						var r11 = this13 == 0 ? 0. : this13 / 255;
+						var this14 = old1 >> 8 & 255;
+						var g11 = this14 == 0 ? 0. : this14 / 255;
+						var this15 = old1 & 255;
+						var b11 = this15 == 0 ? 0. : this15 / 255;
+						var this16 = rhs1 >> 24 & 255;
+						var a21 = this16 == 0 ? 0. : this16 / 255;
+						var this17 = rhs1 >> 16 & 255;
+						var r21 = this17 == 0 ? 0. : this17 / 255;
+						var this18 = rhs1 >> 8 & 255;
+						var g21 = this18 == 0 ? 0. : this18 / 255;
+						var this19 = rhs1 & 255;
+						var b21 = this19 == 0 ? 0. : this19 / 255;
+						var a31 = a11 * (1 - a21);
+						var r4 = 255 * (r11 * a31 + r21 * a21) | 0;
+						var g4 = 255 * (g11 * a31 + g21 * a21) | 0;
+						var b4 = 255 * (b11 * a31 + b21 * a21) | 0;
+						var a5 = 255 * (a31 + a21) | 0;
+						var blended1 = a5 << 24 | r4 << 16 | g4 << 8 | b4;
+						this1.image.set(location1,justGraphix_image_Endian_isLittleEndian ? (blended1 >> 24 & 255) << 24 | (blended1 & 255) << 16 | (blended1 >> 8 & 255) << 8 | blended1 >> 16 & 255 : blended1);
+					} else {
+						this1.image.set(location1,this1.isLittle ? a0 << 24 | b << 16 | g << 8 | r : a0 << 24 | r << 16 | g << 8 | b);
+					}
+					intery += gradient;
+				}
+			}
+			this.info = new justGraphix_hit_HitThinLine(ax,ay,bx,by);
+			if(this.info != null && this.oldInfo != null) {
+				var this1 = this.pixelImage;
+				var ax = this.oldInfo.bx * this.scaleX + this.translateX;
+				var ay = this.oldInfo.by * this.scaleY + this.translateY;
+				var bx = this.info.ax * this.scaleX + this.translateX;
+				var by = this.info.ay * this.scaleY + this.translateY;
+				var color = this.strokeColor;
+				var alpha = (((color | 0) >> 24 & 255) / 255 - 0.000000000000001) * 0.5;
+				var brightRange = alpha;
+				if(brightRange == null) {
+					brightRange = 0.25;
+				}
+				var x0 = ax;
+				var y0 = ay;
+				var x1 = bx;
+				var y1 = by;
+				var brightRange1 = brightRange;
+				if(brightRange1 == null) {
+					brightRange1 = 0.25;
+				}
+				var a = color >> 24 & 255;
+				var r = color >> 16 & 255;
+				var g = color >> 8 & 255;
+				var b = color & 255;
+				var steep = Math.abs(y1 - y0) > Math.abs(x1 - x0);
+				var temp = 0.;
+				if(steep) {
+					temp = y0;
+					y0 = x0;
+					x0 = temp;
+					temp = y1;
+					y1 = x1;
+					x1 = temp;
+				}
+				if(x0 > x1) {
+					temp = x1;
+					x1 = x0;
+					x0 = temp;
+					temp = y1;
+					y1 = y0;
+					y0 = temp;
+				}
+				var dx = x1 - x0;
+				var dy = y1 - y0;
+				var gradient = dx == 0.0 ? 1. : dy / dx;
+				var xend = Math.floor(x0) + 0.5;
+				var yend = y0 + gradient * (xend - x0);
+				var v = x0 + 0.5;
+				var xgap = 1 - v + Math.floor(v);
+				var xpxl1 = xend | 0;
+				var ypxl1 = Math.floor(yend);
+				var a0 = 0;
+				var range = brightRange1;
+				var solid = 1 - range;
+				var intery = yend + gradient;
+				var xend = Math.floor(x1) + 0.5;
+				var yend = y1 + gradient * (xend - x1);
+				var v = x1 + 0.5;
+				var xgap = v - Math.floor(v);
+				var xpxl2 = xend | 0;
+				var ypxl2 = Math.floor(yend);
+				var startX = xpxl1 + 1;
+				var endX = xpxl2 + 1;
+				if(steep) {
+					var _g = startX;
+					var _g1 = endX;
+					while(_g < _g1) {
+						var x = _g++;
+						var i = a * solid + range * a * (1 - intery + Math.floor(intery)) | 0;
+						if(i > 255) {
+							i = 255;
+						}
+						if(i < 0) {
+							i = 0;
+						}
+						a0 = i;
+						var x1 = Math.floor(intery);
+						var location = this1.useVirtualPos ? (x - this1.virtualY) * this1.width + x1 - this1.virtualX | 0 : x * this1.width + x1 | 0;
+						if(this1.transparent && a0 < 254) {
+							var this2 = this1.image.get(location);
+							var old = justGraphix_image_Endian_isLittleEndian ? (this2 >> 24 & 255) << 24 | (this2 & 255) << 16 | (this2 >> 8 & 255) << 8 | this2 >> 16 & 255 : this2;
+							var rhs = a0 << 24 | r << 16 | g << 8 | b;
+							var this3 = old >> 24 & 255;
+							var a1 = this3 == 0 ? 0. : this3 / 255;
+							var this4 = old >> 16 & 255;
+							var r1 = this4 == 0 ? 0. : this4 / 255;
+							var this5 = old >> 8 & 255;
+							var g1 = this5 == 0 ? 0. : this5 / 255;
+							var this6 = old & 255;
+							var b1 = this6 == 0 ? 0. : this6 / 255;
+							var this7 = rhs >> 24 & 255;
+							var a2 = this7 == 0 ? 0. : this7 / 255;
+							var this8 = rhs >> 16 & 255;
+							var r2 = this8 == 0 ? 0. : this8 / 255;
+							var this9 = rhs >> 8 & 255;
+							var g2 = this9 == 0 ? 0. : this9 / 255;
+							var this10 = rhs & 255;
+							var b2 = this10 == 0 ? 0. : this10 / 255;
+							var a3 = a1 * (1 - a2);
+							var r3 = 255 * (r1 * a3 + r2 * a2) | 0;
+							var g3 = 255 * (g1 * a3 + g2 * a2) | 0;
+							var b3 = 255 * (b1 * a3 + b2 * a2) | 0;
+							var a4 = 255 * (a3 + a2) | 0;
+							var blended = a4 << 24 | r3 << 16 | g3 << 8 | b3;
+							this1.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+						} else {
+							this1.image.set(location,this1.isLittle ? a0 << 24 | b << 16 | g << 8 | r : a0 << 24 | r << 16 | g << 8 | b);
+						}
+						var i1 = a * solid + range * a * (intery - Math.floor(intery)) | 0;
+						if(i1 > 255) {
+							i1 = 255;
+						}
+						if(i1 < 0) {
+							i1 = 0;
+						}
+						a0 = i1;
+						var x3 = Math.floor(intery) + 1;
+						var location1 = this1.useVirtualPos ? (x - this1.virtualY) * this1.width + x3 - this1.virtualX | 0 : x * this1.width + x3 | 0;
+						if(this1.transparent && a0 < 254) {
+							var this11 = this1.image.get(location1);
+							var old1 = justGraphix_image_Endian_isLittleEndian ? (this11 >> 24 & 255) << 24 | (this11 & 255) << 16 | (this11 >> 8 & 255) << 8 | this11 >> 16 & 255 : this11;
+							var rhs1 = a0 << 24 | r << 16 | g << 8 | b;
+							var this12 = old1 >> 24 & 255;
+							var a11 = this12 == 0 ? 0. : this12 / 255;
+							var this13 = old1 >> 16 & 255;
+							var r11 = this13 == 0 ? 0. : this13 / 255;
+							var this14 = old1 >> 8 & 255;
+							var g11 = this14 == 0 ? 0. : this14 / 255;
+							var this15 = old1 & 255;
+							var b11 = this15 == 0 ? 0. : this15 / 255;
+							var this16 = rhs1 >> 24 & 255;
+							var a21 = this16 == 0 ? 0. : this16 / 255;
+							var this17 = rhs1 >> 16 & 255;
+							var r21 = this17 == 0 ? 0. : this17 / 255;
+							var this18 = rhs1 >> 8 & 255;
+							var g21 = this18 == 0 ? 0. : this18 / 255;
+							var this19 = rhs1 & 255;
+							var b21 = this19 == 0 ? 0. : this19 / 255;
+							var a31 = a11 * (1 - a21);
+							var r4 = 255 * (r11 * a31 + r21 * a21) | 0;
+							var g4 = 255 * (g11 * a31 + g21 * a21) | 0;
+							var b4 = 255 * (b11 * a31 + b21 * a21) | 0;
+							var a5 = 255 * (a31 + a21) | 0;
+							var blended1 = a5 << 24 | r4 << 16 | g4 << 8 | b4;
+							this1.image.set(location1,justGraphix_image_Endian_isLittleEndian ? (blended1 >> 24 & 255) << 24 | (blended1 & 255) << 16 | (blended1 >> 8 & 255) << 8 | blended1 >> 16 & 255 : blended1);
+						} else {
+							this1.image.set(location1,this1.isLittle ? a0 << 24 | b << 16 | g << 8 | r : a0 << 24 | r << 16 | g << 8 | b);
+						}
+						intery += gradient;
 					}
 				} else {
-					this.line(x_,y_);
-					if(this.distTotal > this.pwm2) {
-						this.toggle3++;
-						this.pwmToggle = !this.pwmToggle;
-						this.distTotal = 0.;
-					}
-				}
-				break;
-			case 1:
-				this.wasMove = true;
-				var tmp;
-				switch(this.endLine) {
-				case 0:case 1:case 6:case 9:case 12:case 15:case 18:
-					tmp = false;
-					break;
-				case 2:case 3:case 4:case 5:case 7:case 8:case 10:case 11:case 13:case 14:case 16:case 17:case 19:case 20:
-					tmp = true;
-					break;
-				}
-				if(tmp) {
-					this.contour.end(this.width);
-				}
-				this.x = x_;
-				this.y = y_;
-				var l = this.points.length;
-				this.points[l] = [];
-				this.points[l][0] = x_;
-				this.points[l][1] = y_;
-				this.pointsClock[this.pointsClock.length] = this.contour.pointsClock.slice();
-				this.pointsAnti[this.pointsAnti.length] = this.contour.pointsAnti.slice();
-				this.dim[this.dim.length] = { minX : Infinity, maxX : -Infinity, minY : Infinity, maxY : -Infinity};
-				var d = this.dim[this.dim.length - 1];
-				if(x_ < d.minX) {
-					d.minX = x_;
-				}
-				if(x_ > d.maxX) {
-					d.maxX = x_;
-				}
-				if(y_ < d.minY) {
-					d.minY = y_;
-				}
-				if(y_ > d.maxY) {
-					d.maxY = y_;
-				}
-				this.contour.reset();
-				if(this.distTotal > this.pwm3 + this.width / 2) {
-					this.toggle3++;
-					this.distTotal = 0.;
-				}
-				break;
-			default:
-				this.wasMove = true;
-				var tmp;
-				switch(this.endLine) {
-				case 0:case 1:case 6:case 9:case 12:case 15:case 18:
-					tmp = false;
-					break;
-				case 2:case 3:case 4:case 5:case 7:case 8:case 10:case 11:case 13:case 14:case 16:case 17:case 19:case 20:
-					tmp = true;
-					break;
-				}
-				if(tmp) {
-					this.contour.end(this.width);
-				}
-				this.x = x_;
-				this.y = y_;
-				var l = this.points.length;
-				this.points[l] = [];
-				this.points[l][0] = x_;
-				this.points[l][1] = y_;
-				this.pointsClock[this.pointsClock.length] = this.contour.pointsClock.slice();
-				this.pointsAnti[this.pointsAnti.length] = this.contour.pointsAnti.slice();
-				this.dim[this.dim.length] = { minX : Infinity, maxX : -Infinity, minY : Infinity, maxY : -Infinity};
-				var d = this.dim[this.dim.length - 1];
-				if(x_ < d.minX) {
-					d.minX = x_;
-				}
-				if(x_ > d.maxX) {
-					d.maxX = x_;
-				}
-				if(y_ < d.minY) {
-					d.minY = y_;
-				}
-				if(y_ > d.maxY) {
-					d.maxY = y_;
-				}
-				this.contour.reset();
-				if(this.distTotal > this.pwm3 + this.width / 2) {
-					this.distTotal = 0.;
-					if(this.toggle3 == 2) {
-						this.toggle3 = 0;
-					}
-				}
-			}
-			var l = this.points.length;
-			var p = this.points[l - 1];
-			var l2 = p.length;
-			p[l2] = x_;
-			p[l2 + 1] = y_;
-			var d = this.dim[this.dim.length - 1];
-			if(x_ < d.minX) {
-				d.minX = x_;
-			}
-			if(x_ > d.maxX) {
-				d.maxX = x_;
-			}
-			if(y_ < d.minY) {
-				d.minY = y_;
-			}
-			if(y_ > d.maxY) {
-				d.maxY = y_;
-			}
-			this.x = x_;
-			this.y = y_;
-		}
-	}
-	,lineTo: function(x_,y_) {
-		var repeat = this.x == x_ && this.y == y_;
-		if(!repeat) {
-			if(this.widthFunction != null) {
-				this.width = this.widthFunction(this.width,this.x,this.y,x_,y_);
-			}
-			if(this.colourFunction != null) {
-				this.pen.currentColor = this.colourFunction(this.pen.currentColor,this.x,this.y,x_,y_);
-			}
-			if(this.sketchForm == 5) {
-				var x1 = x_;
-				var y1 = y_;
-				var xx = this.x - x_;
-				var yy = this.y - y_;
-				var a1 = Math.atan2(yy,xx) - Math.PI;
-				var sin = Math.sin(a1);
-				var cos = Math.cos(a1);
-				var dx1 = this.pwm1 * cos;
-				var dy1 = this.pwm1 * sin;
-				var dx2 = this.pwm2 * cos;
-				var dy2 = this.pwm2 * sin;
-				var dx3 = this.pwm3 * cos;
-				var dy3 = this.pwm3 * sin;
-				var dist = sin != 0 ? -yy / sin : cos != 0 ? -xx / cos : 0.;
-				if(dist < this.shortestSeg) {
-					var x11 = x_;
-					var y11 = y_;
-					var xx = this.x - x_;
-					var yy = this.y - y_;
-					var a1 = Math.atan2(yy,xx) - Math.PI;
-					var sin = Math.sin(a1);
-					var cos = Math.cos(a1);
-					var dist1 = sin != 0 ? -yy / sin : cos != 0 ? -xx / cos : 0.;
-					this.distTotal += dist1;
-					switch(this.toggle3) {
-					case 0:
-						if(this.pwmToggle) {
-							this.line(x_,y_);
-							if(this.distTotal > this.pwm1) {
-								this.toggle3++;
-								this.pwmToggle = !this.pwmToggle;
-								this.distTotal = 0.;
-							}
+					var _g = startX;
+					var _g1 = endX;
+					while(_g < _g1) {
+						var x = _g++;
+						var i = a * solid + range * a * (1 - intery + Math.floor(intery)) | 0;
+						if(i > 255) {
+							i = 255;
+						}
+						if(i < 0) {
+							i = 0;
+						}
+						a0 = i;
+						var y = Math.floor(intery);
+						var location = this1.useVirtualPos ? (y - this1.virtualY) * this1.width + x - this1.virtualX | 0 : y * this1.width + x | 0;
+						if(this1.transparent && a0 < 254) {
+							var this2 = this1.image.get(location);
+							var old = justGraphix_image_Endian_isLittleEndian ? (this2 >> 24 & 255) << 24 | (this2 & 255) << 16 | (this2 >> 8 & 255) << 8 | this2 >> 16 & 255 : this2;
+							var rhs = a0 << 24 | r << 16 | g << 8 | b;
+							var this3 = old >> 24 & 255;
+							var a1 = this3 == 0 ? 0. : this3 / 255;
+							var this4 = old >> 16 & 255;
+							var r1 = this4 == 0 ? 0. : this4 / 255;
+							var this5 = old >> 8 & 255;
+							var g1 = this5 == 0 ? 0. : this5 / 255;
+							var this6 = old & 255;
+							var b1 = this6 == 0 ? 0. : this6 / 255;
+							var this7 = rhs >> 24 & 255;
+							var a2 = this7 == 0 ? 0. : this7 / 255;
+							var this8 = rhs >> 16 & 255;
+							var r2 = this8 == 0 ? 0. : this8 / 255;
+							var this9 = rhs >> 8 & 255;
+							var g2 = this9 == 0 ? 0. : this9 / 255;
+							var this10 = rhs & 255;
+							var b2 = this10 == 0 ? 0. : this10 / 255;
+							var a3 = a1 * (1 - a2);
+							var r3 = 255 * (r1 * a3 + r2 * a2) | 0;
+							var g3 = 255 * (g1 * a3 + g2 * a2) | 0;
+							var b3 = 255 * (b1 * a3 + b2 * a2) | 0;
+							var a4 = 255 * (a3 + a2) | 0;
+							var blended = a4 << 24 | r3 << 16 | g3 << 8 | b3;
+							this1.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
 						} else {
-							this.line(x_,y_);
-							if(this.distTotal > this.pwm2) {
-								this.toggle3++;
-								this.pwmToggle = !this.pwmToggle;
-								this.distTotal = 0.;
-							}
+							this1.image.set(location,this1.isLittle ? a0 << 24 | b << 16 | g << 8 | r : a0 << 24 | r << 16 | g << 8 | b);
 						}
-						break;
-					case 1:
-						this.wasMove = true;
-						var tmp;
-						switch(this.endLine) {
-						case 0:case 1:case 6:case 9:case 12:case 15:case 18:
-							tmp = false;
-							break;
-						case 2:case 3:case 4:case 5:case 7:case 8:case 10:case 11:case 13:case 14:case 16:case 17:case 19:case 20:
-							tmp = true;
-							break;
+						var i1 = a * solid + range * a * (intery - Math.floor(intery)) | 0;
+						if(i1 > 255) {
+							i1 = 255;
 						}
-						if(tmp) {
-							this.contour.end(this.width);
+						if(i1 < 0) {
+							i1 = 0;
 						}
-						this.x = x_;
-						this.y = y_;
-						var l = this.points.length;
-						this.points[l] = [];
-						this.points[l][0] = x_;
-						this.points[l][1] = y_;
-						this.pointsClock[this.pointsClock.length] = this.contour.pointsClock.slice();
-						this.pointsAnti[this.pointsAnti.length] = this.contour.pointsAnti.slice();
-						this.dim[this.dim.length] = { minX : Infinity, maxX : -Infinity, minY : Infinity, maxY : -Infinity};
-						var d = this.dim[this.dim.length - 1];
-						if(x_ < d.minX) {
-							d.minX = x_;
+						a0 = i1;
+						var y1 = Math.floor(intery) + 1;
+						var location1 = this1.useVirtualPos ? (y1 - this1.virtualY) * this1.width + x - this1.virtualX | 0 : y1 * this1.width + x | 0;
+						if(this1.transparent && a0 < 254) {
+							var this11 = this1.image.get(location1);
+							var old1 = justGraphix_image_Endian_isLittleEndian ? (this11 >> 24 & 255) << 24 | (this11 & 255) << 16 | (this11 >> 8 & 255) << 8 | this11 >> 16 & 255 : this11;
+							var rhs1 = a0 << 24 | r << 16 | g << 8 | b;
+							var this12 = old1 >> 24 & 255;
+							var a11 = this12 == 0 ? 0. : this12 / 255;
+							var this13 = old1 >> 16 & 255;
+							var r11 = this13 == 0 ? 0. : this13 / 255;
+							var this14 = old1 >> 8 & 255;
+							var g11 = this14 == 0 ? 0. : this14 / 255;
+							var this15 = old1 & 255;
+							var b11 = this15 == 0 ? 0. : this15 / 255;
+							var this16 = rhs1 >> 24 & 255;
+							var a21 = this16 == 0 ? 0. : this16 / 255;
+							var this17 = rhs1 >> 16 & 255;
+							var r21 = this17 == 0 ? 0. : this17 / 255;
+							var this18 = rhs1 >> 8 & 255;
+							var g21 = this18 == 0 ? 0. : this18 / 255;
+							var this19 = rhs1 & 255;
+							var b21 = this19 == 0 ? 0. : this19 / 255;
+							var a31 = a11 * (1 - a21);
+							var r4 = 255 * (r11 * a31 + r21 * a21) | 0;
+							var g4 = 255 * (g11 * a31 + g21 * a21) | 0;
+							var b4 = 255 * (b11 * a31 + b21 * a21) | 0;
+							var a5 = 255 * (a31 + a21) | 0;
+							var blended1 = a5 << 24 | r4 << 16 | g4 << 8 | b4;
+							this1.image.set(location1,justGraphix_image_Endian_isLittleEndian ? (blended1 >> 24 & 255) << 24 | (blended1 & 255) << 16 | (blended1 >> 8 & 255) << 8 | blended1 >> 16 & 255 : blended1);
+						} else {
+							this1.image.set(location1,this1.isLittle ? a0 << 24 | b << 16 | g << 8 | r : a0 << 24 | r << 16 | g << 8 | b);
 						}
-						if(x_ > d.maxX) {
-							d.maxX = x_;
-						}
-						if(y_ < d.minY) {
-							d.minY = y_;
-						}
-						if(y_ > d.maxY) {
-							d.maxY = y_;
-						}
-						this.contour.reset();
-						if(this.distTotal > this.pwm3 + this.width / 2) {
-							this.toggle3++;
-							this.distTotal = 0.;
-						}
-						break;
-					default:
-						this.wasMove = true;
-						var tmp;
-						switch(this.endLine) {
-						case 0:case 1:case 6:case 9:case 12:case 15:case 18:
-							tmp = false;
-							break;
-						case 2:case 3:case 4:case 5:case 7:case 8:case 10:case 11:case 13:case 14:case 16:case 17:case 19:case 20:
-							tmp = true;
-							break;
-						}
-						if(tmp) {
-							this.contour.end(this.width);
-						}
-						this.x = x_;
-						this.y = y_;
-						var l = this.points.length;
-						this.points[l] = [];
-						this.points[l][0] = x_;
-						this.points[l][1] = y_;
-						this.pointsClock[this.pointsClock.length] = this.contour.pointsClock.slice();
-						this.pointsAnti[this.pointsAnti.length] = this.contour.pointsAnti.slice();
-						this.dim[this.dim.length] = { minX : Infinity, maxX : -Infinity, minY : Infinity, maxY : -Infinity};
-						var d = this.dim[this.dim.length - 1];
-						if(x_ < d.minX) {
-							d.minX = x_;
-						}
-						if(x_ > d.maxX) {
-							d.maxX = x_;
-						}
-						if(y_ < d.minY) {
-							d.minY = y_;
-						}
-						if(y_ > d.maxY) {
-							d.maxY = y_;
-						}
-						this.contour.reset();
-						if(this.distTotal > this.pwm3 + this.width / 2) {
-							this.distTotal = 0.;
-							if(this.toggle3 == 2) {
-								this.toggle3 = 0;
-							}
-						}
+						intery += gradient;
 					}
+				}
+				var temp = new justGraphix_hit_HitThinLine(ax,ay,bx,by);
+				if(this.hitsAllowed) {
+					this.hitsArr.push(temp);
+				}
+			}
+			if(this.hitsAllowed) {
+				this.hitsArr.push(this.info);
+			}
+		}
+		this.toggleDraw = !this.toggleDraw;
+		this.x0 = x2;
+		this.y0 = y2;
+	}
+	,lineTo: function(x2,y2) {
+		this.oldInfo = this.info;
+		var this1 = this.pixelImage;
+		var ax = this.x0 * this.scaleX + this.translateX;
+		var ay = this.y0 * this.scaleY + this.translateY;
+		var bx = x2 * this.scaleX + this.translateX;
+		var by = y2 * this.scaleY + this.translateY;
+		var color = this.strokeColor;
+		var alpha = (((color | 0) >> 24 & 255) / 255 - 0.000000000000001) * 0.5;
+		var brightRange = alpha;
+		if(brightRange == null) {
+			brightRange = 0.25;
+		}
+		var x0 = ax;
+		var y0 = ay;
+		var x1 = bx;
+		var y1 = by;
+		var brightRange1 = brightRange;
+		if(brightRange1 == null) {
+			brightRange1 = 0.25;
+		}
+		var a = color >> 24 & 255;
+		var r = color >> 16 & 255;
+		var g = color >> 8 & 255;
+		var b = color & 255;
+		var steep = Math.abs(y1 - y0) > Math.abs(x1 - x0);
+		var temp = 0.;
+		if(steep) {
+			temp = y0;
+			y0 = x0;
+			x0 = temp;
+			temp = y1;
+			y1 = x1;
+			x1 = temp;
+		}
+		if(x0 > x1) {
+			temp = x1;
+			x1 = x0;
+			x0 = temp;
+			temp = y1;
+			y1 = y0;
+			y0 = temp;
+		}
+		var dx = x1 - x0;
+		var dy = y1 - y0;
+		var gradient = dx == 0.0 ? 1. : dy / dx;
+		var xend = Math.floor(x0) + 0.5;
+		var yend = y0 + gradient * (xend - x0);
+		var v = x0 + 0.5;
+		var xgap = 1 - v + Math.floor(v);
+		var xpxl1 = xend | 0;
+		var ypxl1 = Math.floor(yend);
+		var a0 = 0;
+		var range = brightRange1;
+		var solid = 1 - range;
+		var intery = yend + gradient;
+		var xend = Math.floor(x1) + 0.5;
+		var yend = y1 + gradient * (xend - x1);
+		var v = x1 + 0.5;
+		var xgap = v - Math.floor(v);
+		var xpxl2 = xend | 0;
+		var ypxl2 = Math.floor(yend);
+		var startX = xpxl1 + 1;
+		var endX = xpxl2 + 1;
+		if(steep) {
+			var _g = startX;
+			var _g1 = endX;
+			while(_g < _g1) {
+				var x = _g++;
+				var i = a * solid + range * a * (1 - intery + Math.floor(intery)) | 0;
+				if(i > 255) {
+					i = 255;
+				}
+				if(i < 0) {
+					i = 0;
+				}
+				a0 = i;
+				var x1 = Math.floor(intery);
+				var location = this1.useVirtualPos ? (x - this1.virtualY) * this1.width + x1 - this1.virtualX | 0 : x * this1.width + x1 | 0;
+				if(this1.transparent && a0 < 254) {
+					var this2 = this1.image.get(location);
+					var old = justGraphix_image_Endian_isLittleEndian ? (this2 >> 24 & 255) << 24 | (this2 & 255) << 16 | (this2 >> 8 & 255) << 8 | this2 >> 16 & 255 : this2;
+					var rhs = a0 << 24 | r << 16 | g << 8 | b;
+					var this3 = old >> 24 & 255;
+					var a1 = this3 == 0 ? 0. : this3 / 255;
+					var this4 = old >> 16 & 255;
+					var r1 = this4 == 0 ? 0. : this4 / 255;
+					var this5 = old >> 8 & 255;
+					var g1 = this5 == 0 ? 0. : this5 / 255;
+					var this6 = old & 255;
+					var b1 = this6 == 0 ? 0. : this6 / 255;
+					var this7 = rhs >> 24 & 255;
+					var a2 = this7 == 0 ? 0. : this7 / 255;
+					var this8 = rhs >> 16 & 255;
+					var r2 = this8 == 0 ? 0. : this8 / 255;
+					var this9 = rhs >> 8 & 255;
+					var g2 = this9 == 0 ? 0. : this9 / 255;
+					var this10 = rhs & 255;
+					var b2 = this10 == 0 ? 0. : this10 / 255;
+					var a3 = a1 * (1 - a2);
+					var r3 = 255 * (r1 * a3 + r2 * a2) | 0;
+					var g3 = 255 * (g1 * a3 + g2 * a2) | 0;
+					var b3 = 255 * (b1 * a3 + b2 * a2) | 0;
+					var a4 = 255 * (a3 + a2) | 0;
+					var blended = a4 << 24 | r3 << 16 | g3 << 8 | b3;
+					this1.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
 				} else {
-					this.distTotal += dist;
-					dist -= this.pwm2;
-					var px = this.x;
-					var py = this.y;
-					var pz = 0.;
-					px += dx2;
-					py += dy2;
-					this.wasMove = true;
-					var tmp;
-					switch(this.endLine) {
-					case 0:case 1:case 6:case 9:case 12:case 15:case 18:
-						tmp = false;
-						break;
-					case 2:case 3:case 4:case 5:case 7:case 8:case 10:case 11:case 13:case 14:case 16:case 17:case 19:case 20:
-						tmp = true;
-						break;
-					}
-					if(tmp) {
-						this.contour.end(this.width);
-					}
-					this.x = px;
-					this.y = py;
-					var l = this.points.length;
-					this.points[l] = [];
-					this.points[l][0] = px;
-					this.points[l][1] = py;
-					this.pointsClock[this.pointsClock.length] = this.contour.pointsClock.slice();
-					this.pointsAnti[this.pointsAnti.length] = this.contour.pointsAnti.slice();
-					this.dim[this.dim.length] = { minX : Infinity, maxX : -Infinity, minY : Infinity, maxY : -Infinity};
-					var d = this.dim[this.dim.length - 1];
-					if(px < d.minX) {
-						d.minX = px;
-					}
-					if(px > d.maxX) {
-						d.maxX = px;
-					}
-					if(py < d.minY) {
-						d.minY = py;
-					}
-					if(py > d.maxY) {
-						d.maxY = py;
-					}
-					this.contour.reset();
-					while(pz < dist) {
-						if(this.toggle3 == 0) {
-							if(this.pwmToggle) {
-								pz += this.pwm1;
-								px += dx1;
-								py += dy1;
-								this.pwmToggle = !this.pwmToggle;
-								this.line(px,py);
-								if(pz - this.pwm1 > dist) {
-									this.distTotal = 0.;
-									break;
-								}
-							} else {
-								pz += this.pwm3;
-								px += dx3;
-								py += dy3;
-								this.pwmToggle = !this.pwmToggle;
-								this.line(px,py);
-								if(pz - this.pwm3 > dist) {
-									this.distTotal = 0.;
-									break;
-								}
-							}
-						} else {
-							if(this.toggle3 == 1) {
-								pz += this.pwm1;
-								px += dx1;
-								py += dy1;
-								if(pz - this.pwm1 > dist + this.width / 2) {
-									this.distTotal = 0.;
-									break;
-								}
-							} else {
-								pz += this.pwm2;
-								px += dx2;
-								py += dy2;
-								if(pz - this.pwm2 > dist + this.width / 2) {
-									this.distTotal = 0.;
-									break;
-								}
-							}
-							this.wasMove = true;
-							var tmp;
-							switch(this.endLine) {
-							case 0:case 1:case 6:case 9:case 12:case 15:case 18:
-								tmp = false;
-								break;
-							case 2:case 3:case 4:case 5:case 7:case 8:case 10:case 11:case 13:case 14:case 16:case 17:case 19:case 20:
-								tmp = true;
-								break;
-							}
-							if(tmp) {
-								this.contour.end(this.width);
-							}
-							this.x = px;
-							this.y = py;
-							var l = this.points.length;
-							this.points[l] = [];
-							this.points[l][0] = px;
-							this.points[l][1] = py;
-							this.pointsClock[this.pointsClock.length] = this.contour.pointsClock.slice();
-							this.pointsAnti[this.pointsAnti.length] = this.contour.pointsAnti.slice();
-							this.dim[this.dim.length] = { minX : Infinity, maxX : -Infinity, minY : Infinity, maxY : -Infinity};
-							var d = this.dim[this.dim.length - 1];
-							if(px < d.minX) {
-								d.minX = px;
-							}
-							if(px > d.maxX) {
-								d.maxX = px;
-							}
-							if(py < d.minY) {
-								d.minY = py;
-							}
-							if(py > d.maxY) {
-								d.maxY = py;
-							}
-							this.contour.reset();
-						}
-						this.toggle3++;
-						if(this.toggle3 == 2) {
-							this.toggle3 = 0;
-						}
-					}
-					this.wasMove = true;
-					var tmp;
-					switch(this.endLine) {
-					case 0:case 1:case 6:case 9:case 12:case 15:case 18:
-						tmp = false;
-						break;
-					case 2:case 3:case 4:case 5:case 7:case 8:case 10:case 11:case 13:case 14:case 16:case 17:case 19:case 20:
-						tmp = true;
-						break;
-					}
-					if(tmp) {
-						this.contour.end(this.width);
-					}
-					this.x = x_;
-					this.y = y_;
-					var l = this.points.length;
-					this.points[l] = [];
-					this.points[l][0] = x_;
-					this.points[l][1] = y_;
-					this.pointsClock[this.pointsClock.length] = this.contour.pointsClock.slice();
-					this.pointsAnti[this.pointsAnti.length] = this.contour.pointsAnti.slice();
-					this.dim[this.dim.length] = { minX : Infinity, maxX : -Infinity, minY : Infinity, maxY : -Infinity};
-					var d = this.dim[this.dim.length - 1];
-					if(x_ < d.minX) {
-						d.minX = x_;
-					}
-					if(x_ > d.maxX) {
-						d.maxX = x_;
-					}
-					if(y_ < d.minY) {
-						d.minY = y_;
-					}
-					if(y_ > d.maxY) {
-						d.maxY = y_;
-					}
-					this.contour.reset();
-					this.x = x1;
-					this.y = y1;
+					this1.image.set(location,this1.isLittle ? a0 << 24 | b << 16 | g << 8 | r : a0 << 24 | r << 16 | g << 8 | b);
 				}
-			} else {
-				this.line(x_,y_);
-			}
-			var l = this.points.length;
-			var p = this.points[l - 1];
-			var l2 = p.length;
-			p[l2] = x_;
-			p[l2 + 1] = y_;
-			var d = this.dim[this.dim.length - 1];
-			if(x_ < d.minX) {
-				d.minX = x_;
-			}
-			if(x_ > d.maxX) {
-				d.maxX = x_;
-			}
-			if(y_ < d.minY) {
-				d.minY = y_;
-			}
-			if(y_ > d.maxY) {
-				d.maxY = y_;
-			}
-			this.x = x_;
-			this.y = y_;
-		}
-	}
-	,quadTo: function(x1,y1,x2,y2) {
-		this.tempArr = [];
-		var p = this.tempArr;
-		var ax = this.x;
-		var ay = this.y;
-		var x = ax - x1;
-		var y = ay - y1;
-		var x3 = x1 - x2;
-		var y3 = y1 - y2;
-		var approxDistance = Math.sqrt(x * x + y * y) + Math.sqrt(x3 * x3 + y3 * y3);
-		if(approxDistance == 0) {
-			approxDistance = 0.000001;
-		}
-		var step = Math.min(1 / (approxDistance * 0.707),justGraphix_curve_CurveMath_quadStep);
-		var l = p.length;
-		p[l++] = ax;
-		p[l++] = ay;
-		var t = step;
-		while(t < 1.) {
-			var u = 1 - t;
-			p[l++] = Math.pow(u,2) * ax + 2 * u * t * x1 + Math.pow(t,2) * x2;
-			var u1 = 1 - t;
-			p[l++] = Math.pow(u1,2) * ay + 2 * u1 * t * y1 + Math.pow(t,2) * y2;
-			t += step;
-		}
-		p[l++] = x2;
-		p[l++] = y2;
-		if(this.sketchForm == 5) {
-			var j = 0;
-			var l = this.tempArr.length / 2 | 0;
-			var _g = 1;
-			var _g1 = l;
-			while(_g < _g1) {
-				var i = _g++;
-				j = i * 2;
-				this.dashCurveTo(this.tempArr[j],this.tempArr[j + 1]);
+				var i1 = a * solid + range * a * (intery - Math.floor(intery)) | 0;
+				if(i1 > 255) {
+					i1 = 255;
+				}
+				if(i1 < 0) {
+					i1 = 0;
+				}
+				a0 = i1;
+				var x3 = Math.floor(intery) + 1;
+				var location1 = this1.useVirtualPos ? (x - this1.virtualY) * this1.width + x3 - this1.virtualX | 0 : x * this1.width + x3 | 0;
+				if(this1.transparent && a0 < 254) {
+					var this11 = this1.image.get(location1);
+					var old1 = justGraphix_image_Endian_isLittleEndian ? (this11 >> 24 & 255) << 24 | (this11 & 255) << 16 | (this11 >> 8 & 255) << 8 | this11 >> 16 & 255 : this11;
+					var rhs1 = a0 << 24 | r << 16 | g << 8 | b;
+					var this12 = old1 >> 24 & 255;
+					var a11 = this12 == 0 ? 0. : this12 / 255;
+					var this13 = old1 >> 16 & 255;
+					var r11 = this13 == 0 ? 0. : this13 / 255;
+					var this14 = old1 >> 8 & 255;
+					var g11 = this14 == 0 ? 0. : this14 / 255;
+					var this15 = old1 & 255;
+					var b11 = this15 == 0 ? 0. : this15 / 255;
+					var this16 = rhs1 >> 24 & 255;
+					var a21 = this16 == 0 ? 0. : this16 / 255;
+					var this17 = rhs1 >> 16 & 255;
+					var r21 = this17 == 0 ? 0. : this17 / 255;
+					var this18 = rhs1 >> 8 & 255;
+					var g21 = this18 == 0 ? 0. : this18 / 255;
+					var this19 = rhs1 & 255;
+					var b21 = this19 == 0 ? 0. : this19 / 255;
+					var a31 = a11 * (1 - a21);
+					var r4 = 255 * (r11 * a31 + r21 * a21) | 0;
+					var g4 = 255 * (g11 * a31 + g21 * a21) | 0;
+					var b4 = 255 * (b11 * a31 + b21 * a21) | 0;
+					var a5 = 255 * (a31 + a21) | 0;
+					var blended1 = a5 << 24 | r4 << 16 | g4 << 8 | b4;
+					this1.image.set(location1,justGraphix_image_Endian_isLittleEndian ? (blended1 >> 24 & 255) << 24 | (blended1 & 255) << 16 | (blended1 >> 8 & 255) << 8 | blended1 >> 16 & 255 : blended1);
+				} else {
+					this1.image.set(location1,this1.isLittle ? a0 << 24 | b << 16 | g << 8 | r : a0 << 24 | r << 16 | g << 8 | b);
+				}
+				intery += gradient;
 			}
 		} else {
-			var arr = this.tempArr;
-			var withMove = false;
-			if(withMove == null) {
-				withMove = true;
-			}
-			var l = arr.length;
-			var i = 2;
-			if(withMove) {
-				var x_ = arr[0];
-				var y_ = arr[1];
-				this.wasMove = true;
-				var tmp;
-				switch(this.endLine) {
-				case 0:case 1:case 6:case 9:case 12:case 15:case 18:
-					tmp = false;
-					break;
-				case 2:case 3:case 4:case 5:case 7:case 8:case 10:case 11:case 13:case 14:case 16:case 17:case 19:case 20:
-					tmp = true;
-					break;
-				}
-				if(tmp) {
-					this.contour.end(this.width);
-				}
-				this.x = x_;
-				this.y = y_;
-				var l1 = this.points.length;
-				this.points[l1] = [];
-				this.points[l1][0] = x_;
-				this.points[l1][1] = y_;
-				this.pointsClock[this.pointsClock.length] = this.contour.pointsClock.slice();
-				this.pointsAnti[this.pointsAnti.length] = this.contour.pointsAnti.slice();
-				this.dim[this.dim.length] = { minX : Infinity, maxX : -Infinity, minY : Infinity, maxY : -Infinity};
-				var d = this.dim[this.dim.length - 1];
-				if(x_ < d.minX) {
-					d.minX = x_;
-				}
-				if(x_ > d.maxX) {
-					d.maxX = x_;
-				}
-				if(y_ < d.minY) {
-					d.minY = y_;
-				}
-				if(y_ > d.maxY) {
-					d.maxY = y_;
-				}
-				this.contour.reset();
-			} else {
-				this.lineTo(arr[0],arr[1]);
-			}
-			var cx = (arr[0] + arr[l - 2]) / 2;
-			var cy = (arr[1] + arr[l - 1]) / 2;
-			var ox = this.x;
-			var oy = this.y;
-			while(i < l) {
-				if(this.fill && this.penIsDown) {
-					if(i > 0 && i < l - 2) {
-						this.pen.triangle2DFill(arr[i - 2],arr[i - 1],arr[i],arr[i + 1],cx,cy);
-					}
-				}
-				this.lineTo(arr[i],arr[i + 1]);
-				i += 2;
-			}
-			if(this.fill && this.penIsDown) {
-				this.wasMove = true;
-				var tmp;
-				switch(this.endLine) {
-				case 0:case 1:case 6:case 9:case 12:case 15:case 18:
-					tmp = false;
-					break;
-				case 2:case 3:case 4:case 5:case 7:case 8:case 10:case 11:case 13:case 14:case 16:case 17:case 19:case 20:
-					tmp = true;
-					break;
-				}
-				if(tmp) {
-					this.contour.end(this.width);
-				}
-				this.x = ox;
-				this.y = oy;
-				var l1 = this.points.length;
-				this.points[l1] = [];
-				this.points[l1][0] = ox;
-				this.points[l1][1] = oy;
-				this.pointsClock[this.pointsClock.length] = this.contour.pointsClock.slice();
-				this.pointsAnti[this.pointsAnti.length] = this.contour.pointsAnti.slice();
-				this.dim[this.dim.length] = { minX : Infinity, maxX : -Infinity, minY : Infinity, maxY : -Infinity};
-				var d = this.dim[this.dim.length - 1];
-				if(ox < d.minX) {
-					d.minX = ox;
-				}
-				if(ox > d.maxX) {
-					d.maxX = ox;
-				}
-				if(oy < d.minY) {
-					d.minY = oy;
-				}
-				if(oy > d.maxY) {
-					d.maxY = oy;
-				}
-				this.contour.reset();
-				this.lineTo(arr[l - 2],arr[l - 1]);
-			}
-		}
-		this.x = x2;
-		this.y = y2;
-	}
-	,curveTo: function(x1,y1,x2,y2,x3,y3) {
-		this.tempArr = [];
-		var p = this.tempArr;
-		var ax = this.x;
-		var ay = this.y;
-		var x = ax - x1;
-		var y = ay - y1;
-		var x4 = x1 - x2;
-		var y4 = y1 - y2;
-		var x5 = x2 - x3;
-		var y5 = y2 - y3;
-		var approxDistance = Math.sqrt(x * x + y * y) + Math.sqrt(x4 * x4 + y4 * y4) + Math.sqrt(x5 * x5 + y5 * y5);
-		if(approxDistance == 0) {
-			approxDistance = 0.000001;
-		}
-		var step = Math.min(1 / (approxDistance * 0.707),0.03);
-		var l = p.length;
-		p[l++] = ax;
-		p[l++] = ay;
-		var t = step;
-		while(t < 1.) {
-			var u = 1 - t;
-			p[l++] = Math.pow(u,3) * ax + 3 * Math.pow(u,2) * t * x1 + 3 * u * Math.pow(t,2) * x2 + Math.pow(t,3) * x3;
-			var u1 = 1 - t;
-			p[l++] = Math.pow(u1,3) * ay + 3 * Math.pow(u1,2) * t * y1 + 3 * u1 * Math.pow(t,2) * y2 + Math.pow(t,3) * y3;
-			t += step;
-		}
-		p[l++] = x3;
-		p[l++] = y3;
-		if(this.sketchForm == 5) {
-			var j = 0;
-			var l = this.tempArr.length / 2 | 0;
-			var _g = 1;
-			var _g1 = l;
+			var _g = startX;
+			var _g1 = endX;
 			while(_g < _g1) {
-				var i = _g++;
-				j = i * 2;
-				this.dashCurveTo(this.tempArr[j],this.tempArr[j + 1]);
-			}
-		} else {
-			var arr = this.tempArr;
-			var withMove = false;
-			if(withMove == null) {
-				withMove = true;
-			}
-			var l = arr.length;
-			var i = 2;
-			if(withMove) {
-				var x_ = arr[0];
-				var y_ = arr[1];
-				this.wasMove = true;
-				var tmp;
-				switch(this.endLine) {
-				case 0:case 1:case 6:case 9:case 12:case 15:case 18:
-					tmp = false;
-					break;
-				case 2:case 3:case 4:case 5:case 7:case 8:case 10:case 11:case 13:case 14:case 16:case 17:case 19:case 20:
-					tmp = true;
-					break;
+				var x = _g++;
+				var i = a * solid + range * a * (1 - intery + Math.floor(intery)) | 0;
+				if(i > 255) {
+					i = 255;
 				}
-				if(tmp) {
-					this.contour.end(this.width);
+				if(i < 0) {
+					i = 0;
 				}
-				this.x = x_;
-				this.y = y_;
-				var l1 = this.points.length;
-				this.points[l1] = [];
-				this.points[l1][0] = x_;
-				this.points[l1][1] = y_;
-				this.pointsClock[this.pointsClock.length] = this.contour.pointsClock.slice();
-				this.pointsAnti[this.pointsAnti.length] = this.contour.pointsAnti.slice();
-				this.dim[this.dim.length] = { minX : Infinity, maxX : -Infinity, minY : Infinity, maxY : -Infinity};
-				var d = this.dim[this.dim.length - 1];
-				if(x_ < d.minX) {
-					d.minX = x_;
+				a0 = i;
+				var y = Math.floor(intery);
+				var location = this1.useVirtualPos ? (y - this1.virtualY) * this1.width + x - this1.virtualX | 0 : y * this1.width + x | 0;
+				if(this1.transparent && a0 < 254) {
+					var this2 = this1.image.get(location);
+					var old = justGraphix_image_Endian_isLittleEndian ? (this2 >> 24 & 255) << 24 | (this2 & 255) << 16 | (this2 >> 8 & 255) << 8 | this2 >> 16 & 255 : this2;
+					var rhs = a0 << 24 | r << 16 | g << 8 | b;
+					var this3 = old >> 24 & 255;
+					var a1 = this3 == 0 ? 0. : this3 / 255;
+					var this4 = old >> 16 & 255;
+					var r1 = this4 == 0 ? 0. : this4 / 255;
+					var this5 = old >> 8 & 255;
+					var g1 = this5 == 0 ? 0. : this5 / 255;
+					var this6 = old & 255;
+					var b1 = this6 == 0 ? 0. : this6 / 255;
+					var this7 = rhs >> 24 & 255;
+					var a2 = this7 == 0 ? 0. : this7 / 255;
+					var this8 = rhs >> 16 & 255;
+					var r2 = this8 == 0 ? 0. : this8 / 255;
+					var this9 = rhs >> 8 & 255;
+					var g2 = this9 == 0 ? 0. : this9 / 255;
+					var this10 = rhs & 255;
+					var b2 = this10 == 0 ? 0. : this10 / 255;
+					var a3 = a1 * (1 - a2);
+					var r3 = 255 * (r1 * a3 + r2 * a2) | 0;
+					var g3 = 255 * (g1 * a3 + g2 * a2) | 0;
+					var b3 = 255 * (b1 * a3 + b2 * a2) | 0;
+					var a4 = 255 * (a3 + a2) | 0;
+					var blended = a4 << 24 | r3 << 16 | g3 << 8 | b3;
+					this1.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+				} else {
+					this1.image.set(location,this1.isLittle ? a0 << 24 | b << 16 | g << 8 | r : a0 << 24 | r << 16 | g << 8 | b);
 				}
-				if(x_ > d.maxX) {
-					d.maxX = x_;
+				var i1 = a * solid + range * a * (intery - Math.floor(intery)) | 0;
+				if(i1 > 255) {
+					i1 = 255;
 				}
-				if(y_ < d.minY) {
-					d.minY = y_;
+				if(i1 < 0) {
+					i1 = 0;
 				}
-				if(y_ > d.maxY) {
-					d.maxY = y_;
+				a0 = i1;
+				var y1 = Math.floor(intery) + 1;
+				var location1 = this1.useVirtualPos ? (y1 - this1.virtualY) * this1.width + x - this1.virtualX | 0 : y1 * this1.width + x | 0;
+				if(this1.transparent && a0 < 254) {
+					var this11 = this1.image.get(location1);
+					var old1 = justGraphix_image_Endian_isLittleEndian ? (this11 >> 24 & 255) << 24 | (this11 & 255) << 16 | (this11 >> 8 & 255) << 8 | this11 >> 16 & 255 : this11;
+					var rhs1 = a0 << 24 | r << 16 | g << 8 | b;
+					var this12 = old1 >> 24 & 255;
+					var a11 = this12 == 0 ? 0. : this12 / 255;
+					var this13 = old1 >> 16 & 255;
+					var r11 = this13 == 0 ? 0. : this13 / 255;
+					var this14 = old1 >> 8 & 255;
+					var g11 = this14 == 0 ? 0. : this14 / 255;
+					var this15 = old1 & 255;
+					var b11 = this15 == 0 ? 0. : this15 / 255;
+					var this16 = rhs1 >> 24 & 255;
+					var a21 = this16 == 0 ? 0. : this16 / 255;
+					var this17 = rhs1 >> 16 & 255;
+					var r21 = this17 == 0 ? 0. : this17 / 255;
+					var this18 = rhs1 >> 8 & 255;
+					var g21 = this18 == 0 ? 0. : this18 / 255;
+					var this19 = rhs1 & 255;
+					var b21 = this19 == 0 ? 0. : this19 / 255;
+					var a31 = a11 * (1 - a21);
+					var r4 = 255 * (r11 * a31 + r21 * a21) | 0;
+					var g4 = 255 * (g11 * a31 + g21 * a21) | 0;
+					var b4 = 255 * (b11 * a31 + b21 * a21) | 0;
+					var a5 = 255 * (a31 + a21) | 0;
+					var blended1 = a5 << 24 | r4 << 16 | g4 << 8 | b4;
+					this1.image.set(location1,justGraphix_image_Endian_isLittleEndian ? (blended1 >> 24 & 255) << 24 | (blended1 & 255) << 16 | (blended1 >> 8 & 255) << 8 | blended1 >> 16 & 255 : blended1);
+				} else {
+					this1.image.set(location1,this1.isLittle ? a0 << 24 | b << 16 | g << 8 | r : a0 << 24 | r << 16 | g << 8 | b);
 				}
-				this.contour.reset();
-			} else {
-				this.lineTo(arr[0],arr[1]);
-			}
-			var cx = (arr[0] + arr[l - 2]) / 2;
-			var cy = (arr[1] + arr[l - 1]) / 2;
-			var ox = this.x;
-			var oy = this.y;
-			while(i < l) {
-				if(this.fill && this.penIsDown) {
-					if(i > 0 && i < l - 2) {
-						this.pen.triangle2DFill(arr[i - 2],arr[i - 1],arr[i],arr[i + 1],cx,cy);
-					}
-				}
-				this.lineTo(arr[i],arr[i + 1]);
-				i += 2;
-			}
-			if(this.fill && this.penIsDown) {
-				this.wasMove = true;
-				var tmp;
-				switch(this.endLine) {
-				case 0:case 1:case 6:case 9:case 12:case 15:case 18:
-					tmp = false;
-					break;
-				case 2:case 3:case 4:case 5:case 7:case 8:case 10:case 11:case 13:case 14:case 16:case 17:case 19:case 20:
-					tmp = true;
-					break;
-				}
-				if(tmp) {
-					this.contour.end(this.width);
-				}
-				this.x = ox;
-				this.y = oy;
-				var l1 = this.points.length;
-				this.points[l1] = [];
-				this.points[l1][0] = ox;
-				this.points[l1][1] = oy;
-				this.pointsClock[this.pointsClock.length] = this.contour.pointsClock.slice();
-				this.pointsAnti[this.pointsAnti.length] = this.contour.pointsAnti.slice();
-				this.dim[this.dim.length] = { minX : Infinity, maxX : -Infinity, minY : Infinity, maxY : -Infinity};
-				var d = this.dim[this.dim.length - 1];
-				if(ox < d.minX) {
-					d.minX = ox;
-				}
-				if(ox > d.maxX) {
-					d.maxX = ox;
-				}
-				if(oy < d.minY) {
-					d.minY = oy;
-				}
-				if(oy > d.maxY) {
-					d.maxY = oy;
-				}
-				this.contour.reset();
-				this.lineTo(arr[l - 2],arr[l - 1]);
+				intery += gradient;
 			}
 		}
-		this.x = x3;
-		this.y = y3;
+		this.info = new justGraphix_hit_HitThinLine(ax,ay,bx,by);
+		if(this.info != null && this.oldInfo != null) {
+			var this1 = this.pixelImage;
+			var ax = this.oldInfo.bx * this.scaleX + this.translateX;
+			var ay = this.oldInfo.by * this.scaleY + this.translateY;
+			var bx = this.info.ax * this.scaleX + this.translateX;
+			var by = this.info.ay * this.scaleY + this.translateY;
+			var color = this.strokeColor;
+			var alpha = (((color | 0) >> 24 & 255) / 255 - 0.000000000000001) * 0.5;
+			var brightRange = alpha;
+			if(brightRange == null) {
+				brightRange = 0.25;
+			}
+			var x0 = ax;
+			var y0 = ay;
+			var x1 = bx;
+			var y1 = by;
+			var brightRange1 = brightRange;
+			if(brightRange1 == null) {
+				brightRange1 = 0.25;
+			}
+			var a = color >> 24 & 255;
+			var r = color >> 16 & 255;
+			var g = color >> 8 & 255;
+			var b = color & 255;
+			var steep = Math.abs(y1 - y0) > Math.abs(x1 - x0);
+			var temp = 0.;
+			if(steep) {
+				temp = y0;
+				y0 = x0;
+				x0 = temp;
+				temp = y1;
+				y1 = x1;
+				x1 = temp;
+			}
+			if(x0 > x1) {
+				temp = x1;
+				x1 = x0;
+				x0 = temp;
+				temp = y1;
+				y1 = y0;
+				y0 = temp;
+			}
+			var dx = x1 - x0;
+			var dy = y1 - y0;
+			var gradient = dx == 0.0 ? 1. : dy / dx;
+			var xend = Math.floor(x0) + 0.5;
+			var yend = y0 + gradient * (xend - x0);
+			var v = x0 + 0.5;
+			var xgap = 1 - v + Math.floor(v);
+			var xpxl1 = xend | 0;
+			var ypxl1 = Math.floor(yend);
+			var a0 = 0;
+			var range = brightRange1;
+			var solid = 1 - range;
+			var intery = yend + gradient;
+			var xend = Math.floor(x1) + 0.5;
+			var yend = y1 + gradient * (xend - x1);
+			var v = x1 + 0.5;
+			var xgap = v - Math.floor(v);
+			var xpxl2 = xend | 0;
+			var ypxl2 = Math.floor(yend);
+			var startX = xpxl1 + 1;
+			var endX = xpxl2 + 1;
+			if(steep) {
+				var _g = startX;
+				var _g1 = endX;
+				while(_g < _g1) {
+					var x = _g++;
+					var i = a * solid + range * a * (1 - intery + Math.floor(intery)) | 0;
+					if(i > 255) {
+						i = 255;
+					}
+					if(i < 0) {
+						i = 0;
+					}
+					a0 = i;
+					var x1 = Math.floor(intery);
+					var location = this1.useVirtualPos ? (x - this1.virtualY) * this1.width + x1 - this1.virtualX | 0 : x * this1.width + x1 | 0;
+					if(this1.transparent && a0 < 254) {
+						var this2 = this1.image.get(location);
+						var old = justGraphix_image_Endian_isLittleEndian ? (this2 >> 24 & 255) << 24 | (this2 & 255) << 16 | (this2 >> 8 & 255) << 8 | this2 >> 16 & 255 : this2;
+						var rhs = a0 << 24 | r << 16 | g << 8 | b;
+						var this3 = old >> 24 & 255;
+						var a1 = this3 == 0 ? 0. : this3 / 255;
+						var this4 = old >> 16 & 255;
+						var r1 = this4 == 0 ? 0. : this4 / 255;
+						var this5 = old >> 8 & 255;
+						var g1 = this5 == 0 ? 0. : this5 / 255;
+						var this6 = old & 255;
+						var b1 = this6 == 0 ? 0. : this6 / 255;
+						var this7 = rhs >> 24 & 255;
+						var a2 = this7 == 0 ? 0. : this7 / 255;
+						var this8 = rhs >> 16 & 255;
+						var r2 = this8 == 0 ? 0. : this8 / 255;
+						var this9 = rhs >> 8 & 255;
+						var g2 = this9 == 0 ? 0. : this9 / 255;
+						var this10 = rhs & 255;
+						var b2 = this10 == 0 ? 0. : this10 / 255;
+						var a3 = a1 * (1 - a2);
+						var r3 = 255 * (r1 * a3 + r2 * a2) | 0;
+						var g3 = 255 * (g1 * a3 + g2 * a2) | 0;
+						var b3 = 255 * (b1 * a3 + b2 * a2) | 0;
+						var a4 = 255 * (a3 + a2) | 0;
+						var blended = a4 << 24 | r3 << 16 | g3 << 8 | b3;
+						this1.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+					} else {
+						this1.image.set(location,this1.isLittle ? a0 << 24 | b << 16 | g << 8 | r : a0 << 24 | r << 16 | g << 8 | b);
+					}
+					var i1 = a * solid + range * a * (intery - Math.floor(intery)) | 0;
+					if(i1 > 255) {
+						i1 = 255;
+					}
+					if(i1 < 0) {
+						i1 = 0;
+					}
+					a0 = i1;
+					var x3 = Math.floor(intery) + 1;
+					var location1 = this1.useVirtualPos ? (x - this1.virtualY) * this1.width + x3 - this1.virtualX | 0 : x * this1.width + x3 | 0;
+					if(this1.transparent && a0 < 254) {
+						var this11 = this1.image.get(location1);
+						var old1 = justGraphix_image_Endian_isLittleEndian ? (this11 >> 24 & 255) << 24 | (this11 & 255) << 16 | (this11 >> 8 & 255) << 8 | this11 >> 16 & 255 : this11;
+						var rhs1 = a0 << 24 | r << 16 | g << 8 | b;
+						var this12 = old1 >> 24 & 255;
+						var a11 = this12 == 0 ? 0. : this12 / 255;
+						var this13 = old1 >> 16 & 255;
+						var r11 = this13 == 0 ? 0. : this13 / 255;
+						var this14 = old1 >> 8 & 255;
+						var g11 = this14 == 0 ? 0. : this14 / 255;
+						var this15 = old1 & 255;
+						var b11 = this15 == 0 ? 0. : this15 / 255;
+						var this16 = rhs1 >> 24 & 255;
+						var a21 = this16 == 0 ? 0. : this16 / 255;
+						var this17 = rhs1 >> 16 & 255;
+						var r21 = this17 == 0 ? 0. : this17 / 255;
+						var this18 = rhs1 >> 8 & 255;
+						var g21 = this18 == 0 ? 0. : this18 / 255;
+						var this19 = rhs1 & 255;
+						var b21 = this19 == 0 ? 0. : this19 / 255;
+						var a31 = a11 * (1 - a21);
+						var r4 = 255 * (r11 * a31 + r21 * a21) | 0;
+						var g4 = 255 * (g11 * a31 + g21 * a21) | 0;
+						var b4 = 255 * (b11 * a31 + b21 * a21) | 0;
+						var a5 = 255 * (a31 + a21) | 0;
+						var blended1 = a5 << 24 | r4 << 16 | g4 << 8 | b4;
+						this1.image.set(location1,justGraphix_image_Endian_isLittleEndian ? (blended1 >> 24 & 255) << 24 | (blended1 & 255) << 16 | (blended1 >> 8 & 255) << 8 | blended1 >> 16 & 255 : blended1);
+					} else {
+						this1.image.set(location1,this1.isLittle ? a0 << 24 | b << 16 | g << 8 | r : a0 << 24 | r << 16 | g << 8 | b);
+					}
+					intery += gradient;
+				}
+			} else {
+				var _g = startX;
+				var _g1 = endX;
+				while(_g < _g1) {
+					var x = _g++;
+					var i = a * solid + range * a * (1 - intery + Math.floor(intery)) | 0;
+					if(i > 255) {
+						i = 255;
+					}
+					if(i < 0) {
+						i = 0;
+					}
+					a0 = i;
+					var y = Math.floor(intery);
+					var location = this1.useVirtualPos ? (y - this1.virtualY) * this1.width + x - this1.virtualX | 0 : y * this1.width + x | 0;
+					if(this1.transparent && a0 < 254) {
+						var this2 = this1.image.get(location);
+						var old = justGraphix_image_Endian_isLittleEndian ? (this2 >> 24 & 255) << 24 | (this2 & 255) << 16 | (this2 >> 8 & 255) << 8 | this2 >> 16 & 255 : this2;
+						var rhs = a0 << 24 | r << 16 | g << 8 | b;
+						var this3 = old >> 24 & 255;
+						var a1 = this3 == 0 ? 0. : this3 / 255;
+						var this4 = old >> 16 & 255;
+						var r1 = this4 == 0 ? 0. : this4 / 255;
+						var this5 = old >> 8 & 255;
+						var g1 = this5 == 0 ? 0. : this5 / 255;
+						var this6 = old & 255;
+						var b1 = this6 == 0 ? 0. : this6 / 255;
+						var this7 = rhs >> 24 & 255;
+						var a2 = this7 == 0 ? 0. : this7 / 255;
+						var this8 = rhs >> 16 & 255;
+						var r2 = this8 == 0 ? 0. : this8 / 255;
+						var this9 = rhs >> 8 & 255;
+						var g2 = this9 == 0 ? 0. : this9 / 255;
+						var this10 = rhs & 255;
+						var b2 = this10 == 0 ? 0. : this10 / 255;
+						var a3 = a1 * (1 - a2);
+						var r3 = 255 * (r1 * a3 + r2 * a2) | 0;
+						var g3 = 255 * (g1 * a3 + g2 * a2) | 0;
+						var b3 = 255 * (b1 * a3 + b2 * a2) | 0;
+						var a4 = 255 * (a3 + a2) | 0;
+						var blended = a4 << 24 | r3 << 16 | g3 << 8 | b3;
+						this1.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+					} else {
+						this1.image.set(location,this1.isLittle ? a0 << 24 | b << 16 | g << 8 | r : a0 << 24 | r << 16 | g << 8 | b);
+					}
+					var i1 = a * solid + range * a * (intery - Math.floor(intery)) | 0;
+					if(i1 > 255) {
+						i1 = 255;
+					}
+					if(i1 < 0) {
+						i1 = 0;
+					}
+					a0 = i1;
+					var y1 = Math.floor(intery) + 1;
+					var location1 = this1.useVirtualPos ? (y1 - this1.virtualY) * this1.width + x - this1.virtualX | 0 : y1 * this1.width + x | 0;
+					if(this1.transparent && a0 < 254) {
+						var this11 = this1.image.get(location1);
+						var old1 = justGraphix_image_Endian_isLittleEndian ? (this11 >> 24 & 255) << 24 | (this11 & 255) << 16 | (this11 >> 8 & 255) << 8 | this11 >> 16 & 255 : this11;
+						var rhs1 = a0 << 24 | r << 16 | g << 8 | b;
+						var this12 = old1 >> 24 & 255;
+						var a11 = this12 == 0 ? 0. : this12 / 255;
+						var this13 = old1 >> 16 & 255;
+						var r11 = this13 == 0 ? 0. : this13 / 255;
+						var this14 = old1 >> 8 & 255;
+						var g11 = this14 == 0 ? 0. : this14 / 255;
+						var this15 = old1 & 255;
+						var b11 = this15 == 0 ? 0. : this15 / 255;
+						var this16 = rhs1 >> 24 & 255;
+						var a21 = this16 == 0 ? 0. : this16 / 255;
+						var this17 = rhs1 >> 16 & 255;
+						var r21 = this17 == 0 ? 0. : this17 / 255;
+						var this18 = rhs1 >> 8 & 255;
+						var g21 = this18 == 0 ? 0. : this18 / 255;
+						var this19 = rhs1 & 255;
+						var b21 = this19 == 0 ? 0. : this19 / 255;
+						var a31 = a11 * (1 - a21);
+						var r4 = 255 * (r11 * a31 + r21 * a21) | 0;
+						var g4 = 255 * (g11 * a31 + g21 * a21) | 0;
+						var b4 = 255 * (b11 * a31 + b21 * a21) | 0;
+						var a5 = 255 * (a31 + a21) | 0;
+						var blended1 = a5 << 24 | r4 << 16 | g4 << 8 | b4;
+						this1.image.set(location1,justGraphix_image_Endian_isLittleEndian ? (blended1 >> 24 & 255) << 24 | (blended1 & 255) << 16 | (blended1 >> 8 & 255) << 8 | blended1 >> 16 & 255 : blended1);
+					} else {
+						this1.image.set(location1,this1.isLittle ? a0 << 24 | b << 16 | g << 8 | r : a0 << 24 | r << 16 | g << 8 | b);
+					}
+					intery += gradient;
+				}
+			}
+			var temp = new justGraphix_hit_HitThinLine(ax,ay,bx,by);
+			if(this.hitsAllowed) {
+				this.hitsArr.push(temp);
+			}
+		}
+		if(this.hitsAllowed) {
+			this.hitsArr.push(this.info);
+		}
+		this.x0 = x2;
+		this.y0 = y2;
+		this.toggleDraw = true;
 	}
-	,__class__: justGraphix_contour_Sketcher
-};
+	,moveTo: function(x1,y1) {
+		justGraphix_contour_contourPath_DrawContourHelper.prototype.moveTo.call(this,x1,y1);
+		this.info = null;
+	}
+	,__class__: justGraphix_contour_contourPath_DrawThinLineHelper
+});
 var justGraphix_contour_io_Array2DTriGrad = {};
 justGraphix_contour_io_Array2DTriGrad.__properties__ = {set_cy:"set_cy",get_cy:"get_cy",set_cx:"set_cx",get_cx:"get_cx",set_by:"set_by",get_by:"get_by",set_bx:"set_bx",get_bx:"get_bx",set_ay:"set_ay",get_ay:"get_ay",set_ax:"set_ax",get_ax:"get_ax"};
 justGraphix_contour_io_Array2DTriGrad.get_ax = function(this1) {
@@ -11548,7 +6520,7 @@ justGraphix_contour_io_Array2DTriGrad.adjustWinding = function(this1) {
 	return justGraphix_contour_io_Array2DTriGrad.get_ax(this1) * justGraphix_contour_io_Array2DTriGrad.get_by(this1) - justGraphix_contour_io_Array2DTriGrad.get_bx(this1) * justGraphix_contour_io_Array2DTriGrad.get_ay(this1) + (justGraphix_contour_io_Array2DTriGrad.get_bx(this1) * justGraphix_contour_io_Array2DTriGrad.get_cy(this1) - justGraphix_contour_io_Array2DTriGrad.get_cx(this1) * justGraphix_contour_io_Array2DTriGrad.get_by(this1)) + (justGraphix_contour_io_Array2DTriGrad.get_cx(this1) * justGraphix_contour_io_Array2DTriGrad.get_ay(this1) - justGraphix_contour_io_Array2DTriGrad.get_ax(this1) * justGraphix_contour_io_Array2DTriGrad.get_cy(this1)) > 0;
 };
 var justGraphix_contour_io_Array2DTriangles = {};
-justGraphix_contour_io_Array2DTriangles.__properties__ = {set_colorInt:"set_colorInt",get_color:"get_color",set_cy:"set_cy",get_cy:"get_cy",set_cx:"set_cx",get_cx:"get_cx",set_by:"set_by",get_by:"get_by",set_bx:"set_bx",get_bx:"get_bx",set_ay:"set_ay",get_ay:"get_ay",set_ax:"set_ax",get_ax:"get_ax"};
+justGraphix_contour_io_Array2DTriangles.__properties__ = {set_cy:"set_cy",get_cy:"get_cy",set_cx:"set_cx",get_cx:"get_cx",set_by:"set_by",get_by:"get_by",set_bx:"set_bx",get_bx:"get_bx",set_ay:"set_ay",get_ay:"get_ay",set_ax:"set_ax",get_ax:"get_ax"};
 justGraphix_contour_io_Array2DTriangles.get_ax = function(this1) {
 	return this1[(this1[0] | 0) * 7 + 1];
 };
@@ -11589,14 +6561,6 @@ justGraphix_contour_io_Array2DTriangles.get_cy = function(this1) {
 };
 justGraphix_contour_io_Array2DTriangles.set_cy = function(this1,v) {
 	this1[(this1[0] | 0) * 7 + 5 + 1] = v;
-	return v;
-};
-justGraphix_contour_io_Array2DTriangles.get_color = function(this1) {
-	return this1[(this1[0] | 0) * 7 + 6 + 1];
-};
-justGraphix_contour_io_Array2DTriangles.set_colorInt = function(this1,v) {
-	var v1 = v | 0;
-	this1[(this1[0] | 0) * 7 + 6 + 1] = v1;
 	return v;
 };
 justGraphix_contour_io_Array2DTriangles.triangle = function(this1,ax_,ay_,bx_,by_,cx_,cy_) {
@@ -11761,6 +6725,17 @@ justGraphix_curve_EllipseArc.prototype = {
 var justGraphix_hit_IhitObj = function() { };
 justGraphix_hit_IhitObj.__name__ = "justGraphix.hit.IhitObj";
 justGraphix_hit_IhitObj.__isInterface__ = true;
+var justGraphix_hit_HitObjArray = function(arr) {
+	this.arr = arr;
+};
+justGraphix_hit_HitObjArray.__name__ = "justGraphix.hit.HitObjArray";
+justGraphix_hit_HitObjArray.__interfaces__ = [justGraphix_hit_IhitObj];
+justGraphix_hit_HitObjArray.prototype = {
+	push: function(v) {
+		return this.arr.push(v);
+	}
+	,__class__: justGraphix_hit_HitObjArray
+};
 var justGraphix_hit_HitThinLine = function(ax,ay,bx,by) {
 	this.ax = ax;
 	this.ay = ay;
@@ -11787,6 +6762,7 @@ justGraphix_hit_HitThinLine.prototype = {
 	__class__: justGraphix_hit_HitThinLine
 };
 var justGraphix_image_ImageStruct = function() {
+	this.useMask = false;
 	this.useVirtualPos = false;
 	this.virtualY = 0;
 	this.virtualX = 0;
@@ -12304,29 +7280,195 @@ justGraphix_image_imageAbstracts_LineShape.thinLine = function(this1,ax,ay,bx,by
 	}
 	return new justGraphix_hit_HitThinLine(ax,ay,bx,by);
 };
-var justGraphix_path_ScaleTranslateContext = function(pathContext_,dx_,dy_,sx_,sy_) {
-	this.pathContext = pathContext_;
-	this.dx = dx_;
-	this.dy = dy_;
-	this.sx = sx_;
-	this.sy = sy_;
+var justGraphix_image_imageAbstracts_TransformImage = {};
+justGraphix_image_imageAbstracts_TransformImage.flippedY = function(this1,x,y,w,h,transparent,inPlace,includeMask) {
+	if(includeMask == null) {
+		includeMask = false;
+	}
+	if(inPlace == null) {
+		inPlace = false;
+	}
+	if(transparent == null) {
+		transparent = false;
+	}
+	var transparent1 = transparent;
+	var inPlace1 = inPlace;
+	var includeMask1 = includeMask;
+	if(includeMask1 == null) {
+		includeMask1 = false;
+	}
+	if(inPlace1 == null) {
+		inPlace1 = false;
+	}
+	if(transparent1 == null) {
+		transparent1 = false;
+	}
+	var r_x = x;
+	var r_y = y;
+	var r_w = w;
+	var r_h = h;
+	var xmax = r_x + r_w + 1 | 0;
+	var ymax = r_y + r_h + 1 | 0;
+	var ii_min = r_x | 0;
+	var ii_max = xmax;
+	var xRange__start = ii_min;
+	var xRange__max = ii_max;
+	var ii_min = r_y | 0;
+	var ii_max = ymax;
+	var yRange__start = ii_min;
+	var yRange__max = ii_max;
+	var range_x = xRange__start;
+	var range_y = yRange__start - 1;
+	var range_xReset = range_x;
+	var range_yReset = range_y;
+	var range_xMax = xRange__max - 2;
+	var range_yMax = yRange__max - 2;
+	var _this_min = 0;
+	var _this_max = (xRange__max - xRange__start) * (yRange__max - yRange__start) | 0;
+	var nextImage = justGraphix_image_Pixelimage._new(w | 0,h | 0);
+	nextImage.transparent = transparent1;
+	while(_this_min < _this_max) {
+		var i = _this_min++;
+		if(range_y > range_yMax) {
+			range_y = range_yReset;
+			++range_x;
+		}
+		++range_y;
+		var i1 = i;
+		var x1 = range_x;
+		var y1 = range_y;
+		var x2 = range_x;
+		var y2 = range_yMax - range_y;
+		var c = this1.image.get(this1.useVirtualPos ? (y2 - this1.virtualY) * this1.width + x2 - this1.virtualX | 0 : y2 * this1.width + x2 | 0);
+		var color = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+		var c1 = color;
+		if((c1 >> 24 & 255) < 254 && nextImage.transparent) {
+			var location = nextImage.useVirtualPos ? (y1 - nextImage.virtualY) * nextImage.width + x1 - nextImage.virtualX | 0 : y1 * nextImage.width + x1 | 0;
+			var this2 = nextImage.image.get(location);
+			var this3 = justGraphix_image_Endian_isLittleEndian ? (this2 >> 24 & 255) << 24 | (this2 & 255) << 16 | (this2 >> 8 & 255) << 8 | this2 >> 16 & 255 : this2;
+			var this4 = this3 >> 24 & 255;
+			var a1 = this4 == 0 ? 0. : this4 / 255;
+			var this5 = this3 >> 16 & 255;
+			var r1 = this5 == 0 ? 0. : this5 / 255;
+			var this6 = this3 >> 8 & 255;
+			var g1 = this6 == 0 ? 0. : this6 / 255;
+			var this7 = this3 & 255;
+			var b1 = this7 == 0 ? 0. : this7 / 255;
+			var this8 = color >> 24 & 255;
+			var a2 = this8 == 0 ? 0. : this8 / 255;
+			var this9 = color >> 16 & 255;
+			var r2 = this9 == 0 ? 0. : this9 / 255;
+			var this10 = color >> 8 & 255;
+			var g2 = this10 == 0 ? 0. : this10 / 255;
+			var this11 = color & 255;
+			var b2 = this11 == 0 ? 0. : this11 / 255;
+			var a3 = a1 * (1 - a2);
+			var r = 255 * (r1 * a3 + r2 * a2) | 0;
+			var g = 255 * (g1 * a3 + g2 * a2) | 0;
+			var b = 255 * (b1 * a3 + b2 * a2) | 0;
+			var a = 255 * (a3 + a2) | 0;
+			var blended = a << 24 | r << 16 | g << 8 | b;
+			nextImage.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+		} else {
+			nextImage.image.set(nextImage.useVirtualPos ? (y1 - nextImage.virtualY) * nextImage.width + x1 - nextImage.virtualX | 0 : y1 * nextImage.width + x1 | 0,justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1);
+		}
+	}
+	if(inPlace1) {
+		var x1 = x | 0;
+		var y1 = y | 0;
+		var _g = 0;
+		var _g1 = nextImage.height;
+		while(_g < _g1) {
+			var dy = _g++;
+			var _g2 = 0;
+			var _g3 = nextImage.width;
+			while(_g2 < _g3) {
+				var dx = _g2++;
+				var c = nextImage.image.get(nextImage.useVirtualPos ? (dy - nextImage.virtualY) * nextImage.width + dx - nextImage.virtualX | 0 : dy * nextImage.width + dx | 0);
+				var col = justGraphix_image_Endian_isLittleEndian ? (c >> 24 & 255) << 24 | (c & 255) << 16 | (c >> 8 & 255) << 8 | c >> 16 & 255 : c;
+				if(nextImage.useMask && nextImage.mask != null) {
+					var this2 = nextImage.mask;
+					var c1 = this2.image.get(this2.useVirtualPos ? (dy - this2.virtualY) * this2.width + dx - this2.virtualX | 0 : dy * this2.width + dx | 0);
+					var maskPixel = justGraphix_image_Endian_isLittleEndian ? (c1 >> 24 & 255) << 24 | (c1 & 255) << 16 | (c1 >> 8 & 255) << 8 | c1 >> 16 & 255 : c1;
+					var this3 = col;
+					if(maskPixel == 0) {
+						col = this3;
+					} else {
+						var this4 = maskPixel >> 24 & 255;
+						var m0 = this4 == 0 ? 0. : this4 / 255;
+						var this5 = maskPixel >> 16 & 255;
+						var m1 = this5 == 0 ? 0. : this5 / 255;
+						var this6 = maskPixel >> 8 & 255;
+						var m2 = this6 == 0 ? 0. : this6 / 255;
+						var this7 = maskPixel & 255;
+						var m3 = this7 == 0 ? 0. : this7 / 255;
+						var ch0 = (1. - m0) * (this3 >> 24 & 255) | 0;
+						var ch1 = (1. - m1) * (this3 >> 16 & 255) | 0;
+						var ch2 = (1. - m2) * (this3 >> 8 & 255) | 0;
+						var ch3 = (1. - m3) * (this3 & 255) | 0;
+						col = Math.round(ch0 * 255) << 24 | Math.round(ch1 * 255) << 16 | Math.round(ch2 * 255) << 8 | Math.round(ch3 * 255);
+					}
+				}
+				if(col != 0) {
+					var x2 = x1 + dx;
+					var y2 = y1 + dy;
+					var c2 = col;
+					if((c2 >> 24 & 255) < 254 && this1.transparent) {
+						var location = this1.useVirtualPos ? (y2 - this1.virtualY) * this1.width + x2 - this1.virtualX | 0 : y2 * this1.width + x2 | 0;
+						var this8 = this1.image.get(location);
+						var this9 = justGraphix_image_Endian_isLittleEndian ? (this8 >> 24 & 255) << 24 | (this8 & 255) << 16 | (this8 >> 8 & 255) << 8 | this8 >> 16 & 255 : this8;
+						var this10 = this9 >> 24 & 255;
+						var a1 = this10 == 0 ? 0. : this10 / 255;
+						var this11 = this9 >> 16 & 255;
+						var r1 = this11 == 0 ? 0. : this11 / 255;
+						var this12 = this9 >> 8 & 255;
+						var g1 = this12 == 0 ? 0. : this12 / 255;
+						var this13 = this9 & 255;
+						var b1 = this13 == 0 ? 0. : this13 / 255;
+						var this14 = col >> 24 & 255;
+						var a2 = this14 == 0 ? 0. : this14 / 255;
+						var this15 = col >> 16 & 255;
+						var r2 = this15 == 0 ? 0. : this15 / 255;
+						var this16 = col >> 8 & 255;
+						var g2 = this16 == 0 ? 0. : this16 / 255;
+						var this17 = col & 255;
+						var b2 = this17 == 0 ? 0. : this17 / 255;
+						var a3 = a1 * (1 - a2);
+						var r = 255 * (r1 * a3 + r2 * a2) | 0;
+						var g = 255 * (g1 * a3 + g2 * a2) | 0;
+						var b = 255 * (b1 * a3 + b2 * a2) | 0;
+						var a = 255 * (a3 + a2) | 0;
+						var blended = a << 24 | r << 16 | g << 8 | b;
+						this1.image.set(location,justGraphix_image_Endian_isLittleEndian ? (blended >> 24 & 255) << 24 | (blended & 255) << 16 | (blended >> 8 & 255) << 8 | blended >> 16 & 255 : blended);
+					} else {
+						this1.image.set(this1.useVirtualPos ? (y2 - this1.virtualY) * this1.width + x2 - this1.virtualX | 0 : y2 * this1.width + x2 | 0,justGraphix_image_Endian_isLittleEndian ? (c2 >> 24 & 255) << 24 | (c2 & 255) << 16 | (c2 >> 8 & 255) << 8 | c2 >> 16 & 255 : c2);
+					}
+				}
+			}
+		}
+		if(this1.mask != null && includeMask1) {
+			var v = justGraphix_image_imageAbstracts_TransformImage.flippedY(this1.mask,x,y,this1.width,this1.height,this1.mask.transparent,inPlace1,includeMask1);
+			this1.useMask = true;
+			this1.mask = v;
+		}
+		nextImage = null;
+		return this1;
+	} else {
+		if(this1.mask != null && includeMask1) {
+			var v = justGraphix_image_imageAbstracts_TransformImage.flippedY(this1.mask,x,y,this1.width,this1.height,this1.mask.transparent,inPlace1,includeMask1);
+			nextImage.useMask = true;
+			nextImage.mask = v;
+		}
+		return nextImage;
+	}
 };
-justGraphix_path_ScaleTranslateContext.__name__ = "justGraphix.path.ScaleTranslateContext";
-justGraphix_path_ScaleTranslateContext.__interfaces__ = [justGraphix_path_IPathContext];
-justGraphix_path_ScaleTranslateContext.prototype = {
-	moveTo: function(x,y) {
-		this.pathContext.moveTo(x * this.sx + this.dx,y * this.sy + this.dy);
-	}
-	,lineTo: function(x,y) {
-		this.pathContext.lineTo(x * this.sx + this.dx,y * this.sy + this.dy);
-	}
-	,quadTo: function(x1,y1,x2,y2) {
-		this.pathContext.quadTo(x1 * this.sx + this.dx,y1 * this.sy + this.dy,x2 * this.sx + this.dx,y2 * this.sy + this.dy);
-	}
-	,curveTo: function(x1,y1,x2,y2,x3,y3) {
-		this.pathContext.curveTo(x1 * this.sx + this.dx,y1 * this.sy + this.dy,x2 * this.sx + this.dx,y2 * this.sy + this.dy,x3 * this.sx + this.dx,y3 * this.sy + this.dy);
-	}
-	,__class__: justGraphix_path_ScaleTranslateContext
+var justGraphix_iterMagix_IntIterStart = function(min_,max_) {
+	this.start = min_;
+	this.max = max_;
+};
+justGraphix_iterMagix_IntIterStart.__name__ = "justGraphix.iterMagix.IntIterStart";
+justGraphix_iterMagix_IntIterStart.prototype = {
+	__class__: justGraphix_iterMagix_IntIterStart
 };
 var justGraphix_path_StoreF6 = function() {
 	this.count = 0;
@@ -12410,7 +7552,9 @@ justGraphix_path_StoreF6.prototype = {
 	}
 	,__class__: justGraphix_path_StoreF6
 };
-var justGraphix_path_SvgPath = function(pathContext_) {
+var justGraphix_path_SvgLinePath = function(pathContext_) {
+	this.py = 0.;
+	this.px = 0.;
 	this.l = 0;
 	this.c = 0;
 	this.controlY = 0.;
@@ -12421,8 +7565,8 @@ var justGraphix_path_SvgPath = function(pathContext_) {
 	this.str = "";
 	this.pathContext = pathContext_;
 };
-justGraphix_path_SvgPath.__name__ = "justGraphix.path.SvgPath";
-justGraphix_path_SvgPath.prototype = {
+justGraphix_path_SvgLinePath.__name__ = "justGraphix.path.SvgLinePath";
+justGraphix_path_SvgLinePath.prototype = {
 	parse: function(str_) {
 		this.str = str_;
 		this.pos = 0;
@@ -13442,7 +8586,7 @@ justGraphix_path_SvgPath.prototype = {
 				}
 				break;
 			case 66:
-				haxe_Log.trace("bearing - not implemented",{ fileName : "src/justGraphix/path/SvgPath.hx", lineNumber : 377, className : "justGraphix.path.SvgPath", methodName : "parse"});
+				haxe_Log.trace("bearing - not implemented",{ fileName : "src/justGraphix/path/SvgLinePath.hx", lineNumber : 380, className : "justGraphix.path.SvgLinePath", methodName : "parse"});
 				throw haxe_Exception.thrown("bearing not supported please remove");
 			case 67:
 				var _this45 = this.store;
@@ -13852,7 +8996,57 @@ justGraphix_path_SvgPath.prototype = {
 					this.controlY = this.store.s3;
 					this.lastX = this.store.s4;
 					this.lastY = this.store.s5;
-					this.pathContext.curveTo(this.store.s0,this.store.s1,this.controlX,this.controlY,this.lastX,this.lastY);
+					var x12 = this.store.s0;
+					var y12 = this.store.s1;
+					var x2 = this.controlX;
+					var y2 = this.controlY;
+					var x3 = this.lastX;
+					var y3 = this.lastY;
+					var tempArr = [];
+					var ax2 = this.px;
+					var ay2 = this.py;
+					var x = ax2 - x12;
+					var y = ay2 - y12;
+					var x4 = x12 - x2;
+					var y4 = y12 - y2;
+					var x5 = x2 - x3;
+					var y5 = y2 - y3;
+					var approxDistance = Math.sqrt(x * x + y * y) + Math.sqrt(x4 * x4 + y4 * y4) + Math.sqrt(x5 * x5 + y5 * y5);
+					if(approxDistance == 0) {
+						approxDistance = 0.000001;
+					}
+					var step = Math.min(1 / (approxDistance * 0.707),0.03);
+					var l = tempArr.length;
+					tempArr[l++] = ax2;
+					tempArr[l++] = ay2;
+					var t = step;
+					while(t < 1.) {
+						var u = 1 - t;
+						tempArr[l++] = Math.pow(u,3) * ax2 + 3 * Math.pow(u,2) * t * x12 + 3 * u * Math.pow(t,2) * x2 + Math.pow(t,3) * x3;
+						var u1 = 1 - t;
+						tempArr[l++] = Math.pow(u1,3) * ay2 + 3 * Math.pow(u1,2) * t * y12 + 3 * u1 * Math.pow(t,2) * y2 + Math.pow(t,3) * y3;
+						t += step;
+					}
+					tempArr[l++] = x3;
+					tempArr[l++] = y3;
+					var withMove = false;
+					if(withMove == null) {
+						withMove = true;
+					}
+					var l1 = tempArr.length;
+					var i = 2;
+					if(withMove) {
+						this.pathContext.moveTo(tempArr[0],tempArr[1]);
+					} else {
+						this.pathContext.lineSegmentTo(tempArr[0],tempArr[1]);
+					}
+					while(i < l1) {
+						this.pathContext.lineSegmentTo(tempArr[i],tempArr[i + 1]);
+						i += 2;
+					}
+					tempArr = [];
+					this.px = x3;
+					this.py = y3;
 				} else if(this.store.l > 4) {
 					while(this.store.l > 3) {
 						var _this58 = this.store;
@@ -14029,7 +9223,55 @@ justGraphix_path_SvgPath.prototype = {
 							_this68.l--;
 						}
 						this.lastY = out42;
-						this.pathContext.curveTo(firstX,firstY,this.controlX,this.controlY,this.lastX,this.lastY);
+						var x21 = this.controlX;
+						var y21 = this.controlY;
+						var x31 = this.lastX;
+						var y31 = this.lastY;
+						var tempArr1 = [];
+						var ax3 = this.px;
+						var ay3 = this.py;
+						var x6 = ax3 - firstX;
+						var y6 = ay3 - firstY;
+						var x7 = firstX - x21;
+						var y7 = firstY - y21;
+						var x8 = x21 - x31;
+						var y8 = y21 - y31;
+						var approxDistance1 = Math.sqrt(x6 * x6 + y6 * y6) + Math.sqrt(x7 * x7 + y7 * y7) + Math.sqrt(x8 * x8 + y8 * y8);
+						if(approxDistance1 == 0) {
+							approxDistance1 = 0.000001;
+						}
+						var step1 = Math.min(1 / (approxDistance1 * 0.707),0.03);
+						var l2 = tempArr1.length;
+						tempArr1[l2++] = ax3;
+						tempArr1[l2++] = ay3;
+						var t1 = step1;
+						while(t1 < 1.) {
+							var u2 = 1 - t1;
+							tempArr1[l2++] = Math.pow(u2,3) * ax3 + 3 * Math.pow(u2,2) * t1 * firstX + 3 * u2 * Math.pow(t1,2) * x21 + Math.pow(t1,3) * x31;
+							var u3 = 1 - t1;
+							tempArr1[l2++] = Math.pow(u3,3) * ay3 + 3 * Math.pow(u3,2) * t1 * firstY + 3 * u3 * Math.pow(t1,2) * y21 + Math.pow(t1,3) * y31;
+							t1 += step1;
+						}
+						tempArr1[l2++] = x31;
+						tempArr1[l2++] = y31;
+						var withMove1 = false;
+						if(withMove1 == null) {
+							withMove1 = true;
+						}
+						var l3 = tempArr1.length;
+						var i1 = 2;
+						if(withMove1) {
+							this.pathContext.moveTo(tempArr1[0],tempArr1[1]);
+						} else {
+							this.pathContext.lineSegmentTo(tempArr1[0],tempArr1[1]);
+						}
+						while(i1 < l3) {
+							this.pathContext.lineSegmentTo(tempArr1[i1],tempArr1[i1 + 1]);
+							i1 += 2;
+						}
+						tempArr1 = [];
+						this.px = x31;
+						this.py = y31;
 					}
 				}
 				break;
@@ -14613,7 +9855,11 @@ justGraphix_path_SvgPath.prototype = {
 				}
 				if(this.store.l == 1) {
 					this.lastX = this.store.s0;
-					this.pathContext.lineTo(this.lastX,this.lastY);
+					var x_ = this.lastX;
+					var y_ = this.lastY;
+					this.pathContext.lineTo(x_,y_);
+					this.px = x_;
+					this.py = y_;
 				} else if(this.store.l > 1) {
 					while(this.store.l > 0) {
 						var _this89 = this.store;
@@ -14645,7 +9891,11 @@ justGraphix_path_SvgPath.prototype = {
 							_this89.l--;
 						}
 						this.lastX = out44;
-						this.pathContext.lineTo(this.lastX,this.lastY);
+						var x_1 = this.lastX;
+						var y_1 = this.lastY;
+						this.pathContext.lineTo(x_1,y_1);
+						this.px = x_1;
+						this.py = y_1;
 					}
 				}
 				break;
@@ -15055,7 +10305,11 @@ justGraphix_path_SvgPath.prototype = {
 				if(this.store.l == 2) {
 					this.lastX = this.store.s0;
 					this.lastY = this.store.s1;
-					this.pathContext.lineTo(this.lastX,this.lastY);
+					var x_2 = this.lastX;
+					var y_2 = this.lastY;
+					this.pathContext.lineTo(x_2,y_2);
+					this.px = x_2;
+					this.py = y_2;
 				} else if(this.store.l > 2) {
 					while(this.store.l > 1) {
 						var _this104 = this.store;
@@ -15116,7 +10370,11 @@ justGraphix_path_SvgPath.prototype = {
 							_this106.l--;
 						}
 						this.lastY = out48;
-						this.pathContext.lineTo(this.lastX,this.lastY);
+						var x_3 = this.lastX;
+						var y_3 = this.lastY;
+						this.pathContext.lineTo(x_3,y_3);
+						this.px = x_3;
+						this.py = y_3;
 					}
 				}
 				break;
@@ -15526,7 +10784,11 @@ justGraphix_path_SvgPath.prototype = {
 				if(this.store.l == 2) {
 					this.lastX = this.store.s0;
 					this.lastY = this.store.s1;
-					this.pathContext.moveTo(this.lastX,this.lastY);
+					var x_4 = this.lastX;
+					var y_4 = this.lastY;
+					this.px = x_4;
+					this.py = y_4;
+					this.pathContext.moveTo(x_4,y_4);
 				} else if(this.store.l > 2) {
 					var _this121 = this.store;
 					var out50 = _this121.s0;
@@ -15586,7 +10848,11 @@ justGraphix_path_SvgPath.prototype = {
 						_this123.l--;
 					}
 					this.lastY = out52;
-					this.pathContext.moveTo(this.lastX,this.lastY);
+					var x_5 = this.lastX;
+					var y_5 = this.lastY;
+					this.px = x_5;
+					this.py = y_5;
+					this.pathContext.moveTo(x_5,y_5);
 					while(this.store.l > 1) {
 						var _this125 = this.store;
 						var out54 = _this125.s0;
@@ -15646,7 +10912,11 @@ justGraphix_path_SvgPath.prototype = {
 							_this127.l--;
 						}
 						this.lastY = out56;
-						this.pathContext.lineTo(this.lastX,this.lastY);
+						var x_6 = this.lastX;
+						var y_6 = this.lastY;
+						this.pathContext.lineTo(x_6,y_6);
+						this.px = x_6;
+						this.py = y_6;
 					}
 				}
 				break;
@@ -16058,7 +11328,53 @@ justGraphix_path_SvgPath.prototype = {
 					this.controlY = this.store.s1;
 					this.lastX = this.store.s2;
 					this.lastY = this.store.s3;
-					this.pathContext.quadTo(this.controlX,this.controlY,this.lastX,this.lastY);
+					var x13 = this.controlX;
+					var y13 = this.controlY;
+					var x22 = this.lastX;
+					var y22 = this.lastY;
+					var tempArr2 = [];
+					var ax4 = this.px;
+					var ay4 = this.py;
+					var x9 = ax4 - x13;
+					var y9 = ay4 - y13;
+					var x10 = x13 - x22;
+					var y10 = y13 - y22;
+					var approxDistance2 = Math.sqrt(x9 * x9 + y9 * y9) + Math.sqrt(x10 * x10 + y10 * y10);
+					if(approxDistance2 == 0) {
+						approxDistance2 = 0.000001;
+					}
+					var step2 = Math.min(1 / (approxDistance2 * 0.707),justGraphix_curve_CurveMath_quadStep);
+					var l4 = tempArr2.length;
+					tempArr2[l4++] = ax4;
+					tempArr2[l4++] = ay4;
+					var t2 = step2;
+					while(t2 < 1.) {
+						var u4 = 1 - t2;
+						tempArr2[l4++] = Math.pow(u4,2) * ax4 + 2 * u4 * t2 * x13 + Math.pow(t2,2) * x22;
+						var u5 = 1 - t2;
+						tempArr2[l4++] = Math.pow(u5,2) * ay4 + 2 * u5 * t2 * y13 + Math.pow(t2,2) * y22;
+						t2 += step2;
+					}
+					tempArr2[l4++] = x22;
+					tempArr2[l4++] = y22;
+					var withMove2 = false;
+					if(withMove2 == null) {
+						withMove2 = true;
+					}
+					var l5 = tempArr2.length;
+					var i2 = 2;
+					if(withMove2) {
+						this.pathContext.moveTo(tempArr2[0],tempArr2[1]);
+					} else {
+						this.pathContext.lineSegmentTo(tempArr2[0],tempArr2[1]);
+					}
+					while(i2 < l5) {
+						this.pathContext.lineSegmentTo(tempArr2[i2],tempArr2[i2 + 1]);
+						i2 += 2;
+					}
+					tempArr2 = [];
+					this.px = x22;
+					this.py = y22;
 				} else if(this.store.l > 4) {
 					while(this.store.l > 3) {
 						var _this142 = this.store;
@@ -16177,7 +11493,53 @@ justGraphix_path_SvgPath.prototype = {
 							_this148.l--;
 						}
 						this.lastY = out64;
-						this.pathContext.quadTo(this.controlX,this.controlY,this.lastX,this.lastY);
+						var x14 = this.controlX;
+						var y14 = this.controlY;
+						var x23 = this.lastX;
+						var y23 = this.lastY;
+						var tempArr3 = [];
+						var ax5 = this.px;
+						var ay5 = this.py;
+						var x15 = ax5 - x14;
+						var y15 = ay5 - y14;
+						var x16 = x14 - x23;
+						var y16 = y14 - y23;
+						var approxDistance3 = Math.sqrt(x15 * x15 + y15 * y15) + Math.sqrt(x16 * x16 + y16 * y16);
+						if(approxDistance3 == 0) {
+							approxDistance3 = 0.000001;
+						}
+						var step3 = Math.min(1 / (approxDistance3 * 0.707),justGraphix_curve_CurveMath_quadStep);
+						var l6 = tempArr3.length;
+						tempArr3[l6++] = ax5;
+						tempArr3[l6++] = ay5;
+						var t3 = step3;
+						while(t3 < 1.) {
+							var u6 = 1 - t3;
+							tempArr3[l6++] = Math.pow(u6,2) * ax5 + 2 * u6 * t3 * x14 + Math.pow(t3,2) * x23;
+							var u7 = 1 - t3;
+							tempArr3[l6++] = Math.pow(u7,2) * ay5 + 2 * u7 * t3 * y14 + Math.pow(t3,2) * y23;
+							t3 += step3;
+						}
+						tempArr3[l6++] = x23;
+						tempArr3[l6++] = y23;
+						var withMove3 = false;
+						if(withMove3 == null) {
+							withMove3 = true;
+						}
+						var l7 = tempArr3.length;
+						var i3 = 2;
+						if(withMove3) {
+							this.pathContext.moveTo(tempArr3[0],tempArr3[1]);
+						} else {
+							this.pathContext.lineSegmentTo(tempArr3[0],tempArr3[1]);
+						}
+						while(i3 < l7) {
+							this.pathContext.lineSegmentTo(tempArr3[i3],tempArr3[i3 + 1]);
+							i3 += 2;
+						}
+						tempArr3 = [];
+						this.px = x23;
+						this.py = y23;
 					}
 				}
 				break;
@@ -16591,7 +11953,53 @@ justGraphix_path_SvgPath.prototype = {
 					this.controlY = 2 * this.lastY - this.controlY;
 					var endX = this.store.s2;
 					var endY = this.store.s3;
-					this.pathContext.curveTo(this.controlX,this.controlY,firstX1,firstY1,endX,endY);
+					var x17 = this.controlX;
+					var y17 = this.controlY;
+					var tempArr4 = [];
+					var ax6 = this.px;
+					var ay6 = this.py;
+					var x18 = ax6 - x17;
+					var y18 = ay6 - y17;
+					var x19 = x17 - firstX1;
+					var y19 = y17 - firstY1;
+					var x20 = firstX1 - endX;
+					var y20 = firstY1 - endY;
+					var approxDistance4 = Math.sqrt(x18 * x18 + y18 * y18) + Math.sqrt(x19 * x19 + y19 * y19) + Math.sqrt(x20 * x20 + y20 * y20);
+					if(approxDistance4 == 0) {
+						approxDistance4 = 0.000001;
+					}
+					var step4 = Math.min(1 / (approxDistance4 * 0.707),0.03);
+					var l8 = tempArr4.length;
+					tempArr4[l8++] = ax6;
+					tempArr4[l8++] = ay6;
+					var t4 = step4;
+					while(t4 < 1.) {
+						var u8 = 1 - t4;
+						tempArr4[l8++] = Math.pow(u8,3) * ax6 + 3 * Math.pow(u8,2) * t4 * x17 + 3 * u8 * Math.pow(t4,2) * firstX1 + Math.pow(t4,3) * endX;
+						var u9 = 1 - t4;
+						tempArr4[l8++] = Math.pow(u9,3) * ay6 + 3 * Math.pow(u9,2) * t4 * y17 + 3 * u9 * Math.pow(t4,2) * firstY1 + Math.pow(t4,3) * endY;
+						t4 += step4;
+					}
+					tempArr4[l8++] = endX;
+					tempArr4[l8++] = endY;
+					var withMove4 = false;
+					if(withMove4 == null) {
+						withMove4 = true;
+					}
+					var l9 = tempArr4.length;
+					var i4 = 2;
+					if(withMove4) {
+						this.pathContext.moveTo(tempArr4[0],tempArr4[1]);
+					} else {
+						this.pathContext.lineSegmentTo(tempArr4[0],tempArr4[1]);
+					}
+					while(i4 < l9) {
+						this.pathContext.lineSegmentTo(tempArr4[i4],tempArr4[i4 + 1]);
+						i4 += 2;
+					}
+					tempArr4 = [];
+					this.px = endX;
+					this.py = endY;
 					this.controlX = this.store.s0;
 					this.controlY = this.store.s1;
 					this.lastX = endX;
@@ -16716,7 +12124,55 @@ justGraphix_path_SvgPath.prototype = {
 							_this169.l--;
 						}
 						this.lastY = out72;
-						this.pathContext.curveTo(this.controlX,this.controlY,firstX2,firstY2,this.lastX,this.lastY);
+						var x110 = this.controlX;
+						var y110 = this.controlY;
+						var x32 = this.lastX;
+						var y32 = this.lastY;
+						var tempArr5 = [];
+						var ax7 = this.px;
+						var ay7 = this.py;
+						var x24 = ax7 - x110;
+						var y24 = ay7 - y110;
+						var x25 = x110 - firstX2;
+						var y25 = y110 - firstY2;
+						var x26 = firstX2 - x32;
+						var y26 = firstY2 - y32;
+						var approxDistance5 = Math.sqrt(x24 * x24 + y24 * y24) + Math.sqrt(x25 * x25 + y25 * y25) + Math.sqrt(x26 * x26 + y26 * y26);
+						if(approxDistance5 == 0) {
+							approxDistance5 = 0.000001;
+						}
+						var step5 = Math.min(1 / (approxDistance5 * 0.707),0.03);
+						var l10 = tempArr5.length;
+						tempArr5[l10++] = ax7;
+						tempArr5[l10++] = ay7;
+						var t5 = step5;
+						while(t5 < 1.) {
+							var u10 = 1 - t5;
+							tempArr5[l10++] = Math.pow(u10,3) * ax7 + 3 * Math.pow(u10,2) * t5 * x110 + 3 * u10 * Math.pow(t5,2) * firstX2 + Math.pow(t5,3) * x32;
+							var u11 = 1 - t5;
+							tempArr5[l10++] = Math.pow(u11,3) * ay7 + 3 * Math.pow(u11,2) * t5 * y110 + 3 * u11 * Math.pow(t5,2) * firstY2 + Math.pow(t5,3) * y32;
+							t5 += step5;
+						}
+						tempArr5[l10++] = x32;
+						tempArr5[l10++] = y32;
+						var withMove5 = false;
+						if(withMove5 == null) {
+							withMove5 = true;
+						}
+						var l11 = tempArr5.length;
+						var i5 = 2;
+						if(withMove5) {
+							this.pathContext.moveTo(tempArr5[0],tempArr5[1]);
+						} else {
+							this.pathContext.lineSegmentTo(tempArr5[0],tempArr5[1]);
+						}
+						while(i5 < l11) {
+							this.pathContext.lineSegmentTo(tempArr5[i5],tempArr5[i5 + 1]);
+							i5 += 2;
+						}
+						tempArr5 = [];
+						this.px = x32;
+						this.py = y32;
 						this.controlX = firstX2;
 						this.controlY = firstY2;
 					}
@@ -17130,7 +12586,53 @@ justGraphix_path_SvgPath.prototype = {
 					this.controlY = 2 * this.lastY - this.controlY;
 					this.lastX = this.store.s0;
 					this.lastY = this.store.s1;
-					this.pathContext.quadTo(this.controlX,this.controlY,this.lastX,this.lastY);
+					var x111 = this.controlX;
+					var y111 = this.controlY;
+					var x27 = this.lastX;
+					var y27 = this.lastY;
+					var tempArr6 = [];
+					var ax8 = this.px;
+					var ay8 = this.py;
+					var x28 = ax8 - x111;
+					var y28 = ay8 - y111;
+					var x29 = x111 - x27;
+					var y29 = y111 - y27;
+					var approxDistance6 = Math.sqrt(x28 * x28 + y28 * y28) + Math.sqrt(x29 * x29 + y29 * y29);
+					if(approxDistance6 == 0) {
+						approxDistance6 = 0.000001;
+					}
+					var step6 = Math.min(1 / (approxDistance6 * 0.707),justGraphix_curve_CurveMath_quadStep);
+					var l12 = tempArr6.length;
+					tempArr6[l12++] = ax8;
+					tempArr6[l12++] = ay8;
+					var t6 = step6;
+					while(t6 < 1.) {
+						var u12 = 1 - t6;
+						tempArr6[l12++] = Math.pow(u12,2) * ax8 + 2 * u12 * t6 * x111 + Math.pow(t6,2) * x27;
+						var u13 = 1 - t6;
+						tempArr6[l12++] = Math.pow(u13,2) * ay8 + 2 * u13 * t6 * y111 + Math.pow(t6,2) * y27;
+						t6 += step6;
+					}
+					tempArr6[l12++] = x27;
+					tempArr6[l12++] = y27;
+					var withMove6 = false;
+					if(withMove6 == null) {
+						withMove6 = true;
+					}
+					var l13 = tempArr6.length;
+					var i6 = 2;
+					if(withMove6) {
+						this.pathContext.moveTo(tempArr6[0],tempArr6[1]);
+					} else {
+						this.pathContext.lineSegmentTo(tempArr6[0],tempArr6[1]);
+					}
+					while(i6 < l13) {
+						this.pathContext.lineSegmentTo(tempArr6[i6],tempArr6[i6 + 1]);
+						i6 += 2;
+					}
+					tempArr6 = [];
+					this.px = x27;
+					this.py = y27;
 				} else if(this.store.l > 2) {
 					while(this.store.l > 1) {
 						this.controlX = 2 * this.lastX - this.controlX;
@@ -17193,7 +12695,53 @@ justGraphix_path_SvgPath.prototype = {
 							_this186.l--;
 						}
 						this.lastY = out76;
-						this.pathContext.quadTo(this.controlX,this.controlY,this.lastX,this.lastY);
+						var x112 = this.controlX;
+						var y112 = this.controlY;
+						var x210 = this.lastX;
+						var y210 = this.lastY;
+						var tempArr7 = [];
+						var ax9 = this.px;
+						var ay9 = this.py;
+						var x30 = ax9 - x112;
+						var y30 = ay9 - y112;
+						var x33 = x112 - x210;
+						var y33 = y112 - y210;
+						var approxDistance7 = Math.sqrt(x30 * x30 + y30 * y30) + Math.sqrt(x33 * x33 + y33 * y33);
+						if(approxDistance7 == 0) {
+							approxDistance7 = 0.000001;
+						}
+						var step7 = Math.min(1 / (approxDistance7 * 0.707),justGraphix_curve_CurveMath_quadStep);
+						var l14 = tempArr7.length;
+						tempArr7[l14++] = ax9;
+						tempArr7[l14++] = ay9;
+						var t7 = step7;
+						while(t7 < 1.) {
+							var u14 = 1 - t7;
+							tempArr7[l14++] = Math.pow(u14,2) * ax9 + 2 * u14 * t7 * x112 + Math.pow(t7,2) * x210;
+							var u15 = 1 - t7;
+							tempArr7[l14++] = Math.pow(u15,2) * ay9 + 2 * u15 * t7 * y112 + Math.pow(t7,2) * y210;
+							t7 += step7;
+						}
+						tempArr7[l14++] = x210;
+						tempArr7[l14++] = y210;
+						var withMove7 = false;
+						if(withMove7 == null) {
+							withMove7 = true;
+						}
+						var l15 = tempArr7.length;
+						var i7 = 2;
+						if(withMove7) {
+							this.pathContext.moveTo(tempArr7[0],tempArr7[1]);
+						} else {
+							this.pathContext.lineSegmentTo(tempArr7[0],tempArr7[1]);
+						}
+						while(i7 < l15) {
+							this.pathContext.lineSegmentTo(tempArr7[i7],tempArr7[i7 + 1]);
+							i7 += 2;
+						}
+						tempArr7 = [];
+						this.px = x210;
+						this.py = y210;
 					}
 				}
 				break;
@@ -17805,7 +13353,11 @@ justGraphix_path_SvgPath.prototype = {
 						_this207.l--;
 					}
 					this.lastY = out78;
-					this.pathContext.lineTo(this.lastX,this.lastY);
+					var x_7 = this.lastX;
+					var y_7 = this.lastY;
+					this.pathContext.lineTo(x_7,y_7);
+					this.px = x_7;
+					this.py = y_7;
 				} else if(this.store.l > 1) {
 					while(this.store.l > 0) {
 						var _this209 = this.store;
@@ -17837,7 +13389,11 @@ justGraphix_path_SvgPath.prototype = {
 							_this209.l--;
 						}
 						this.lastY = out80;
-						this.pathContext.lineTo(this.lastX,this.lastY);
+						var x_8 = this.lastX;
+						var y_8 = this.lastY;
+						this.pathContext.lineTo(x_8,y_8);
+						this.px = x_8;
+						this.py = y_8;
 					}
 				}
 				break;
@@ -18485,20 +14041,20 @@ justGraphix_path_SvgPath.prototype = {
 					var ey2 = this.lastY;
 					var mx2 = (sx5 - ex2) / 2;
 					var my2 = (sy5 - ey2) / 2;
-					var ax2 = (sx5 + ex2) / 2;
-					var ay2 = (sy5 + ey2) / 2;
+					var ax10 = (sx5 + ex2) / 2;
+					var ay10 = (sy5 + ey2) / 2;
 					phi5 %= 360;
 					phi5 = phi5 * Math.PI / 180;
 					var sin2 = Math.sin(phi5);
 					var cos2 = Math.cos(phi5);
-					var x12 = mx2 * cos2 + my2 * sin2;
-					var y12 = -mx2 * sin2 + my2 * cos2;
+					var x113 = mx2 * cos2 + my2 * sin2;
+					var y113 = -mx2 * sin2 + my2 * cos2;
 					var rx2 = Math.abs(xr2);
 					var ry2 = Math.abs(yr2);
 					var rxx2 = rx2 * rx2;
 					var ryy2 = ry2 * ry2;
-					var xx12 = x12 * x12;
-					var yy12 = y12 * y12;
+					var xx12 = x113 * x113;
+					var yy12 = y113 * y113;
 					var check2 = xx12 / rxx2 + yy12 / ryy2;
 					if(check2 > 1) {
 						rx2 *= Math.sqrt(check2);
@@ -18512,10 +14068,10 @@ justGraphix_path_SvgPath.prototype = {
 						sq2 = 0;
 					}
 					var coef2 = sign2 * Math.sqrt(sq2);
-					var cx12 = coef2 * rx2 * y12 / ry2;
-					var cy12 = -coef2 * ry2 * x12 / rx2;
-					var cx3 = ax2 + cx12 * cos2 - cy12 * sin2;
-					var cy3 = ay2 + cx12 * sin2 + cy12 * cos2;
+					var cx12 = coef2 * rx2 * y113 / ry2;
+					var cy12 = -coef2 * ry2 * x113 / rx2;
+					var cx3 = ax10 + cx12 * cos2 - cy12 * sin2;
+					var cy3 = ay10 + cx12 * sin2 + cy12 * cos2;
 					var phiSin2 = Math.sin(-phi5);
 					var phiCos2 = Math.cos(-phi5);
 					sx5 -= cx3;
@@ -18787,20 +14343,20 @@ justGraphix_path_SvgPath.prototype = {
 						var ey3 = this.lastY;
 						var mx3 = (sx7 - ex3) / 2;
 						var my3 = (sy7 - ey3) / 2;
-						var ax3 = (sx7 + ex3) / 2;
-						var ay3 = (sy7 + ey3) / 2;
+						var ax11 = (sx7 + ex3) / 2;
+						var ay11 = (sy7 + ey3) / 2;
 						phi7 %= 360;
 						phi7 = phi7 * Math.PI / 180;
 						var sin3 = Math.sin(phi7);
 						var cos3 = Math.cos(phi7);
-						var x13 = mx3 * cos3 + my3 * sin3;
-						var y13 = -mx3 * sin3 + my3 * cos3;
+						var x114 = mx3 * cos3 + my3 * sin3;
+						var y114 = -mx3 * sin3 + my3 * cos3;
 						var rx3 = Math.abs(xr3);
 						var ry3 = Math.abs(yr3);
 						var rxx3 = rx3 * rx3;
 						var ryy3 = ry3 * ry3;
-						var xx13 = x13 * x13;
-						var yy13 = y13 * y13;
+						var xx13 = x114 * x114;
+						var yy13 = y114 * y114;
 						var check3 = xx13 / rxx3 + yy13 / ryy3;
 						if(check3 > 1) {
 							rx3 *= Math.sqrt(check3);
@@ -18814,10 +14370,10 @@ justGraphix_path_SvgPath.prototype = {
 							sq3 = 0;
 						}
 						var coef3 = sign3 * Math.sqrt(sq3);
-						var cx13 = coef3 * rx3 * y13 / ry3;
-						var cy13 = -coef3 * ry3 * x13 / rx3;
-						var cx4 = ax3 + cx13 * cos3 - cy13 * sin3;
-						var cy4 = ay3 + cx13 * sin3 + cy13 * cos3;
+						var cx13 = coef3 * rx3 * y114 / ry3;
+						var cy13 = -coef3 * ry3 * x114 / rx3;
+						var cx4 = ax11 + cx13 * cos3 - cy13 * sin3;
+						var cy4 = ay11 + cx13 * sin3 + cy13 * cos3;
 						var phiSin3 = Math.sin(-phi7);
 						var phiCos3 = Math.cos(-phi7);
 						sx7 -= cx4;
@@ -19260,7 +14816,55 @@ justGraphix_path_SvgPath.prototype = {
 					this.controlY = this.store.s3 + this.lastY;
 					this.lastX = this.store.s4 + this.lastX;
 					this.lastY = this.store.s5 + this.lastY;
-					this.pathContext.curveTo(firstX3,firstY3,this.controlX,this.controlY,this.lastX,this.lastY);
+					var x211 = this.controlX;
+					var y211 = this.controlY;
+					var x34 = this.lastX;
+					var y34 = this.lastY;
+					var tempArr8 = [];
+					var ax12 = this.px;
+					var ay12 = this.py;
+					var x35 = ax12 - firstX3;
+					var y35 = ay12 - firstY3;
+					var x36 = firstX3 - x211;
+					var y36 = firstY3 - y211;
+					var x37 = x211 - x34;
+					var y37 = y211 - y34;
+					var approxDistance8 = Math.sqrt(x35 * x35 + y35 * y35) + Math.sqrt(x36 * x36 + y36 * y36) + Math.sqrt(x37 * x37 + y37 * y37);
+					if(approxDistance8 == 0) {
+						approxDistance8 = 0.000001;
+					}
+					var step8 = Math.min(1 / (approxDistance8 * 0.707),0.03);
+					var l16 = tempArr8.length;
+					tempArr8[l16++] = ax12;
+					tempArr8[l16++] = ay12;
+					var t8 = step8;
+					while(t8 < 1.) {
+						var u16 = 1 - t8;
+						tempArr8[l16++] = Math.pow(u16,3) * ax12 + 3 * Math.pow(u16,2) * t8 * firstX3 + 3 * u16 * Math.pow(t8,2) * x211 + Math.pow(t8,3) * x34;
+						var u17 = 1 - t8;
+						tempArr8[l16++] = Math.pow(u17,3) * ay12 + 3 * Math.pow(u17,2) * t8 * firstY3 + 3 * u17 * Math.pow(t8,2) * y211 + Math.pow(t8,3) * y34;
+						t8 += step8;
+					}
+					tempArr8[l16++] = x34;
+					tempArr8[l16++] = y34;
+					var withMove8 = false;
+					if(withMove8 == null) {
+						withMove8 = true;
+					}
+					var l17 = tempArr8.length;
+					var i8 = 2;
+					if(withMove8) {
+						this.pathContext.moveTo(tempArr8[0],tempArr8[1]);
+					} else {
+						this.pathContext.lineSegmentTo(tempArr8[0],tempArr8[1]);
+					}
+					while(i8 < l17) {
+						this.pathContext.lineSegmentTo(tempArr8[i8],tempArr8[i8 + 1]);
+						i8 += 2;
+					}
+					tempArr8 = [];
+					this.px = x34;
+					this.py = y34;
 				} else if(this.store.l > 4) {
 					while(this.store.l > 3) {
 						var _this269 = this.store;
@@ -19437,7 +15041,55 @@ justGraphix_path_SvgPath.prototype = {
 							_this279.l--;
 						}
 						this.lastY = out124 + this.lastY;
-						this.pathContext.curveTo(firstX4,firstY4,this.controlX,this.controlY,this.lastX,this.lastY);
+						var x212 = this.controlX;
+						var y212 = this.controlY;
+						var x38 = this.lastX;
+						var y38 = this.lastY;
+						var tempArr9 = [];
+						var ax13 = this.px;
+						var ay13 = this.py;
+						var x39 = ax13 - firstX4;
+						var y39 = ay13 - firstY4;
+						var x40 = firstX4 - x212;
+						var y40 = firstY4 - y212;
+						var x41 = x212 - x38;
+						var y41 = y212 - y38;
+						var approxDistance9 = Math.sqrt(x39 * x39 + y39 * y39) + Math.sqrt(x40 * x40 + y40 * y40) + Math.sqrt(x41 * x41 + y41 * y41);
+						if(approxDistance9 == 0) {
+							approxDistance9 = 0.000001;
+						}
+						var step9 = Math.min(1 / (approxDistance9 * 0.707),0.03);
+						var l18 = tempArr9.length;
+						tempArr9[l18++] = ax13;
+						tempArr9[l18++] = ay13;
+						var t9 = step9;
+						while(t9 < 1.) {
+							var u18 = 1 - t9;
+							tempArr9[l18++] = Math.pow(u18,3) * ax13 + 3 * Math.pow(u18,2) * t9 * firstX4 + 3 * u18 * Math.pow(t9,2) * x212 + Math.pow(t9,3) * x38;
+							var u19 = 1 - t9;
+							tempArr9[l18++] = Math.pow(u19,3) * ay13 + 3 * Math.pow(u19,2) * t9 * firstY4 + 3 * u19 * Math.pow(t9,2) * y212 + Math.pow(t9,3) * y38;
+							t9 += step9;
+						}
+						tempArr9[l18++] = x38;
+						tempArr9[l18++] = y38;
+						var withMove9 = false;
+						if(withMove9 == null) {
+							withMove9 = true;
+						}
+						var l19 = tempArr9.length;
+						var i9 = 2;
+						if(withMove9) {
+							this.pathContext.moveTo(tempArr9[0],tempArr9[1]);
+						} else {
+							this.pathContext.lineSegmentTo(tempArr9[0],tempArr9[1]);
+						}
+						while(i9 < l19) {
+							this.pathContext.lineSegmentTo(tempArr9[i9],tempArr9[i9 + 1]);
+							i9 += 2;
+						}
+						tempArr9 = [];
+						this.px = x38;
+						this.py = y38;
 					}
 				}
 				break;
@@ -20054,7 +15706,11 @@ justGraphix_path_SvgPath.prototype = {
 							_this300.l--;
 						}
 						this.lastX = tmp + out126;
-						this.pathContext.lineTo(this.lastX,this.lastY);
+						var x_9 = this.lastX;
+						var y_9 = this.lastY;
+						this.pathContext.lineTo(x_9,y_9);
+						this.px = x_9;
+						this.py = y_9;
 					}
 				}
 				break;
@@ -21467,7 +17123,53 @@ justGraphix_path_SvgPath.prototype = {
 					this.controlY = this.lastY + this.store.s1;
 					this.lastX = this.store.s0 + this.lastX;
 					this.lastY = this.store.s1 + this.lastY;
-					this.pathContext.quadTo(this.controlX,this.controlY,this.lastX,this.lastY);
+					var x115 = this.controlX;
+					var y115 = this.controlY;
+					var x213 = this.lastX;
+					var y213 = this.lastY;
+					var tempArr10 = [];
+					var ax14 = this.px;
+					var ay14 = this.py;
+					var x42 = ax14 - x115;
+					var y42 = ay14 - y115;
+					var x43 = x115 - x213;
+					var y43 = y115 - y213;
+					var approxDistance10 = Math.sqrt(x42 * x42 + y42 * y42) + Math.sqrt(x43 * x43 + y43 * y43);
+					if(approxDistance10 == 0) {
+						approxDistance10 = 0.000001;
+					}
+					var step10 = Math.min(1 / (approxDistance10 * 0.707),justGraphix_curve_CurveMath_quadStep);
+					var l20 = tempArr10.length;
+					tempArr10[l20++] = ax14;
+					tempArr10[l20++] = ay14;
+					var t10 = step10;
+					while(t10 < 1.) {
+						var u20 = 1 - t10;
+						tempArr10[l20++] = Math.pow(u20,2) * ax14 + 2 * u20 * t10 * x115 + Math.pow(t10,2) * x213;
+						var u21 = 1 - t10;
+						tempArr10[l20++] = Math.pow(u21,2) * ay14 + 2 * u21 * t10 * y115 + Math.pow(t10,2) * y213;
+						t10 += step10;
+					}
+					tempArr10[l20++] = x213;
+					tempArr10[l20++] = y213;
+					var withMove10 = false;
+					if(withMove10 == null) {
+						withMove10 = true;
+					}
+					var l21 = tempArr10.length;
+					var i10 = 2;
+					if(withMove10) {
+						this.pathContext.moveTo(tempArr10[0],tempArr10[1]);
+					} else {
+						this.pathContext.lineSegmentTo(tempArr10[0],tempArr10[1]);
+					}
+					while(i10 < l21) {
+						this.pathContext.lineSegmentTo(tempArr10[i10],tempArr10[i10 + 1]);
+						i10 += 2;
+					}
+					tempArr10 = [];
+					this.px = x213;
+					this.py = y213;
 				} else if(this.store.l > 4) {
 					while(this.store.l > 3) {
 						var tmp1 = this.lastX;
@@ -21588,7 +17290,53 @@ justGraphix_path_SvgPath.prototype = {
 							_this359.l--;
 						}
 						this.lastY = out146 + this.lastY;
-						this.pathContext.quadTo(this.controlX,this.controlY,this.lastX,this.lastY);
+						var x116 = this.controlX;
+						var y116 = this.controlY;
+						var x214 = this.lastX;
+						var y214 = this.lastY;
+						var tempArr11 = [];
+						var ax15 = this.px;
+						var ay15 = this.py;
+						var x44 = ax15 - x116;
+						var y44 = ay15 - y116;
+						var x45 = x116 - x214;
+						var y45 = y116 - y214;
+						var approxDistance11 = Math.sqrt(x44 * x44 + y44 * y44) + Math.sqrt(x45 * x45 + y45 * y45);
+						if(approxDistance11 == 0) {
+							approxDistance11 = 0.000001;
+						}
+						var step11 = Math.min(1 / (approxDistance11 * 0.707),justGraphix_curve_CurveMath_quadStep);
+						var l22 = tempArr11.length;
+						tempArr11[l22++] = ax15;
+						tempArr11[l22++] = ay15;
+						var t11 = step11;
+						while(t11 < 1.) {
+							var u22 = 1 - t11;
+							tempArr11[l22++] = Math.pow(u22,2) * ax15 + 2 * u22 * t11 * x116 + Math.pow(t11,2) * x214;
+							var u23 = 1 - t11;
+							tempArr11[l22++] = Math.pow(u23,2) * ay15 + 2 * u23 * t11 * y116 + Math.pow(t11,2) * y214;
+							t11 += step11;
+						}
+						tempArr11[l22++] = x214;
+						tempArr11[l22++] = y214;
+						var withMove11 = false;
+						if(withMove11 == null) {
+							withMove11 = true;
+						}
+						var l23 = tempArr11.length;
+						var i11 = 2;
+						if(withMove11) {
+							this.pathContext.moveTo(tempArr11[0],tempArr11[1]);
+						} else {
+							this.pathContext.lineSegmentTo(tempArr11[0],tempArr11[1]);
+						}
+						while(i11 < l23) {
+							this.pathContext.lineSegmentTo(tempArr11[i11],tempArr11[i11 + 1]);
+							i11 += 2;
+						}
+						tempArr11 = [];
+						this.px = x214;
+						this.py = y214;
 					}
 				}
 				break;
@@ -22002,7 +17750,55 @@ justGraphix_path_SvgPath.prototype = {
 					this.controlY = 2 * this.lastY - this.controlY;
 					this.lastX = this.store.s2 + this.lastX;
 					this.lastY = this.store.s3 + this.lastY;
-					this.pathContext.curveTo(this.controlX,this.controlY,firstX5,firstY5,this.lastX,this.lastY);
+					var x117 = this.controlX;
+					var y117 = this.controlY;
+					var x310 = this.lastX;
+					var y310 = this.lastY;
+					var tempArr12 = [];
+					var ax16 = this.px;
+					var ay16 = this.py;
+					var x46 = ax16 - x117;
+					var y46 = ay16 - y117;
+					var x47 = x117 - firstX5;
+					var y47 = y117 - firstY5;
+					var x48 = firstX5 - x310;
+					var y48 = firstY5 - y310;
+					var approxDistance12 = Math.sqrt(x46 * x46 + y46 * y46) + Math.sqrt(x47 * x47 + y47 * y47) + Math.sqrt(x48 * x48 + y48 * y48);
+					if(approxDistance12 == 0) {
+						approxDistance12 = 0.000001;
+					}
+					var step12 = Math.min(1 / (approxDistance12 * 0.707),0.03);
+					var l24 = tempArr12.length;
+					tempArr12[l24++] = ax16;
+					tempArr12[l24++] = ay16;
+					var t12 = step12;
+					while(t12 < 1.) {
+						var u24 = 1 - t12;
+						tempArr12[l24++] = Math.pow(u24,3) * ax16 + 3 * Math.pow(u24,2) * t12 * x117 + 3 * u24 * Math.pow(t12,2) * firstX5 + Math.pow(t12,3) * x310;
+						var u25 = 1 - t12;
+						tempArr12[l24++] = Math.pow(u25,3) * ay16 + 3 * Math.pow(u25,2) * t12 * y117 + 3 * u25 * Math.pow(t12,2) * firstY5 + Math.pow(t12,3) * y310;
+						t12 += step12;
+					}
+					tempArr12[l24++] = x310;
+					tempArr12[l24++] = y310;
+					var withMove12 = false;
+					if(withMove12 == null) {
+						withMove12 = true;
+					}
+					var l25 = tempArr12.length;
+					var i12 = 2;
+					if(withMove12) {
+						this.pathContext.moveTo(tempArr12[0],tempArr12[1]);
+					} else {
+						this.pathContext.lineSegmentTo(tempArr12[0],tempArr12[1]);
+					}
+					while(i12 < l25) {
+						this.pathContext.lineSegmentTo(tempArr12[i12],tempArr12[i12 + 1]);
+						i12 += 2;
+					}
+					tempArr12 = [];
+					this.px = x310;
+					this.py = y310;
 					this.controlX = firstX5;
 					this.controlY = firstY5;
 				} else if(this.store.l > 4) {
@@ -22125,7 +17921,55 @@ justGraphix_path_SvgPath.prototype = {
 							_this380.l--;
 						}
 						this.lastY = out154 + this.lastY;
-						this.pathContext.curveTo(this.controlX,this.controlY,firstX6,firstY6,this.lastX,this.lastY);
+						var x118 = this.controlX;
+						var y118 = this.controlY;
+						var x311 = this.lastX;
+						var y311 = this.lastY;
+						var tempArr13 = [];
+						var ax17 = this.px;
+						var ay17 = this.py;
+						var x49 = ax17 - x118;
+						var y49 = ay17 - y118;
+						var x50 = x118 - firstX6;
+						var y50 = y118 - firstY6;
+						var x51 = firstX6 - x311;
+						var y51 = firstY6 - y311;
+						var approxDistance13 = Math.sqrt(x49 * x49 + y49 * y49) + Math.sqrt(x50 * x50 + y50 * y50) + Math.sqrt(x51 * x51 + y51 * y51);
+						if(approxDistance13 == 0) {
+							approxDistance13 = 0.000001;
+						}
+						var step13 = Math.min(1 / (approxDistance13 * 0.707),0.03);
+						var l26 = tempArr13.length;
+						tempArr13[l26++] = ax17;
+						tempArr13[l26++] = ay17;
+						var t13 = step13;
+						while(t13 < 1.) {
+							var u26 = 1 - t13;
+							tempArr13[l26++] = Math.pow(u26,3) * ax17 + 3 * Math.pow(u26,2) * t13 * x118 + 3 * u26 * Math.pow(t13,2) * firstX6 + Math.pow(t13,3) * x311;
+							var u27 = 1 - t13;
+							tempArr13[l26++] = Math.pow(u27,3) * ay17 + 3 * Math.pow(u27,2) * t13 * y118 + 3 * u27 * Math.pow(t13,2) * firstY6 + Math.pow(t13,3) * y311;
+							t13 += step13;
+						}
+						tempArr13[l26++] = x311;
+						tempArr13[l26++] = y311;
+						var withMove13 = false;
+						if(withMove13 == null) {
+							withMove13 = true;
+						}
+						var l27 = tempArr13.length;
+						var i13 = 2;
+						if(withMove13) {
+							this.pathContext.moveTo(tempArr13[0],tempArr13[1]);
+						} else {
+							this.pathContext.lineSegmentTo(tempArr13[0],tempArr13[1]);
+						}
+						while(i13 < l27) {
+							this.pathContext.lineSegmentTo(tempArr13[i13],tempArr13[i13 + 1]);
+							i13 += 2;
+						}
+						tempArr13 = [];
+						this.px = x311;
+						this.py = y311;
 						this.controlX = firstX6;
 						this.controlY = firstY6;
 					}
@@ -22539,7 +18383,53 @@ justGraphix_path_SvgPath.prototype = {
 					this.controlY = 2 * this.lastY - this.controlY;
 					this.lastX = this.store.s0 + this.lastY;
 					this.lastY = this.store.s1 + this.lastX;
-					this.pathContext.quadTo(this.controlX,this.controlY,this.lastX,this.lastY);
+					var x119 = this.controlX;
+					var y119 = this.controlY;
+					var x215 = this.lastX;
+					var y215 = this.lastY;
+					var tempArr14 = [];
+					var ax18 = this.px;
+					var ay18 = this.py;
+					var x52 = ax18 - x119;
+					var y52 = ay18 - y119;
+					var x53 = x119 - x215;
+					var y53 = y119 - y215;
+					var approxDistance14 = Math.sqrt(x52 * x52 + y52 * y52) + Math.sqrt(x53 * x53 + y53 * y53);
+					if(approxDistance14 == 0) {
+						approxDistance14 = 0.000001;
+					}
+					var step14 = Math.min(1 / (approxDistance14 * 0.707),justGraphix_curve_CurveMath_quadStep);
+					var l28 = tempArr14.length;
+					tempArr14[l28++] = ax18;
+					tempArr14[l28++] = ay18;
+					var t14 = step14;
+					while(t14 < 1.) {
+						var u28 = 1 - t14;
+						tempArr14[l28++] = Math.pow(u28,2) * ax18 + 2 * u28 * t14 * x119 + Math.pow(t14,2) * x215;
+						var u29 = 1 - t14;
+						tempArr14[l28++] = Math.pow(u29,2) * ay18 + 2 * u29 * t14 * y119 + Math.pow(t14,2) * y215;
+						t14 += step14;
+					}
+					tempArr14[l28++] = x215;
+					tempArr14[l28++] = y215;
+					var withMove14 = false;
+					if(withMove14 == null) {
+						withMove14 = true;
+					}
+					var l29 = tempArr14.length;
+					var i14 = 2;
+					if(withMove14) {
+						this.pathContext.moveTo(tempArr14[0],tempArr14[1]);
+					} else {
+						this.pathContext.lineSegmentTo(tempArr14[0],tempArr14[1]);
+					}
+					while(i14 < l29) {
+						this.pathContext.lineSegmentTo(tempArr14[i14],tempArr14[i14 + 1]);
+						i14 += 2;
+					}
+					tempArr14 = [];
+					this.px = x215;
+					this.py = y215;
 				} else if(this.store.l > 2) {
 					while(this.store.l > 1) {
 						this.controlX = 2 * this.lastX - this.controlX;
@@ -22602,7 +18492,53 @@ justGraphix_path_SvgPath.prototype = {
 							_this397.l--;
 						}
 						this.lastY = out158 + this.lastX;
-						this.pathContext.quadTo(this.controlX,this.controlY,this.lastX,this.lastY);
+						var x120 = this.controlX;
+						var y120 = this.controlY;
+						var x216 = this.lastX;
+						var y216 = this.lastY;
+						var tempArr15 = [];
+						var ax19 = this.px;
+						var ay19 = this.py;
+						var x54 = ax19 - x120;
+						var y54 = ay19 - y120;
+						var x55 = x120 - x216;
+						var y55 = y120 - y216;
+						var approxDistance15 = Math.sqrt(x54 * x54 + y54 * y54) + Math.sqrt(x55 * x55 + y55 * y55);
+						if(approxDistance15 == 0) {
+							approxDistance15 = 0.000001;
+						}
+						var step15 = Math.min(1 / (approxDistance15 * 0.707),justGraphix_curve_CurveMath_quadStep);
+						var l30 = tempArr15.length;
+						tempArr15[l30++] = ax19;
+						tempArr15[l30++] = ay19;
+						var t15 = step15;
+						while(t15 < 1.) {
+							var u30 = 1 - t15;
+							tempArr15[l30++] = Math.pow(u30,2) * ax19 + 2 * u30 * t15 * x120 + Math.pow(t15,2) * x216;
+							var u31 = 1 - t15;
+							tempArr15[l30++] = Math.pow(u31,2) * ay19 + 2 * u31 * t15 * y120 + Math.pow(t15,2) * y216;
+							t15 += step15;
+						}
+						tempArr15[l30++] = x216;
+						tempArr15[l30++] = y216;
+						var withMove15 = false;
+						if(withMove15 == null) {
+							withMove15 = true;
+						}
+						var l31 = tempArr15.length;
+						var i15 = 2;
+						if(withMove15) {
+							this.pathContext.moveTo(tempArr15[0],tempArr15[1]);
+						} else {
+							this.pathContext.lineSegmentTo(tempArr15[0],tempArr15[1]);
+						}
+						while(i15 < l31) {
+							this.pathContext.lineSegmentTo(tempArr15[i15],tempArr15[i15 + 1]);
+							i15 += 2;
+						}
+						tempArr15 = [];
+						this.px = x216;
+						this.py = y216;
 					}
 				}
 				break;
@@ -23186,7 +19122,11 @@ justGraphix_path_SvgPath.prototype = {
 				}
 				if(this.store.l == 1) {
 					this.lastY += this.store.s0;
-					this.pathContext.lineTo(this.lastX,this.lastY);
+					var x_10 = this.lastX;
+					var y_10 = this.lastY;
+					this.pathContext.lineTo(x_10,y_10);
+					this.px = x_10;
+					this.py = y_10;
 				} else if(this.store.l > 1) {
 					while(this.store.l > 0) {
 						var tmp3 = this.lastY;
@@ -23219,7 +19159,11 @@ justGraphix_path_SvgPath.prototype = {
 							_this418.l--;
 						}
 						this.lastY = tmp3 + out160;
-						this.pathContext.lineTo(this.lastX,this.lastY);
+						var x_11 = this.lastX;
+						var y_11 = this.lastY;
+						this.pathContext.lineTo(x_11,y_11);
+						this.px = x_11;
+						this.py = y_11;
 					}
 				}
 				break;
@@ -23234,16 +19178,8 @@ justGraphix_path_SvgPath.prototype = {
 		}
 		return str_;
 	}
-	,__class__: justGraphix_path_SvgPath
+	,__class__: justGraphix_path_SvgLinePath
 };
-var justGraphix_rose_DifferencePreference = $hxEnums["justGraphix.rose.DifferencePreference"] = { __ename__:true,__constructs__:null
-	,CLOCKWISE: {_hx_name:"CLOCKWISE",_hx_index:0,__enum__:"justGraphix.rose.DifferencePreference",toString:$estr}
-	,ANTICLOCKWISE: {_hx_name:"ANTICLOCKWISE",_hx_index:1,__enum__:"justGraphix.rose.DifferencePreference",toString:$estr}
-	,SMALL: {_hx_name:"SMALL",_hx_index:2,__enum__:"justGraphix.rose.DifferencePreference",toString:$estr}
-	,LARGE: {_hx_name:"LARGE",_hx_index:3,__enum__:"justGraphix.rose.DifferencePreference",toString:$estr}
-	,SMALL_OLD: {_hx_name:"SMALL_OLD",_hx_index:4,__enum__:"justGraphix.rose.DifferencePreference",toString:$estr}
-};
-justGraphix_rose_DifferencePreference.__constructs__ = [justGraphix_rose_DifferencePreference.CLOCKWISE,justGraphix_rose_DifferencePreference.ANTICLOCKWISE,justGraphix_rose_DifferencePreference.SMALL,justGraphix_rose_DifferencePreference.LARGE,justGraphix_rose_DifferencePreference.SMALL_OLD];
 function justGraphix_target_openflTarget_$_LimeImage_toLimeImageBuffer(pixelImage) {
 	var lh = pixelImage.height;
 	var lw = pixelImage.width;
@@ -23826,6 +19762,32 @@ lime_math_Rectangle.prototype = {
 };
 var justGraphix_target_openflTarget_$_LimeImage = function() { };
 justGraphix_target_openflTarget_$_LimeImage.__name__ = "justGraphix.target.openflTarget_.LimeImage";
+var justGraphix_target_openflTarget_$_PeoteBasicElement = function(x,y,wide,hi,slot) {
+	if(slot == null) {
+		slot = 0;
+	}
+	if(hi == null) {
+		hi = 128;
+	}
+	if(wide == null) {
+		wide = 128;
+	}
+	this.bytePos = -1;
+	this.slot = 0;
+	this.hi = 128;
+	this.wide = 128;
+	this.y = 0;
+	this.x = 0;
+	this.x = x;
+	this.y = y;
+	this.wide = wide;
+	this.hi = hi;
+	this.slot = slot;
+};
+justGraphix_target_openflTarget_$_PeoteBasicElement.__name__ = "justGraphix.target.openflTarget_.PeoteBasicElement";
+justGraphix_target_openflTarget_$_PeoteBasicElement.prototype = {
+	__class__: justGraphix_target_openflTarget_$_PeoteBasicElement
+};
 var peote_view_Display = function(x,y,width,height,color) {
 	if(color == null) {
 		color = 0;
@@ -24167,6 +20129,12 @@ peote_view_Display.prototype = {
 			}
 		}
 	}
+	,addProgram: function(program,atProgram,addBefore) {
+		if(addBefore == null) {
+			addBefore = false;
+		}
+		program.addToDisplay(this,atProgram,addBefore);
+	}
 	,renderProgram: function(peoteView) {
 		this.programListItem = this.programList.first;
 		while(this.programListItem != null) {
@@ -24501,160 +20469,6 @@ peote_view_Display.prototype = {
 	}
 	,__class__: peote_view_Display
 };
-var justGraphix_target_openflTarget_$_PeoteColorDisplayES2 = function(x,y,width,height,pen,gradient) {
-	if(gradient == null) {
-		gradient = false;
-	}
-	this.fragmentColor2D = "#version 300 es\n                precision mediump float;\n                in vec4 vertexColor;\n                out vec4 FragColor;\n                void main(){\n                    FragColor = vertexColor;\n                }";
-	this.vertexColor2D = "#version 300 es\n                layout (location = 0) in vec2 aPos;\n                layout (location = 1) in vec4 aColor;\n                out vec4 vertexColor; \n                void main(){\n                    gl_Position = vec4(aPos, 0.0, 1.0);\n                    vertexColor = aColor;\n                }";
-	this.pen = pen;
-	justGraphix_target_openflTarget_$_PeoteColorDisplayES2.wide = width;
-	justGraphix_target_openflTarget_$_PeoteColorDisplayES2.hi = height;
-	this.gradient = gradient;
-	peote_view_Display.call(this,x,y,width,height,0);
-};
-justGraphix_target_openflTarget_$_PeoteColorDisplayES2.__name__ = "justGraphix.target.openflTarget_.PeoteColorDisplayES2";
-justGraphix_target_openflTarget_$_PeoteColorDisplayES2.__super__ = peote_view_Display;
-justGraphix_target_openflTarget_$_PeoteColorDisplayES2.prototype = $extend(peote_view_Display.prototype,{
-	createShaders: function() {
-		this.vertex_shader = this.gl.createShader(this.gl.VERTEX_SHADER);
-		this.gl.shaderSource(this.vertex_shader,this.vertexColor2D);
-		this.gl.attachShader(this.program,this.vertex_shader);
-		this.gl.compileShader(this.vertex_shader);
-		if(this.gl.getShaderParameter(this.vertex_shader,this.gl.COMPILE_STATUS) == 0) {
-			throw haxe_Exception.thrown(this.gl.getShaderInfoLog(this.vertex_shader));
-		}
-		this.fragment_shader = this.gl.createShader(this.gl.FRAGMENT_SHADER);
-		this.gl.shaderSource(this.fragment_shader,this.fragmentColor2D);
-		this.gl.attachShader(this.program,this.fragment_shader);
-		this.gl.compileShader(this.fragment_shader);
-		if(this.gl.getShaderParameter(this.fragment_shader,this.gl.COMPILE_STATUS) == 0) {
-			throw haxe_Exception.thrown(this.gl.getShaderInfoLog(this.fragment_shader));
-		}
-		this.gl.linkProgram(this.program);
-		this.gl.useProgram(this.program);
-		if(this.gl.getProgramParameter(this.program,this.gl.LINK_STATUS) == 0) {
-			var log = this.gl.getProgramInfoLog(this.program);
-			log = (log == null ? "null" : "" + log) + ("\nVALIDATE_STATUS: " + Std.string(this.gl.getProgramParameter(this.program,this.gl.VALIDATE_STATUS)));
-			log += "\nERROR: " + Std.string(this.gl.getError());
-			throw haxe_Exception.thrown(log);
-		}
-	}
-	,uploadDataAssignAttributes: function() {
-		this.rearrageDrawData();
-		var vbo = this.gl.createBuffer();
-		var vao = this.gl.createVertexArray();
-		this.gl.bindVertexArray(vao);
-		this.gl.bindBuffer(this.gl.ARRAY_BUFFER,vbo);
-		var size = this.vertexBytes.length;
-		var bytes = this.vertexBytes;
-		this.gl.bufferData(this.gl.ARRAY_BUFFER,new Uint8Array(bytes.b.bufferValue,0),this.gl.STATIC_DRAW);
-		var FLOAT = 4;
-		var VERTEX_STRIDE = 6;
-		var stride = FLOAT * VERTEX_STRIDE;
-		if(!peote_view_Version.isVAO) {
-			this.gl.bindAttribLocation(this.program,0,"try");
-			this.gl.vertexAttribPointer(0,2,this.gl.FLOAT,false,stride,0);
-			this.gl.enableVertexAttribArray(0);
-			this.gl.vertexAttribPointer(1,4,this.gl.FLOAT,false,stride,2 * FLOAT);
-			this.gl.enableVertexAttribArray(1);
-		}
-	}
-	,rearrageDrawData: function() {
-		var data = this.pen.arr;
-		var red = 0.;
-		var green = 0.;
-		var blue = 0.;
-		var alpha = 0.;
-		var color = 0;
-		var totalTriangles = this.gradient ? (data.length - 1) / 9 | 0 : (data.length - 1) / 7 | 0;
-		var bufferLength = totalTriangles * 3;
-		var len = totalTriangles * 6 * 3 | 0;
-		var j = 0;
-		var FLOAT = 4;
-		var VERTEX_STRIDE = 6;
-		var stride = FLOAT * VERTEX_STRIDE;
-		this.vertexBytes = new peote_view_intern_BufferBytes(new ArrayBuffer(stride * totalTriangles));
-		var _g = 0;
-		var _g1 = totalTriangles;
-		while(_g < _g1) {
-			var i = _g++;
-			this.pen.arr[0] = i;
-			if(!this.gradient) {
-				color = justGraphix_contour_io_Array2DTriangles.get_color(data) | 0;
-			}
-			alpha = (color >> 24 & 255) / 255;
-			red = (color >> 16 & 255) / 255;
-			green = (color >> 8 & 255) / 255;
-			blue = (color & 255) / 255;
-			var _this = this.vertexBytes;
-			var v = -(1 - 2 * justGraphix_contour_io_Array2DTriangles.get_ax(data) / justGraphix_target_openflTarget_$_PeoteColorDisplayES2.wide);
-			_this.b_UFloat32[j >> 2] = v;
-			j += FLOAT;
-			var _this1 = this.vertexBytes;
-			var v1 = 1 - 2 * justGraphix_contour_io_Array2DTriangles.get_ay(data) / justGraphix_target_openflTarget_$_PeoteColorDisplayES2.hi;
-			_this1.b_UFloat32[j >> 2] = v1;
-			j += FLOAT;
-			this.vertexBytes.b_UFloat32[j >> 2] = red;
-			j += FLOAT;
-			this.vertexBytes.b_UFloat32[j >> 2] = green;
-			j += FLOAT;
-			this.vertexBytes.b_UFloat32[j >> 2] = blue;
-			j += FLOAT;
-			this.vertexBytes.b_UFloat32[j >> 2] = alpha;
-			j += FLOAT;
-			var _this2 = this.vertexBytes;
-			var v2 = -(1 - 2 * justGraphix_contour_io_Array2DTriangles.get_bx(data) / justGraphix_target_openflTarget_$_PeoteColorDisplayES2.wide);
-			_this2.b_UFloat32[j >> 2] = v2;
-			j += FLOAT;
-			var _this3 = this.vertexBytes;
-			var v3 = 1 - 2 * justGraphix_contour_io_Array2DTriangles.get_by(data) / justGraphix_target_openflTarget_$_PeoteColorDisplayES2.hi;
-			_this3.b_UFloat32[j >> 2] = v3;
-			j += FLOAT;
-			this.vertexBytes.b_UFloat32[j >> 2] = red;
-			j += FLOAT;
-			this.vertexBytes.b_UFloat32[j >> 2] = green;
-			j += FLOAT;
-			this.vertexBytes.b_UFloat32[j >> 2] = blue;
-			j += FLOAT;
-			this.vertexBytes.b_UFloat32[j >> 2] = alpha;
-			j += FLOAT;
-			var _this4 = this.vertexBytes;
-			var v4 = -(1 - 2 * justGraphix_contour_io_Array2DTriangles.get_cx(data) / justGraphix_target_openflTarget_$_PeoteColorDisplayES2.wide);
-			_this4.b_UFloat32[j >> 2] = v4;
-			j += FLOAT;
-			var _this5 = this.vertexBytes;
-			var v5 = 1 - 2 * justGraphix_contour_io_Array2DTriangles.get_cy(data) / justGraphix_target_openflTarget_$_PeoteColorDisplayES2.hi;
-			_this5.b_UFloat32[j >> 2] = v5;
-			j += FLOAT;
-			this.vertexBytes.b_UFloat32[j >> 2] = red;
-			j += FLOAT;
-			this.vertexBytes.b_UFloat32[j >> 2] = green;
-			j += FLOAT;
-			this.vertexBytes.b_UFloat32[j >> 2] = blue;
-			j += FLOAT;
-			this.vertexBytes.b_UFloat32[j >> 2] = alpha;
-			j += FLOAT;
-		}
-	}
-	,tidyAfter: function() {
-		if(!peote_view_Version.isINSTANCED) {
-			this.gl.disableVertexAttribArray(0);
-		}
-		this.gl.bindBuffer(this.gl.ARRAY_BUFFER,null);
-		this.gl.useProgram(null);
-	}
-	,renderProgram: function(peoteView) {
-		this.program = this.gl.createProgram();
-		this.createShaders();
-		this.uploadDataAssignAttributes();
-		if(!peote_view_Version.isINSTANCED) {
-			this.gl.disableVertexAttribArray(0);
-		}
-		this.tidyAfter();
-	}
-	,__class__: justGraphix_target_openflTarget_$_PeoteColorDisplayES2
-});
 function justGraphix_target_openflTarget_$_PeoteTextureData_toPeotePixels(pixelImage,peotePixels) {
 	var lh = pixelImage.height;
 	var lw = pixelImage.width;
@@ -27278,6 +23092,418 @@ peote_view_intern_BufferInterface.__isInterface__ = true;
 peote_view_intern_BufferInterface.prototype = {
 	__class__: peote_view_intern_BufferInterface
 };
+var peote_view_Buffer_$PeoteBasicElement = function(minSize,growSize,autoShrink) {
+	if(autoShrink == null) {
+		autoShrink = false;
+	}
+	if(growSize == null) {
+		growSize = 0;
+	}
+	this._shrinkAtSize = 0;
+	this._growSize = 0;
+	this._maxElements = 0;
+	this._glVAO = null;
+	this._glInstanceBuffer = null;
+	this._gl = null;
+	if(minSize <= 0) {
+		throw haxe_Exception.thrown("Error: Buffer need a minimum size of 1 to store an Element.");
+	}
+	this._minSize = minSize;
+	this._growSize = growSize < 0 ? 0 : growSize;
+	if(autoShrink) {
+		this._shrinkAtSize = growSize + (growSize / 2 | 0);
+	}
+	this._elements = new Array(this._minSize);
+	if(peote_view_Version.isINSTANCED) {
+		if(justGraphix_target_openflTarget_$_PeoteBasicElement.instanceBytes == null) {
+			justGraphix_target_openflTarget_$_PeoteBasicElement.instanceBytes = new peote_view_intern_BufferBytes(new ArrayBuffer(12));
+			justGraphix_target_openflTarget_$_PeoteBasicElement.instanceBytes.b[0] = 1;
+			justGraphix_target_openflTarget_$_PeoteBasicElement.instanceBytes.b[1] = 1;
+			justGraphix_target_openflTarget_$_PeoteBasicElement.instanceBytes.b[2] = 1;
+			justGraphix_target_openflTarget_$_PeoteBasicElement.instanceBytes.b[3] = 1;
+			justGraphix_target_openflTarget_$_PeoteBasicElement.instanceBytes.b[4] = 0;
+			justGraphix_target_openflTarget_$_PeoteBasicElement.instanceBytes.b[5] = 1;
+			justGraphix_target_openflTarget_$_PeoteBasicElement.instanceBytes.b[6] = 1;
+			justGraphix_target_openflTarget_$_PeoteBasicElement.instanceBytes.b[7] = 0;
+			justGraphix_target_openflTarget_$_PeoteBasicElement.instanceBytes.b[8] = 0;
+			justGraphix_target_openflTarget_$_PeoteBasicElement.instanceBytes.b[9] = 0;
+			justGraphix_target_openflTarget_$_PeoteBasicElement.instanceBytes.b[10] = 0;
+			justGraphix_target_openflTarget_$_PeoteBasicElement.instanceBytes.b[11] = 0;
+		}
+		this._elemBuffSize = 12;
+	} else {
+		this._elemBuffSize = 72;
+	}
+	this._bytes = new peote_view_intern_BufferBytes(new ArrayBuffer(this._elemBuffSize * this._minSize));
+	this._bytes.fill(0,this._elemBuffSize * this._minSize,0);
+};
+peote_view_Buffer_$PeoteBasicElement.__name__ = "peote.view.Buffer_PeoteBasicElement";
+peote_view_Buffer_$PeoteBasicElement.__interfaces__ = [peote_view_intern_BufferInterface];
+peote_view_Buffer_$PeoteBasicElement.prototype = {
+	setNewGLContext: function(newGl) {
+		if(newGl != null && newGl != this._gl) {
+			if(this._gl != null) {
+				this._gl.deleteBuffer(this._glBuffer);
+				if(peote_view_Version.isINSTANCED) {
+					this._gl.deleteBuffer(this._glInstanceBuffer);
+				}
+				if(peote_view_Version.isVAO) {
+					this._gl.deleteVertexArray(this._glVAO);
+				}
+			}
+			this._gl = newGl;
+			this._glBuffer = this._gl.createBuffer();
+			this._gl.bindBuffer(this._gl.ARRAY_BUFFER,this._glBuffer);
+			var size = this._bytes.length;
+			var bytes = this._bytes;
+			this._gl.bufferData(this._gl.ARRAY_BUFFER,new Uint8Array(bytes.b.bufferValue,0),this._gl.STREAM_DRAW);
+			this._gl.bindBuffer(this._gl.ARRAY_BUFFER,null);
+			if(peote_view_Version.isINSTANCED) {
+				this._glInstanceBuffer = this._gl.createBuffer();
+				var gl = this._gl;
+				gl.bindBuffer(gl.ARRAY_BUFFER,this._glInstanceBuffer);
+				var size = justGraphix_target_openflTarget_$_PeoteBasicElement.instanceBytes.length;
+				var bytes = justGraphix_target_openflTarget_$_PeoteBasicElement.instanceBytes;
+				gl.bufferData(gl.ARRAY_BUFFER,new Uint8Array(bytes.b.bufferValue,0),gl.STATIC_DRAW);
+				gl.bindBuffer(gl.ARRAY_BUFFER,null);
+			}
+			if(peote_view_Version.isVAO) {
+				this._glVAO = this._gl.createVertexArray();
+				this._gl.bindVertexArray(this._glVAO);
+				if(peote_view_Version.isINSTANCED) {
+					var gl = this._gl;
+					var glBuffer = this._glBuffer;
+					gl.bindBuffer(gl.ARRAY_BUFFER,this._glInstanceBuffer);
+					gl.enableVertexAttribArray(0);
+					gl.vertexAttribPointer(0,2,gl.UNSIGNED_BYTE,false,2,0);
+					gl.bindBuffer(gl.ARRAY_BUFFER,glBuffer);
+					gl.enableVertexAttribArray(1);
+					gl.vertexAttribPointer(1,2,gl.SHORT,false,12,0);
+					gl.vertexAttribDivisor(1,1);
+					gl.enableVertexAttribArray(2);
+					gl.vertexAttribPointer(2,2,gl.SHORT,false,12,4);
+					gl.vertexAttribDivisor(2,1);
+					gl.enableVertexAttribArray(3);
+					gl.vertexAttribPointer(3,1,gl.SHORT,false,12,8);
+					gl.vertexAttribDivisor(3,1);
+				} else {
+					var gl = this._gl;
+					gl.bindBuffer(gl.ARRAY_BUFFER,this._glBuffer);
+					gl.enableVertexAttribArray(1);
+					gl.vertexAttribPointer(1,2,gl.SHORT,false,12,0);
+					gl.enableVertexAttribArray(2);
+					gl.vertexAttribPointer(2,2,gl.SHORT,false,12,4);
+					gl.enableVertexAttribArray(3);
+					gl.vertexAttribPointer(3,1,gl.SHORT,false,12,8);
+					gl.enableVertexAttribArray(0);
+					gl.vertexAttribPointer(0,2,gl.UNSIGNED_BYTE,false,12,10);
+				}
+				this._gl.bindVertexArray(null);
+			}
+		}
+	}
+	,updateElement: function(element) {
+		if(peote_view_Version.isINSTANCED) {
+			var bytes = this._bytes;
+			bytes.b_Uint16[element.bytePos >> 1] = element.x & 65535;
+			bytes.b_Uint16[element.bytePos + 2 >> 1] = element.y & 65535;
+			bytes.b_Uint16[element.bytePos + 4 >> 1] = element.wide & 65535;
+			bytes.b_Uint16[element.bytePos + 6 >> 1] = element.hi & 65535;
+			bytes.b_Uint16[element.bytePos + 8 >> 1] = element.slot & 65535;
+		} else {
+			var bytes = this._bytes;
+			bytes.b_Uint16[element.bytePos >> 1] = element.x & 65535;
+			bytes.b_Uint16[element.bytePos + 2 >> 1] = element.y & 65535;
+			bytes.b_Uint16[element.bytePos + 4 >> 1] = element.wide & 65535;
+			bytes.b_Uint16[element.bytePos + 6 >> 1] = element.hi & 65535;
+			bytes.b_Uint16[element.bytePos + 8 >> 1] = element.slot & 65535;
+			bytes.b[element.bytePos + 10] = 1;
+			bytes.b[element.bytePos + 11] = 1;
+			bytes.b_Uint16[element.bytePos + 12 >> 1] = element.x & 65535;
+			bytes.b_Uint16[element.bytePos + 14 >> 1] = element.y & 65535;
+			bytes.b_Uint16[element.bytePos + 16 >> 1] = element.wide & 65535;
+			bytes.b_Uint16[element.bytePos + 18 >> 1] = element.hi & 65535;
+			bytes.b_Uint16[element.bytePos + 20 >> 1] = element.slot & 65535;
+			bytes.b[element.bytePos + 22] = 1;
+			bytes.b[element.bytePos + 23] = 1;
+			bytes.b_Uint16[element.bytePos + 24 >> 1] = element.x & 65535;
+			bytes.b_Uint16[element.bytePos + 26 >> 1] = element.y & 65535;
+			bytes.b_Uint16[element.bytePos + 28 >> 1] = element.wide & 65535;
+			bytes.b_Uint16[element.bytePos + 30 >> 1] = element.hi & 65535;
+			bytes.b_Uint16[element.bytePos + 32 >> 1] = element.slot & 65535;
+			bytes.b[element.bytePos + 34] = 0;
+			bytes.b[element.bytePos + 35] = 1;
+			bytes.b_Uint16[element.bytePos + 36 >> 1] = element.x & 65535;
+			bytes.b_Uint16[element.bytePos + 38 >> 1] = element.y & 65535;
+			bytes.b_Uint16[element.bytePos + 40 >> 1] = element.wide & 65535;
+			bytes.b_Uint16[element.bytePos + 42 >> 1] = element.hi & 65535;
+			bytes.b_Uint16[element.bytePos + 44 >> 1] = element.slot & 65535;
+			bytes.b[element.bytePos + 46] = 1;
+			bytes.b[element.bytePos + 47] = 0;
+			bytes.b_Uint16[element.bytePos + 48 >> 1] = element.x & 65535;
+			bytes.b_Uint16[element.bytePos + 50 >> 1] = element.y & 65535;
+			bytes.b_Uint16[element.bytePos + 52 >> 1] = element.wide & 65535;
+			bytes.b_Uint16[element.bytePos + 54 >> 1] = element.hi & 65535;
+			bytes.b_Uint16[element.bytePos + 56 >> 1] = element.slot & 65535;
+			bytes.b[element.bytePos + 58] = 0;
+			bytes.b[element.bytePos + 59] = 0;
+			bytes.b_Uint16[element.bytePos + 60 >> 1] = element.x & 65535;
+			bytes.b_Uint16[element.bytePos + 62 >> 1] = element.y & 65535;
+			bytes.b_Uint16[element.bytePos + 64 >> 1] = element.wide & 65535;
+			bytes.b_Uint16[element.bytePos + 66 >> 1] = element.hi & 65535;
+			bytes.b_Uint16[element.bytePos + 68 >> 1] = element.slot & 65535;
+			bytes.b[element.bytePos + 70] = 0;
+			bytes.b[element.bytePos + 71] = 0;
+		}
+		if(element.bytePos == -1) {
+			throw haxe_Exception.thrown("Error, Element is not added to Buffer");
+		}
+		if(this._gl != null) {
+			var gl = this._gl;
+			var elemBuffSize = this._elemBuffSize;
+			gl.bindBuffer(gl.ARRAY_BUFFER,this._glBuffer);
+			gl.bufferSubData(gl.ARRAY_BUFFER,element.bytePos,element.bufferPointer);
+			gl.bindBuffer(gl.ARRAY_BUFFER,null);
+		}
+	}
+	,addElement: function(element) {
+		if(element.bytePos == -1) {
+			if(this._maxElements == this._elements.length) {
+				if(this._growSize == 0) {
+					throw haxe_Exception.thrown("Error: Can't add new Element. Buffer is full and automatic growing Buffersize is disabled.");
+				}
+				var newSize = this._maxElements + this._growSize;
+				var _newBytes = new peote_view_intern_BufferBytes(new ArrayBuffer(this._elemBuffSize * newSize));
+				_newBytes.blit(0,this._bytes,0,this._elemBuffSize * this._maxElements);
+				this._bytes = _newBytes;
+				var _newElements = new Array(newSize);
+				var _g = 0;
+				var _g1 = this._maxElements;
+				while(_g < _g1) {
+					var i = _g++;
+					var element1 = this._elements[i];
+					var bytes = this._bytes;
+					var offset = element1.bytePos;
+					var size = this._elemBuffSize;
+					if(size == null) {
+						size = 0;
+					}
+					if(offset == null) {
+						offset = 0;
+					}
+					var this1;
+					if(size > 0) {
+						this1 = new Uint8Array(bytes.b.bufferValue,offset,size);
+					} else {
+						this1 = new Uint8Array(bytes.b.bufferValue,offset);
+					}
+					element1.bufferPointer = this1;
+					_newElements[i] = element1;
+				}
+				this._elements = _newElements;
+				if(this._gl != null) {
+					this._gl.deleteBuffer(this._glBuffer);
+					this._glBuffer = this._gl.createBuffer();
+					this._gl.bindBuffer(this._gl.ARRAY_BUFFER,this._glBuffer);
+					var size = this._bytes.length;
+					var bytes = this._bytes;
+					this._gl.bufferData(this._gl.ARRAY_BUFFER,new Uint8Array(bytes.b.bufferValue,0),this._gl.STREAM_DRAW);
+					this._gl.bindBuffer(this._gl.ARRAY_BUFFER,null);
+					if(peote_view_Version.isVAO) {
+						this._gl.bindVertexArray(this._glVAO);
+						if(peote_view_Version.isINSTANCED) {
+							var gl = this._gl;
+							var glBuffer = this._glBuffer;
+							gl.bindBuffer(gl.ARRAY_BUFFER,this._glInstanceBuffer);
+							gl.enableVertexAttribArray(0);
+							gl.vertexAttribPointer(0,2,gl.UNSIGNED_BYTE,false,2,0);
+							gl.bindBuffer(gl.ARRAY_BUFFER,glBuffer);
+							gl.enableVertexAttribArray(1);
+							gl.vertexAttribPointer(1,2,gl.SHORT,false,12,0);
+							gl.vertexAttribDivisor(1,1);
+							gl.enableVertexAttribArray(2);
+							gl.vertexAttribPointer(2,2,gl.SHORT,false,12,4);
+							gl.vertexAttribDivisor(2,1);
+							gl.enableVertexAttribArray(3);
+							gl.vertexAttribPointer(3,1,gl.SHORT,false,12,8);
+							gl.vertexAttribDivisor(3,1);
+						} else {
+							var gl = this._gl;
+							gl.bindBuffer(gl.ARRAY_BUFFER,this._glBuffer);
+							gl.enableVertexAttribArray(1);
+							gl.vertexAttribPointer(1,2,gl.SHORT,false,12,0);
+							gl.enableVertexAttribArray(2);
+							gl.vertexAttribPointer(2,2,gl.SHORT,false,12,4);
+							gl.enableVertexAttribArray(3);
+							gl.vertexAttribPointer(3,1,gl.SHORT,false,12,8);
+							gl.enableVertexAttribArray(0);
+							gl.vertexAttribPointer(0,2,gl.UNSIGNED_BYTE,false,12,10);
+						}
+						this._gl.bindVertexArray(null);
+					}
+				}
+			}
+			element.bytePos = this._maxElements * this._elemBuffSize;
+			var bytes = this._bytes;
+			var offset = element.bytePos;
+			var size = this._elemBuffSize;
+			if(size == null) {
+				size = 0;
+			}
+			if(offset == null) {
+				offset = 0;
+			}
+			var this1;
+			if(size > 0) {
+				this1 = new Uint8Array(bytes.b.bufferValue,offset,size);
+			} else {
+				this1 = new Uint8Array(bytes.b.bufferValue,offset);
+			}
+			element.bufferPointer = this1;
+			this._elements[this._maxElements++] = element;
+			this.updateElement(element);
+		} else {
+			throw haxe_Exception.thrown("Error: Element is already inside a Buffer");
+		}
+	}
+	,getVertexShader: function() {
+		return "\n\t::if isES3::#version 300 es::end::\n\t::if VERTEX_INT_PRECISION::precision ::VERTEX_INT_PRECISION:: int; ::end::\n\t::if VERTEX_FLOAT_PRECISION::precision ::VERTEX_FLOAT_PRECISION:: float; ::end::\n\t::if VERTEX_SAMPLER_PRECISION::precision ::VERTEX_SAMPLER_PRECISION:: sampler2D; ::end::\n\t\n\t// Uniforms -------------------------\n\t::if (!isPICKING && isUBO)::\n\t//layout(std140) uniform uboView\n\tuniform uboView\n\t{\n\t\tvec2 uResolution;\n\t\tvec2 uViewOffset;\n\t\tvec2 uViewZoom;\n\t};\n\t//layout(std140) uniform uboDisplay\n\tuniform uboDisplay\n\t{\n\t\tvec2 uOffset;\n\t\tvec2 uZoom;\n\t};\n\t::else::\n\tuniform vec2 uResolution;\n\tuniform vec2 uOffset;\n\tuniform vec2 uZoom;\n\t::end::\n\t\n\t\n\t\n\t// Attributes -------------------------\n\t::IN:: vec2 aPosition;\n\t\n\t::if isPICKING::\n\t\t::if !isINSTANCED::\n\t\t\t::IN:: vec4 aElement;\n\t\t::end::\n\t::end::\n\t\n\t::IN:: vec2 aPos;\n\t::IN:: vec2 aSize;\n\t\n\t\n\t\n\t\n\t\n\t\n\t::IN:: float aShort0;\n\t\n\t// Varyings ---------------------------\n\t::if isPICKING::\n\t\t::if isINSTANCED::\n\t\t\tflat ::VAROUT:: int vElement;\n\t\t::else::\n\t\t\t::VAROUT:: vec4 vElement;\n\t\t::end::\n\t::end::\n\t\n\t\n\t\n\t\n\t::if (hasTEXTURES || hasFRAGMENT_INJECTION)::\n\t\t::VAROUT:: vec2 vTexCoord;\n\t\t::if isES3::flat ::end:: ::VAROUT:: float vTexPack0;\n\t::end::\t\n\n\t// custom functions -------------------\n\t::VERTEX_INJECTION::\n\n\t// --------- vertex main --------------\n\tvoid main(void)\n\t{\n\t\t\n\t\tvec2 size = ::if SIZE_FORMULA::::SIZE_FORMULA::::else::aSize::end::;\n\t\t\t\t\n\t\t\n\t\tvec2 pos = ::if POS_FORMULA::::POS_FORMULA::::else::aPos::end::;\npos = pos + aPosition * size;\n\t\t\n\n\t\t\n\n\t\t::if (hasTEXTURES || hasFRAGMENT_INJECTION)::\n\t\t\tvTexCoord = aPosition;\t\t\t\n\t\t\tvTexPack0 = ::if FORMULA_VARYINGS.slot::::FORMULA_VARYINGS.slot::::else::aShort0::end::;\n\t\t::end::\n\t\t\n\t\t::if isPICKING::\n\t\t\t::if isINSTANCED::\n\t\t\t\tvElement = gl_InstanceID + 1;\n\t\t\t::else::\n\t\t\t\tvElement = aElement;\n\t\t\t::end::\n\t\t::end::\n\t\t\n\t\tfloat width = uResolution.x;\n\t\tfloat height = uResolution.y;\n\t\t::if (!isPICKING && isUBO)::\n\t\tfloat deltaX = (uOffset.x  + uViewOffset.x) / uZoom.x;\n\t\tfloat deltaY = (uOffset.y  + uViewOffset.y) / uZoom.y;\n\t\tvec2 zoom = uZoom * uViewZoom;\n\t\t::else::\n\t\tfloat deltaX = uOffset.x;\n\t\tfloat deltaY = uOffset.y;\n\t\tvec2 zoom = uZoom;\n\t\t::end::\n\t\t\n\t\t::if isPIXELSNAPPING::\n\t\tpos = floor( pos * ::PIXELDIVISOR:: * zoom ) / ::PIXELDIVISOR:: / zoom;\n\t\t::end::\n\t\t\n\t\tgl_Position = vec4 (\n\t\t\t 2.0 * zoom.x/width  * (pos.x + deltaX) - 1.0,\n\t\t\t-2.0 * zoom.y/height * (pos.y + deltaY) + 1.0,\n\t\t\t- 0.0,\n\t\t\t1.0\n\t\t);\t\t\n\t\t\n\t}\n\t";
+	}
+	,getFragmentShader: function() {
+		return "\n\t::if isES3::#version 300 es::end::\n\t::foreach FRAGMENT_EXTENSIONS::#extension ::EXTENSION:: : enable\n\t::end::\n\t\n\t::if FRAGMENT_INT_PRECISION::precision ::FRAGMENT_INT_PRECISION:: int; ::end::\n\t::if FRAGMENT_FLOAT_PRECISION::precision ::FRAGMENT_FLOAT_PRECISION:: float; ::end::\n\t::if FRAGMENT_SAMPLER_PRECISION::precision ::FRAGMENT_SAMPLER_PRECISION:: sampler2D; ::end::\n\t\n\t// Uniforms -------------------------\t\n\t::FRAGMENT_PROGRAM_UNIFORMS::\n\t\n\t// Varyings ---------------------------\n\t::if isPICKING::\n\t\t::if isINSTANCED::\n\t\t\tflat ::VARIN:: int vElement;\n\t\t::else::\n\t\t\t::VARIN:: vec4 vElement;\n\t\t::end::\n\t::end::\n\n\t\n\t\n\t\t\t\n\t::if (hasTEXTURES || hasFRAGMENT_INJECTION)::\n\t\t::VARIN:: vec2 vTexCoord;\n\t\t::if isES3::flat ::end:: ::VARIN:: float vTexPack0;\n\t::end::\t\n\t\n\t\n\t::if isES3::\n\t\t::if (isPICKING && isINSTANCED)::\n\t\t\tout int Color;\n\t\t::else::\n\t\t\tout vec4 Color;\n\t\t::end::\n\t::end::\n\n\t::if hasTEXTURE_FUNCTIONS::\n\t\t// function to get texture color\n\t\tvec4 getTextureColor(int TXTNUM, vec2 vTexCoord) {\n\t\t::foreach TEXTURES::\n\t\t\t\n\t\t\t::if (LAYER >= 0)::\n\t\t\t::if USED_ID::\n\t\t\t\tif (TXTNUM == ::LAYER::) {\n\t\t\t\t\t::foreach UNITS::\n\t\t\t\t\t::if !FIRST ::else ::end::::if !LAST ::if (0.0 < ::UNIT_VALUE::)::end::\n\t\t\t\t\t\treturn(texture::if !isES3::2D::end::(::TEXTURE::, vec2(vTexCoord.x * ::SLOT_WIDTH:: + floor(mod(vTexPack0, ::SLOTS_X::)) * ::SLOT_WIDTH::, vTexCoord.y * ::SLOT_HEIGHT:: + floor(floor(vTexPack0)/::SLOTS_X::) * ::SLOT_HEIGHT::)));\n\t\t\t\t\t::end::\n\t\t\t\t}\n\t\t\t::end::\n\t\t\t::end::\n\t\t\t\n\t\t::end::\n\t\t// default values:\n\t\t::foreach TEXTURE_DEFAULTS::\n\t\t\tif (TXTNUM == ::LAYER::) {return(::DEFAULT_VALUE::);}\t\t\n\t\t::end::\n\t\t}\n\t::else:: \n\t\t::if hasFRAGMENT_INJECTION::#define getTextureColor(a,b) vec4(0.0,0.0,0.0,0.0)::end::\n\t::end::\n\n\t::if hasTEXTURE_FUNCTIONS::\n\t\t// function to get full texture size\n\t\tvec2 getTextureResolution(int TXTNUM) {\n\t\t::foreach TEXTURES::\n\t\t\t\n\t\t\t::if (LAYER >= 0)::\n\t\t\t::if USED_ID::\n\t\t\t\tif (TXTNUM == ::LAYER::) {\n\t\t\t\t\t::foreach UNITS::\n\t\t\t\t\t::if !FIRST ::else ::end::::if !LAST ::if (0.0 < ::UNIT_VALUE::)::end::\n\t\t\t\t\t\treturn( vec2(::TEXTURE_WIDTH::, ::TEXTURE_HEIGHT::) );\n\t\t\t\t\t::end::\n\t\t\t\t}\n\t\t\t::end::\n\t\t\t::end::\n\t\t\t\n\t\t::end::\n\t\t// default values:\n\t\t::foreach TEXTURE_DEFAULTS::\n\t\t\tif (TXTNUM == ::LAYER::) {return(vec2(0.0,0.0));}\t\t\n\t\t::end::\n\t\t}\n\t::else:: \n\t\t::if hasFRAGMENT_INJECTION::#define getTextureResolution(a) vec2(0.0,0.0)::end::\n\t::end::\n\n\t// custom functions -------------------\n\t::FRAGMENT_INJECTION::\n\t\n\t// --------- fragment main ------------\n\tvoid main(void)\n\t{\t\n\t\t\n\t\t\n\t\t::if hasTEXTURES::\n\t\t\t::foreach TEXTURES::\n\t\t\t\t// ------------- LAYER ::LAYER:: --------------\n\t\t\t\t\n\t\t\t\t::if (LAYER >= 0)::\n\t\t\t\t::if USED::\n\t\t\t\t\tvec4 t::LAYER::;\n\t\t\t\t\t::foreach UNITS::\n\t\t\t\t\t::if !FIRST ::else ::end::::if !LAST ::if (0.0 < ::UNIT_VALUE::)::end::\n\t\t\t\t\t\tt::LAYER:: = texture::if !isES3::2D::end::(::TEXTURE::, vec2(vTexCoord.x * ::SLOT_WIDTH:: + floor(mod(vTexPack0, ::SLOTS_X::)) * ::SLOT_WIDTH::, vTexCoord.y * ::SLOT_HEIGHT:: + floor(floor(vTexPack0)/::SLOTS_X::) * ::SLOT_HEIGHT::));\n\t\t\t\t\t::end::\n\t\t\t\t::end::\n\t\t\t\t::end::\n\t\t\t\t\n\t\t\t::end::\n\t\t::end::\n\t\t\n\t\t// calc final color from all layers\n\t\tvec4 col = ::FRAGMENT_CALC_LAYER::;\n\t\t\n\t\t::if isDISCARD:: \n\t\t\tif (col.a <= ::DISCARD::) discard;\n\t\t::end::\n\t\t\n\t\t::if isPICKING::\n\t\t\t::if !isES3::gl_Frag::end::Color = vElement;\n\t\t::else::\n\t\t\t::if !isES3::gl_Frag::end::Color = col;\n\t\t\t// this fixing problem on old FF if alpha goes zero\n\t\t\t// ::if !isES3::gl_Frag::end::Color.w = clamp(::if !isES3::gl_Frag::end::Color.w, 0.003, 1.0);\n\t\t::end::\n\t}\n\t";
+	}
+	,getTextureIdentifiers: function() {
+		return [];
+	}
+	,getColorIdentifiers: function() {
+		return [];
+	}
+	,getCustomIdentifiers: function() {
+		return [];
+	}
+	,getCustomVaryings: function() {
+		return [];
+	}
+	,getDefaultColorFormula: function() {
+		return "";
+	}
+	,getDefaultFormulaVars: function() {
+		return justGraphix_target_openflTarget_$_PeoteBasicElement.DEFAULT_FORMULA_VARS;
+	}
+	,getFormulas: function() {
+		return justGraphix_target_openflTarget_$_PeoteBasicElement.FORMULAS;
+	}
+	,getAttributes: function() {
+		return justGraphix_target_openflTarget_$_PeoteBasicElement.ATTRIBUTES;
+	}
+	,getFormulaNames: function() {
+		return justGraphix_target_openflTarget_$_PeoteBasicElement.FORMULA_NAMES;
+	}
+	,getFormulaVaryings: function() {
+		if(justGraphix_target_openflTarget_$_PeoteBasicElement.FORMULA_VARYINGS == "") {
+			return [];
+		} else {
+			return justGraphix_target_openflTarget_$_PeoteBasicElement.FORMULA_VARYINGS.split(",");
+		}
+	}
+	,getFormulaConstants: function() {
+		if(justGraphix_target_openflTarget_$_PeoteBasicElement.FORMULA_CONSTANTS == "") {
+			return [];
+		} else {
+			return justGraphix_target_openflTarget_$_PeoteBasicElement.FORMULA_CONSTANTS.split(",");
+		}
+	}
+	,getMaxZindex: function() {
+		return 2097151;
+	}
+	,hasBlend: function() {
+		return false;
+	}
+	,hasZindex: function() {
+		return false;
+	}
+	,hasPicking: function() {
+		return false;
+	}
+	,needFragmentPrecision: function() {
+		return false;
+	}
+	,bindAttribLocations: function(gl,glProgram) {
+		if(peote_view_Version.isINSTANCED) {
+			gl.bindAttribLocation(glProgram,1,"aPos");
+			gl.bindAttribLocation(glProgram,2,"aSize");
+			gl.bindAttribLocation(glProgram,3,"aShort0");
+			gl.bindAttribLocation(glProgram,0,"aPosition");
+		} else {
+			gl.bindAttribLocation(glProgram,1,"aPos");
+			gl.bindAttribLocation(glProgram,2,"aSize");
+			gl.bindAttribLocation(glProgram,3,"aShort0");
+			gl.bindAttribLocation(glProgram,0,"aPosition");
+		}
+	}
+	,render: function(peoteView,display,program) {
+		var toElement = this._maxElements;
+		if(peote_view_Version.isINSTANCED) {
+			if(peote_view_Version.isVAO) {
+				this._gl.bindVertexArray(this._glVAO);
+			} else {
+				var gl = this._gl;
+				var glBuffer = this._glBuffer;
+				gl.bindBuffer(gl.ARRAY_BUFFER,this._glInstanceBuffer);
+				gl.enableVertexAttribArray(0);
+				gl.vertexAttribPointer(0,2,gl.UNSIGNED_BYTE,false,2,0);
+				gl.bindBuffer(gl.ARRAY_BUFFER,glBuffer);
+				gl.enableVertexAttribArray(1);
+				gl.vertexAttribPointer(1,2,gl.SHORT,false,12,0);
+				gl.vertexAttribDivisor(1,1);
+				gl.enableVertexAttribArray(2);
+				gl.vertexAttribPointer(2,2,gl.SHORT,false,12,4);
+				gl.vertexAttribDivisor(2,1);
+				gl.enableVertexAttribArray(3);
+				gl.vertexAttribPointer(3,1,gl.SHORT,false,12,8);
+				gl.vertexAttribDivisor(3,1);
+			}
+			this._gl.drawArraysInstanced(this._gl.TRIANGLE_STRIP,0,6,toElement);
+			if(peote_view_Version.isVAO) {
+				this._gl.bindVertexArray(null);
+			} else {
+				var gl = this._gl;
+				gl.disableVertexAttribArray(0);
+				gl.disableVertexAttribArray(1);
+				gl.disableVertexAttribArray(2);
+				gl.disableVertexAttribArray(3);
+			}
+			this._gl.bindBuffer(this._gl.ARRAY_BUFFER,null);
+		} else {
+			if(peote_view_Version.isVAO) {
+				this._gl.bindVertexArray(this._glVAO);
+			} else {
+				var gl = this._gl;
+				gl.bindBuffer(gl.ARRAY_BUFFER,this._glBuffer);
+				gl.enableVertexAttribArray(1);
+				gl.vertexAttribPointer(1,2,gl.SHORT,false,12,0);
+				gl.enableVertexAttribArray(2);
+				gl.vertexAttribPointer(2,2,gl.SHORT,false,12,4);
+				gl.enableVertexAttribArray(3);
+				gl.vertexAttribPointer(3,1,gl.SHORT,false,12,8);
+				gl.enableVertexAttribArray(0);
+				gl.vertexAttribPointer(0,2,gl.UNSIGNED_BYTE,false,12,10);
+			}
+			this._gl.drawArrays(this._gl.TRIANGLE_STRIP,0,toElement * 6);
+			if(peote_view_Version.isVAO) {
+				this._gl.bindVertexArray(null);
+			} else {
+				var gl = this._gl;
+				gl.disableVertexAttribArray(0);
+				gl.disableVertexAttribArray(1);
+				gl.disableVertexAttribArray(2);
+				gl.disableVertexAttribArray(3);
+			}
+			this._gl.bindBuffer(this._gl.ARRAY_BUFFER,null);
+		}
+	}
+	,__class__: peote_view_Buffer_$PeoteBasicElement
+};
 var peote_view_PeoteGL = {};
 peote_view_PeoteGL.fromRenderContext = function(context) {
 	if(context.webgl2 != null) {
@@ -27802,6 +24028,7 @@ peote_view_PeoteView.prototype = {
 var peote_view_Program = function(buffer) {
 	this.uniformFloats = [];
 	this.ready = false;
+	this.hasFragmentInjection = false;
 	this.fragmentFloatPrecision = null;
 	this.formulaHasChanged = false;
 	this.formula = new haxe_ds_StringMap();
@@ -27825,6 +24052,7 @@ var peote_view_Program = function(buffer) {
 	this.gl = null;
 	this.displays = [];
 	this.isVisible = true;
+	this.autoUpdateTextures = true;
 	this.clearMask = false;
 	this.mask = 0;
 	this.blendColor = 2139062143;
@@ -27907,7 +24135,167 @@ var peote_view_Program = function(buffer) {
 };
 peote_view_Program.__name__ = "peote.view.Program";
 peote_view_Program.prototype = {
-	createProg: function(isPicking) {
+	addToDisplay: function(display,atProgram,addBefore) {
+		if(addBefore == null) {
+			addBefore = false;
+		}
+		if(this.displays.indexOf(display) < 0) {
+			this.displays.push(display);
+			var newGl = display.gl;
+			if(newGl != null && newGl != this.gl) {
+				var _g = 0;
+				var _g1 = this.displays;
+				while(_g < _g1.length) {
+					var d = _g1[_g];
+					++_g;
+					if(d.gl != null && d.gl != newGl) {
+						throw haxe_Exception.thrown("Error, program can not used inside different gl-contexts");
+					}
+				}
+				if(this.gl != null) {
+					this.gl.deleteShader(this.glVertexShader);
+					this.gl.deleteShader(this.glFragmentShader);
+					this.gl.deleteProgram(this.glProgram);
+					if(this.buffer.hasPicking()) {
+						this.gl.deleteShader(this.glVertexShaderPicking);
+						this.gl.deleteShader(this.glFragmentShaderPicking);
+						this.gl.deleteProgram(this.glProgramPicking);
+					}
+				}
+				this.gl = newGl;
+				this.glBlendSrc = peote_view_BlendFactor.toGL(this.blendValues & 15,this.gl);
+				this.glBlendDst = peote_view_BlendFactor.toGL(this.blendValues >> 4 & 15,this.gl);
+				this.glBlendSrcAlpha = peote_view_BlendFactor.toGL(this.blendValues >> 8 & 15,this.gl);
+				this.glBlendDstAlpha = peote_view_BlendFactor.toGL(this.blendValues >> 12 & 15,this.gl);
+				this.glBlendFunc = peote_view_BlendFunc.toGL(this.blendValues >> 16 & 15,this.gl);
+				this.glBlendFuncAlpha = peote_view_BlendFunc.toGL(this.blendValues >> 20 & 15,this.gl);
+				if(peote_view_Version.isES3) {
+					this.glShaderConfig.isES3 = true;
+					this.glShaderConfig.IN = "in";
+					this.glShaderConfig.VARIN = "in";
+					this.glShaderConfig.VAROUT = "out";
+				}
+				if(peote_view_Version.isUBO) {
+					this.glShaderConfig.isUBO = true;
+				}
+				if(peote_view_Version.isINSTANCED) {
+					this.glShaderConfig.isINSTANCED = true;
+				}
+				this.glShaderConfig.FRAGMENT_EXTENSIONS = [];
+				if(this.gl.getExtension("OES_standard_derivatives") != null) {
+					this.glShaderConfig.FRAGMENT_EXTENSIONS.push({ EXTENSION : "GL_OES_standard_derivatives"});
+				}
+				if(this.gl.getExtension("EXT_color_buffer_float") != null) {
+					this.glShaderConfig.FRAGMENT_EXTENSIONS.push({ EXTENSION : "EXT_color_buffer_float"});
+				} else if(this.gl.getExtension("OES_texture_float") != null) {
+					this.glShaderConfig.FRAGMENT_EXTENSIONS.push({ EXTENSION : "OES_texture_float"});
+				}
+				this.buffer.setNewGLContext(this.gl);
+				this.createProg();
+				if(this.buffer.hasPicking()) {
+					this.createProg(true);
+				}
+				var _g = 0;
+				var _g1 = this.activeTextures;
+				while(_g < _g1.length) {
+					var t = _g1[_g];
+					++_g;
+					var newGl = this.gl;
+					if(newGl != null && newGl != t.gl) {
+						var _g2 = 0;
+						var _g3 = t.programs;
+						while(_g2 < _g3.length) {
+							var p = _g3[_g2];
+							++_g2;
+							if(p.gl != null && p.gl != newGl) {
+								throw haxe_Exception.thrown("Error, texture can not used inside different gl-contexts");
+							}
+						}
+						var _g4 = 0;
+						var _g5 = t.displays;
+						while(_g4 < _g5.length) {
+							var d = _g5[_g4];
+							++_g4;
+							if(d.gl != null && d.gl != newGl) {
+								throw haxe_Exception.thrown("Error, texture can not used inside different gl-contexts");
+							}
+						}
+						if(t.gl != null) {
+							t.gl.deleteTexture(t.glTexture);
+							t.glTexture = null;
+							if(t.displays.length == 0 && t.framebuffer != null) {
+								t.gl.deleteFramebuffer(t.framebuffer);
+								t.framebuffer = null;
+								if(t.glDepthBuffer != null) {
+									t.gl.deleteRenderbuffer(t.glDepthBuffer);
+								}
+								t.glDepthBuffer = null;
+							}
+						}
+						t.gl = newGl;
+						if(t.width > t.gl.getParameter(t.gl.MAX_TEXTURE_SIZE) || t.height > t.gl.getParameter(t.gl.MAX_TEXTURE_SIZE)) {
+							throw haxe_Exception.thrown("Error, texture size is greater then gl.MAX_TEXTURE_SIZE");
+						}
+						t.glTexture = peote_view_intern_TexUtils.createEmptyTexture(t.gl,t.width,t.height,t.format,t.smoothExpand,t.smoothShrink,t.mipmap,t.smoothMipmap);
+						if(t.displays.length > 0 && t.framebuffer == null) {
+							t.glDepthBuffer = t.gl.createRenderbuffer();
+							var gl = t.gl;
+							var texture = t.glTexture;
+							var depthBuffer = t.glDepthBuffer;
+							var width = t.width;
+							var height = t.height;
+							var framebuffer = gl.createFramebuffer();
+							gl.bindRenderbuffer(gl.RENDERBUFFER,depthBuffer);
+							peote_view_intern_GLTool.clearGlErrorQueue(gl);
+							gl.renderbufferStorage(gl.RENDERBUFFER,gl.DEPTH_COMPONENT24,width,height);
+							if(peote_view_intern_GLTool.getLastGlError(gl) == gl.INVALID_ENUM) {
+								haxe_Log.trace("switching to DEPTH_COMPONENT16 for framebuffer",{ fileName : "peote/view/intern/GLTool.hx", lineNumber : 42, className : "peote.view.intern.GLTool", methodName : "createFramebuffer"});
+								gl.renderbufferStorage(gl.RENDERBUFFER,gl.DEPTH_COMPONENT16,width,height);
+							}
+							gl.bindFramebuffer(gl.FRAMEBUFFER,framebuffer);
+							gl.framebufferRenderbuffer(gl.FRAMEBUFFER,gl.DEPTH_ATTACHMENT,gl.RENDERBUFFER,depthBuffer);
+							gl.framebufferTexture2D(gl.FRAMEBUFFER,gl.COLOR_ATTACHMENT0,gl.TEXTURE_2D,texture,0);
+							if(gl.checkFramebufferStatus(gl.FRAMEBUFFER) != gl.FRAMEBUFFER_COMPLETE) {
+								throw haxe_Exception.thrown("Error: Framebuffer not complete!");
+							}
+							gl.bindFramebuffer(gl.FRAMEBUFFER,null);
+							gl.bindRenderbuffer(gl.RENDERBUFFER,null);
+							t.framebuffer = framebuffer;
+							t.updated = true;
+						}
+						t.gl.bindTexture(t.gl.TEXTURE_2D,t.glTexture);
+						var map = t.usedSlots;
+						var _g_map = map;
+						var _g_keys = map.keys();
+						while(_g_keys.hasNext()) {
+							var key = _g_keys.next();
+							var _g_value = _g_map.get(key);
+							var _g_key = key;
+							var slot = _g_key;
+							var textureData = _g_value;
+							peote_view_intern_TexUtils.dataToTexture(t.gl,t.slotWidth * (slot % t.slotsX),t.slotHeight * (slot / t.slotsX | 0),t.format,textureData,false);
+						}
+						if(t.mipmap) {
+							var gl1 = t.gl;
+							var glTexture = null;
+							if(glTexture != null) {
+								gl1.bindTexture(gl1.TEXTURE_2D,glTexture);
+							}
+							gl1.generateMipmap(gl1.TEXTURE_2D);
+							if(glTexture != null) {
+								gl1.bindTexture(gl1.TEXTURE_2D,null);
+							}
+							t.mipmapIsCreated = true;
+						}
+						t.gl.bindTexture(t.gl.TEXTURE_2D,null);
+						t.updated = true;
+					}
+				}
+			}
+		}
+		display.programList.add(this,atProgram,addBefore);
+	}
+	,createProg: function(isPicking) {
 		if(isPicking == null) {
 			isPicking = false;
 		}
@@ -28272,6 +24660,224 @@ peote_view_Program.prototype = {
 			}
 		}
 	}
+	,getTextureIndexByIdentifier: function(identifier,addNew) {
+		if(addNew == null) {
+			addNew = true;
+		}
+		var layer = this.textureIdentifiers.indexOf(identifier);
+		if(layer < 0) {
+			layer = this.customTextureIdentifiers.indexOf(identifier);
+			if(layer < 0) {
+				if(addNew) {
+					var regexp = new EReg("^([a-zA-z_]+\\d*)+$","g");
+					if(!regexp.match(identifier)) {
+						throw haxe_Exception.thrown("Error: \"" + identifier + "\" is not an identifier, please use only letters/numbers or \"_\" (starting with a letter)");
+					}
+					layer = this.textureIdentifiers.length + this.customTextureIdentifiers.length;
+					this.customTextureIdentifiers.push(identifier);
+				}
+			}
+		}
+		return layer;
+	}
+	,setTexture: function(texture,identifier,autoUpdateTextures) {
+		var layer = this.getTextureIndexByIdentifier(identifier);
+		this.textureLayers.h[layer] = [texture];
+		if(autoUpdateTextures != null) {
+			if(autoUpdateTextures) {
+				this.updateTextures();
+			}
+		} else if(this.autoUpdateTextures) {
+			this.updateTextures();
+		}
+	}
+	,updateTextures: function() {
+		var newTextures = [];
+		var layer = this.textureLayers.keys();
+		while(layer.hasNext()) {
+			var layer1 = layer.next();
+			var _g = 0;
+			var _g1 = this.textureLayers.h[layer1];
+			while(_g < _g1.length) {
+				var t = _g1[_g];
+				++_g;
+				if(newTextures.indexOf(t) < 0) {
+					newTextures.push(t);
+				}
+			}
+		}
+		var i = this.activeTextures.length;
+		while(i-- > 0) if(newTextures.indexOf(this.activeTextures[i]) < 0) {
+			if(!HxOverrides.remove(this.activeTextures[i].programs,this)) {
+				throw haxe_Exception.thrown("Error, this texture is not used by program anymore");
+			}
+			this.activeTextures.splice(i,1);
+			this.activeUnits.splice(i,1);
+		}
+		var _g = 0;
+		while(_g < newTextures.length) {
+			var t = newTextures[_g];
+			++_g;
+			if(this.activeTextures.indexOf(t) < 0) {
+				this.activeTextures.push(t);
+				var unit = 0;
+				while(this.activeUnits.indexOf(unit) >= 0) ++unit;
+				this.activeUnits.push(unit);
+				if(t.programs.indexOf(this) >= 0) {
+					throw haxe_Exception.thrown("Error, texture is already used by program");
+				}
+				var newGl = this.gl;
+				if(newGl != null && newGl != t.gl) {
+					var _g1 = 0;
+					var _g2 = t.programs;
+					while(_g1 < _g2.length) {
+						var p = _g2[_g1];
+						++_g1;
+						if(p.gl != null && p.gl != newGl) {
+							throw haxe_Exception.thrown("Error, texture can not used inside different gl-contexts");
+						}
+					}
+					var _g3 = 0;
+					var _g4 = t.displays;
+					while(_g3 < _g4.length) {
+						var d = _g4[_g3];
+						++_g3;
+						if(d.gl != null && d.gl != newGl) {
+							throw haxe_Exception.thrown("Error, texture can not used inside different gl-contexts");
+						}
+					}
+					if(t.gl != null) {
+						t.gl.deleteTexture(t.glTexture);
+						t.glTexture = null;
+						if(t.displays.length == 0 && t.framebuffer != null) {
+							t.gl.deleteFramebuffer(t.framebuffer);
+							t.framebuffer = null;
+							if(t.glDepthBuffer != null) {
+								t.gl.deleteRenderbuffer(t.glDepthBuffer);
+							}
+							t.glDepthBuffer = null;
+						}
+					}
+					t.gl = newGl;
+					if(t.width > t.gl.getParameter(t.gl.MAX_TEXTURE_SIZE) || t.height > t.gl.getParameter(t.gl.MAX_TEXTURE_SIZE)) {
+						throw haxe_Exception.thrown("Error, texture size is greater then gl.MAX_TEXTURE_SIZE");
+					}
+					t.glTexture = peote_view_intern_TexUtils.createEmptyTexture(t.gl,t.width,t.height,t.format,t.smoothExpand,t.smoothShrink,t.mipmap,t.smoothMipmap);
+					if(t.displays.length > 0 && t.framebuffer == null) {
+						t.glDepthBuffer = t.gl.createRenderbuffer();
+						var gl = t.gl;
+						var texture = t.glTexture;
+						var depthBuffer = t.glDepthBuffer;
+						var width = t.width;
+						var height = t.height;
+						var framebuffer = gl.createFramebuffer();
+						gl.bindRenderbuffer(gl.RENDERBUFFER,depthBuffer);
+						peote_view_intern_GLTool.clearGlErrorQueue(gl);
+						gl.renderbufferStorage(gl.RENDERBUFFER,gl.DEPTH_COMPONENT24,width,height);
+						if(peote_view_intern_GLTool.getLastGlError(gl) == gl.INVALID_ENUM) {
+							haxe_Log.trace("switching to DEPTH_COMPONENT16 for framebuffer",{ fileName : "peote/view/intern/GLTool.hx", lineNumber : 42, className : "peote.view.intern.GLTool", methodName : "createFramebuffer"});
+							gl.renderbufferStorage(gl.RENDERBUFFER,gl.DEPTH_COMPONENT16,width,height);
+						}
+						gl.bindFramebuffer(gl.FRAMEBUFFER,framebuffer);
+						gl.framebufferRenderbuffer(gl.FRAMEBUFFER,gl.DEPTH_ATTACHMENT,gl.RENDERBUFFER,depthBuffer);
+						gl.framebufferTexture2D(gl.FRAMEBUFFER,gl.COLOR_ATTACHMENT0,gl.TEXTURE_2D,texture,0);
+						if(gl.checkFramebufferStatus(gl.FRAMEBUFFER) != gl.FRAMEBUFFER_COMPLETE) {
+							throw haxe_Exception.thrown("Error: Framebuffer not complete!");
+						}
+						gl.bindFramebuffer(gl.FRAMEBUFFER,null);
+						gl.bindRenderbuffer(gl.RENDERBUFFER,null);
+						t.framebuffer = framebuffer;
+						t.updated = true;
+					}
+					t.gl.bindTexture(t.gl.TEXTURE_2D,t.glTexture);
+					var map = t.usedSlots;
+					var _g_map = map;
+					var _g_keys = map.keys();
+					while(_g_keys.hasNext()) {
+						var key = _g_keys.next();
+						var _g_value = _g_map.get(key);
+						var _g_key = key;
+						var slot = _g_key;
+						var textureData = _g_value;
+						peote_view_intern_TexUtils.dataToTexture(t.gl,t.slotWidth * (slot % t.slotsX),t.slotHeight * (slot / t.slotsX | 0),t.format,textureData,false);
+					}
+					if(t.mipmap) {
+						var gl1 = t.gl;
+						var glTexture = null;
+						if(glTexture != null) {
+							gl1.bindTexture(gl1.TEXTURE_2D,glTexture);
+						}
+						gl1.generateMipmap(gl1.TEXTURE_2D);
+						if(glTexture != null) {
+							gl1.bindTexture(gl1.TEXTURE_2D,null);
+						}
+						t.mipmapIsCreated = true;
+					}
+					t.gl.bindTexture(t.gl.TEXTURE_2D,null);
+					t.updated = true;
+				}
+				t.programs.push(this);
+			}
+		}
+		this.parseColorFormula();
+		this.glShaderConfig.hasFRAGMENT_INJECTION = this.hasFragmentInjection;
+		this.glShaderConfig.FRAGMENT_PROGRAM_UNIFORMS = "";
+		this.glShaderConfig.TEXTURES = [];
+		if(this.activeTextures.length == 0) {
+			this.glShaderConfig.hasTEXTURES = false;
+		} else {
+			this.glShaderConfig.hasTEXTURES = true;
+			var _g = 0;
+			var _g1 = this.activeTextures.length;
+			while(_g < _g1) {
+				var i = _g++;
+				this.glShaderConfig.FRAGMENT_PROGRAM_UNIFORMS += "uniform sampler2D uTexture" + i + ";";
+			}
+			var layer = this.textureLayers.keys();
+			while(layer.hasNext()) {
+				var layer1 = layer.next();
+				var units = [];
+				var textures = this.textureLayers.h[layer1];
+				var _g = 0;
+				var _g1 = textures.length;
+				while(_g < _g1) {
+					var i = _g++;
+					var s = "" + Std.string(textures[i].slotWidth / textures[i].width);
+					var s1 = "" + Std.string(textures[i].slotHeight / textures[i].height);
+					var s2 = "" + Std.string(textures[i].slotsX * textures[i].slotWidth / textures[i].width);
+					var s3 = "" + Std.string(textures[i].slotsY * textures[i].slotHeight / textures[i].height);
+					units.push({ UNIT_VALUE : i + 1 + ".0", TEXTURE : "uTexture" + this.activeTextures.indexOf(textures[i]), SLOTS_X : textures[i].slotsX + ".0", SLOTS_Y : textures[i].slotsY + ".0", SLOT_WIDTH : s.indexOf(".") != -1 || s.indexOf("e-") != -1 ? s : s + ".0", SLOT_HEIGHT : s1.indexOf(".") != -1 || s1.indexOf("e-") != -1 ? s1 : s1 + ".0", SLOTS_WIDTH : s2.indexOf(".") != -1 || s2.indexOf("e-") != -1 ? s2 : s2 + ".0", SLOTS_HEIGHT : s3.indexOf(".") != -1 || s3.indexOf("e-") != -1 ? s3 : s3 + ".0", TILES_X : textures[i].tilesX + ".0", TILES_Y : textures[i].tilesY + ".0", TEXTURE_WIDTH : textures[i].width + ".0", TEXTURE_HEIGHT : textures[i].height + ".0", FIRST : i == 0, LAST : i == textures.length - 1});
+				}
+				var used = (this.used_by_ColorFormula & 1 << layer1) > 0;
+				var usedID = (this.usedID_by_ColorFormula & 1 << layer1) > 0;
+				this.glShaderConfig.TEXTURES.push({ LAYER : layer1, UNITS : units, USED : used, USED_ID : usedID});
+			}
+		}
+		this.glShaderConfig.TEXTURE_DEFAULTS = [];
+		var _g = 0;
+		var _g1 = this.textureID_Defaults;
+		while(_g < _g1.length) {
+			var defaults = _g1[_g];
+			++_g;
+			this.glShaderConfig.TEXTURE_DEFAULTS.push({ LAYER : defaults.layer, DEFAULT_VALUE : defaults.value});
+		}
+		this.glShaderConfig.hasTEXTURE_FUNCTIONS = this.usedID_by_ColorFormula == 0 && this.textureID_Defaults.length == 0 ? false : true;
+		if(this.gl != null) {
+			this.ready = false;
+			this.gl.deleteShader(this.glVertexShader);
+			this.gl.deleteShader(this.glFragmentShader);
+			this.gl.deleteProgram(this.glProgram);
+			if(this.buffer.hasPicking()) {
+				this.gl.deleteShader(this.glVertexShaderPicking);
+				this.gl.deleteShader(this.glFragmentShaderPicking);
+				this.gl.deleteProgram(this.glProgramPicking);
+			}
+			this.createProg();
+			if(this.buffer.hasPicking()) {
+				this.createProg(true);
+			}
+		}
+	}
 	,__class__: peote_view_Program
 };
 var peote_view_ActiveTexture = function(unit,texture,uniformLoc) {
@@ -28630,7 +25236,35 @@ var peote_view_Texture = function(slotWidth,slotHeight,slots,textureConfig) {
 };
 peote_view_Texture.__name__ = "peote.view.Texture";
 peote_view_Texture.prototype = {
-	__class__: peote_view_Texture
+	setData: function(textureData,slot) {
+		if(slot == null) {
+			slot = 0;
+		}
+		if(this.format > 7 != textureData.format > 7) {
+			throw haxe_Exception.thrown("Error: Can not use " + (textureData.format > 7 ? "float" : "integer") + " TextureData for " + (this.format > 7 ? "float" : "integer") + " Texture");
+		} else {
+			var this1 = this.format;
+			var this2 = textureData.format;
+			if((this1 > 7 ? this1 - 7 : this1 < 5 ? this1 : this1 < 7 ? 1 : 2) != (this2 > 7 ? this2 - 7 : this2 < 5 ? this2 : this2 < 7 ? 1 : 2)) {
+				throw haxe_Exception.thrown("Error: Number of colorchannels of TextureData and Texture don't match");
+			}
+		}
+		this.usedSlots.h[slot] = textureData;
+		if(this.gl != null) {
+			if(this.glTexture == null) {
+				if(this.width > this.gl.getParameter(this.gl.MAX_TEXTURE_SIZE) || this.height > this.gl.getParameter(this.gl.MAX_TEXTURE_SIZE)) {
+					throw haxe_Exception.thrown("Error, texture size is greater then gl.MAX_TEXTURE_SIZE");
+				}
+				this.glTexture = peote_view_intern_TexUtils.createEmptyTexture(this.gl,this.width,this.height,this.format,this.smoothExpand,this.smoothShrink,this.mipmap,this.smoothMipmap);
+			}
+			peote_view_intern_TexUtils.dataToTexture(this.gl,this.slotWidth * (slot % this.slotsX),this.slotHeight * (slot / this.slotsX | 0),this.format,textureData,this.mipmap,this.glTexture);
+			if(this.mipmap) {
+				this.mipmapIsCreated = true;
+			}
+			this.updated = true;
+		}
+	}
+	,__class__: peote_view_Texture
 };
 var peote_view_TextureConfig = function(maxTextureSize,slotsX,slotsY,powerOfTwo,tilesX,tilesY,format,smoothExpand,smoothShrink,mipmap,smoothMipmap) {
 	this.smoothMipmap = false;
@@ -28792,7 +25426,22 @@ var peote_view_intern_BufferBytes = function(data) {
 };
 peote_view_intern_BufferBytes.__name__ = "peote.view.intern.BufferBytes";
 peote_view_intern_BufferBytes.prototype = {
-	__class__: peote_view_intern_BufferBytes
+	blit: function(pos,src,srcpos,len) {
+		if(srcpos == 0 && len == src.b.byteLength) {
+			this.b.set(src.b,pos);
+		} else {
+			this.b.set(src.b.subarray(srcpos,srcpos + len),pos);
+		}
+	}
+	,fill: function(pos,len,value) {
+		var _g = 0;
+		var _g1 = len;
+		while(_g < _g1) {
+			var i = _g++;
+			this.b[pos++] = value;
+		}
+	}
+	,__class__: peote_view_intern_BufferBytes
 };
 var peote_view_intern_GLTool = function() { };
 peote_view_intern_GLTool.__name__ = "peote.view.intern.GLTool";
@@ -29006,12 +25655,65 @@ peote_view_intern_RenderList_$peote_$view_$Display.prototype = {
 	,__class__: peote_view_intern_RenderList_$peote_$view_$Display
 };
 var peote_view_intern_RenderList_$peote_$view_$Program = function(itemMap) {
+	this.last = null;
 	this.first = null;
 	this.itemMap = itemMap;
 };
 peote_view_intern_RenderList_$peote_$view_$Program.__name__ = "peote.view.intern.RenderList_peote_view_Program";
 peote_view_intern_RenderList_$peote_$view_$Program.prototype = {
-	__class__: peote_view_intern_RenderList_$peote_$view_$Program
+	add: function(value,atValue,addBefore) {
+		var newItem = null;
+		if(addBefore) {
+			if(this.first == null) {
+				newItem = this.first = this.last = new peote_view_intern_RenderListItem_$peote_$view_$Program(value,null,null);
+			} else if(atValue == null) {
+				newItem = this.first = new peote_view_intern_RenderListItem_$peote_$view_$Program(value,null,this.first);
+			} else {
+				var atItem = this.itemMap.get(atValue);
+				if(atItem != null) {
+					newItem = new peote_view_intern_RenderListItem_$peote_$view_$Program(value,atItem.prev,atItem);
+					if(atItem == this.first) {
+						this.first = newItem;
+					}
+				} else {
+					throw haxe_Exception.thrown("Error on add: " + Std.string(atValue) + " is not in list.");
+				}
+			}
+		} else if(this.last == null) {
+			newItem = this.first = this.last = new peote_view_intern_RenderListItem_$peote_$view_$Program(value,null,null);
+		} else if(atValue == null) {
+			newItem = this.last = new peote_view_intern_RenderListItem_$peote_$view_$Program(value,this.last,null);
+		} else {
+			var atItem = this.itemMap.get(atValue);
+			if(atItem != null) {
+				newItem = new peote_view_intern_RenderListItem_$peote_$view_$Program(value,atItem,atItem.next);
+				if(atItem == this.last) {
+					this.last = newItem;
+				}
+			} else {
+				throw haxe_Exception.thrown("Error on add: " + Std.string(atValue) + " is not in list.");
+			}
+		}
+		var oldItem = this.itemMap.get(value);
+		if(oldItem != null) {
+			var item = oldItem;
+			if(item == this.first) {
+				this.first = item.next;
+			}
+			if(item == this.last) {
+				this.last = item.prev;
+			}
+			if(item.prev != null) {
+				item.prev.next = item.next;
+			}
+			if(item.next != null) {
+				item.next.prev = item.prev;
+			}
+			item = null;
+		}
+		this.itemMap.set(value,newItem);
+	}
+	,__class__: peote_view_intern_RenderList_$peote_$view_$Program
 };
 var peote_view_intern_TexUtils = function() { };
 peote_view_intern_TexUtils.__name__ = "peote.view.intern.TexUtils";
@@ -30268,6 +26970,42 @@ justGraphix_target_openflTarget_$_LimeImage.toLimeImageBuffer_ = justGraphix_tar
 justGraphix_target_openflTarget_$_LimeImage.fromLimeImageBuffer_ = justGraphix_target_openflTarget_$_LimeImage_fromLimeImageBuffer;
 justGraphix_target_openflTarget_$_LimeImage.toLimeImage_ = justGraphix_target_openflTarget_$_LimeImage_toLimeImage;
 justGraphix_target_openflTarget_$_LimeImage.fromLimeImage_ = justGraphix_target_openflTarget_$_LimeImage_fromLimeImage;
+justGraphix_target_openflTarget_$_PeoteBasicElement.__meta__ = { fields : { x : { posX : null}, y : { posY : null}, wide : { sizeX : null}, hi : { sizeY : null}, slot : { texSlot : null}}};
+justGraphix_target_openflTarget_$_PeoteBasicElement.FORMULAS = new haxe_ds_StringMap();
+justGraphix_target_openflTarget_$_PeoteBasicElement.ATTRIBUTES = (function($this) {
+	var $r;
+	var _g = new haxe_ds_StringMap();
+	_g.h["yStart"] = "aPos.y";
+	_g.h["yEnd"] = "aPos.y";
+	_g.h["y"] = "aPos.y";
+	_g.h["xStart"] = "aPos.x";
+	_g.h["xEnd"] = "aPos.x";
+	_g.h["x"] = "aPos.x";
+	_g.h["wideStart"] = "aSize.x";
+	_g.h["wideEnd"] = "aSize.x";
+	_g.h["wide"] = "aSize.x";
+	_g.h["slotStart"] = "aShort0";
+	_g.h["slotEnd"] = "aShort0";
+	_g.h["slot"] = "aShort0";
+	_g.h["hiStart"] = "aSize.y";
+	_g.h["hiEnd"] = "aSize.y";
+	_g.h["hi"] = "aSize.y";
+	$r = _g;
+	return $r;
+}(this));
+justGraphix_target_openflTarget_$_PeoteBasicElement.FORMULA_NAMES = (function($this) {
+	var $r;
+	var _g = new haxe_ds_StringMap();
+	_g.h["sizeX"] = "wide";
+	_g.h["sizeY"] = "hi";
+	_g.h["posX"] = "x";
+	_g.h["posY"] = "y";
+	$r = _g;
+	return $r;
+}(this));
+justGraphix_target_openflTarget_$_PeoteBasicElement.FORMULA_VARYINGS = "slot";
+justGraphix_target_openflTarget_$_PeoteBasicElement.FORMULA_CONSTANTS = "";
+justGraphix_target_openflTarget_$_PeoteBasicElement.DEFAULT_FORMULA_VARS = new haxe_ds_StringMap();
 justGraphix_target_openflTarget_$_PeoteV.toPeoteTextureData_ = justGraphix_target_openflTarget_$_PeoteTextureData_toPeoteTextureData;
 justGraphix_target_openflTarget_$_PeoteV.fromPeoteTextureData_ = justGraphix_target_openflTarget_$_PeoteTextureData_fromPeoteTextureData;
 justGraphix_target_openflTarget_$_PeoteV.toPeotePixels_ = justGraphix_target_openflTarget_$_PeoteTextureData_toPeotePixels;
