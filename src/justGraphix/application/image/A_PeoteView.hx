@@ -14,6 +14,7 @@ import peote.view.Program;
 import peote.view.Color;
 import peote.view.*;
 import peote.view.TextureFormat;
+import peote.view.intern.BufferBytes;
 
 import justGraphix.image.Pixelimage;
 import justGraphix.pixel.Pixel32;
@@ -26,7 +27,6 @@ import justGraphix.contour.StyleEndLine;
 import justGraphix.path.ScaleTranslateContext;
 import justGraphix.path.Path_D;
 import justGraphix.path.SvgPath;
-import justGraphix.target.openflTarget_.PeoteColorDisplayES2;
 import haxe.CallStack;
 import lime.app.Application;
 import lime.ui.Window;
@@ -34,8 +34,12 @@ import peote.view.*;
 import justGraphix.target.openflTarget_.PeoteBasicElement;
 import peote.view.element.Elem;
 import justGraphix.path.Path_D;
-
+import peoteViewTriangle.Triangle;
+import peoteViewTriangle.TriangleDisplay;
 class A_PeoteView extends Application {
+    var wide = 800;
+    var hi = 600;
+    
     /**
      * Lime GL setup for PeoteView
      */
@@ -54,16 +58,28 @@ class A_PeoteView extends Application {
     public
     function startPeoteView( window: Window ){
         var peoteView = new PeoteView( window) ;
+        // pixel example
         var display   = new Display( 10, 10, window.width - 20, window.height - 20, Color.WHITE );
-        peoteView.addDisplay( display );
         textureUsage( display );
-        
-        //var pen2D = new Pen2D( 0xFF0000FF );
-        //birdSVG( pen2D );
-        //var customDisplay = new PeoteColorDisplayES2( 0, 0, 800, 600, pen2D, false );
-        //peoteView.addDisplay( customDisplay );
+        peoteView.addDisplay( display );
+        // triangle example
+        var triangleDisplay = new TriangleDisplay( 0, 0, window.width, window.height, 0, Std.int( 100* 1024) );
+        var pen2D = new Pen2D( 0xFF0000FF );
+        birdSVG( pen2D );
+        var data = pen2D.arr;
+        var color: Int;
+        var totalTriangles = Std.int( data.size/7); // /9 for gradient version!
+        var str = '';
+        for( i in 0...totalTriangles ){
+            pen2D.pos = i;
+            color = Std.int( data.color );
+            triangleDisplay.addElement( new Triangle( data.ax, data.ay+300, color
+                                                    , data.bx, data.by+300, color
+                                                    , data.cx, data.cy+300, color ) );
+         }
+         peoteView.addDisplay( triangleDisplay );
     }
-    
+
     public
     function birdSVG( pen2D: Pen2D ){
         var sketcher = new Sketcher( pen2D, StyleSketch.Fine, StyleEndLine.both );

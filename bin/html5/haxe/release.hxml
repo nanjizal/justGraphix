@@ -8,6 +8,8 @@
 --macro Sys.println("haxe_libraries/peote-view.hxml:3: [Warning] Using dev version of library peote-view")
 -cp /home/nanjizalmac/haxe/haxelib/format/3,7,0
 -D format=3.7.0
+-cp /home/nanjizalmac/haxe/haxelib/peoteviewtriangle/git
+-D peoteViewTriangle=0.0.0
 -cp src
 -D peoteview_customdisplay
 -D tools=8.1.2

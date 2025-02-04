@@ -18,6 +18,7 @@
 	<!--<haxelib name="justGraphic" />-->
 	<haxelib name="peote-view" />
   	<haxelib name="format" />
+	<haxelib name="peoteViewTriangle" />
 
 	<!--to let make childclass of Display for custom rendering-->
 	<haxedef name="peoteview_customdisplay" />
