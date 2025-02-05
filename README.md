@@ -3,7 +3,6 @@
 A graphics library to draw shapes using triangles or pixels targeting the haxe ecosystem.
 
 Since based on my older projects it will support OpenFL, Lime, Starling, Flixel, NME, Ceramic, Heaps, Kha, WebGL, Canvas, Gluon.
-Decoupled for use with.  
 
 Currently it has one example for a Lime engine Peote-View, and includes basics of using custom display for triangle rendering of svg paths and drawing to multiple images rendering as quad Elements.
   
