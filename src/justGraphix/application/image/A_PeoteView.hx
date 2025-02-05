@@ -72,7 +72,7 @@ class A_PeoteView extends Application {
         var str = '';
         for( i in 0...totalTriangles ){
             pen2D.pos = i;
-            color = Std.int( data.color );
+            color = ( Std.int( data.color ): Pixel32 ).firstToLast();
             triangleDisplay.addElement( new Triangle( data.ax, data.ay+300, color
                                                     , data.bx, data.by+300, color
                                                     , data.cx, data.cy+300, color ) );

@@ -69,6 +69,14 @@ abstract Pixel32( Int ) to Int from Int {
         this = Pixel32.fromChannels( c0, c1, c2, v );
         return v;
     }
+    inline
+    public function firstToLast(): Pixel32 {
+        return ( cast ( this << 8 ) + ( this >> 24 & 0xFF ): Pixel32 );
+    }
+    inline
+    public function lastToFirst(): Pixel32 {
+        return  ( cast (( this >> 8  & 0xFFFFFF ) + ( this << 24 ) ): Pixel32 );
+    }
     inline 
     public function flip13(): Pixel32
         return ( cast c0 << 24 | c3 << 16 | c2 << 8 | c1 : Pixel32 );

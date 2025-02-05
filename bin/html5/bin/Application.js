@@ -867,7 +867,7 @@ ApplicationMain.main = function() {
 };
 ApplicationMain.create = function(config) {
 	var app = new justGraphix_application_image_A_$PeoteView();
-	app.meta.h["build"] = "13";
+	app.meta.h["build"] = "14";
 	app.meta.h["company"] = "Justinfront";
 	app.meta.h["file"] = "Application";
 	app.meta.h["name"] = "A_PeoteView";
@@ -2025,7 +2025,8 @@ justGraphix_application_image_A_$PeoteView.prototype = $extend(lime_app_Applicat
 		while(_g < _g1) {
 			var i = _g++;
 			pen2D.arr[0] = i;
-			color = justGraphix_contour_io_Array2DTriangles.get_color(data) | 0;
+			var this1 = justGraphix_contour_io_Array2DTriangles.get_color(data) | 0;
+			color = (this1 << 8) + (this1 >> 24 & 255);
 			triangleDisplay.addElement(new peoteViewTriangle_Triangle(justGraphix_contour_io_Array2DTriangles.get_ax(data),justGraphix_contour_io_Array2DTriangles.get_ay(data) + 300,color,justGraphix_contour_io_Array2DTriangles.get_bx(data),justGraphix_contour_io_Array2DTriangles.get_by(data) + 300,color,justGraphix_contour_io_Array2DTriangles.get_cx(data),justGraphix_contour_io_Array2DTriangles.get_cy(data) + 300,color));
 		}
 		peoteView.addDisplay(triangleDisplay);
