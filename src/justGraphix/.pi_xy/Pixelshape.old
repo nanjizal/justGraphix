@@ -1,0 +1,71 @@
+package pi_xy;
+
+import justGraphix.image.Pixelimage;
+import justGraphix.pixel.Pixel32;
+import justGraphix.image.algo.RoundRecPixel;
+import justGraphix.hit.HitTri;
+import justGraphix.hit.HitQuad;
+import justGraphix.hit.HitTriArray;
+import justGraphix.image.algo.GeomPix;
+//import vision.ds.Image;
+import haxe.io.UInt32Array;
+import iterMagic.BoundIterator;
+import iterMagic.IteratorRange;
+import pi_xy.ImageStruct;
+import justGraphix.pixel.Pixel32;
+import pi_xy.pixel.Pixel28;
+import justGraphix.image.algo.GeomPix;
+import pi_xy.pixel.PixelChannel;
+import justGraphix.image.algo.TriPixel;
+import justGraphix.image.algo.LinePixel;
+import justGraphix.image.algo.CirclePixel;
+import justGraphix.image.algo.PolyPixel;
+// import justGraphix.image.algo.QuadPixel;
+import justGraphix.image.algo.QuadrantPixel;
+import justGraphix.image.algo.RoundRecPixel;
+import justGraphix.image.algo.RectanglePixel;
+import justGraphix.hit.HitTri;
+import justGraphix.hit.HitQuad;
+import justGraphix.hit.HitTriArray;
+import justGraphix.image.algo.QuadPixel;
+import justGraphix.image.algo.QuintPixel;
+import justGraphix.image.algo.ArrowPixel;
+
+@:transient
+@:forward
+abstract Pixelshape( Pixelimage ) to Pixelimage {
+	public inline 
+	function new( w: Int, h: Int ) {
+		this = new Pixelimage( w, h );
+	}
+
+	/*
+		// TODO: may remove.
+		public inline
+		function fillRect( x: Float, y: Float
+						 , w: Float, h: Float
+						 , color: Int, ?phi: Float = 0.
+						 , ?debugCorners: Bool = false ) { 
+			if( phi != 0. ){
+				// need to tweak to get accurate offset..
+				var cx = x + w/2;
+				var cy = y + h/2;
+				this.fillPolyBuild( x, y, w, h, color, phi, 4, false );
+				//rotateLine( x, y, w, h, Math.PI/4, color );
+			} else {
+				this.simpleRect( x, y, w, h, color );
+			}
+		}
+	 */
+
+
+	/*
+		public inline
+		function fillDavidStar(x: Float, y: Float
+								, d: Float
+								, color: Int ) {
+			fillSquare( x, y, d, color );
+			fillRect( x, y, d*Math.pow(2,0.5), d*Math.pow(2,0.5), color, Math.PI/4 );
+		}
+	 */
+}
