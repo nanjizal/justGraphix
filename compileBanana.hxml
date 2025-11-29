@@ -1,0 +1,12 @@
+-cp src
+-js banana.js
+-D contour_debug
+-main justGraphix.example.polygon.Banana
+-D js-flatten 
+-dce full
+#--no-traces
+--next
+
+-cmd echo '<!DOCTYPE html><meta charset="UTF-8"><html><body><script src="banana.js"></script></body></html>' >banana.html
+# open html on mac os.
+-cmd open banana.html

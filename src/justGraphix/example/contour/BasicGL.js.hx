@@ -1,7 +1,5 @@
 package justGraphix.example.contour;
 
-import justGraphix.contour.io.Float32Array;
-
 // contour code
 import justGraphix.contour.Sketcher;
 import justGraphix.contour.Pen2D;
