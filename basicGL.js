@@ -9677,6 +9677,82 @@ justGraphix_contour_io_Array2DTriangles.triangle = function(this1,ax_,ay_,bx_,by
 justGraphix_contour_io_Array2DTriangles.adjustWinding = function(this1) {
 	return justGraphix_contour_io_Array2DTriangles.get_ax(this1) * justGraphix_contour_io_Array2DTriangles.get_by(this1) - justGraphix_contour_io_Array2DTriangles.get_bx(this1) * justGraphix_contour_io_Array2DTriangles.get_ay(this1) + (justGraphix_contour_io_Array2DTriangles.get_bx(this1) * justGraphix_contour_io_Array2DTriangles.get_cy(this1) - justGraphix_contour_io_Array2DTriangles.get_cx(this1) * justGraphix_contour_io_Array2DTriangles.get_by(this1)) + (justGraphix_contour_io_Array2DTriangles.get_cx(this1) * justGraphix_contour_io_Array2DTriangles.get_ay(this1) - justGraphix_contour_io_Array2DTriangles.get_ax(this1) * justGraphix_contour_io_Array2DTriangles.get_cy(this1)) > 0;
 };
+var justGraphix_contour_io_ColorTriangles2D = {};
+justGraphix_contour_io_ColorTriangles2D.get_ax = function(this1) {
+	return this1[(this1[0] | 0) * 18 + 2];
+};
+justGraphix_contour_io_ColorTriangles2D.set_ax = function(this1,v) {
+	this1[(this1[0] | 0) * 18 + 2] = v;
+	return v;
+};
+justGraphix_contour_io_ColorTriangles2D.get_ay = function(this1) {
+	return this1[(this1[0] | 0) * 18 + 1 + 2];
+};
+justGraphix_contour_io_ColorTriangles2D.set_ay = function(this1,v) {
+	this1[(this1[0] | 0) * 18 + 1 + 2] = v;
+	return v;
+};
+justGraphix_contour_io_ColorTriangles2D.set_redA = function(this1,v) {
+	this1[(this1[0] | 0) * 18 + 2 + 2] = v;
+	return v;
+};
+justGraphix_contour_io_ColorTriangles2D.get_bx = function(this1) {
+	return this1[(this1[0] | 0) * 18 + 6 + 2];
+};
+justGraphix_contour_io_ColorTriangles2D.set_bx = function(this1,v) {
+	this1[(this1[0] | 0) * 18 + 6 + 2] = v;
+	return v;
+};
+justGraphix_contour_io_ColorTriangles2D.get_by = function(this1) {
+	return this1[(this1[0] | 0) * 18 + 7 + 2];
+};
+justGraphix_contour_io_ColorTriangles2D.set_by = function(this1,v) {
+	this1[(this1[0] | 0) * 18 + 7 + 2] = v;
+	return v;
+};
+justGraphix_contour_io_ColorTriangles2D.set_redB = function(this1,v) {
+	this1[(this1[0] | 0) * 18 + 8 + 2] = v;
+	return v;
+};
+justGraphix_contour_io_ColorTriangles2D.get_cx = function(this1) {
+	return this1[(this1[0] | 0) * 18 + 12 + 2];
+};
+justGraphix_contour_io_ColorTriangles2D.set_cx = function(this1,v) {
+	this1[(this1[0] | 0) * 18 + 12 + 2] = v;
+	return v;
+};
+justGraphix_contour_io_ColorTriangles2D.get_cy = function(this1) {
+	return this1[(this1[0] | 0) * 18 + 13 + 2];
+};
+justGraphix_contour_io_ColorTriangles2D.set_cy = function(this1,v) {
+	this1[(this1[0] | 0) * 18 + 13 + 2] = v;
+	return v;
+};
+justGraphix_contour_io_ColorTriangles2D.set_redC = function(this1,v) {
+	this1[(this1[0] | 0) * 18 + 14 + 2] = v;
+	return v;
+};
+justGraphix_contour_io_ColorTriangles2D.triangle = function(this1,ax_,ay_,bx_,by_,cx_,cy_) {
+	justGraphix_contour_io_ColorTriangles2D.set_ax(this1,ax_);
+	justGraphix_contour_io_ColorTriangles2D.set_ay(this1,ay_);
+	justGraphix_contour_io_ColorTriangles2D.set_bx(this1,bx_);
+	justGraphix_contour_io_ColorTriangles2D.set_by(this1,by_);
+	justGraphix_contour_io_ColorTriangles2D.set_cx(this1,cx_);
+	justGraphix_contour_io_ColorTriangles2D.set_cy(this1,cy_);
+	var windingAdjusted = justGraphix_contour_io_ColorTriangles2D.adjustWinding(this1);
+	if(windingAdjusted) {
+		justGraphix_contour_io_ColorTriangles2D.set_ax(this1,ax_);
+		justGraphix_contour_io_ColorTriangles2D.set_ay(this1,ay_);
+		justGraphix_contour_io_ColorTriangles2D.set_bx(this1,cx_);
+		justGraphix_contour_io_ColorTriangles2D.set_by(this1,cy_);
+		justGraphix_contour_io_ColorTriangles2D.set_cx(this1,bx_);
+		justGraphix_contour_io_ColorTriangles2D.set_cy(this1,by_);
+	}
+	return windingAdjusted;
+};
+justGraphix_contour_io_ColorTriangles2D.adjustWinding = function(this1) {
+	return justGraphix_contour_io_ColorTriangles2D.get_ax(this1) * justGraphix_contour_io_ColorTriangles2D.get_by(this1) - justGraphix_contour_io_ColorTriangles2D.get_bx(this1) * justGraphix_contour_io_ColorTriangles2D.get_ay(this1) + (justGraphix_contour_io_ColorTriangles2D.get_bx(this1) * justGraphix_contour_io_ColorTriangles2D.get_cy(this1) - justGraphix_contour_io_ColorTriangles2D.get_cx(this1) * justGraphix_contour_io_ColorTriangles2D.get_by(this1)) + (justGraphix_contour_io_ColorTriangles2D.get_cx(this1) * justGraphix_contour_io_ColorTriangles2D.get_ay(this1) - justGraphix_contour_io_ColorTriangles2D.get_ax(this1) * justGraphix_contour_io_ColorTriangles2D.get_cy(this1)) > 0;
+};
 var justGraphix_curve_EllipseArc = function(arc_) {
 	this.arc = arc_;
 };
@@ -9735,204 +9811,212 @@ justGraphix_curve_EllipseArc.prototype = {
 	}
 };
 var justGraphix_example_contour_BasicGL = function() {
-	this.vertexColor = "vertexColor";
-	this.vertexPosition = "vertexPosition";
 	this.divertTrace = new justGraphix_target__$canvas_DivertTrace();
-	haxe_Log.trace("Contour Test",{ fileName : "src/justGraphix/example/contour/BasicGL.js.hx", lineNumber : 61, className : "justGraphix.example.contour.BasicGL", methodName : "new"});
+	haxe_Log.trace("Contour Test",{ fileName : "src/justGraphix/example/contour/BasicGL.js.hx", lineNumber : 49, className : "justGraphix.example.contour.BasicGL", methodName : "new"});
 	this.width = 1024;
 	this.height = 768;
-	this.drawContours();
-	this.rearrageDrawData();
-	this.renderOnce();
+	this.pen2D = new justGraphix_contour_Pen2D(-16776961);
+	var s = this.pen2D.arr[0] | 0;
+	justGraphix_example_contour_SvgTests_arcSvg(this.pen2D);
+	this.pen2D.currentColor = -16776961;
+	justGraphix_example_contour_SvgTests_kiwiSvg(this.pen2D);
+	justGraphix_example_contour_SvgTests_cubicSvg(this.pen2D);
+	justGraphix_example_contour_SvgTests_quadSvg(this.pen2D);
+	var e = this.pen2D.arr[0] - 1 | 0;
+	this.mainSheet = new justGraphix_target__$canvas_Sheet();
+	this.mainSheet.create(this.width,this.height,true);
+	this.gl = this.mainSheet.gl;
+	this.renderer = new justGraphix_target__$gl__$Renderer_Renderer_$(this.gl,this.pen2D,this.width,this.height);
+	var this1 = this.renderer;
+	var ii_min = s;
+	var ii_max = e;
+	var range_start = ii_min;
+	var range_max = ii_max;
+	var data = this1.pen.arr;
+	this1.totalTriangles = (data.length - 1) / 6 | 0;
+	this1.bufferLength = this1.totalTriangles * 3;
+	this1.triSize = 18;
+	this1.len = this1.totalTriangles * this1.triSize | 0;
+	var this2 = new Float32Array(this1.len + 2);
+	this2[0] = 0.;
+	this2[1] = 0.;
+	this1.arrData = this2;
+	var _g = 0;
+	var _g1 = this1.totalTriangles;
+	while(_g < _g1) {
+		var i = _g++;
+		this1.pen.arr[0] = i;
+		var this2 = this1.arrData;
+		this2[0] = i;
+		if(this2[0] > this2[1] - 1) {
+			this2[1] = this2[0];
+		}
+		var this3 = this1.arrData;
+		var col = justGraphix_contour_io_Array2DTriangles.get_color(data) | 0;
+		justGraphix_contour_io_ColorTriangles2D.set_redA(this3,(col >> 16 & 255) / 255);
+		var v = (col & 255) / 255;
+		this3[(this3[0] | 0) * 18 + 4 + 2] = v;
+		var v1 = (col >> 8 & 255) / 255;
+		this3[(this3[0] | 0) * 18 + 3 + 2] = v1;
+		var v2 = (col >> 24 & 255) / 255;
+		this3[(this3[0] | 0) * 18 + 5 + 2] = v2;
+		justGraphix_contour_io_ColorTriangles2D.set_redB(this3,(col >> 16 & 255) / 255);
+		var v3 = (col & 255) / 255;
+		this3[(this3[0] | 0) * 18 + 10 + 2] = v3;
+		var v4 = (col >> 8 & 255) / 255;
+		this3[(this3[0] | 0) * 18 + 9 + 2] = v4;
+		var v5 = (col >> 24 & 255) / 255;
+		this3[(this3[0] | 0) * 18 + 11 + 2] = v5;
+		justGraphix_contour_io_ColorTriangles2D.set_redC(this3,(col >> 16 & 255) / 255);
+		var v6 = (col & 255) / 255;
+		this3[(this3[0] | 0) * 18 + 16 + 2] = v6;
+		var v7 = (col >> 8 & 255) / 255;
+		this3[(this3[0] | 0) * 18 + 15 + 2] = v7;
+		var v8 = (col >> 24 & 255) / 255;
+		this3[(this3[0] | 0) * 18 + 17 + 2] = v8;
+		justGraphix_contour_io_ColorTriangles2D.set_ax(this1.arrData,-(1 - 2 * justGraphix_contour_io_Array2DTriangles.get_ax(data) / this1.width));
+		justGraphix_contour_io_ColorTriangles2D.set_ay(this1.arrData,1 - 2 * justGraphix_contour_io_Array2DTriangles.get_ay(data) / this1.height);
+		justGraphix_contour_io_ColorTriangles2D.set_bx(this1.arrData,-(1 - 2 * justGraphix_contour_io_Array2DTriangles.get_bx(data) / this1.width));
+		justGraphix_contour_io_ColorTriangles2D.set_by(this1.arrData,1 - 2 * justGraphix_contour_io_Array2DTriangles.get_by(data) / this1.height);
+		justGraphix_contour_io_ColorTriangles2D.set_cx(this1.arrData,-(1 - 2 * justGraphix_contour_io_Array2DTriangles.get_cx(data) / this1.width));
+		justGraphix_contour_io_ColorTriangles2D.set_cy(this1.arrData,1 - 2 * justGraphix_contour_io_Array2DTriangles.get_cy(data) / this1.height);
+	}
+	var gl = this1.gl;
+	var program = gl.createProgram();
+	var shader = gl.createShader(35633);
+	gl.shaderSource(shader,"attribute vec2 vertexPosition;" + "attribute vec4 vertexColor;" + "varying vec4 vcol;" + "void main(void) {" + " gl_Position = vec4(vertexPosition, .0, 1.0);" + " vcol = vertexColor;" + "}");
+	gl.compileShader(shader);
+	var tmp;
+	if(!gl.getShaderParameter(shader,35713)) {
+		throw haxe_Exception.thrown("Error compiling shader. " + gl.getShaderInfoLog(shader));
+	} else {
+		tmp = shader;
+	}
+	gl.attachShader(program,tmp);
+	var shader = gl.createShader(35632);
+	gl.shaderSource(shader,"precision mediump float;" + "varying vec4 vcol;" + "void main(void) {" + "vec4 color = vec4(vcol.rgb, 1. );" + "color *= vcol.a; " + "gl_FragColor = color;" + "}");
+	gl.compileShader(shader);
+	var tmp;
+	if(!gl.getShaderParameter(shader,35713)) {
+		throw haxe_Exception.thrown("Error compiling shader. " + gl.getShaderInfoLog(shader));
+	} else {
+		tmp = shader;
+	}
+	gl.attachShader(program,tmp);
+	gl.linkProgram(program);
+	var tmp;
+	if(!gl.getProgramParameter(program,35714)) {
+		throw haxe_Exception.thrown("Error linking program. " + gl.getProgramInfoLog(program));
+	} else {
+		gl.validateProgram(program);
+		if(!gl.getProgramParameter(program,35715)) {
+			throw haxe_Exception.thrown("Error validating program. " + gl.getProgramInfoLog(program));
+		} else {
+			gl.useProgram(program);
+			tmp = program;
+		}
+	}
+	this1.program = tmp;
+	this1.gl.bindBuffer(34962,null);
+	this1.gl.useProgram(this1.program);
+	var this2 = this1.arrData;
+	var arr = this2.subarray(2,(this2[1] | 0) * 18 + 2);
+	var gl = this1.gl;
+	var program = this1.program;
+	var xyName = this1.vertexPosition;
+	var rgbaName = this1.vertexColor;
+	var isDynamic = true;
+	if(isDynamic == null) {
+		isDynamic = false;
+	}
+	var isDynamic1 = isDynamic;
+	if(isDynamic1 == null) {
+		isDynamic1 = false;
+	}
+	var buf = gl.createBuffer();
+	var staticDraw = 35044;
+	var dynamicDraw = 35048;
+	var arrayBuffer = 34962;
+	gl.bindBuffer(arrayBuffer,buf);
+	if(isDynamic1) {
+		var arrayBuffer = 34962;
+		gl.bufferData(arrayBuffer,arr,dynamicDraw);
+	} else {
+		var arrayBuffer = 34962;
+		gl.bufferData(arrayBuffer,arr,staticDraw);
+	}
+	var vbo = buf;
+	var inp = gl.getAttribLocation(program,xyName);
+	var elementBytes = 4;
+	var fp = 5126;
+	var strideBytes = 6 * elementBytes;
+	var offBytes = 0 * elementBytes;
+	gl.vertexAttribPointer(inp,2,fp,false,strideBytes,offBytes);
+	gl.enableVertexAttribArray(inp);
+	var inp = gl.getAttribLocation(program,rgbaName);
+	var elementBytes = 4;
+	var fp = 5126;
+	var strideBytes = 6 * elementBytes;
+	var offBytes = 2 * elementBytes;
+	gl.vertexAttribPointer(inp,4,fp,false,strideBytes,offBytes);
+	gl.enableVertexAttribArray(inp);
+	this1.buf = vbo;
+	this1.gl.bindBuffer(34962,this1.buf);
+	this1.gl.useProgram(this1.program);
+	var gl = this1.gl;
+	var program = this1.program;
+	var rgbaName = this1.vertexColor;
+	var inp = gl.getAttribLocation(program,this1.vertexPosition);
+	var elementBytes = 4;
+	var fp = 5126;
+	var strideBytes = 6 * elementBytes;
+	var offBytes = 0 * elementBytes;
+	gl.vertexAttribPointer(inp,2,fp,false,strideBytes,offBytes);
+	gl.enableVertexAttribArray(inp);
+	var inp = gl.getAttribLocation(program,rgbaName);
+	var elementBytes = 4;
+	var fp = 5126;
+	var strideBytes = 6 * elementBytes;
+	var offBytes = 2 * elementBytes;
+	gl.vertexAttribPointer(inp,4,fp,false,strideBytes,offBytes);
+	gl.enableVertexAttribArray(inp);
+	this1.gl.bindBuffer(34962,this1.buf);
+	var this2 = this1.arrData;
+	this1.currData = this2.subarray(2,(this2[1] | 0) * 18 + 2);
+	var this2 = this1.arrData;
+	this1.currData = this2.subarray(2,(this2[1] | 0) * 18 + 2);
+	var gl = this1.gl;
+	var width = this1.width;
+	var height = this1.height;
+	var r = 0.;
+	var g = 0.;
+	var b = 0.;
+	var a = 1.;
+	if(a == null) {
+		a = 0.;
+	}
+	if(b == null) {
+		b = 0.;
+	}
+	if(g == null) {
+		g = 0.;
+	}
+	if(r == null) {
+		r = 0.;
+	}
+	gl.clearColor(r,g,b,a);
+	gl.enable(2929);
+	gl.clear(16384);
+	gl.viewport(0,0,width,height);
+	gl.enable(3042);
+	gl.blendFunc(1,771);
+	gl.enable(2884);
+	var partData = this1.currData.subarray(range_start * this1.triSize,range_max * this1.triSize);
+	this1.gl.bufferSubData(34962,0,partData);
+	this1.gl.useProgram(this1.program);
+	this1.gl.drawArrays(4,0,(range_max - range_start) * 3 | 0);
 };
 justGraphix_example_contour_BasicGL.__name__ = "justGraphix.example.contour.BasicGL";
-justGraphix_example_contour_BasicGL.prototype = {
-	rearrageDrawData: function() {
-		haxe_Log.trace("rearrangeDrawData",{ fileName : "src/justGraphix/example/contour/BasicGL.js.hx", lineNumber : 72, className : "justGraphix.example.contour.BasicGL", methodName : "rearrageDrawData"});
-		var pen = this.pen2D;
-		var data = pen.arr;
-		var red = 0.;
-		var green = 0.;
-		var blue = 0.;
-		var alpha = 0.;
-		var color = 0;
-		this.totalTriangles = (data.length - 1) / 7 | 0;
-		this.bufferLength = this.totalTriangles * 3;
-		this.len = this.totalTriangles * 6 * 3 | 0;
-		var j = 0;
-		this.arr32 = new Float32Array(this.len);
-		var _g = 0;
-		var _g1 = this.totalTriangles;
-		while(_g < _g1) {
-			var i = _g++;
-			pen.arr[0] = i;
-			color = justGraphix_contour_io_Array2DTriangles.get_color(data) | 0;
-			alpha = (color >> 24 & 255) / 255;
-			red = (color >> 16 & 255) / 255;
-			green = (color >> 8 & 255) / 255;
-			blue = (color & 255) / 255;
-			this.arr32[j] = -(1 - 2 * justGraphix_contour_io_Array2DTriangles.get_ax(data) / this.width);
-			++j;
-			this.arr32[j] = 1 - 2 * justGraphix_contour_io_Array2DTriangles.get_ay(data) / this.height;
-			++j;
-			this.arr32[j] = red;
-			++j;
-			this.arr32[j] = green;
-			++j;
-			this.arr32[j] = blue;
-			++j;
-			this.arr32[j] = alpha;
-			++j;
-			this.arr32[j] = -(1 - 2 * justGraphix_contour_io_Array2DTriangles.get_bx(data) / this.width);
-			++j;
-			this.arr32[j] = 1 - 2 * justGraphix_contour_io_Array2DTriangles.get_by(data) / this.height;
-			++j;
-			this.arr32[j] = red;
-			++j;
-			this.arr32[j] = green;
-			++j;
-			this.arr32[j] = blue;
-			++j;
-			this.arr32[j] = alpha;
-			++j;
-			this.arr32[j] = -(1 - 2 * justGraphix_contour_io_Array2DTriangles.get_cx(data) / this.width);
-			++j;
-			this.arr32[j] = 1 - 2 * justGraphix_contour_io_Array2DTriangles.get_cy(data) / this.height;
-			++j;
-			this.arr32[j] = red;
-			++j;
-			this.arr32[j] = green;
-			++j;
-			this.arr32[j] = blue;
-			++j;
-			this.arr32[j] = alpha;
-			++j;
-		}
-	}
-	,drawContours: function() {
-		haxe_Log.trace("drawContours",{ fileName : "src/justGraphix/example/contour/BasicGL.js.hx", lineNumber : 135, className : "justGraphix.example.contour.BasicGL", methodName : "drawContours"});
-		this.pen2D = new justGraphix_contour_Pen2D(-16776961);
-		justGraphix_example_contour_SvgTests_arcSvg(this.pen2D);
-		this.pen2D.currentColor = -16776961;
-		justGraphix_example_contour_SvgTests_kiwiSvg(this.pen2D);
-		justGraphix_example_contour_SvgTests_cubicSvg(this.pen2D);
-		justGraphix_example_contour_SvgTests_quadSvg(this.pen2D);
-	}
-	,renderOnce: function() {
-		haxe_Log.trace("renderOnce",{ fileName : "src/justGraphix/example/contour/BasicGL.js.hx", lineNumber : 145, className : "justGraphix.example.contour.BasicGL", methodName : "renderOnce"});
-		this.mainSheet = new justGraphix_target__$canvas_Sheet();
-		this.mainSheet.create(this.width,this.height,true);
-		this.gl = this.mainSheet.gl;
-		var gl = this.gl;
-		var width = this.width;
-		var height = this.height;
-		var r = 0.;
-		var g = 0.;
-		var b = 0.;
-		var a = 1.;
-		if(a == null) {
-			a = 0.;
-		}
-		if(b == null) {
-			b = 0.;
-		}
-		if(g == null) {
-			g = 0.;
-		}
-		if(r == null) {
-			r = 0.;
-		}
-		gl.clearColor(r,g,b,a);
-		gl.enable(2929);
-		gl.clear(16384);
-		gl.viewport(0,0,width,height);
-		gl.enable(3042);
-		gl.blendFunc(1,771);
-		gl.enable(2884);
-		var gl = this.gl;
-		var program = gl.createProgram();
-		var shader = gl.createShader(35633);
-		gl.shaderSource(shader,"attribute vec2 vertexPosition;" + "attribute vec4 vertexColor;" + "varying vec4 vcol;" + "void main(void) {" + " gl_Position = vec4(vertexPosition, .0, 1.0);" + " vcol = vertexColor;" + "}");
-		gl.compileShader(shader);
-		var tmp;
-		if(!gl.getShaderParameter(shader,35713)) {
-			throw haxe_Exception.thrown("Error compiling shader. " + gl.getShaderInfoLog(shader));
-		} else {
-			tmp = shader;
-		}
-		gl.attachShader(program,tmp);
-		var shader = gl.createShader(35632);
-		gl.shaderSource(shader,"precision mediump float;" + "varying vec4 vcol;" + "void main(void) {" + "vec4 color = vec4(vcol.rgb, 1. );" + "color *= vcol.a; " + "gl_FragColor = color;" + "}");
-		gl.compileShader(shader);
-		var tmp;
-		if(!gl.getShaderParameter(shader,35713)) {
-			throw haxe_Exception.thrown("Error compiling shader. " + gl.getShaderInfoLog(shader));
-		} else {
-			tmp = shader;
-		}
-		gl.attachShader(program,tmp);
-		gl.linkProgram(program);
-		var tmp;
-		if(!gl.getProgramParameter(program,35714)) {
-			throw haxe_Exception.thrown("Error linking program. " + gl.getProgramInfoLog(program));
-		} else {
-			gl.validateProgram(program);
-			if(!gl.getProgramParameter(program,35715)) {
-				throw haxe_Exception.thrown("Error validating program. " + gl.getProgramInfoLog(program));
-			} else {
-				gl.useProgram(program);
-				tmp = program;
-			}
-		}
-		this.programColor = tmp;
-		this.gl.bindBuffer(34962,null);
-		this.gl.useProgram(this.programColor);
-		var gl = this.gl;
-		var program = this.programColor;
-		var data = this.arr32;
-		var xyName = this.vertexPosition;
-		var rgbaName = this.vertexColor;
-		var isDynamic = true;
-		if(isDynamic == null) {
-			isDynamic = false;
-		}
-		var isDynamic1 = isDynamic;
-		if(isDynamic1 == null) {
-			isDynamic1 = false;
-		}
-		var buf = gl.createBuffer();
-		var staticDraw = 35044;
-		var dynamicDraw = 35048;
-		var arrayBuffer = 34962;
-		gl.bindBuffer(arrayBuffer,buf);
-		if(isDynamic1) {
-			var arrayBuffer = 34962;
-			gl.bufferData(arrayBuffer,data,dynamicDraw);
-		} else {
-			var arrayBuffer = 34962;
-			gl.bufferData(arrayBuffer,data,staticDraw);
-		}
-		var vbo = buf;
-		var inp = gl.getAttribLocation(program,xyName);
-		var elementBytes = 4;
-		var fp = 5126;
-		var strideBytes = 6 * elementBytes;
-		var offBytes = 0 * elementBytes;
-		gl.vertexAttribPointer(inp,2,fp,false,strideBytes,offBytes);
-		gl.enableVertexAttribArray(inp);
-		var inp = gl.getAttribLocation(program,rgbaName);
-		var elementBytes = 4;
-		var fp = 5126;
-		var strideBytes = 6 * elementBytes;
-		var offBytes = 2 * elementBytes;
-		gl.vertexAttribPointer(inp,4,fp,false,strideBytes,offBytes);
-		gl.enableVertexAttribArray(inp);
-		this.bufColor = vbo;
-		this.gl.bindBuffer(34962,this.bufColor);
-		this.gl.useProgram(this.programColor);
-		this.gl.drawArrays(4,0,this.bufferLength);
-	}
-};
 function justGraphix_example_contour_BasicGL_main() {
 	new justGraphix_example_contour_BasicGL();
 }
@@ -21122,6 +21206,15 @@ justGraphix_target__$canvas_Sheet.prototype = {
 		this.cx = this.canvas2D.getContext("2d");
 	}
 };
+var justGraphix_target__$gl__$Renderer_Renderer_$ = function(gl,pen,width,height) {
+	this.vertexColor = "vertexColor";
+	this.vertexPosition = "vertexPosition";
+	this.gl = gl;
+	this.pen = pen;
+	this.width = width;
+	this.height = height;
+};
+justGraphix_target__$gl__$Renderer_Renderer_$.__name__ = "justGraphix.target._gl._Renderer.Renderer_";
 function $bind(o,m) { if( m == null ) return null; if( m.__id__ == null ) m.__id__ = $global.$haxeUID++; var f; if( o.hx__closures__ == null ) o.hx__closures__ = {}; else f = o.hx__closures__[m.__id__]; if( f == null ) { f = m.bind(o); o.hx__closures__[m.__id__] = f; } return f; }
 $global.$haxeUID |= 0;
 String.__name__ = "String";

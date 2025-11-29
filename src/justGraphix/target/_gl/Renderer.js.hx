@@ -9,7 +9,7 @@ import justGraphix.contour.Pen2D;
 import justGraphix.target._gl.ShaderColor2D;
 import justGraphix.target._gl.GL;
 import justGraphix.target._gl.BufferGL;
-*/
+
 // js webgl 
 import js.html.webgl.Buffer;
 import js.html.webgl.RenderingContext;
@@ -26,8 +26,8 @@ private class Renderer_ {
     public final vertexColor            = 'vertexColor';
     public var gl:               RenderingContext;
     public var pen:              Pen2D;
-    public var width:            Float;
-    public var height:           Float;
+    public var width:            Int;
+    public var height:           Int;
     public var program:          Program;
     public var buf:              Buffer;
     public var arrData:          ColorTriangles2D;
@@ -37,7 +37,7 @@ private class Renderer_ {
     public var triSize:          Int;
     public var currData:         Float32Array;
     public function new( gl: RenderingContext, pen: Pen2D,
-                         width: Float, height: Float ){
+                         width: Int, height: Int ){
         this.gl     = gl;
         this.pen    = pen;
         this.width  = width;
@@ -104,7 +104,14 @@ abstract Renderer( Renderer_ ) from Renderer_ {
                                , this.vertexPosition, this.vertexColor, true );
         this.gl.bindBuffer( GL.ARRAY_BUFFER, this.buf );
     }
-
+    public inline
+    function simpleRenderRange( range: IteratorRange ){
+        rearrangeData();
+        setup();
+        updateData();
+        clearAll( this.gl, this.width, this.height, 0., 0., 0., 1. );
+        drawData( range );
+    }
     public inline
     function updateData(){
         this.currData = this.arrData.getFloat32Array();

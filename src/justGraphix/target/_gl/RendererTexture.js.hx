@@ -42,8 +42,8 @@ private class RendererTexture_ {
     public final uvTransform            = 'uvTransform';
     public var gl:                      RenderingContext;
     public var pen:              Pen2D;
-    public var width:            Float;
-    public var height:           Float;
+    public var width:            Int;
+    public var height:           Int;
     public var program:          Program;
     public var bufTexture:       Buffer;
     public var bufIndices:       Buffer;
@@ -64,7 +64,7 @@ private class RendererTexture_ {
     public var currData:         Float32Array;
     //public var mode: ProgramMode = ModeNone;
     public function new( gl: RenderingContext, pen: Pen2D,
-                         width: Float, height: Float ){
+                         width: Int, height: Int ){
         this.gl     = gl;
         this.pen    = pen;
         this.width  = width;
