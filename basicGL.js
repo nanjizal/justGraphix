@@ -9735,49 +9735,10 @@ justGraphix_curve_EllipseArc.prototype = {
 	}
 };
 var justGraphix_example_contour_BasicGL = function() {
-	this.bird_d = "M210.333,65.331C104.367,66.105-12.349,150.637,1.056,276.449c4.303,40.393,18.533,63.704,52.171,79.03c36.307,16.544,57.022,54.556,50.406,112.954c-9.935,4.88-17.405,11.031-19.132,20.015c7.531-0.17,14.943-0.312,22.59,4.341c20.333,12.375,31.296,27.363,42.979,51.72c1.714,3.572,8.192,2.849,8.312-3.078c0.17-8.467-1.856-17.454-5.226-26.933c-2.955-8.313,3.059-7.985,6.917-6.106c6.399,3.115,16.334,9.43,30.39,13.098c5.392,1.407,5.995-3.877,5.224-6.991c-1.864-7.522-11.009-10.862-24.519-19.229c-4.82-2.984-0.927-9.736,5.168-8.351l20.234,2.415c3.359,0.763,4.555-6.114,0.882-7.875c-14.198-6.804-28.897-10.098-53.864-7.799c-11.617-29.265-29.811-61.617-15.674-81.681c12.639-17.938,31.216-20.74,39.147,43.489c-5.002,3.107-11.215,5.031-11.332,13.024c7.201-2.845,11.207-1.399,14.791,0c17.912,6.998,35.462,21.826,52.982,37.309c3.739,3.303,8.413-1.718,6.991-6.034c-2.138-6.494-8.053-10.659-14.791-20.016c-3.239-4.495,5.03-7.045,10.886-6.876c13.849,0.396,22.886,8.268,35.177,11.218c4.483,1.076,9.741-1.964,6.917-6.917c-3.472-6.085-13.015-9.124-19.18-13.413c-4.357-3.029-3.025-7.132,2.697-6.602c3.905,0.361,8.478,2.271,13.908,1.767c9.946-0.925,7.717-7.169-0.883-9.566c-19.036-5.304-39.891-6.311-61.665-5.225c-43.837-8.358-31.554-84.887,0-90.363c29.571-5.132,62.966-13.339,99.928-32.156c32.668-5.429,64.835-12.446,92.939-33.85c48.106-14.469,111.903,16.113,204.241,149.695c3.926,5.681,15.819,9.94,9.524-6.351c-15.893-41.125-68.176-93.328-92.13-132.085c-24.581-39.774-14.34-61.243-39.957-91.247c-21.326-24.978-47.502-25.803-77.339-17.365c-23.461,6.634-39.234-7.117-52.98-31.273C318.42,87.525,265.838,64.927,210.333,65.331zM445.731,203.01c6.12,0,11.112,4.919,11.112,11.038c0,6.119-4.994,11.111-11.112,11.111s-11.038-4.994-11.038-11.111C434.693,207.929,439.613,203.01,445.731,203.01z";
-	this.arc7_3 = "M 100 200 A 100 50 -45 1 1 250 150";
-	this.arc7_2 = "M 100 200 A 100 50 -45 1 0 250 150";
-	this.arc7_1 = "M 100 200 A 100 50 -45 0 1 250 150";
-	this.arc7_0 = "M 100 200 A 100 50 -45 0 0 250 150";
-	this.arc6_3 = "M 100 200 A 100 50 -45 1 0 250 150";
-	this.arc6_2 = "M 100 200 A 100 50 -45 1 1 250 150";
-	this.arc6_1 = "M 100 200 A 100 50 -45 0 1 250 150";
-	this.arc6_0 = "M 100 200 A 100 50 -45 0 0 250 150";
-	this.arc5_3 = "M 100 200 A 100 50 -44 0 1 250 150";
-	this.arc5_2 = "M 100 200 A 100 50 -44 1 0 250 150";
-	this.arc5_1 = "M 100 200 A 100 50 -44 1 1 250 150";
-	this.arc5_0 = "M 100 200 A 100 50 -44 0 0 250 150";
-	this.arc4_3 = "M 100 200 A 100 50 -44 0 0 250 150";
-	this.arc4_2 = "M 100 200 A 100 50 -44 1 1 250 150";
-	this.arc4_1 = "M 100 200 A 100 50 -44 0 1 250 150";
-	this.arc4_0 = "M 100 200 A 100 50 -44 1 0 250 150";
-	this.arc3_3 = "M 100 200 A 100 50 -15 1 1 250 150";
-	this.arc3_2 = "M 100 200 A 100 50 -15 1 0 250 150";
-	this.arc3_1 = "M 100 200 A 100 50 -15 0 1 250 150";
-	this.arc3_0 = "M 100 200 A 100 50 -15 0 0 250 150";
-	this.arc2_3 = "M 100 200 A 100 50 -15 1 0 250 150";
-	this.arc2_2 = "M 100 200 A 100 50 -15 1 1 250 150";
-	this.arc2_1 = "M 100 200 A 100 50 -15 0 1 250 150";
-	this.arc2_0 = "M 100 200 A 100 50 -15 0 0 250 150";
-	this.arc1_3 = "M 100 200 A 100 50 0.0 0 1 250 150";
-	this.arc1_2 = "M 100 200 A 100 50 0.0 1 1 250 150";
-	this.arc1_1 = "M 100 200 A 100 50 0.0 1 0 250 150";
-	this.arc1_0 = "M 100 200 A 100 50 0.0 0 0 250 150";
-	this.arc0_3 = "M 100 200 A 100 50 0.0 0 0 250 150";
-	this.arc0_2 = "M 100 200 A 100 50 0.0 1 1 250 150";
-	this.arc0_1 = "M 100 200 A 100 50 0.0 1 0 250 150";
-	this.arc0_0 = "M 100 200 A 100 50 0.0 0 1 250 150";
-	this.lightGray = -2894893;
-	this.gainsboro = -2302756;
-	this.silver = -4144960;
-	this.crimson = -2354116;
 	this.vertexColor = "vertexColor";
 	this.vertexPosition = "vertexPosition";
-	this.cubictest_d = "M100,200 C100,100 250,100 250,200S400,300 400,200";
-	this.quadtest_d = "M200,300 Q400,50 600,300 T1000,300";
 	this.divertTrace = new justGraphix_target__$canvas_DivertTrace();
-	haxe_Log.trace("Contour Test",{ fileName : "src/justGraphix/example/contour/BasicGL.js.hx", lineNumber : 64, className : "justGraphix.example.contour.BasicGL", methodName : "new"});
+	haxe_Log.trace("Contour Test",{ fileName : "src/justGraphix/example/contour/BasicGL.js.hx", lineNumber : 61, className : "justGraphix.example.contour.BasicGL", methodName : "new"});
 	this.width = 1024;
 	this.height = 768;
 	this.drawContours();
@@ -9787,7 +9748,7 @@ var justGraphix_example_contour_BasicGL = function() {
 justGraphix_example_contour_BasicGL.__name__ = "justGraphix.example.contour.BasicGL";
 justGraphix_example_contour_BasicGL.prototype = {
 	rearrageDrawData: function() {
-		haxe_Log.trace("rearrangeDrawData",{ fileName : "src/justGraphix/example/contour/BasicGL.js.hx", lineNumber : 75, className : "justGraphix.example.contour.BasicGL", methodName : "rearrageDrawData"});
+		haxe_Log.trace("rearrangeDrawData",{ fileName : "src/justGraphix/example/contour/BasicGL.js.hx", lineNumber : 72, className : "justGraphix.example.contour.BasicGL", methodName : "rearrageDrawData"});
 		var pen = this.pen2D;
 		var data = pen.arr;
 		var red = 0.;
@@ -9849,16 +9810,16 @@ justGraphix_example_contour_BasicGL.prototype = {
 		}
 	}
 	,drawContours: function() {
-		haxe_Log.trace("drawContours",{ fileName : "src/justGraphix/example/contour/BasicGL.js.hx", lineNumber : 138, className : "justGraphix.example.contour.BasicGL", methodName : "drawContours"});
+		haxe_Log.trace("drawContours",{ fileName : "src/justGraphix/example/contour/BasicGL.js.hx", lineNumber : 135, className : "justGraphix.example.contour.BasicGL", methodName : "drawContours"});
 		this.pen2D = new justGraphix_contour_Pen2D(-16776961);
-		this.arcSVG();
+		justGraphix_example_contour_SvgTests_arcSvg(this.pen2D);
 		this.pen2D.currentColor = -16776961;
-		this.birdSVG();
-		this.cubicSVG();
-		this.quadSVG();
+		justGraphix_example_contour_SvgTests_kiwiSvg(this.pen2D);
+		justGraphix_example_contour_SvgTests_cubicSvg(this.pen2D);
+		justGraphix_example_contour_SvgTests_quadSvg(this.pen2D);
 	}
 	,renderOnce: function() {
-		haxe_Log.trace("renderOnce",{ fileName : "src/justGraphix/example/contour/BasicGL.js.hx", lineNumber : 148, className : "justGraphix.example.contour.BasicGL", methodName : "renderOnce"});
+		haxe_Log.trace("renderOnce",{ fileName : "src/justGraphix/example/contour/BasicGL.js.hx", lineNumber : 145, className : "justGraphix.example.contour.BasicGL", methodName : "renderOnce"});
 		this.mainSheet = new justGraphix_target__$canvas_Sheet();
 		this.mainSheet.create(this.width,this.height,true);
 		this.gl = this.mainSheet.gl;
@@ -9971,34 +9932,54 @@ justGraphix_example_contour_BasicGL.prototype = {
 		this.gl.useProgram(this.programColor);
 		this.gl.drawArrays(4,0,this.bufferLength);
 	}
-	,birdSVG: function() {
-		var sketcher = new justGraphix_contour_Sketcher(this.pen2D,4,3);
-		sketcher.width = 2;
-		var scaleTranslateContext = new justGraphix_path_ScaleTranslateContext(sketcher,20,0,1,1);
-		var p = new justGraphix_path_SvgPath(scaleTranslateContext);
-		p.parse(this.bird_d);
-	}
-	,cubicSVG: function() {
-		var sketcher = new justGraphix_contour_Sketcher(this.pen2D,4,3);
-		sketcher.width = 10;
-		sketcher.colourFunction = function(colour,x,y,x_,y_) {
-			return Math.round(colour - x * y);
-		};
-		var translateContext = new justGraphix_path_TranslationContext(sketcher,50,200);
-		var p = new justGraphix_path_SvgPath(translateContext);
-		p.parse(this.cubictest_d);
-	}
-	,quadSVG: function() {
-		var sketcher = new justGraphix_contour_Sketcher(this.pen2D,4,3);
-		sketcher.width = 1;
-		sketcher.widthFunction = function(width,x,y,x_,y_) {
-			return width + 0.016;
-		};
-		var translateContext = new justGraphix_path_ScaleTranslateContext(sketcher,0,100,0.5,0.5);
-		var p = new justGraphix_path_SvgPath(translateContext);
-		p.parse(this.quadtest_d);
-	}
-	,arcSVG: function() {
+};
+function justGraphix_example_contour_BasicGL_main() {
+	new justGraphix_example_contour_BasicGL();
+}
+var justGraphix_example_contour_Ellipses = function(pen2D_) {
+	this.arc7_3 = "M 100 200 A 100 50 -45 1 1 250 150";
+	this.arc7_2 = "M 100 200 A 100 50 -45 1 0 250 150";
+	this.arc7_1 = "M 100 200 A 100 50 -45 0 1 250 150";
+	this.arc7_0 = "M 100 200 A 100 50 -45 0 0 250 150";
+	this.arc6_3 = "M 100 200 A 100 50 -45 1 0 250 150";
+	this.arc6_2 = "M 100 200 A 100 50 -45 1 1 250 150";
+	this.arc6_1 = "M 100 200 A 100 50 -45 0 1 250 150";
+	this.arc6_0 = "M 100 200 A 100 50 -45 0 0 250 150";
+	this.arc5_3 = "M 100 200 A 100 50 -44 0 1 250 150";
+	this.arc5_2 = "M 100 200 A 100 50 -44 1 0 250 150";
+	this.arc5_1 = "M 100 200 A 100 50 -44 1 1 250 150";
+	this.arc5_0 = "M 100 200 A 100 50 -44 0 0 250 150";
+	this.arc4_3 = "M 100 200 A 100 50 -44 0 0 250 150";
+	this.arc4_2 = "M 100 200 A 100 50 -44 1 1 250 150";
+	this.arc4_1 = "M 100 200 A 100 50 -44 0 1 250 150";
+	this.arc4_0 = "M 100 200 A 100 50 -44 1 0 250 150";
+	this.arc3_3 = "M 100 200 A 100 50 -15 1 1 250 150";
+	this.arc3_2 = "M 100 200 A 100 50 -15 1 0 250 150";
+	this.arc3_1 = "M 100 200 A 100 50 -15 0 1 250 150";
+	this.arc3_0 = "M 100 200 A 100 50 -15 0 0 250 150";
+	this.arc2_3 = "M 100 200 A 100 50 -15 1 0 250 150";
+	this.arc2_2 = "M 100 200 A 100 50 -15 1 1 250 150";
+	this.arc2_1 = "M 100 200 A 100 50 -15 0 1 250 150";
+	this.arc2_0 = "M 100 200 A 100 50 -15 0 0 250 150";
+	this.arc1_3 = "M 100 200 A 100 50 0.0 0 1 250 150";
+	this.arc1_2 = "M 100 200 A 100 50 0.0 1 1 250 150";
+	this.arc1_1 = "M 100 200 A 100 50 0.0 1 0 250 150";
+	this.arc1_0 = "M 100 200 A 100 50 0.0 0 0 250 150";
+	this.arc0_3 = "M 100 200 A 100 50 0.0 0 0 250 150";
+	this.arc0_2 = "M 100 200 A 100 50 0.0 1 1 250 150";
+	this.arc0_1 = "M 100 200 A 100 50 0.0 1 0 250 150";
+	this.arc0_0 = "M 100 200 A 100 50 0.0 0 1 250 150";
+	this.row3 = 400;
+	this.row2 = 250;
+	this.row1 = 100;
+	this.row0 = -30;
+	this.secondColumnX = 450;
+	this.firstColumnX = 130;
+	this.pen2D = pen2D_;
+};
+justGraphix_example_contour_Ellipses.__name__ = "justGraphix.example.contour.Ellipses";
+justGraphix_example_contour_Ellipses.prototype = {
+	draw: function() {
 		var arcs0 = [this.arc0_0,this.arc0_1,this.arc0_2,this.arc0_3];
 		var arcs1 = [this.arc1_0,this.arc1_1,this.arc1_2,this.arc1_3];
 		var arcs2 = [this.arc2_0,this.arc2_1,this.arc2_2,this.arc2_3];
@@ -10007,17 +9988,15 @@ justGraphix_example_contour_BasicGL.prototype = {
 		var arcs5 = [this.arc5_0,this.arc5_1,this.arc5_2,this.arc5_3];
 		var arcs6 = [this.arc6_0,this.arc6_1,this.arc6_2,this.arc6_3];
 		var arcs7 = [this.arc7_0,this.arc7_1,this.arc7_2,this.arc7_3];
-		var pallet = [this.silver,this.gainsboro,this.lightGray,this.crimson];
-		var x0 = 130;
-		var x1 = 450;
-		var yPos = [-30,100,250,400];
+		var pallet = [-4144960,-2302756,-2894893,-2354116];
+		var yPos = [this.row0,this.row1,this.row2,this.row3];
 		var arcs = [arcs0,arcs1,arcs2,arcs3,arcs4,arcs5,arcs6,arcs7];
 		var _g = 0;
 		var _g1 = yPos.length;
 		while(_g < _g1) {
 			var i = _g++;
-			this.drawSet(arcs.shift(),pallet,x0,yPos[i],0.5);
-			this.drawSet(arcs.shift(),pallet,x1,yPos[i],0.5);
+			this.drawSet(arcs.shift(),pallet,this.firstColumnX,yPos[i],0.5);
+			this.drawSet(arcs.shift(),pallet,this.secondColumnX,yPos[i],0.5);
 		}
 	}
 	,drawSet: function(arcs,col,x,y,s) {
@@ -10025,7 +10004,7 @@ justGraphix_example_contour_BasicGL.prototype = {
 		var _g1 = arcs.length;
 		while(_g < _g1) {
 			var i = _g++;
-			this.draw_d(arcs[i],x,y,s,1.,col[i]);
+			this.draw_d(arcs[i],x,y,s,3.,col[i]);
 		}
 	}
 	,draw_d: function(d,x,y,s,w,color) {
@@ -10037,8 +10016,42 @@ justGraphix_example_contour_BasicGL.prototype = {
 		p.parse(d);
 	}
 };
-function justGraphix_example_contour_BasicGL_main() {
-	new justGraphix_example_contour_BasicGL();
+function justGraphix_example_contour_SvgTests_cubicSvg(pen2D,width) {
+	if(width == null) {
+		width = 10;
+	}
+	var sketcher = new justGraphix_contour_Sketcher(pen2D,4,3);
+	sketcher.width = width;
+	sketcher.colourFunction = function(colour,x,y,x_,y_) {
+		return colour - x * y | 0;
+	};
+	var translateContext = new justGraphix_path_TranslationContext(sketcher,50,200);
+	var p = new justGraphix_path_SvgPath(translateContext);
+	p.parse(justGraphix_example_contour_SvgTests_cubictest_d);
+}
+function justGraphix_example_contour_SvgTests_quadSvg(pen2D,width) {
+	if(width == null) {
+		width = 1.;
+	}
+	var sketcher = new justGraphix_contour_Sketcher(pen2D,4,3);
+	sketcher.width = width;
+	sketcher.widthFunction = function(width,x,y,x_,y_) {
+		return width + 0.016;
+	};
+	var translateContext = new justGraphix_path_ScaleTranslateContext(sketcher,0,100,0.5,0.5);
+	var p = new justGraphix_path_SvgPath(translateContext);
+	p.parse(justGraphix_example_contour_SvgTests_quadtest_d);
+}
+function justGraphix_example_contour_SvgTests_kiwiSvg(pen2D) {
+	var sketcher = new justGraphix_contour_Sketcher(pen2D,4,3);
+	sketcher.width = 2;
+	var scaleTranslateContext = new justGraphix_path_ScaleTranslateContext(sketcher,20,0,1,1);
+	var p = new justGraphix_path_SvgPath(scaleTranslateContext);
+	p.parse(justGraphix_example_contour_SvgTests_kiwi_d);
+}
+function justGraphix_example_contour_SvgTests_arcSvg(pen2D) {
+	var ellipses = new justGraphix_example_contour_Ellipses(pen2D);
+	ellipses.draw();
 }
 var justGraphix_geom_structs_StoreF6 = function() {
 	this.count = 0;
@@ -21115,5 +21128,8 @@ String.__name__ = "String";
 Array.__name__ = "Array";
 js_Boot.__toStr = ({ }).toString;
 var justGraphix_curve_CurveMath_quadStep = 0.03;
+var justGraphix_example_contour_SvgTests_quadtest_d = "M200,300 Q400,50 600,300 T1000,300";
+var justGraphix_example_contour_SvgTests_cubictest_d = "M100,200 C100,100 250,100 250,200S400,300 400,200";
+var justGraphix_example_contour_SvgTests_kiwi_d = "M210.333,65.331C104.367,66.105-12.349,150.637,1.056,276.449c4.303,40.393,18.533,63.704,52.171,79.03c36.307,16.544,57.022,54.556,50.406,112.954c-9.935,4.88-17.405,11.031-19.132,20.015c7.531-0.17,14.943-0.312,22.59,4.341c20.333,12.375,31.296,27.363,42.979,51.72c1.714,3.572,8.192,2.849,8.312-3.078c0.17-8.467-1.856-17.454-5.226-26.933c-2.955-8.313,3.059-7.985,6.917-6.106c6.399,3.115,16.334,9.43,30.39,13.098c5.392,1.407,5.995-3.877,5.224-6.991c-1.864-7.522-11.009-10.862-24.519-19.229c-4.82-2.984-0.927-9.736,5.168-8.351l20.234,2.415c3.359,0.763,4.555-6.114,0.882-7.875c-14.198-6.804-28.897-10.098-53.864-7.799c-11.617-29.265-29.811-61.617-15.674-81.681c12.639-17.938,31.216-20.74,39.147,43.489c-5.002,3.107-11.215,5.031-11.332,13.024c7.201-2.845,11.207-1.399,14.791,0c17.912,6.998,35.462,21.826,52.982,37.309c3.739,3.303,8.413-1.718,6.991-6.034c-2.138-6.494-8.053-10.659-14.791-20.016c-3.239-4.495,5.03-7.045,10.886-6.876c13.849,0.396,22.886,8.268,35.177,11.218c4.483,1.076,9.741-1.964,6.917-6.917c-3.472-6.085-13.015-9.124-19.18-13.413c-4.357-3.029-3.025-7.132,2.697-6.602c3.905,0.361,8.478,2.271,13.908,1.767c9.946-0.925,7.717-7.169-0.883-9.566c-19.036-5.304-39.891-6.311-61.665-5.225c-43.837-8.358-31.554-84.887,0-90.363c29.571-5.132,62.966-13.339,99.928-32.156c32.668-5.429,64.835-12.446,92.939-33.85c48.106-14.469,111.903,16.113,204.241,149.695c3.926,5.681,15.819,9.94,9.524-6.351c-15.893-41.125-68.176-93.328-92.13-132.085c-24.581-39.774-14.34-61.243-39.957-91.247c-21.326-24.978-47.502-25.803-77.339-17.365c-23.461,6.634-39.234-7.117-52.98-31.273C318.42,87.525,265.838,64.927,210.333,65.331zM445.731,203.01c6.12,0,11.112,4.919,11.112,11.038c0,6.119-4.994,11.111-11.112,11.111s-11.038-4.994-11.038-11.111C434.693,207.929,439.613,203.01,445.731,203.01z";
 justGraphix_example_contour_BasicGL_main();
 })(typeof window != "undefined" ? window : typeof global != "undefined" ? global : typeof self != "undefined" ? self : this);
